@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_round_corner_rect"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/movie_memoirs_card_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="2015年06月18日" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gary_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp" >
+
+        <TextView
+            android:id="@+id/movie_memoirs_card_movie_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="救火英雄"
+            android:textColor="@color/tabBackground"
+            android:textSize="@dimen/BIG_FONT" />
+
+        <TextView
+            android:id="@+id/movie_memoirs_card_movie_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/movie_memoirs_card_movie_title"
+            android:layout_marginTop="5dp"
+            android:text="剧情 冒险" />
+
+        <TextView
+            android:id="@+id/movie_memoirs_card_movie_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/movie_memoirs_card_movie_type"
+            android:layout_marginTop="5dp"
+            android:text="115分钟"
+            android:textColor="@color/dynamicLineColor" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/movie_memoirs_card_movie_time"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/memoirs_bg_my_grade"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的评分"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/movie_memoirs_card_my_grade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="8.0"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/movie_memoirs_card_poster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_launcher" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" >
+
+        <ImageView
+            android:id="@+id/movie_memoirs_look_type_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/memoirs_icon_look_type_cinema" />
+
+        <TextView
+            android:id="@+id/movie_memoirs_card_look_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="影院观看"
+            android:textColor="@color/dynamicLineColor" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/gary_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp" >
+
+        <TextView
+            android:id="@+id/movie_memoirs_card_cinema"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="传奇时代影城" />
+
+        <TextView
+            android:id="@+id/movie_memoirs_card_seat_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/movie_memoirs_card_cinema"
+            android:layout_marginTop="5dp"
+            android:text="1号厅 1排1号" />
+
+        <TextView
+            android:id="@+id/movie_memoirs_card_show_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/movie_memoirs_card_seat_number"
+            android:layout_marginTop="5dp"
+            android:text="18:35" />
+
+        <TextView
+            android:id="@+id/movie_memoirs_card_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/movie_memoirs_card_show_time"
+            android:text="Y40"
+            android:textColor="@color/tabBackground"
+            android:textSize="@dimen/BIG_FONT" />
+
+    </RelativeLayout>
+
+</LinearLayout>

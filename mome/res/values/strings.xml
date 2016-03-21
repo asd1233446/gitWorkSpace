@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">mome</string>
+    <string name="ExitHint">再按一次退出应用</string>
+    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+    <string name="fans">粉丝</string>
+    <string name="attention">关注</string>
+    <string name="seenFilmNum">观影总数</string>
+    <string name="filmStyle">喜欢类型</string>
+    <string name="TAfilm">TA的影院</string>
+    <string name="TAPhotos">TA的相册</string>
+    <string name="TAcollection">TA的收藏</string>
+    <string name="TAattention">TA关注的人</string>
+    <string name="UpdateIcon">修改头像</string>
+    <string name="UserName">用户名</string>
+    <string name="UserSex">性别</string>
+    <string name="UserSign">个人签名</string>
+    <string name="UserAddress">所在地</string>
+    <string name="Userbirthday">生日</string>
+</resources>

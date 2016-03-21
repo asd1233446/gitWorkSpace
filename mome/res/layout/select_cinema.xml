@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/B3B3B3"
+    android:orientation="vertical" >
+
+    <com.mome.main.business.HeadRef
+        xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
+        android:id="@+id/head_layout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        head:leftBtnShow="show"
+        head:rightBtnShow="show"
+        head:rightButton="text"
+        head:rightText="北京"
+        head:titleShow="show"
+        head:titleText="添加观影记录(影院)" >
+    </com.mome.main.business.HeadRef>
+
+    <EditText
+        android:id="@+id/select_cinema_search_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/headview_btn_search"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:paddingLeft="150dp"
+        android:text="搜索"
+        android:textColor="@color/B3B3B3" >
+
+        <requestFocus />
+    </EditText>
+
+    <ExpandableListView
+        android:id="@+id/select_cinema_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" >
+
+    </ExpandableListView>
+
+</LinearLayout>

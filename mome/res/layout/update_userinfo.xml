@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <com.mome.main.business.HeadRef
+        xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
+        android:id="@+id/head_layout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        head:leftBtnShow="show"
+        head:leftButton="img"
+        head:leftImg="@drawable/headview_btn_back"
+        head:rightBtnShow="show"
+        head:rightText="保存"
+        head:titleShow="show"
+        head:titleText="编辑资料" >
+    </com.mome.main.business.HeadRef>
+
+    <View style="@style/line_horizontal_Max" />
+
+    <RelativeLayout
+        android:id="@+id/userIcon_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_marginOrpadding" >
+
+        <ImageView
+            android:id="@+id/userIcon_iv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/common_middle_marginOrpadding"
+            android:layout_toRightOf="@+id/userIcon_iv"
+            android:text="@string/UpdateIcon"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_textSize" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/discovery_icon_arrow" />
+    </RelativeLayout>
+
+    <View style="@style/line_horizontal_Max" />
+
+    <RelativeLayout
+        android:id="@+id/userName_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/common_max_marginOrpadding" 
+        android:paddingBottom="@dimen/common_max_marginOrpadding"
+        android:paddingLeft="@dimen/common_max_marginOrpadding"
+        android:paddingRight="@dimen/common_marginOrpadding">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/UserName"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_textSize" />
+
+        <TextView
+            android:id="@+id/userName_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/common_max_marginOrpadding"
+            android:layout_toRightOf="@+id/textView1"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_textSize" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/discovery_icon_arrow" />
+    </RelativeLayout>
+    <View style="@style/line_horizontal"
+        android:layout_marginLeft="@dimen/common_max_marginOrpadding"/>
+
+    <RelativeLayout
+        android:id="@+id/userSex_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/common_max_marginOrpadding" 
+        android:paddingBottom="@dimen/common_max_marginOrpadding"
+        android:paddingLeft="@dimen/common_max_marginOrpadding"
+        android:paddingRight="@dimen/common_marginOrpadding">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/UserSex"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_textSize" />
+
+        <TextView
+            android:id="@+id/userSex_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/common_max_marginOrpadding"
+            android:layout_toRightOf="@+id/textView2"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_textSize" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/discovery_icon_arrow" />
+    </RelativeLayout>
+    <View style="@style/line_horizontal"
+        android:layout_marginLeft="@dimen/common_max_marginOrpadding"/>
+    <RelativeLayout
+        android:id="@+id/userSign_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/common_max_marginOrpadding" 
+        android:paddingBottom="@dimen/common_max_marginOrpadding"
+        android:paddingLeft="@dimen/common_max_marginOrpadding"
+        android:paddingRight="@dimen/common_marginOrpadding">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/UserSign"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_textSize" />
+
+        <TextView
+            android:id="@+id/userSign_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/common_max_marginOrpadding"
+            android:layout_toRightOf="@+id/textView3"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_textSize" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/discovery_icon_arrow" />
+    </RelativeLayout>
+    <View style="@style/line_horizontal"
+        android:layout_marginLeft="@dimen/common_max_marginOrpadding"/>
+      <RelativeLayout
+        android:id="@+id/userAddress_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/common_max_marginOrpadding" 
+        android:paddingBottom="@dimen/common_max_marginOrpadding"
+        android:paddingLeft="@dimen/common_max_marginOrpadding"
+        android:paddingRight="@dimen/common_marginOrpadding">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/UserAddress"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_textSize" />
+
+        <TextView
+            android:id="@+id/userAddress_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/common_max_marginOrpadding"
+            android:layout_toRightOf="@+id/textView4"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_textSize" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/discovery_icon_arrow" />
+    </RelativeLayout>
+    <View style="@style/line_horizontal"
+        android:layout_marginLeft="@dimen/common_max_marginOrpadding"/>
+    <RelativeLayout
+        android:id="@+id/userBirthday_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/common_max_marginOrpadding" 
+        android:paddingBottom="@dimen/common_max_marginOrpadding"
+        android:paddingLeft="@dimen/common_max_marginOrpadding"
+        android:paddingRight="@dimen/common_marginOrpadding">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/Userbirthday"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_textSize" />
+
+        <TextView
+            android:id="@+id/userBirthday_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/common_max_marginOrpadding"
+            android:layout_toRightOf="@+id/textView5"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_textSize" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/discovery_icon_arrow" />
+    </RelativeLayout>
+    <View style="@style/line_horizontal"
+        android:layout_marginLeft="@dimen/common_max_marginOrpadding"/>
+</LinearLayout>

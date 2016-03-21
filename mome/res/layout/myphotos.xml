@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <com.mome.main.business.HeadRef
+        xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
+        android:id="@+id/head_layout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        head:titleShow="show"
+        head:leftBtnShow="show"
+        head:leftButton="img"
+        head:leftImg="@drawable/headview_btn_back"
+        head:titleText="我的相册" >
+    </com.mome.main.business.HeadRef>
+   <android.support.v7.widget.RecyclerView
+       android:id="@+id/myPhotosGridView"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:numColumns="3"
+       />
+           
+</LinearLayout>

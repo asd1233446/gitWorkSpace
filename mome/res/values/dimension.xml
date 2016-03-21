@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 文字尺寸设置 -->
+    <dimen name="BIG_FONT">20sp</dimen>
+    <dimen name="MIDDLE_FONT">15sp</dimen>
+    <dimen name="SMALL_FONT">12sp</dimen>
+</resources>

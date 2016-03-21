@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <com.mome.main.business.HeadRef
+        xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
+        android:id="@+id/head_layout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        head:leftBtnShow="show"
+        head:leftButton="img"
+        head:leftImg="@drawable/headview_btn_back"
+        head:titleShow="show"
+        head:titleText="用户主页" >
+    </com.mome.main.business.HeadRef>
+
+    <View style="@style/line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_marginOrpadding" >
+
+        <ImageView
+            android:id="@+id/user_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_launcher" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/common_marginOrpadding" >
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="古天乐"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_middle_textSize" />
+
+            <TextView
+                android:id="@+id/user_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="ID:123445"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_textSize" />
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/common_middle_marginOrpadding"
+            android:src="@drawable/discovery_icon_look_friend" />
+
+        <ImageButton
+            android:id="@+id/attention"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/discovery_icon_look_friend" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/dynamic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_marginOrpadding"
+        android:text="他比较懒，什么都没留下"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/common_textSize" />
+
+    <View style="@style/line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_marginOrpadding" >
+
+        <RelativeLayout
+            android:id="@+id/seenFilmLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/seenFilmNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:singleLine="true"
+                android:text="205"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_textSize" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/seenFilmNum"
+                android:layout_centerHorizontal="true"
+                android:text="@string/seenFilmNum"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_textSize" />
+        </RelativeLayout>
+
+        <TextView style="@style/line_vercal" />
+
+        <RelativeLayout
+            android:id="@+id/filmStyleLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/filmStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:singleLine="true"
+                android:text="2054"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_textSize" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/filmStyle"
+                android:layout_centerHorizontal="true"
+                android:text="@string/filmStyle"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_textSize" />
+        </RelativeLayout>
+    </LinearLayout>
+  <View style="@style/line_horizontal_Max" 
+    />
+    <RelativeLayout
+        android:id="@+id/TAMovieHouseLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_middle_marginOrpadding" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/TAfilm"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_middle_textSize" />
+
+        <TextView
+            android:id="@+id/movieHouse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/ImageView02"
+            android:text="北京万达国际影城"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_textSize" />
+
+        <ImageView
+            android:id="@+id/ImageView02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/discovery_icon_arrow" />
+    </RelativeLayout>
+
+    <View style="@style/line_horizontal" />
+
+    <RelativeLayout
+        android:id="@+id/TAphotosLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_middle_marginOrpadding" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/TAPhotos"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_middle_textSize" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/discovery_icon_arrow" />
+    </RelativeLayout>
+
+    <View style="@style/line_horizontal" />
+    <RelativeLayout
+        android:id="@+id/TAcollectionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_middle_marginOrpadding" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/TAcollection"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_middle_textSize" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/discovery_icon_arrow" />
+    </RelativeLayout>
+
+    <View style="@style/line_horizontal" />
+    <RelativeLayout
+        android:id="@+id/TAattentionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_middle_marginOrpadding" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/TAattention"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_middle_textSize" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/discovery_icon_arrow" />
+    </RelativeLayout>
+
+
+    <ListView
+        android:id="@+id/friendsDynamicList"
+        style="@style/listView" >
+    </ListView>
+
+</LinearLayout>

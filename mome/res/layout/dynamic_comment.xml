@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    
+    <com.mome.main.business.HeadRef
+        xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
+        android:id="@+id/head_layout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        head:leftBtnShow="show"
+        head:leftButton="text"
+        head:leftText="取消"
+        head:rightBtnShow="show"
+        head:rightButton="text"
+        head:rightText="发送"
+        head:rightImg="@drawable/headview_icon_search"
+        head:titleShow="show"
+        head:titleText="发评论" >
+    </com.mome.main.business.HeadRef>
+
+    <EditText
+        android:id="@+id/dynamic_comment_edit"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+</LinearLayout>

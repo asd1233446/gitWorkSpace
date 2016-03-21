@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 下拉刷新组件 -->
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
+    <!-- 字体定义 -->
+    <dimen name="common_textSize">16sp</dimen>
+    <dimen name="common_middle_textSize">18sp</dimen>
+    <dimen name="common_max_textSize">20sp</dimen>
+    <!-- 距离定义 -->
+    <dimen name="common_marginOrpadding">5dp</dimen>
+    <dimen name="common_middle_marginOrpadding">10dp</dimen>
+    <dimen name="common_max_marginOrpadding">15dp</dimen>
+    <!--线的高度  -->
+    <dimen name="common_line_height">0.5dp</dimen>
+    <dimen name="common_line_height_max">15dp</dimen>
+
+</resources>
