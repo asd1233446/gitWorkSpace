@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <View style="@style/line_horizontal" />
+
+    <LinearLayout
+        android:id="@+id/news_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_marginOrpadding" >
+
+        <ImageView
+            android:id="@+id/user_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_launcher" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/common_marginOrpadding" >
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="古天乐"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_middle_textSize" />
+
+            <TextView
+                android:id="@+id/user_news"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:singleLine="true"
+                android:text="123445sdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_textSize" />
+
+            <TextView
+                android:id="@+id/newsDate_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="2-05"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_middle_textSize" />
+
+            <TextView
+                android:id="@+id/newsNum_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/newsDate_tv"
+                android:background="@drawable/bg_round_corner_blue_rect"
+                android:gravity="center"
+                android:paddingLeft="@dimen/common_marginOrpadding"
+                android:paddingRight="@dimen/common_marginOrpadding"
+                android:text="300"
+                android:textColor="@color/white"
+                android:textSize="@dimen/common_textSize" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <View style="@style/line_horizontal_Max" />
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="@dimen/common_marginOrpadding" >
+
+        <com.mome.main.netframe.volley.toolbox.NetworkImageView
+            android:id="@+id/user_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="@dimen/common_marginOrpadding"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/userName_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/user_icon"
+            android:text="英雄饶命"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_middle_textSize" />
+
+        <RatingBar
+            android:id="@+id/dynamic_rating"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userName_tv"
+            android:layout_marginTop="@dimen/common_marginOrpadding"
+            android:layout_toRightOf="@+id/user_icon"
+            android:numStars="5"
+            android:progressDrawable="@drawable/bg_rating"
+            android:isIndicator="true"
+            android:rating="1.5" />
+
+        <TextView
+            android:id="@+id/movieScore_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userName_tv"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="@dimen/common_marginOrpadding"
+            android:layout_toRightOf="@+id/dynamic_rating"
+            android:text="6.5"
+            android:textColor="@color/dynamicScoreClolor" />
+
+        <TextView
+            android:id="@+id/movieinfo_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_icon"
+            android:text="一个特色传统，建党的古装奇幻个特色传统，建党的古装"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_textSize" />
+        
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_marginOrpadding"
+                android:layout_below="@+id/movieinfo_tv"
+                android:gravity="center_vertical" >
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/dynamic_img_date" />
+
+                <TextView
+                    android:id="@+id/movieDate_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="2015-04-11"
+                    android:textColor="@color/dynamicDateColor" />
+            </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_margin="@dimen/common_marginOrpadding"
+            android:orientation="vertical" >
+
+           <com.mome.main.netframe.volley.toolbox.NetworkImageView
+                android:id="@+id/movieImage_iv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:src="@drawable/ic_launcher" /> 
+               
+
+            <TextView
+                android:id="@+id/movieTitile_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"                
+                android:text="电影名称"
+                android:textColor="@color/tabBackground" />
+        </LinearLayout>
+        
+   
+    </LinearLayout>
+     <View style="@style/line_horizontal"/>
+     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp" >
+
+        <LinearLayout
+            android:id="@+id/dynamic_list_cell_btn_praise"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/dynamic_list_cell_txt_praise_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/dynamic_img_praise"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="赞"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_textSize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0.5dp"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/dynamicHLineColor"
+            android:orientation="horizontal" />
+
+        <LinearLayout
+            android:id="@+id/dynamic_list_cell_btn_comment"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/dynamicComment_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/dynamic_img_comment"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="评论(205555536)"
+                 android:textSize="@dimen/common_textSize"
+                android:textColor="@color/gray" />
+        </LinearLayout>
+    </LinearLayout>
+   
+</LinearLayout>
