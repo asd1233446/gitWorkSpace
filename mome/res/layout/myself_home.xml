@@ -16,7 +16,6 @@
         head:titleShow="show"
         head:titleText="个人主页" >
     </com.mome.main.business.HeadRef>
-    <View style="@style/line_horizontal"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +27,7 @@
             android:id="@+id/user_icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_launcher" />
+            />
 
         <TextView
             android:id="@+id/user_name"
@@ -100,7 +99,7 @@
         android:padding="@dimen/common_marginOrpadding">
 
         <TextView
-            android:id="@+id/dynamic"
+            android:id="@+id/signature_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="他比较懒，什么都没留下"
@@ -176,9 +175,9 @@
         </RelativeLayout>
     </LinearLayout>
     
-     <ListView 
+     <com.mome.main.business.widget.pulltorefresh.PullToRefreshListView 
          android:id="@+id/friendsDynamicList"
          style="@style/listView"         
-         ></ListView>
+         ></com.mome.main.business.widget.pulltorefresh.PullToRefreshListView>
 
 </LinearLayout>

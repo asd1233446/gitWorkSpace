@@ -370,7 +370,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/userinfo_message_title"
             android:background="@drawable/bg_round_corner_blue_rect"
-            android:text="22222"
+            android:text="20"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:textColor="@color/white" />

@@ -2,37 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp" >
+    android:orientation="vertical" >
+
+   
 
     <TextView
         android:id="@+id/mycinema_list_cell_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="@dimen/common_max_marginOrpadding"
+        android:text="万达国际电影远"
         android:textColor="@color/black"
         android:textSize="@dimen/MIDDLE_FONT"
         android:textStyle="bold" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" >
-
-        <TextView
-            android:id="@+id/mycinema_list_cell_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/tabTitleDefault"
-            android:textSize="@dimen/SMALL_FONT" />
-
-        <TextView
-            android:id="@+id/mycinema_list_cell_distance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:textColor="@color/tabTitleDefault"
-            android:textSize="@dimen/SMALL_FONT" />
-
-    </RelativeLayout>
-
+ <View style="@style/line_horizontal" />
 </LinearLayout>

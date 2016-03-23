@@ -13,6 +13,7 @@ import com.mome.main.netframe.volley.Response.BaseModelListener;
 import com.mome.main.netframe.volley.Response.ErrorListener;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 
 public abstract class ObjectRequest extends Request<String>{
@@ -67,7 +68,7 @@ public abstract class ObjectRequest extends Request<String>{
 	    gsonBuilder.setDateFormat("yyyy-MM-dd HH:mm:ss");
 	    
 	    Gson gson = gsonBuilder.create();
-	    
+	    Log.e("返回数据", response);
 	    ResponseResult<?> resultModel = gson.fromJson(response, getClassType());
 	    mListener.onResponse(resultModel);
 	}

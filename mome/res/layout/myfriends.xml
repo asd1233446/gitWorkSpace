@@ -17,10 +17,29 @@
     </com.mome.main.business.HeadRef>
     
     
-   <ListView
-       android:id="@+id/myFriendsListView"
-       style="@style/listView"
-       >
-       </ListView>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <ExpandableListView
+            android:id="@+id/expandableList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="#00000000"
+            android:childDivider="@color/B3B3B3"
+            android:childIndicator="@null"
+            android:divider="@color/B3B3B3"
+            android:dividerHeight="1px"
+            android:groupIndicator="@null" />
+
+        <com.mome.pinyin.AssortView
+            android:id="@+id/letter_view"
+            android:layout_width="84dip"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            />
+    </FrameLayout>
 
 </LinearLayout>

@@ -1,64 +1,53 @@
 package com.mome.main.business.userinfo;
 
+import com.jessieray.api.model.CinemaInfo;
+import com.jessieray.api.model.DynamicInfo;
 import com.mome.main.R;
 import com.mome.main.business.module.ExpandListCellBase;
+import com.mome.main.business.module.ListCellBase;
+import com.mome.main.business.userinfo.UserDynaicListCell.ViewHolder;
 import com.mome.main.core.annotation.InjectProcessor;
 import com.mome.main.core.annotation.LayoutInject;
 import com.mome.main.core.annotation.ViewInject;
+import com.mome.main.core.net.HttpRequest;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
-public class MyCinemaListCell extends ExpandListCellBase {
+public class MyCinemaListCell implements ListCellBase {
 
-	
+	private CinemaInfo cinemaInfo;
+
+	public CinemaInfo getCinemaInfo() {
+		return cinemaInfo;
+	}
+	public void setCinemaInfo(CinemaInfo cinemaInfo) {
+		this.cinemaInfo = cinemaInfo;
+	}
 	@Override
-	public View getGroupView(View convertView) {
-		View view = convertView;
-		GroupViewHolder viewHolder;
-		if(view == null) {
-			viewHolder = new GroupViewHolder();
-			view = InjectProcessor.injectListViewHolder(viewHolder);
-			view.setTag(viewHolder);
+	public View getView(View convertView) {
+		// TODO Auto-generated method stub
+		
+		ViewHolder viewHolder = null;
+		if (convertView == null) {
+			viewHolder = new ViewHolder();
+			convertView = InjectProcessor.injectListViewHolder(viewHolder);
+			convertView.setTag(viewHolder);
 		} else {
-			viewHolder = (GroupViewHolder) view.getTag();
+			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		return view;
-	}
 
-	@Override
-	public View getChildView(View convertView) {
-		View view = convertView;
-		ChildViewHolder viewHolder;
-		if(view == null) {
-			viewHolder = new ChildViewHolder();
-			view = InjectProcessor.injectListViewHolder(viewHolder);
-			view.setTag(viewHolder);
-		} else {
-			viewHolder = (ChildViewHolder) view.getTag();
-		}
-		return view;
+		viewHolder.cinemaName_tv.setText(cinemaInfo.getTitle());
+		
+		return convertView;
 	}
-
-	@LayoutInject(layout = R.layout.mycinema_group_list_cell)
-	class GroupViewHolder {
-		@ViewInject(id = R.id.mycinema_group_name)
-		public TextView name;
-		@ViewInject(id = R.id.mycinema_group_num)
-		public TextView num;
-		@ViewInject(id = R.id.mycinema_group_arrow)
-		public ImageView arrow;
-	}
-	
 	@LayoutInject(layout = R.layout.mycineam_list_cell)
-	class ChildViewHolder {
+	public class ViewHolder {
 		@ViewInject(id = R.id.mycinema_list_cell_name)
-		public TextView name;
-		@ViewInject(id = R.id.mycinema_list_cell_address)
-		public TextView address;
-		@ViewInject(id = R.id.mycinema_list_cell_distance)
-		public TextView distance;
-	}
+		private TextView cinemaName_tv;
+
 }
 
+}

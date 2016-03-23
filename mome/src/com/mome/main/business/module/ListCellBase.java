@@ -10,4 +10,5 @@ public abstract interface ListCellBase {
 	 * @return
 	 */
 	public abstract View getView(View convertView);
+	
 }

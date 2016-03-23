@@ -1,17 +1,35 @@
 package com.mome.main.business.movie;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.jessieray.api.model.DynamicInfo;
 import com.mome.main.R;
 import com.mome.main.business.module.ListCellBase;
 import com.mome.main.core.annotation.InjectProcessor;
 import com.mome.main.core.annotation.LayoutInject;
 import com.mome.main.core.annotation.ViewInject;
+import com.mome.main.core.net.HttpRequest;
 import com.mome.main.netframe.volley.toolbox.NetworkImageView;
 
 public class MovieDetailListCell implements ListCellBase{
+	private Context context;
+	public MovieDetailListCell(Context context){
+		this.context=context;
+	}
+	
+	private DynamicInfo dynamicInfo;
+
+	public DynamicInfo getMomentInfo() {
+		return dynamicInfo;
+	}
+
+	public void setMomentInfo(DynamicInfo momentInfo) {
+		this.dynamicInfo = momentInfo;
+	}
 
 	//网络数据
 	
@@ -26,37 +44,37 @@ public class MovieDetailListCell implements ListCellBase{
 		} else {
 			viewHolder = (ViewHolder) view.getTag();
 		}
-		viewHolder.movieImg.setDefaultImageResId(R.drawable.ic_launcher);
-		viewHolder.movieImg.setErrorImageResId(R.drawable.ic_launcher);
-//		viewHolder.movieImg.setImageUrl(momentInfo.getHeadPortrait(), HttpRequest.getInstance().imageLoader);
-
-		viewHolder.title.setText("");
-		viewHolder.date.setText("");
-		viewHolder.score.setText("");
-		viewHolder.rating.setRating(0);
-		viewHolder.info.setText("");
+		viewHolder.userIcon.setImageUrl(dynamicInfo.getImageSrc(), HttpRequest.getInstance().imageLoader);
+		viewHolder.nickName.setText(dynamicInfo.getNickname());
+		viewHolder.score.setText(""+dynamicInfo.getMark());
+		viewHolder.rating.setRating((float) (dynamicInfo.getMark()*0.5));
+		viewHolder.info.setText(dynamicInfo.getBrief());
+		viewHolder.date.setText(dynamicInfo.getOrderType()==1?dynamicInfo.getCreatetime():dynamicInfo.getGoods()+"");
+	    Drawable drawable=this.context.getResources().getDrawable(dynamicInfo.getOrderType()==1?R.drawable.dynamic_img_date:R.drawable.dynamic_img_praise);
+	    drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+		viewHolder.date.setCompoundDrawables(drawable, null, null, null);
 		return view;
 	}
 
-	@LayoutInject(layout = R.layout.movie_detail_list_cell)
+	@LayoutInject(layout = R.layout.movie_comment_item)
 	private class ViewHolder {
 		
-		@ViewInject(id = R.id.movie_detail_list_cell_img)
-		private NetworkImageView movieImg;
+		@ViewInject(id = R.id.user_icon)
+		private NetworkImageView userIcon;
 		
-		@ViewInject(id = R.id.movie_detail_list_cell_name)
-		private TextView title;
+		@ViewInject(id = R.id.userName_tv)
+		private TextView nickName;
 		
-		@ViewInject(id = R.id.movie_detail_list_cell_time)
+		@ViewInject(id = R.id.movie_comment_date_tv)
 		private TextView date;
 		
-		@ViewInject(id = R.id.movie_detail_list_cell_score)
+		@ViewInject(id = R.id.movieScore_tv)
 		private TextView score;
 		
-		@ViewInject(id = R.id.movie_detail_list_cell_rating)
+		@ViewInject(id = R.id.dynamic_rating)
 		private RatingBar rating;
 		
-		@ViewInject(id = R.id.movie_detail_list_cell_info)
+		@ViewInject(id = R.id.movie_comment_info_tv)
 		private TextView info;
 	}
 }

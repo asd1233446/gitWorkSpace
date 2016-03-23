@@ -8,6 +8,8 @@
     <dimen name="header_footer_left_right_padding">24dp</dimen>
     <dimen name="header_footer_top_bottom_padding">12dp</dimen>
     <!-- 字体定义 -->
+     <dimen name="common_small_textSize">14sp</dimen>
+    
     <dimen name="common_textSize">16sp</dimen>
     <dimen name="common_middle_textSize">18sp</dimen>
     <dimen name="common_max_textSize">20sp</dimen>

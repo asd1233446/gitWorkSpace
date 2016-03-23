@@ -128,7 +128,7 @@ public class UserInfo extends BaseFragment {
 	 */
 	@OnClick(id = R.id.userinfo_head_icon)
 	public void userHeadClick(View view) {
-	//	Tools.pushScreen(MovieMemoirs.class, null);
+	Tools.pushScreen(MovieMemoirs.class, null);
 
 	}
 	

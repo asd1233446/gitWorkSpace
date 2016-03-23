@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical" >
 
     <com.mome.main.business.HeadRef
@@ -16,10 +17,10 @@
         head:titleText="Ta的影院" >
     </com.mome.main.business.HeadRef>
 
-    <com.mome.main.business.widget.pulltorefresh.PullToRefreshExpandableListView
+    <com.mome.main.business.widget.pulltorefresh.PullToRefreshListView
         android:id="@+id/pull_refresh_list"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:cacheColorHint="#00000000"
         android:divider="#19000000"
@@ -29,6 +30,6 @@
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"
         android:smoothScrollbar="true" >
-    </com.mome.main.business.widget.pulltorefresh.PullToRefreshExpandableListView>
+    </com.mome.main.business.widget.pulltorefresh.PullToRefreshListView>
 
 </LinearLayout>
