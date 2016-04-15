@@ -8,8 +8,9 @@
     <RelativeLayout
         android:id="@+id/titlebar_bg_layout"
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/common_head_height"
         android:background="@color/white"
+       android:gravity="center_vertical"
         android:paddingLeft="14dp"
         android:paddingRight="14dp" >
 
@@ -27,6 +28,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:gravity="center"
+            android:textColor="@color/Purple"
+            android:textSize="@dimen/common_textSize"
             android:visibility="gone" />
         
         <TextView
@@ -44,7 +47,7 @@
             android:textStyle="bold"
             android:visibility="visible" />
         
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/titlebar_input"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -52,29 +55,25 @@
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:visibility="gone"
             android:layout_marginTop="5dp"
             android:layout_toLeftOf="@id/titlebar_right"
             android:layout_toRightOf="@id/titlebar_left"
-            android:background="@drawable/bg_round_corner_rect"
-            android:gravity="center"
-            android:visibility="gone" >
+          
+             >
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/headview_icon_search" />
 
             <EditText
                 android:id="@+id/titlebar_input_edittext"
-                android:layout_width="0dp"
+                android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_marginBottom="3dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="3dp"
-                android:layout_weight="1"
-                android:gravity="left|center_vertical"
-                android:imeOptions="actionDone"
+                android:layout_marginTop="5dp"
+                android:drawableLeft="@drawable/search_xiao"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:background="@drawable/edit_bg"
                 android:inputType="text"
                 android:textColor="@color/black" />
 
@@ -83,9 +82,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="10dp"
+                android:layout_gravity="right|center_vertical"
                 android:src="@drawable/headview_icon_cross" />
 
-        </LinearLayout>
+        </FrameLayout>
 
     </RelativeLayout>
 

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/gray"
     android:layout_height="25dip"
-    android:background="#9D9D9D">
+    >
 
     <TextView
         android:id="@+id/name"
@@ -15,5 +16,5 @@
         android:singleLine="true"
         android:text="name"
         android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="#FFF7FF" />
+        android:textColor="@color/black" />
 </LinearLayout>

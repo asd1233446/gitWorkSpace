@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/B3B3B3"
+    android:background="@color/combackgroud"
     android:orientation="vertical" >
 
     <com.mome.main.business.HeadRef
@@ -29,8 +29,7 @@
         android:drawableLeft="@drawable/headview_btn_search"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:paddingLeft="150dp"
-        android:text="搜索"
+        android:hint="搜索"
         android:textColor="@color/B3B3B3" >
 
         <requestFocus />
@@ -38,9 +37,15 @@
 
     <ExpandableListView
         android:id="@+id/select_cinema_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white" >
+         android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="#00000000"
+            android:childDivider="@null"
+            android:listSelector="#00000000"
+            android:childIndicator="@null"
+            android:divider="@null"
+            android:groupIndicator="@null"
+            android:background="@color/white" >
 
     </ExpandableListView>
 

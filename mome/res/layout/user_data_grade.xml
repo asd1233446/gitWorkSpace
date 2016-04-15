@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="74dp"
+        android:layout_height="100dp"
         android:layout_marginBottom="17dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
@@ -14,53 +14,68 @@
         android:background="#71C8A2" >
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:padding="@dimen/common_marginOrpadding" >
 
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/bg_rating" />
-
-            <TextView
-                android:id="@+id/textView1"
+            <RatingBar
+                android:id="@+id/markrating_rb"
+                style="androidratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxHeight="20dp"
+                android:maxWidth="20dp"
+                android:minHeight="20dp"
+                android:minWidth="20dp"
+                android:numStars="5"
+                android:progressDrawable="@drawable/bg_rating"
+                android:rating="1.5" />
+
+            <TextView
+                android:id="@+id/markyear_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/common_marginOrpadding"
                 android:text="2015年"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/common_max_textSize" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="观影平均分"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/common_small_textSize" />
         </LinearLayout>
 
+        <View style="@style/line_vercal" />
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal" >
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/markValue_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7.6"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/common_moreMax_textSize" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="分"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/common_small_textSize" />
         </LinearLayout>
     </LinearLayout>
 
@@ -69,6 +84,8 @@
         android:layout_height="0.5dp"
         android:background="@color/gary_line" >
     </LinearLayout>
+
+    <View style="@style/line_horizontal" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -92,27 +109,36 @@
                     android:id="@+id/textView7"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="好评" />
+                    android:gravity="center_horizontal"
+                    android:text="好评"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_middle_textSize" />
 
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="10-8分" />
+                    android:text="10-8分"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/markGood_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
-                android:text="35" />
+                android:text="35"
+                android:textColor="@color/Purple"
+                android:textSize="@dimen/common_moreMax_textSize" />
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="部" />
+                android:text="部"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_small_textSize" />
         </LinearLayout>
 
         <LinearLayout
@@ -140,13 +166,17 @@
                     android:id="@+id/textView9"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="一般" />
+                    android:text="一般"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_middle_textSize" />
 
                 <TextView
                     android:id="@+id/textView10"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="5-9分" />
+                    android:text="5-9分"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
             </LinearLayout>
 
             <LinearLayout
@@ -156,16 +186,20 @@
                 android:gravity="center_vertical" >
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/markOrdinary_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10" />
+                    android:text="10"
+                    android:textColor="@color/Purple"
+                    android:textSize="@dimen/common_moreMax_textSize" />
 
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="部" />
+                    android:text="部"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -197,24 +231,34 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="较差" />
+                    android:gravity="center"
+                    android:text="较差"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_middle_textSize" />
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="10-8分" />
+                    android:text="10-8分"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
             </LinearLayout>
 
             <TextView
+                android:id="@+id/marklow_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
-                android:text="35" />
+                android:text="35"
+                android:textColor="@color/Purple"
+                android:textSize="@dimen/common_moreMax_textSize" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="部" />
+                android:text="部"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_small_textSize" />
         </LinearLayout>
 
         <LinearLayout
@@ -241,12 +285,17 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="极差" />
+                    android:text="极差"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_middle_textSize" />
 
                 <TextView
+                    android:id="@+id/markLower_tv"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="5-9分" />
+                    android:text="5-9分"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
             </LinearLayout>
 
             <LinearLayout
@@ -258,12 +307,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10" />
+                    android:text="10"
+                    android:textColor="@color/Purple"
+                    android:textSize="@dimen/common_moreMax_textSize" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="部" />
+                    android:text="部"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

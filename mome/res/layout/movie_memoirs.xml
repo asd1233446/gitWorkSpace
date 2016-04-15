@@ -1,93 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/combackgroud"
     android:orientation="vertical" >
-
-    <TextView
-        android:id="@+id/movie_memoirs_num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:text="700部" />
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/movie_memoirs_num"
-        android:layout_marginTop="200dp"
-        android:background="@color/dynamicHLineColor"
-        android:orientation="vertical" >
-
-    </LinearLayout>
-
-    <com.mome.main.business.widget.timeshaft.CenteringHorizontalScrollView
-        android:id="@+id/movie_memoirs_card_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/movie_memoirs_num"
-        android:scrollbars="none" >
-
-        <LinearLayout
-            android:id="@+id/movie_memoirs_card"
+<com.mome.main.business.HeadRef
+        xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
+        android:id="@+id/head_layout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        head:leftBtnShow="show"
+        head:leftButton="img"
+        head:leftImg="@drawable/headview_btn_back"
+        head:titleShow="show"
+        head:titleText="我的回忆录" >
+    </com.mome.main.business.HeadRef>
+   <com.mome.main.business.widget.pulltorefresh.PullToRefreshExpandableListView
+            android:id="@+id/expandableList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal" >
-        </LinearLayout>
-    </com.mome.main.business.widget.timeshaft.CenteringHorizontalScrollView>
-
-    <RelativeLayout
-        android:id="@+id/movie_memoirs_time_point"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="70dp" >
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="5dp"
-            android:layout_centerVertical="true"
-            android:background="@color/E0DEDA" >
-
-        </LinearLayout>
-
-        <com.mome.main.business.widget.coverflow.FancyCoverFlow
-            android:id="@+id/movie_memoirs_fancyCoverFlow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="15dp" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:orientation="vertical" >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/memoirs_bg_selector" />
-
-            <TextView
-                android:id="@+id/movie_memoirs_selector"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-    </RelativeLayout>
-
-<!--     <com.mome.main.business.widget.seekbar.CustomSeekBar
-        android:id="@+id/movie_memoirs_customSeekBar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/movie_memoirs_fancyCoverFlow"
-        android:layout_marginTop="20dp" >
-    </com.mome.main.business.widget.seekbar.CustomSeekBar> -->
-
-</RelativeLayout>
+            android:cacheColorHint="#00000000"
+            android:childDivider="@null"
+            android:listSelector="#00000000"
+            android:childIndicator="@null"
+            android:divider="@null"
+            android:groupIndicator="@null"
+            
+            />
+</LinearLayout>

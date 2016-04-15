@@ -2,32 +2,155 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/gary_line"
     android:orientation="vertical" >
-    
-    <com.mome.main.business.HeadRef
-        xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
-        android:id="@+id/head_layout"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        head:leftBtnShow="show"
-        head:leftButton="text"
-        head:leftText="取消"
-        head:rightBtnShow="show"
-        head:rightButton="text"
-        head:rightText="发送"
-        head:rightImg="@drawable/headview_icon_search"
-        head:titleShow="show"
-        head:titleText="发评论" >
-    </com.mome.main.business.HeadRef>
+     <RelativeLayout
+        android:id="@+id/titlebar_bg_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/common_head_height"
+        android:background="@color/white"
+       android:gravity="center_vertical"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp" >
 
-    <EditText
-        android:id="@+id/dynamic_comment_edit"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:ems="10" >
+        <TextView
+            android:id="@+id/titlebar_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/headview_btn_back"
+             />
 
-        <requestFocus />
-    </EditText>
+        <TextView
+            android:id="@+id/titlebar_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textColor="@color/Purple"
+            android:text="发布"
+            android:textSize="@dimen/common_textSize"
+             />
+        
+        <TextView
+            android:id="@+id/titlebar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:text="添加影评"
+            android:textSize="20sp"
+            android:textStyle="bold"
+             />
+        </RelativeLayout>
+ 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/common_marginOrpadding" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="左右滑动来选择分数"
+            android:textColor="@color/B3B3B3"
+            android:textSize="@dimen/common_middle_textSize" />
+
+        <com.mome.view.MySeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/common_marginOrpadding"
+            android:max="20"
+            android:progressDrawable="@drawable/takescore"
+            android:thumb="@drawable/scorebar"
+            android:thumbOffset="0dp"
+             />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/common_max_marginOrpadding"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:id="@+id/movieIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/common_marginOrpadding"
+                android:src="@drawable/ic_launcher" />
+
+            <EditText
+                android:id="@+id/dynamic_comment_edit"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_toRightOf="@+id/movieIcon"
+                android:background="@drawable/edit_bg"
+                android:gravity="top"
+                android:hint="写短评"
+                android:maxLength="1000"
+                android:padding="@dimen/common_marginOrpadding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_small_textSize"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/atFriend"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/atfriend"
+        android:gravity="center_vertical"
+        android:padding="@dimen/common_max_marginOrpadding"
+        android:text="关联观影同伴"
+        android:textColor="@color/B3B3B3"
+        android:textSize="@dimen/common_middle_textSize" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_marginOrpadding"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_marginOrpadding" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/common_marginOrpadding"
+            android:text="同步分享到:"
+            android:textColor="@color/B3B3B3"
+            android:textSize="@dimen/common_middle_textSize" />
+
+        <Button
+            android:id="@+id/sina_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/common_marginOrpadding"
+            android:background="@drawable/sina_selector" />
+
+        <Button
+            android:id="@+id/wechat_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/common_marginOrpadding"
+            android:background="@drawable/wechat_selector" />
+
+        <Button
+            android:id="@+id/douban_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/douban_selector" />
+    </LinearLayout>
 
 </LinearLayout>

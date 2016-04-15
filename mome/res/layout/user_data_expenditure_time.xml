@@ -4,56 +4,58 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+
+    <RadioGroup
+        android:id="@+id/timeradioGroup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-    </LinearLayout>
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:orientation="horizontal" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gary_line"
-        android:orientation="vertical" >
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp" >
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+        <RadioButton
+            android:id="@+id/all_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:button="@android:color/transparent"
             android:gravity="center"
-            android:text="全部" />
+            android:text="@string/all"
+            android:textColor="@color/text_view_selector"
+            android:textSize="@dimen/common_small_textSize" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+        <RadioButton
+            android:id="@+id/cinema"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:button="@android:color/transparent"
             android:gravity="center"
-            android:text="影院" />
+            android:text="@string/film"
+            android:textColor="@color/text_view_selector"
+            android:textSize="@dimen/common_small_textSize" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+        <RadioButton
+            android:id="@+id/internet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:button="@android:color/transparent"
             android:gravity="center"
-            android:text="网络" />
+            android:text="@string/internet"
+            android:textColor="@color/text_view_selector"
+            android:textSize="@dimen/common_small_textSize" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+        <RadioButton
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:button="@android:color/transparent"
             android:gravity="center"
-            android:text="电视" />
-
-    </LinearLayout>
+            android:text="@string/TV"
+            android:textColor="@color/text_view_selector"
+            android:textSize="@dimen/common_small_textSize" />
+    </RadioGroup>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -72,7 +74,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:text="用时" />
+            android:text="用时"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_middle_textSize" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -83,19 +87,24 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/common_max_marginOrpadding"
                 android:gravity="center" >
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/times_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1709" />
+                    android:text="1709"
+                    android:textColor="@color/Purple"
+                    android:textSize="@dimen/common_moreMax_textSize" />
 
                 <TextView
                     android:id="@+id/textView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="分钟" />
+                    android:text="分钟"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
             </LinearLayout>
 
             <LinearLayout
@@ -107,44 +116,54 @@
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="等于" />
+                    android:text="等于"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/hours_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="95.53" />
+                    android:text="95.53"
+                    android:textColor="@color/Purple"
+                    android:textSize="@dimen/common_middle_textSize" />
 
                 <TextView
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="小时" />
+                    android:text="小时"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/day_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4" />
+                    android:layout_marginLeft="@dimen/common_middle_marginOrpadding"
+                    android:text="4"
+                    android:textColor="@color/Purple"
+                    android:textSize="@dimen/common_middle_textSize" />
 
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="天" />
+                    android:text="天"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
             </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
 
-<LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="0.5dp"
-    android:background="@color/gary_line"
-    android:orientation="vertical" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gary_line"
+        android:orientation="vertical" >
+    </LinearLayout>
 
-        </LinearLayout>
-        <LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:gravity="center_vertical" >
@@ -153,7 +172,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:text="共消费" />
+            android:text="共消费"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_middle_textSize" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -164,17 +185,23 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/common_max_marginOrpadding"
                 android:gravity="center" >
 
                 <TextView
+                    android:id="@+id/monery_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4598" />
+                    android:text="4598"
+                    android:textColor="@color/Purple"
+                    android:textSize="@dimen/common_moreMax_textSize" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="元" />
+                    android:text="元"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
             </LinearLayout>
 
             <LinearLayout
@@ -185,32 +212,33 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="超过了全国" />
+                    android:text="超过了全国"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
+
+                <TextView
+                    android:id="@+id/beat_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="85%"
+                    android:textColor="@color/Purple"
+                    android:textSize="@dimen/common_middle_textSize" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="85%" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="的观众" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="天" />
+                    android:text="的观众"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
             </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/gary_line"
-            android:orientation="vertical" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gary_line"
+        android:orientation="vertical" >
+    </LinearLayout>
 
-        </LinearLayout>
 </LinearLayout>

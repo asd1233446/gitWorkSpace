@@ -7,7 +7,7 @@
         xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
         android:id="@+id/head_layout"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         head:leftBtnShow="show"
         head:leftButton="img"
         head:leftImg="@drawable/headview_btn_back"

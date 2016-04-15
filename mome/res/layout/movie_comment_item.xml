@@ -14,10 +14,10 @@
 
         <com.mome.main.netframe.volley.toolbox.NetworkImageView
             android:id="@+id/user_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/common_marginOrpadding"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/defualt" />
 
         <TextView
             android:id="@+id/userName_tv"
@@ -59,6 +59,7 @@
             android:layout_below="@+id/user_icon"
             android:text="一个特色传统，建党的古装奇幻个特色传统，建党的古装"
             android:textColor="@color/gray"
+            android:layout_marginTop="@dimen/common_marginOrpadding"
             android:textSize="@dimen/common_textSize" />
 
         <TextView
@@ -71,6 +72,7 @@
             android:drawableLeft="@drawable/dynamic_img_date"
             android:gravity="center_vertical"
             android:text="2015-04-11"
+            android:textSize="@dimen/common_textSize"
             android:textColor="@color/dynamicDateColor" />
     </RelativeLayout>
 

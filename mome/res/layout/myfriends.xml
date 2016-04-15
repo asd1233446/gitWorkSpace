@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/combackgroud"
     android:orientation="vertical" >
+
     <com.mome.main.business.HeadRef
         xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
         android:id="@+id/head_layout"
@@ -15,31 +16,45 @@
         head:titleShow="show"
         head:titleText="我的好友" >
     </com.mome.main.business.HeadRef>
-    
-    
+
+    <EditText
+        android:id="@+id/seachFriend"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_max_marginOrpadding"
+        android:background="@drawable/input_edittext_bg"
+        android:drawableLeft="@drawable/headview_icon_search"
+        android:hint="搜索" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical" >
 
-        <ExpandableListView
-            android:id="@+id/expandableList"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:cacheColorHint="#00000000"
-            android:childDivider="@color/B3B3B3"
-            android:childIndicator="@null"
-            android:divider="@color/B3B3B3"
-            android:dividerHeight="1px"
-            android:groupIndicator="@null" />
+            android:layout_height="match_parent"
+            
+            >
+
+            <se.emilsjolander.stickylistheaders.ExpandableStickyListHeadersListView
+                android:id="@+id/expandableList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:drawSelectorOnTop="true"
+                android:padding="16dp"
+                android:scrollbars="none" />
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         <com.mome.pinyin.AssortView
             android:id="@+id/letter_view"
-            android:layout_width="84dip"
+            android:layout_width="40dp"
             android:layout_height="fill_parent"
             android:layout_gravity="right"
             android:layout_marginRight="10dp"
-            />
+            android:background="@android:color/transparent" />
     </FrameLayout>
 
 </LinearLayout>

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal" >
-    
+
     <com.mome.main.business.widget.digitalcloud.DigitalCloudView
         android:id="@+id/user_data_digital_cloud_view"
         android:layout_width="fill_parent"
@@ -11,302 +11,44 @@
         android:layout_weight="1"
         android:background="@color/B3B3B3" />
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/linearLayout"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_marginOrpadding"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="40dp" >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="观影次数" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:text="平均分" />
-        </RelativeLayout>
-
-        <RelativeLayout
+         >
+        <TextView
+            android:id="@+id/textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp" >
+            android:layout_marginLeft="@dimen/common_middle_marginOrpadding"
+            android:layout_marginTop="@dimen/common_marginOrpadding"
+            android:text="观影次数"
+            android:textColor="@color/gray"
+            android:layout_alignLeft="@+id/datatype_ls"
+            android:textSize="@dimen/common_middle_textSize" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true" >
-
-                <TextView
-                    android:id="@+id/TextView25"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="剧情" />
-
-                <TextView
-                    android:id="@+id/TextView28"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="75" />
-
-                <TextView
-                    android:id="@+id/TextView27"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="部" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/TextView26"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="7.89" />
-        </RelativeLayout>
-
-        <RelativeLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp" >
+            android:layout_marginTop="@dimen/common_marginOrpadding"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="平均分"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_middle_textSize" />
+    
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true" >
-
-                <TextView
-                    android:id="@+id/TextView21"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="爱情" />
-
-                <TextView
-                    android:id="@+id/TextView24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="75" />
-
-                <TextView
-                    android:id="@+id/TextView23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="部" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/TextView22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="7.89" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true" >
-
-                <TextView
-                    android:id="@+id/TextView17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="喜剧" />
-
-                <TextView
-                    android:id="@+id/TextView20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="75" />
-
-                <TextView
-                    android:id="@+id/TextView19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="部" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/TextView18"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="7.89" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true" >
-
-                <TextView
-                    android:id="@+id/TextView13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="悬疑" />
-
-                <TextView
-                    android:id="@+id/TextView16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="75" />
-
-                <TextView
-                    android:id="@+id/TextView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="部" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/TextView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="7.89" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true" >
-
-                <TextView
-                    android:id="@+id/TextView09"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="动作" />
-
-                <TextView
-                    android:id="@+id/TextView12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="75" />
-
-                <TextView
-                    android:id="@+id/TextView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="部" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/TextView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="7.89" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true" >
-
-                <TextView
-                    android:id="@+id/TextView05"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="犯罪" />
-
-                <TextView
-                    android:id="@+id/TextView08"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="75" />
-
-                <TextView
-                    android:id="@+id/TextView07"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="部" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/TextView06"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="7.89" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true" >
-
-                <TextView
-                    android:id="@+id/TextView01"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="传记" />
-
-                <TextView
-                    android:id="@+id/TextView04"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="75" />
-
-                <TextView
-                    android:id="@+id/TextView03"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="部" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/TextView02"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="7.89" />
-        </RelativeLayout>
-
-    </LinearLayout>
+    <ListView
+        android:id="@+id/datatype_ls"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview"
+        android:layout_marginTop="@dimen/common_middle_marginOrpadding"
+        android:divider="@null"
+        android:listSelector="@null"
+        />
+    </RelativeLayout>
 
 </LinearLayout>

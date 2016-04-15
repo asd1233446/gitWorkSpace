@@ -2,48 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/city_tag_bg" >
+    android:background="@color/white" >
 
- 
+    <RelativeLayout
+        android:id="@+id/head_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="@dimen/common_max_marginOrpadding" >
 
-        <RelativeLayout
-            android:id="@+id/head_layout"
-            android:layout_width="match_parent"
+        <com.mome.main.netframe.volley.toolbox.NetworkImageView
+            android:id="@+id/head"
+            android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_margin="@dimen/common_max_marginOrpadding"
-             >
-
-            <com.mome.main.netframe.volley.toolbox.NetworkImageView
-                android:id="@+id/head"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/ic_launcher"
-                android:paddingLeft="5dp" />
-        
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_launcher"
+            android:paddingLeft="5dp" />
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/head"
             android:layout_marginLeft="@dimen/common_middle_marginOrpadding"
+            android:layout_toRightOf="@+id/head"
             android:text="好友名字"
             android:textColor="@color/black"
             android:textSize="@dimen/common_max_textSize" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/realtion_rb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:button="@null"
-            android:background="@drawable/checkbox_checked"/>
-
-        
+            android:layout_marginRight="30dp"
+            android:button="@null" />
     </RelativeLayout>
 
 </LinearLayout>

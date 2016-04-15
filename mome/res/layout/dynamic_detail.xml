@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -9,35 +9,195 @@
         xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
         android:id="@+id/head_layout"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         head:leftBtnShow="show"
         head:leftButton="img"
-        head:rightBtnShow="show"
-        head:rightButton="img"
-        head:rightImg="@drawable/headview_icon_search"
+        head:leftImg="@drawable/headview_btn_back"
         head:titleShow="show"
         head:titleText="动态正文" >
     </com.mome.main.business.HeadRef>
 
-    <include
-        android:id="@+id/dynamic_detail_top"
+    <com.mome.main.business.widget.pulltorefresh.PullToRefreshScrollView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/pull_refresh_scrollview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/Comment_rl"
+        android:layout_below="@+id/head_layout"
+        ptr:ptrAnimationStyle="flip"
+        ptr:ptrMode="both" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/head_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/common_marginOrpadding" >
+
+                <com.mome.main.netframe.volley.toolbox.NetworkImageView
+                    android:id="@+id/user_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_middle_marginOrpadding"
+                    android:src="@drawable/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/userName_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/user_icon"
+                    android:text="英雄饶命"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_max_textSize" />
+
+                <RatingBar
+                    android:id="@+id/dynamic_rating"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/userName_tv"
+                    android:layout_marginTop="@dimen/common_marginOrpadding"
+                    android:layout_toRightOf="@+id/user_icon"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:progressDrawable="@drawable/bg_rating"
+                    android:rating="1.5" />
+
+                <TextView
+                    android:id="@+id/movieScore_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/userName_tv"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="@dimen/common_marginOrpadding"
+                    android:layout_toRightOf="@+id/dynamic_rating"
+                    android:text="6.5"
+                    android:textColor="@color/dynamicScoreClolor" />
+
+                <TextView
+                    android:id="@+id/movieinfo_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/user_icon"
+                    android:layout_marginTop="@dimen/common_middle_marginOrpadding"
+                    android:text="一个特色传统，建党的古装奇幻个特色传统，建党的古装"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
+
+                <TextView
+                    android:id="@+id/movieName_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="评论“降魔之战”"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
+
+                <TextView
+                    android:id="@+id/movieDate_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/dynamicComment_tv"
+                    android:layout_below="@+id/movieinfo_tv"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="@dimen/common_middle_marginOrpadding"
+                    android:drawableLeft="@drawable/dynamic_img_date"
+                    android:gravity="center"
+                    android:text="2015-04-11"
+                    android:textColor="@color/dynamicDateColor"
+                    android:textSize="@dimen/common_textSize" />
+
+                <TextView
+                    android:id="@+id/dynamicComment_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/dynamic_list_cell_txt_praise_value"
+                    android:layout_below="@+id/movieinfo_tv"
+                    android:layout_marginRight="@dimen/common_middle_marginOrpadding"
+                    android:layout_marginTop="@dimen/common_middle_marginOrpadding"
+                    android:layout_toLeftOf="@+id/dynamic_list_cell_txt_praise_value"
+                    android:drawableLeft="@drawable/dynamic_img_comment"
+                    android:gravity="center"
+                    android:text="20000"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
+
+                <TextView
+                    android:id="@+id/dynamic_list_cell_txt_praise_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/movieinfo_tv"
+                    android:layout_marginTop="@dimen/common_middle_marginOrpadding"
+                    android:drawableLeft="@drawable/dynamic_img_praise"
+                    android:gravity="center"
+                    android:text="111"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_textSize" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/originally_ll"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/movie_detail_comment_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/dynamicLineColor"
+                    android:paddingLeft="@dimen/common_middle_marginOrpadding"
+                    android:paddingTop="@dimen/common_max_marginOrpadding"
+                    android:paddingBottom="@dimen/common_marginOrpadding"
+                    android:text="全部评论"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
+            </LinearLayout>
+
+            <com.mome.view.ListViewInScrollView
+                android:id="@+id/pull_refresh_list"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:cacheColorHint="#00000000"
+                android:divider="@null"
+                android:listSelector="#00000000" >
+            </com.mome.view.ListViewInScrollView>
+        </LinearLayout>
+    </com.mome.main.business.widget.pulltorefresh.PullToRefreshScrollView>
+
+    <RelativeLayout
+        android:id="@+id/Comment_rl"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        layout="@layout/dynamic_list_cell" />
+        android:layout_alignParentBottom="true" >
 
-    <com.mome.main.business.widget.pulltorefresh.PullToRefreshListView
-        android:id="@+id/pull_refresh_list"
+        <EditText
+            android:id="@+id/sendComment_et"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/sendCommetn_bt"
+            android:hint="@string/commetn_edit_hint" />
+
+        <Button
+            android:id="@+id/sendCommetn_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="发送" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/suspend_ll"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:cacheColorHint="#00000000"
-        android:divider="#19000000"
-        android:dividerHeight="0dp"
-        android:fadingEdge="none"
-        android:fastScrollEnabled="false"
-        android:footerDividersEnabled="false"
-        android:headerDividersEnabled="false"
-        android:smoothScrollbar="true" >
-    </com.mome.main.business.widget.pulltorefresh.PullToRefreshListView>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/head_layout"
+        android:orientation="vertical" >
+    </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

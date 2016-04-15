@@ -2,35 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/EEEEEE"
+    android:background="@color/combackgroud"
     android:orientation="vertical" >
 
     <com.mome.main.business.HeadRef
         xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
         android:id="@+id/head_layout"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         head:rightBtnShow="show"
         head:rightButton="img"
         head:rightImg="@drawable/headview_icon_search"
         head:titleShow="show"
         head:titleText="发现" >
     </com.mome.main.business.HeadRef>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/dynamicLineColor"
-        android:orientation="horizontal" >
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/dynamicLineColor"
-        android:orientation="horizontal" >
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,10 +27,9 @@
         <RelativeLayout
             android:id="@+id/discovery_friend_layout"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
+            android:padding="@dimen/common_max_marginOrpadding" >
 
             <ImageView
                 android:id="@+id/discovery_icon_friend"
@@ -60,8 +44,9 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/discovery_icon_friend"
-                android:text="找好友"
-                android:textColor="@color/tabBackground" />
+                android:text="邀请好友"
+                android:textColor="@color/tabBackground"
+                android:textSize="@dimen/common_middle_textSize" />
 
             <ImageView
                 android:id="@+id/ImageView03"
@@ -83,10 +68,9 @@
         <RelativeLayout
             android:id="@+id/discovery_instract_layout"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
+            android:padding="@dimen/common_max_marginOrpadding" >
 
             <ImageView
                 android:id="@+id/discovery_icon_instract"
@@ -102,7 +86,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/discovery_icon_instract"
                 android:text="可能感兴趣的人"
-                android:textColor="@color/tabBackground" />
+                android:textColor="@color/tabBackground"
+                android:textSize="@dimen/common_middle_textSize" />
 
             <ImageView
                 android:id="@+id/ImageView04"
@@ -116,15 +101,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/dynamicLineColor"
-        android:orientation="horizontal" >
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="@dimen/common_max_marginOrpadding"
         android:background="@color/dynamicLineColor"
         android:orientation="horizontal" >
     </LinearLayout>
@@ -139,10 +116,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
+            android:padding="@dimen/common_max_marginOrpadding" >
 
             <ImageView
                 android:id="@+id/discovery_icon_activity"
@@ -158,7 +134,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/discovery_icon_activity"
                 android:text="活动"
-                android:textColor="@color/tabBackground" />
+                android:textColor="@color/tabBackground"
+                android:textSize="@dimen/common_middle_textSize" />
 
             <ImageView
                 android:id="@+id/ImageView01"
@@ -179,10 +156,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
+            android:padding="@dimen/common_max_marginOrpadding" >
 
             <ImageView
                 android:id="@+id/discovery_icon_movie_ticket"
@@ -198,7 +174,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/discovery_icon_movie_ticket"
                 android:text="电影票"
-                android:textColor="@color/tabBackground" />
+                android:textColor="@color/tabBackground"
+                android:textSize="@dimen/common_middle_textSize" />
 
             <ImageView
                 android:id="@+id/ImageView07"
@@ -219,10 +196,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
+            android:padding="@dimen/common_max_marginOrpadding" >
 
             <ImageView
                 android:id="@+id/discovery_icon_store"
@@ -238,7 +214,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/discovery_icon_store"
                 android:text="影店"
-                android:textColor="@color/tabBackground" />
+                android:textColor="@color/tabBackground"
+                android:textSize="@dimen/common_middle_textSize" />
 
             <ImageView
                 android:id="@+id/imageView2"

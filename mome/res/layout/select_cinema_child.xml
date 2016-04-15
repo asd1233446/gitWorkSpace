@@ -9,7 +9,11 @@
         android:id="@+id/select_cinema_child_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black" />
+        android:layout_marginTop="@dimen/common_max_marginOrpadding"
+        android:text="五棵松成龙影院"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="@dimen/common_middle_textSize" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,7 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:textColor="@color/gary_line" />
+            android:text="五棵松成龙影院"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_small_textSize" />
 
         <TextView
             android:id="@+id/select_cinema_child_distance"
@@ -30,8 +36,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:textColor="@color/gary_line" />
-
+            android:text="五棵松成龙影院"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_small_textSize" />
     </RelativeLayout>
+
+    <View
+        style="@style/line_horizontal"
+        android:layout_marginTop="@dimen/common_max_marginOrpadding" />
 
 </LinearLayout>

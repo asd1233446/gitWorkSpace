@@ -8,18 +8,26 @@
         xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
         android:id="@+id/head_layout"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         head:titleShow="show"
         head:leftBtnShow="show"
         head:leftButton="img"
         head:leftImg="@drawable/headview_btn_back"
         head:titleText="我的相册" >
     </com.mome.main.business.HeadRef>
-   <android.support.v7.widget.RecyclerView
-       android:id="@+id/myPhotosGridView"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:numColumns="3"
+   <com.mome.main.business.widget.pulltorefresh.PullToRefreshGridView
+         xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/pull_refresh_grid"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:numColumns="3"
+        android:verticalSpacing="1dp"
+        android:horizontalSpacing="1dp"
+        android:columnWidth="100dp"
+        android:stretchMode="columnWidth"
+        android:gravity="fill"
+        ptr:ptrMode="both"
+        ptr:ptrDrawable="@drawable/default_ptr_flip"
        />
            
 </LinearLayout>

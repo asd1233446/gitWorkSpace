@@ -1,206 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/white"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+   
+
+    <com.mome.main.netframe.volley.toolbox.NetworkImageView
+        android:id="@+id/movie_list_cell_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_marginOrpadding"
+        android:layout_marginLeft="@dimen/common_marginOrpadding"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_launcher" />
 
     <LinearLayout
+        android:id="@+id/line"
         android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/dynamicLineColor"
-        android:orientation="horizontal" />
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_marginOrpadding"
+        android:layout_toRightOf="@+id/movie_list_cell_img"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="120dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-        <com.mome.main.netframe.volley.toolbox.NetworkImageView
-            android:id="@+id/movie_list_cell_img"
-            android:layout_width="80dp"
-            android:layout_height="fill_parent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_launcher" />
+            <TextView
+                android:id="@+id/movie_list_cell_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="速度与激情"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_middle_textSize" />
+
+            <LinearLayout
+                android:id="@+id/collect_ll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:textColor="@color/gray"
+                android:visibility="gone" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textColor="@color/gray" 
+                    android:text="共有" />
+
+                <TextView
+                    android:id="@+id/collectionNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="7"
+                    android:textColor="@color/Purple" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="人收藏此片"
+                    android:textColor="@color/gray" />
+            </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="12dp"
-            android:gravity="center_vertical"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical" >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/movie_list_cell_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="速度与激情"
-                    android:textColor="@color/tabBackground"
-                    android:textSize="@dimen/MIDDLE_FONT"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/movie_list_cell_collect"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:visibility="gone" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
+            <RatingBar
+                android:id="@+id/movie_list_cell_rating"
+                style="androidratingBarStyleSmall"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical" >
+                android:maxHeight="20dp"
+                android:maxWidth="20dp"
+                android:minHeight="20dp"
+                android:minWidth="20dp"
+                android:numStars="5"
+                android:progressDrawable="@drawable/bg_rating"
+                android:rating="1.5" />
 
-                <RatingBar
-                    android:id="@+id/movie_list_cell_rating"
-                    style="androidratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxHeight="20dp"
-                    android:maxWidth="20dp"
-                    android:minHeight="20dp"
-                    android:minWidth="20dp"
-                    android:numStars="5"
-                    android:progressDrawable="@drawable/bg_rating"
-                    android:rating="1.5" />
-
-                <TextView
-                    android:id="@+id/movie_list_cell_score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="6.5"
-                    android:textColor="@color/dynamicScoreClolor" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:text="来自"
-                    android:textColor="@color/dynamicScoreClolor" />
-
-                <TextView
-                    android:id="@+id/movie_list_cell_attention_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="7"
-                    android:textColor="@color/tabTitlePressed" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="关注的人"
-                    android:textColor="@color/dynamicScoreClolor" />
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/movie_list_cell_score"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:layout_marginLeft="@dimen/common_middle_marginOrpadding"
+                android:text="6.5"
+                android:textColor="@color/dynamicScoreClolor" />
 
-                <LinearLayout
-                    android:id="@+id/movie_layout_scroe_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="来自"
+                android:textColor="@color/gray" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="17dp"
-                        android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/movie_list_cell_attention_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7"
+                android:textColor="@color/tabTitlePressed" />
 
-                        <TextView
-                            android:id="@+id/movie_list_cell_looked_num"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="7"
-                            android:textColor="@color/tabTitlePressed" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="位好友看过"
-                            android:textColor="@color/dynamicScoreClolor" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="我的评分"
-                            android:textColor="@color/dynamicScoreClolor" />
-
-                        <TextView
-                            android:id="@+id/movie_list_cell_my_score"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="7"
-                            android:textColor="@color/tabTitlePressed" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="分 "
-                            android:textColor="@color/dynamicScoreClolor" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:layout_gravity="right|center_vertical"
-                    android:layout_toRightOf="@id/movie_layout_scroe_layout"
-                    android:gravity="right|center_vertical" >
-
-                    <ImageView
-                        android:id="@+id/movie_list_cell_eyes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/movie_btn_eye" />
-
-                    <ImageView
-                        android:id="@+id/movie_list_cell_add"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:src="@drawable/movie_btn_add" />
-                </LinearLayout>
-            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关注的人"
+                android:textColor="@color/gray" />
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_middle_marginOrpadding" >
+
+            <TextView
+                android:id="@+id/movie_list_cell_looked_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/common_middle_marginOrpadding"
+                android:text="7"
+                android:textColor="@color/tabTitlePressed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/movie_list_cell_looked_num"
+                android:text="位好友看过"
+                android:textColor="@color/gray" />
+
+            <TextView
+                android:id="@+id/core"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/movie_list_cell_looked_num"
+                android:text="我的评分"
+                android:textColor="@color/gray" />
+
+            <TextView
+                android:id="@+id/movie_list_cell_my_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/movie_list_cell_looked_num"
+                android:layout_toRightOf="@+id/core"
+                android:text="7"
+                android:textColor="@color/tabTitlePressed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/movie_list_cell_looked_num"
+                android:layout_toRightOf="@+id/movie_list_cell_my_score"
+                android:text="分 "
+                android:textColor="@color/gray" />
+
+            <ImageView
+                android:id="@+id/movie_list_cell_eyes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/movie_list_cell_add"
+                android:src="@drawable/movie_btn_eye" />
+
+            <ImageView
+                android:id="@+id/movie_list_cell_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/movie_btn_add" />
+        </RelativeLayout>
+        
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/dynamicLineColor"
-        android:orientation="horizontal" />
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="15dp"
-        android:background="@color/EEEEEE"
-        android:visibility="visible" />
-
-</LinearLayout>
+ <View
+       android:layout_below="@+id/line"
+        style="@style/line_horizontal_Max" />
+</RelativeLayout>

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical" >
 
    
@@ -13,7 +14,7 @@
         android:padding="@dimen/common_max_marginOrpadding"
         android:text="万达国际电影远"
         android:textColor="@color/black"
-        android:textSize="@dimen/MIDDLE_FONT"
+        android:textSize="@dimen/common_middle_textSize"
         android:textStyle="bold" />
  <View style="@style/line_horizontal" />
 </LinearLayout>

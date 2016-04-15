@@ -7,158 +7,199 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center" >
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="共观看" />
+            android:text="共观看 "
+            android:textColor="@color/text_view_selector"
+            android:textSize="@dimen/common_small_textSize" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/lookedNum_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="709" />
+            android:text="709"
+            android:textColor="@color/Purple"
+            android:textSize="@dimen/common_moreMax_textSize"
+            />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="部影片" />
-
+            android:textColor="@color/text_view_selector"
+            android:textSize="@dimen/common_small_textSize"
+            android:text=" 部影片" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
         android:gravity="center" >
 
         <com.mome.main.business.widget.circleprogress.DonutProgress
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="10dp"
-            ref:donut_suffix_text="电影" 
-            ref:donut_background_color="@color/white"/>
+            android:id="@+id/flimDount_pg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            ref:donut_background_color="@color/white"
+            ref:donut_text_color="@color/Purple"
+            ref:donut_unfinished_color="@color/gary_line"
+            ref:donut_finished_color="@color/Purple"
+            ref:donut_suffix_text="电影" />
 
         <com.mome.main.business.widget.circleprogress.DonutProgress
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="10dp"
-            ref:donut_suffix_text="网络"
-            ref:donut_background_color="@color/white"  />
+            android:id="@+id/internetDonut_pg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            ref:donut_text_color="@color/Purple"
+            ref:donut_unfinished_color="@color/gary_line"
+            ref:donut_finished_color="@color/Purple"
+            ref:donut_background_color="@color/white"
+            ref:donut_suffix_text="网络" />
 
         <com.mome.main.business.widget.circleprogress.DonutProgress
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="10dp" 
-            ref:donut_suffix_text="电视"
-            ref:donut_background_color="@color/white" />
-
+            android:id="@+id/tvDount_pg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            ref:donut_text_color="@color/Purple"
+            ref:donut_unfinished_color="@color/gary_line"
+            ref:donut_finished_color="@color/Purple"
+            ref:donut_background_color="@color/white"
+            ref:donut_suffix_text="电视" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:orientation="vertical" >
-    </LinearLayout>
+    <View style="@style/line_horizontal" />
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         android:orientation="horizontal"
         android:visibility="visible" >
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/common_max_marginOrpadding"
             android:layout_weight="1"
             android:orientation="vertical" >
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="最常去的影院"
-                android:textColor="@color/dynamicDateColor" />
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_small_textSize" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/oftenCinemaName_tv"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_marginTop="@dimen/common_max_marginOrpadding"
+                android:gravity="center"
+                android:text="万达营业"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_middle_textSize" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_max_marginOrpadding"
+                android:gravity="center"
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="观影" />
+                    android:text="观影"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_small_textSize" />
 
                 <TextView
-                    android:layout_width="fill_parent"
+                    android:id="@+id/oftenCinemaNum_tv"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/Purple"
+                    android:textSize="@dimen/common_max_textSize"
                     android:text="11" />
 
                 <TextView
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_small_textSize"
+                    android:gravity="center"
                     android:text="次" />
-
             </LinearLayout>
-
         </LinearLayout>
+        <View 
+            style="@style/line_vercal"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/common_max_marginOrpadding"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:visibility="visible" >
+            android:orientation="vertical" >
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="最常网络观影方式" />
+                android:gravity="center"
+                android:text="最常网络观影方式"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_small_textSize" />
 
             <TextView
+                android:id="@+id/oftenLookedTypeName_tv"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="PPTV" />
+                android:layout_marginTop="@dimen/common_max_marginOrpadding"
+                android:gravity="center"
+                android:text="万达营业"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_middle_textSize" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_max_marginOrpadding"
+                android:gravity="center"
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="观影" />
+                    android:text="观影"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_small_textSize" />
 
                 <TextView
-                    android:layout_width="fill_parent"
+                    android:id="@+id/oftenLookedTypeNum_tv"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="11"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/Purple"
+                    android:textSize="@dimen/common_max_textSize"
+                    android:text="11" />
 
                 <TextView
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_small_textSize"
+                    android:gravity="center"
                     android:text="次" />
             </LinearLayout>
-
         </LinearLayout>
-
-    </LinearLayout>
-
+        </LinearLayout>
 </LinearLayout>

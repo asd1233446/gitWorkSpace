@@ -1,47 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical" >
 
-    <com.mome.main.netframe.volley.toolbox.NetworkImageView
-        android:id="@+id/dynamic_detail_list_cell_head_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher" />
-
     <RelativeLayout
-        android:id="@+id/dynamic_detail_list_cell_title_layout"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/dynamic_detail_list_cell_head_icon" >
+        android:layout_margin="@dimen/common_max_marginOrpadding" >
+
+        <com.mome.main.netframe.volley.toolbox.NetworkImageView
+            android:id="@+id/dynamic_detail_list_cell_head_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/common_marginOrpadding"
+            android:src="@drawable/ic_launcher" />
 
         <TextView
             android:id="@+id/dynamic_detail_list_cell_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="left"
-            android:text="TextView" />
+            android:layout_toRightOf="@+id/dynamic_detail_list_cell_head_icon"
+            android:textColor="@color/black"
+            android:text="sjofsdo"
+            android:textSize="@dimen/common_max_textSize" />
+
+        <TextView
+            android:id="@+id/dynamic_detail_list_cell_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dynamic_detail_list_cell_username"
+            android:layout_marginTop="@dimen/common_marginOrpadding"
+            android:layout_toRightOf="@+id/dynamic_detail_list_cell_head_icon"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_textSize" />
 
         <TextView
             android:id="@+id/dynamic_detail_list_cell_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="right"
-            android:text="TextView" />
-
+            android:drawableLeft="@drawable/dynamic_img_date"
+            android:text="fsodfjsdof"
+            android:textColor="@color/dynamicDateColor"
+            android:textSize="@dimen/common_textSize" />
     </RelativeLayout>
+    
+    <View style="@style/line_horizontal"/>
 
-    <TextView
-        android:id="@+id/dynamic_detail_list_cell_comment"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/dynamic_detail_list_cell_title_layout"
-        android:layout_toRightOf="@id/dynamic_detail_list_cell_head_icon"
-        android:text="TextView" />
-
-</RelativeLayout>
+</LinearLayout>

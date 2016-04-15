@@ -9,7 +9,7 @@
         xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
         android:id="@+id/head_layout"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         head:rightBtnShow="show"
         head:rightButton="img"
         head:rightImg="@drawable/headview_icon_search"
@@ -17,67 +17,46 @@
         head:titleText="动态" >
     </com.mome.main.business.HeadRef>
 
-    <LinearLayout
+    <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_height="40dp"
+        android:layout_margin="@dimen/common_marginOrpadding"
         android:orientation="horizontal" >
 
-        <TextView
+        <RadioButton
             android:id="@+id/dynamic_btn_boutique"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
             android:gravity="center"
-            android:paddingBottom="15dp"
-            android:paddingTop="15dp"
             android:text="精品"
-            android:textColor="@color/dynamicTextNormal" />
+            android:textColor="@color/dynamic_text_selector"
+            android:textSize="@dimen/common_max_textSize" />
 
-        <TextView
+        <RadioButton
             android:id="@+id/dynamic_btn_dynamic"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_weight="1"
+            android:button="@null"
             android:gravity="center"
-            android:paddingBottom="15dp"
-            android:paddingTop="15dp"
             android:text="动态"
-            android:textColor="@color/dynamicTextNormal" />
+            android:textColor="@color/dynamic_text_selector"
+            android:textSize="@dimen/common_max_textSize" />
+    </RadioGroup>
 
-        <TextView
-            android:id="@+id/dynamic_btn_nearby"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="@drawable/bg_round_corner_rect"
-            android:gravity="center"
-            android:paddingBottom="15dp"
-            android:paddingTop="15dp"
-            android:text="附近"
-            android:textColor="@color/dynamicTextNormal" />
+    <View style="@style/line_horizontal"/>
 
-    </LinearLayout>
-
-    <LinearLayout
+    
+    <FrameLayout 
+        android:id="@+id/framelayout"
         android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/dynamicLineColor"
-        android:orientation="horizontal" >
-    </LinearLayout>
-
-        <com.mome.main.business.widget.pulltorefresh.PullToRefreshListView
-        android:id="@+id/pull_refresh_list"
-        android:layout_width="fill_parent"
+        android:layout_marginTop="@dimen/common_middle_marginOrpadding"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:cacheColorHint="#00000000"
-        android:divider="#19000000"
-        android:dividerHeight="0dp"
-        android:fadingEdge="none"
-        android:fastScrollEnabled="false"
-        android:footerDividersEnabled="false"
-        android:headerDividersEnabled="false"
-        android:smoothScrollbar="true" />
+        ></FrameLayout>
+
 </LinearLayout>

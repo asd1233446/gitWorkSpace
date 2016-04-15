@@ -19,9 +19,9 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp" >
+        android:layout_marginLeft="@dimen/common_marginOrpadding"
+        android:layout_marginRight="@dimen/common_marginOrpadding"
+        android:layout_marginTop="@dimen/common_marginOrpadding" >
 
         <LinearLayout
             android:layout_width="0dp"
@@ -35,8 +35,8 @@
 
                 <com.mome.main.netframe.volley.toolbox.NetworkImageView
                     android:id="@+id/dynamic_list_cell_head_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_launcher" />
 
                 <LinearLayout
@@ -51,8 +51,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="用户名"
-                        android:textColor="@color/tabBackground"
-                        android:textSize="@dimen/MIDDLE_FONT" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/common_max_textSize" />
 
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -89,7 +89,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="一个传统的电影"
-                android:textColor="@color/dynamicTextNormal" />
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_textSize" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -109,7 +110,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:text="2015-04-11"
-                    android:textColor="@color/dynamicDateColor" />
+                    android:textColor="@color/dynamicDateColor"
+                    android:textSize="@dimen/common_textSize" />
             </LinearLayout>
         </LinearLayout>
 
@@ -131,7 +133,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="电影名称"
-                android:textColor="@color/tabBackground" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_max_textSize" />
         </LinearLayout>
     </LinearLayout>
 
@@ -187,7 +190,8 @@
                 android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="评论(2036)"
-                android:textColor="@color/B3B3B3" />
+                android:textColor="@color/B3B3B3"
+                android:textSize="@dimen/common_textSize" />
         </LinearLayout>
     </LinearLayout>
 
@@ -201,7 +205,7 @@
         android:id="@+id/dynamic_list_cell_bottom_line"
         android:layout_width="fill_parent"
         android:layout_height="15dp"
-        android:background="@color/EEEEEE"
+        android:background="@color/combackgroud"
         android:orientation="horizontal"
         android:visibility="visible" />
 

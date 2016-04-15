@@ -1,99 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/alpha"
     android:gravity="bottom|center_horizontal"
-    android:orientation="vertical"
-    android:paddingBottom="50dp" >
+    android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/record_title"
-        android:layout_width="fill_parent"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:gravity="center"
-        android:text="添加观影记录"
-        android:textColor="@color/tabBackground"
-        android:textSize="22sp"
-        android:visibility="invisible" />
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="30dp" >
+
+        <TextView
+            android:id="@+id/record_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:text="添加观影记录"
+            android:textColor="@color/tabBackground"
+            android:textSize="22sp"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/record_net_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/record_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/record_btn_net" />
+
+        <ImageView
+            android:id="@+id/record_cinema_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/record_net_btn"
+            android:layout_below="@id/record_title"
+            android:layout_toLeftOf="@id/record_net_btn"
+            android:scaleType="fitCenter"
+            android:src="@drawable/record_btn_movie" />
+
+        <ImageView
+            android:id="@+id/record_tv_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/record_net_btn"
+            android:layout_below="@id/record_title"
+            android:layout_toRightOf="@id/record_net_btn"
+            android:scaleType="fitCenter"
+            android:src="@drawable/record_btn_tv" />
+
+        <TextView
+            android:id="@+id/record_net_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/record_net_btn"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="55dp"
+            android:layout_marginRight="55dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="网络观看"
+            android:textColor="@color/tabTitleDefault"
+            android:textSize="16sp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/record_cinema_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/record_net_title"
+            android:layout_below="@id/record_net_btn"
+            android:layout_marginLeft="10dp"
+            android:layout_toLeftOf="@id/record_net_title"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="影院观看"
+            android:textColor="@color/tabTitleDefault"
+            android:textSize="16sp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/record_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/record_net_title"
+            android:layout_below="@id/record_tv_btn"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@id/record_net_title"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="电视观看"
+            android:textColor="@color/tabTitleDefault"
+            android:textSize="16sp"
+            android:visibility="invisible" />
+    </RelativeLayout>
 
     <ImageView
-        android:id="@+id/record_net_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/record_title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/record_btn_net" />
+        android:id="@+id/clear"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:src="@drawable/headview_icon_cross" />
 
-    <ImageView
-        android:id="@+id/record_cinema_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/record_net_btn"
-        android:layout_below="@id/record_title"
-        android:layout_toLeftOf="@id/record_net_btn"
-        android:scaleType="fitCenter"
-        android:src="@drawable/record_btn_movie" />
-
-    <ImageView
-        android:id="@+id/record_tv_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/record_net_btn"
-        android:layout_below="@id/record_title"
-        android:layout_toRightOf="@id/record_net_btn"
-        android:scaleType="fitCenter"
-        android:src="@drawable/record_btn_tv" />
-
-    <TextView
-        android:id="@+id/record_net_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/record_net_btn"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="55dp"
-        android:layout_marginRight="55dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="网络观看"
-        android:textColor="@color/tabTitleDefault"
-        android:textSize="16sp"
-        android:visibility="invisible" />
-
-    <TextView
-        android:id="@+id/record_cinema_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/record_net_title"
-        android:layout_below="@id/record_net_btn"
-        android:layout_marginLeft="10dp"
-        android:layout_toLeftOf="@id/record_net_title"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="影院观看"
-        android:textColor="@color/tabTitleDefault"
-        android:textSize="16sp"
-        android:visibility="invisible" />
-
-    <TextView
-        android:id="@+id/record_tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/record_net_title"
-        android:layout_below="@id/record_tv_btn"
-        android:layout_marginRight="10dp"
-        android:layout_toRightOf="@id/record_net_title"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="电视观看"
-        android:textColor="@color/tabTitleDefault"
-        android:textSize="16sp"
-        android:visibility="invisible" />
-
-</RelativeLayout>
+</LinearLayout>

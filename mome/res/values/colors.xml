@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="white">#ffffffff</color>
-    <color name="black">#4F4F4F</color>
-    <color name="gary_line">#ffcccccc</color>
-    <color name="tabBackground">#ff333333</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#333333</color>
+    <color name="gary_line">#e5e5e5</color>
+    <color name="tabBackground">#666666</color>
     <color name="tabTitleDefault">#ff848484</color>
     <color name="tabTitlePressed">#ffad5ca0</color>
-    <color name="dynamicTextPressed">#ffff0000</color>
+    <color name="dynamicTextPressed">#AD5EA1</color>
     <color name="dynamicTextNormal">#ff666666</color>
-    <color name="dynamicLineColor">#ffcccccc</color>
-    <color name="dynamicScoreClolor">#fffa6b5b</color>
-    <color name="dynamicDateColor">#ff9b9b9b</color>
+    <color name="dynamicLineColor">#e5e5e5</color>
+    <color name="dynamicScoreClolor">#FA6B5B</color>
+    <color name="dynamicDateColor">#9b9b9b</color>
     <color name="dynamicHLineColor">#ffe5e5e5</color>
+        <color name="movieLineColor">#cccccc</color>
+    
+    
     <color name="B3B3B3">#ffb3b3b3</color>
-    <color name="EEEEEE">#ffeeeeee</color>
+    <color name="combackgroud">#cccccc</color>
     <color name="F0F0F0">#F0F0F0</color>
     <color name="alpha">#EEFFFFFF</color>
     <color name="E0DEDA">#E0DEDA</color>
@@ -24,6 +27,12 @@
     <color name="viewfinder_frame">#ff000000</color>
     <color name="viewfinder_laser">#ffff0000</color>
     <!-- 灰色 -->
-    <color name="gray">#7B7B7B</color>
+    <color name="gray">#666666</color>
+    <!-- 紫色 -->
+      <color name="Purple">#AD5EA1</color>
+      <!--深灰色 --> 
+       <color name="mostgray">#999999</color>
+       <!--浅灰色 --> 
+       <color name="losergray">#666666</color>
 
 </resources>

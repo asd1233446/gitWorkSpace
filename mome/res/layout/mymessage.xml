@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -15,10 +14,22 @@
         head:leftImg="@drawable/headview_btn_back"
         head:titleText="私信列表" >
     </com.mome.main.business.HeadRef>
-    <ListView 
-        android:id="@+id/myMessage_lv"
-        style="@style/listView">
-        
-    </ListView>
-
+  
+    <com.mome.main.business.widget.pulltorefresh.PullToRefreshListView
+        android:id="@+id/pull_refresh_list"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:cacheColorHint="#00000000"
+        android:divider="#19000000"
+        android:dividerHeight="0dp"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:listSelector="@null"
+        android:smoothScrollbar="true" >
+    </com.mome.main.business.widget.pulltorefresh.PullToRefreshListView>
+    
+    
 </LinearLayout>

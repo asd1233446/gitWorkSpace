@@ -9,7 +9,7 @@
         xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
         android:id="@+id/head_layout"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="@dimen/common_head_height"
         head:leftBtnShow="show"
         head:leftButton="img"
         head:leftImg="@drawable/headview_btn_back"
@@ -27,10 +27,10 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/common_marginOrpadding" >
 
-        <ImageView
+        <com.mome.main.netframe.volley.toolbox.NetworkImageView
             android:id="@+id/userIcon_iv"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_launcher" />
 
         <TextView

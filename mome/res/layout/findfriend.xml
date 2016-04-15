@@ -2,55 +2,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/combackgroud"
     android:orientation="vertical" >
     
     <com.mome.main.business.HeadRef
         xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
         android:id="@+id/head_layout"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        head:rightBtnShow="show"
-        head:rightButton="img"
-        head:rightImg="@drawable/headview_icon_search"
+        android:layout_height="wrap_content"
+        head:leftBtnShow="show"
+        head:leftButton="img"
+        head:leftImg="@drawable/headview_btn_back"
+        android:background="@color/white"
         head:titleShow="show"
         head:titleText="找好友" >
     </com.mome.main.business.HeadRef>
-        <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/dynamicLineColor"
-        android:orientation="horizontal" >
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/dynamicLineColor"
-        android:orientation="horizontal" >
-    </LinearLayout>
+ 
+ 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/common_marginOrpadding"
         android:orientation="vertical" >
 
         <RelativeLayout
             android:id="@+id/findfriend_weibo"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
+            android:padding="@dimen/common_marginOrpadding"
+            >
 
             <ImageView
                 android:id="@+id/ImageView08"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@drawable/discovery_icon_look_friend" />
+                android:src="@drawable/sina_select" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -70,29 +61,22 @@
                 android:src="@drawable/discovery_icon_arrow" />
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="1"
-            android:background="@color/dynamicLineColor"
-            android:orientation="horizontal" >
-        </LinearLayout>
+      <View style="@style/line_horizontal"/>
 
         <RelativeLayout
             android:id="@+id/findfriend_weixin"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/common_marginOrpadding"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
+             >
 
             <ImageView
                 android:id="@+id/ImageView05"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@drawable/discovery_icon_look_friend" />
+                android:src="@drawable/weichat_select" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -112,29 +96,23 @@
                 android:src="@drawable/discovery_icon_arrow" />
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="1"
-            android:background="@color/dynamicLineColor"
-            android:orientation="horizontal" >
-        </LinearLayout>
+             <View style="@style/line_horizontal"/>
+
 
         <RelativeLayout
             android:id="@+id/findfriend_address_book"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
+            android:padding="@dimen/common_marginOrpadding"
+            >
 
             <ImageView
                 android:id="@+id/discovery_icon_friend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@drawable/discovery_icon_look_friend" />
+                android:src="@drawable/douban_select" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -154,191 +132,11 @@
                 android:src="@drawable/discovery_icon_arrow" />
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginLeft="15dp"
-            android:background="@color/dynamicLineColor"
-            android:orientation="horizontal" >
-        </LinearLayout>
+       
 
-        <RelativeLayout
-            android:id="@+id/findfriend_qq"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
-
-            <ImageView
-                android:id="@+id/discovery_icon_instract"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:src="@drawable/discovery_icon_interest" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/discovery_icon_instract"
-                android:text="邀请QQ好友"
-                android:textColor="@color/tabBackground" />
-
-            <ImageView
-                android:id="@+id/ImageView04"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/discovery_icon_arrow" />
-        </RelativeLayout>
+        
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/dynamicLineColor"
-        android:orientation="horizontal" >
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/dynamicLineColor"
-        android:orientation="horizontal" >
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="vertical" >
-
-        <RelativeLayout
-            android:id="@+id/findfriend_nearby"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
-
-            <ImageView
-                android:id="@+id/findfriend_nearby_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:src="@drawable/discovery_icon_activity" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/findfriend_nearby_img"
-                android:text="附近好友"
-                android:textColor="@color/tabBackground" />
-
-            <ImageView
-                android:id="@+id/ImageView01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/discovery_icon_arrow" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginLeft="15dp"
-            android:background="@color/dynamicLineColor"
-            android:orientation="horizontal" >
-        </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/findfriend_mome"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
-
-            <ImageView
-                android:id="@+id/findfriend_mome_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:src="@drawable/discovery_icon_ticket" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/findfriend_mome_img"
-                android:text="MOME推荐"
-                android:textColor="@color/tabBackground" />
-
-            <ImageView
-                android:id="@+id/ImageView07"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/discovery_icon_arrow" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginLeft="15dp"
-            android:background="@color/dynamicLineColor"
-            android:orientation="horizontal" >
-        </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/findfriend_new_add"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
-
-            <ImageView
-                android:id="@+id/findfriend_new_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:src="@drawable/discovery_icon_store" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/findfriend_new_img"
-                android:text="最新加入"
-                android:textColor="@color/tabBackground" />
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/discovery_icon_arrow" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0.5dp"
-            android:layout_weight="1"
-            android:background="@color/dynamicLineColor"
-            android:orientation="horizontal" >
-        </LinearLayout>
-    </LinearLayout>
 </LinearLayout>

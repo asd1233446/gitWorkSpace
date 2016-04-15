@@ -9,11 +9,14 @@
         xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
         android:id="@+id/head_layout"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         head:rightBtnShow="show"
         head:rightButton="img"
         head:rightImg="@drawable/headview_icon_search"
         head:titleShow="show"
+        head:leftBtnShow="show"
+        head:leftButton="img"
+        head:leftImg="@drawable/headview_btn_back"
         head:titleText="电影" >
     </com.mome.main.business.HeadRef>
 
@@ -22,6 +25,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0.5dp"
         android:background="@color/dynamicLineColor"
+        android:visibility="gone"
         android:orientation="horizontal" >
 
     </LinearLayout>
@@ -40,6 +44,7 @@
             android:gravity="center"
             android:paddingBottom="15dp"
             android:paddingTop="15dp"
+            android:textSize="@dimen/common_max_textSize"
             android:text="热门影片"
             android:textColor="@color/dynamicTextNormal" />
 
@@ -52,6 +57,7 @@
             android:paddingBottom="15dp"
             android:paddingTop="15dp"
             android:text="朋友圈影片"
+            android:textSize="@dimen/common_max_textSize"
             android:textColor="@color/dynamicTextNormal" />
 
     </LinearLayout>
@@ -60,7 +66,7 @@
         android:id="@+id/movie_btn_down_line"
         android:layout_width="fill_parent"
         android:layout_height="0.5dp"
-        android:background="@color/dynamicLineColor"
+        android:background="@color/movieLineColor"
         android:orientation="horizontal" >
 
     </LinearLayout>
