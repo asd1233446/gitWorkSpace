@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/combackgroud"
+    android:orientation="vertical" >
+
+    <com.mome.main.business.HeadRef
+        xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
+        android:id="@+id/head_layout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@color/white"
+        head:rightBtnShow="show"
+        head:rightButton="text"
+        head:rightText="编辑"
+        head:titleShow="show"
+        head:titleText="添加电影记录卡" >
+    </com.mome.main.business.HeadRef>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="130dp"
+                android:background="@color/white"
+                android:orientation="horizontal" >
+
+                <com.mome.main.netframe.volley.toolbox.NetworkImageView
+                    android:id="@+id/movie_icon"
+                    android:layout_width="80dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="@dimen/common_marginOrpadding"
+                    android:layout_marginLeft="@dimen/common_marginOrpadding"
+                    android:layout_marginTop="@dimen/common_marginOrpadding"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_launcher" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="@dimen/common_marginOrpadding"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/movie_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:text="速度与激情"
+                        android:textColor="@color/tabBackground"
+                        android:textSize="@dimen/common_max_textSize" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="类型: "
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/common_small_textSize" />
+
+                        <TextView
+                            android:id="@+id/movie_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/common_small_textSize" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="时长: "
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/common_small_textSize" />
+
+                        <TextView
+                            android:id="@+id/movie_times"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/common_small_textSize" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:visibility="gone" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="简介: "
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/common_small_textSize" />
+
+                        <TextView
+                            android:id="@+id/movie_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/common_small_textSize" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/memoirs_bg_my_grade"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="我的评分"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/common_small_textSize" />
+
+                    <TextView
+                        android:id="@+id/movie_mark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/common_marginOrpadding"
+                        android:text="8.0"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/common_middle_textSize" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/dynamicLineColor"
+                android:orientation="horizontal" >
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="影院观影信息"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_small_textSize" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/dynamicLineColor"
+                android:orientation="horizontal" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/movie_ticket"
+                    android:layout_width="80dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="@dimen/common_marginOrpadding"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_launcher" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="@dimen/common_marginOrpadding"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/cinema_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="双井影院"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/common_max_textSize" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" >
+
+                        <TextView
+                            android:id="@+id/cinema_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/common_small_textSize"
+                            android:text="2012-12-9"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/common_small_textSize" />
+
+                        <TextView
+                            android:id="@+id/cinema_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12:00"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/common_small_textSize" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp" >
+
+                        <TextView
+                            android:id="@+id/cinema_hallNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_below="@id/movie_memoirs_card_cinema"
+                            android:text="1号厅"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/common_small_textSize" />
+
+                        <View
+                            android:id="@+id/line"
+                            style="@style/line_vercal"
+                            android:layout_alignBottom="@+id/cinema_hallNum"
+                            android:layout_below="@id/movie_memoirs_card_cinema"
+                            android:layout_marginLeft="@dimen/common_marginOrpadding"
+                            android:layout_marginRight="@dimen/common_marginOrpadding"
+                            android:layout_toRightOf="@+id/cinema_hallNum" />
+
+                        <TextView
+                            android:id="@+id/cinema_seatNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/line"
+                            android:text="1排1号"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/common_small_textSize" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/movie_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="@dimen/common_max_marginOrpadding"
+                    android:text="80"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_max_textSize" />
+            </LinearLayout>
+
+            <View style="@style/line_horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center" >
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/bg_rating" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="同场人查看"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
+
+                <TextView
+                    android:id="@+id/sameMovieNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(30)"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="照片留念"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_small_textSize" />
+
+            <HorizontalScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:padding="@dimen/common_marginOrpadding"
+                android:scrollbars="none" >
+
+                <LinearLayout
+                    android:id="@+id/photoSouvenir"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/addSouvenir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/iconfont_tianjia"
+                        android:scaleType="matrix" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="观影同伴"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_small_textSize" />
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView2"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:padding="@dimen/common_marginOrpadding"
+                android:paddingBottom="@dimen/common_middle_marginOrpadding"
+                android:paddingTop="@dimen/common_middle_marginOrpadding" >
+
+                <LinearLayout
+                    android:id="@+id/MovieCompanion"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:scaleType="matrix"
+                        android:src="@drawable/ic_launcher" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="我的影评"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_small_textSize" />
+
+            <TextView
+                android:id="@+id/movie_comment"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/common_marginOrpadding"
+                android:text="我 u 不舒服送到附近搜到"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_small_textSize" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

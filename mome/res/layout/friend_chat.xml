@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <com.mome.main.business.HeadRef
+        xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
+        android:id="@+id/head_layout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        head:leftBtnShow="show"
+        head:leftButton="img"
+        head:leftImg="@drawable/headview_btn_back"
+        head:titleShow="show"
+        head:titleText="私信" >
+    </com.mome.main.business.HeadRef>
+
+    <com.mome.main.business.widget.pulltorefresh.PullToRefreshListView
+        android:id="@+id/listView"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/msgText"
+        android:layout_below="@+id/head_layout"
+        android:background="@color/gary_line"
+        android:divider="#00000000"
+        android:listSelector="#00000000"
+        android:paddingBottom="10dp"
+        android:transcriptMode="normal" />
+
+    <EditText
+        android:id="@+id/msgText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/sendMgs"
+        android:background="@drawable/input_edittext_bg"
+        android:imeOptions="actionDone"
+        android:layout_alignTop="@+id/sendMgs"
+        android:maxLength="140"
+        android:maxLines="3"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/sendMgs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/bg_round_corner_blue_rect"
+        android:padding="10dp"
+        android:text="发送"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+</RelativeLayout>

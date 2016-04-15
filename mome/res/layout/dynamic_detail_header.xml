@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_marginOrpadding" >
+
+        <com.mome.main.netframe.volley.toolbox.NetworkImageView
+            android:id="@+id/user_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="@dimen/common_marginOrpadding"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/userName_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/user_icon"
+            android:text="英雄饶命"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_middle_textSize" />
+
+        <RatingBar
+            android:id="@+id/dynamic_rating"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userName_tv"
+            android:layout_marginTop="@dimen/common_marginOrpadding"
+            android:layout_toRightOf="@+id/user_icon"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:progressDrawable="@drawable/bg_rating"
+            android:rating="1.5" />
+
+        <TextView
+            android:id="@+id/movieScore_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userName_tv"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="@dimen/common_marginOrpadding"
+            android:layout_toRightOf="@+id/dynamic_rating"
+            android:text="6.5"
+            android:textColor="@color/dynamicScoreClolor" />
+
+        <TextView
+            android:id="@+id/movieinfo_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_icon"
+            android:layout_marginBottom="@dimen/common_marginOrpadding"
+            android:text="一个特色传统，建党的古装奇幻个特色传统，建党的古装"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_small_textSize" />
+
+        <TextView
+            android:id="@+id/movieName_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="评论“降魔之战”"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_small_textSize" />
+
+        <TextView
+            android:id="@+id/movieDate_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/dynamicComment_tv"
+            android:layout_below="@+id/movieinfo_tv"
+            android:layout_marginLeft="5dp"
+            android:drawableLeft="@drawable/dynamic_img_date"
+            android:gravity="center"
+            android:text="2015-04-11"
+            android:textColor="@color/dynamicDateColor"
+            android:textSize="@dimen/common_textSize" />
+
+        <TextView
+            android:id="@+id/dynamicComment_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/dynamic_list_cell_txt_praise_value"
+            android:layout_below="@+id/movieinfo_tv"
+            android:layout_marginRight="@dimen/common_middle_marginOrpadding"
+            android:layout_toLeftOf="@+id/dynamic_list_cell_txt_praise_value"
+            android:drawableLeft="@drawable/dynamic_img_comment"
+            android:gravity="center"
+            android:text="20000"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_small_textSize" />
+
+        <TextView
+            android:id="@+id/dynamic_list_cell_txt_praise_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/movieinfo_tv"
+            android:drawableLeft="@drawable/dynamic_img_praise"
+            android:gravity="center"
+            android:text="111"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_textSize" />
+    </RelativeLayout>
+
+</LinearLayout>

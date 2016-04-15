@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gary_line"
+    android:orientation="vertical" >
+       <com.mome.main.business.HeadRef
+        xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
+        android:id="@+id/head_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_marginOrpadding"
+        head:leftBtnShow="show"
+        head:leftButton="img"
+        head:leftImg="@drawable/qrcode"
+        head:inputShow="show"
+        head:rightBtnShow="show"
+        head:rightText="取消"
+        >
+    </com.mome.main.business.HeadRef>
+   <ExpandableListView
+            android:id="@+id/expandableList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="#00000000"
+            android:childDivider="@null"
+            android:listSelector="#00000000"
+            android:childIndicator="@null"
+            android:divider="@null"
+            android:groupIndicator="@null" 
+            
+            />
+</LinearLayout>

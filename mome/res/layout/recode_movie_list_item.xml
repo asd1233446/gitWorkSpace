@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="100dp"
+    android:padding="@dimen/common_marginOrpadding" >
+
+    <com.mome.main.netframe.volley.toolbox.NetworkImageView
+        android:id="@+id/movie_detail_poster"
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="@dimen/common_marginOrpadding"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/movie_detail_movie_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/movie_detail_poster"
+        android:text="英雄饶命"
+        android:textColor="@color/black"
+        android:textSize="@dimen/common_middle_textSize" />
+
+    <RatingBar
+        android:id="@+id/movie_detail_rating"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/movie_detail_movie_title"
+        android:layout_marginTop="@dimen/common_marginOrpadding"
+        android:layout_toRightOf="@+id/movie_detail_poster"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:progressDrawable="@drawable/bg_rating"
+        android:rating="1.5" />
+
+    <TextView
+        android:id="@+id/movie_detail_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/movie_detail_movie_title"
+        android:layout_marginLeft="@dimen/common_marginOrpadding"
+        android:layout_marginRight="@dimen/common_marginOrpadding"
+        android:layout_marginTop="@dimen/common_marginOrpadding"
+        android:layout_toRightOf="@+id/movie_detail_rating"
+        android:text="6.5"
+        android:textColor="@color/dynamicScoreClolor"
+        android:textSize="@dimen/common_small_textSize" />
+
+    <TextView
+        android:id="@+id/movie_detail_attention_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/movie_detail_movie_title"
+        android:layout_marginTop="@dimen/common_marginOrpadding"
+        android:layout_toRightOf="@+id/movie_detail_score"
+        android:text="来自7位关注的人"
+        android:textColor="@color/gray" />
+
+    <TextView
+        android:id="@+id/movie_detail_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/movie_detail_time"
+        android:layout_toRightOf="@+id/movie_detail_poster"
+        android:text="类型：动作，科幻，动漫"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/common_small_textSize" />
+
+    <TextView
+        android:id="@+id/movie_detail_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/movie_detail_poster"
+        android:text="时长：110分钟"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/common_small_textSize" />
+
+    <TextView
+        android:id="@+id/movieIntroduce_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:drawableLeft="@drawable/bg_rating"
+        android:gravity="right"
+        android:text="@string/movieIntroduce"
+        android:textColor="@color/dynamicScoreClolor"
+        android:textSize="@dimen/common_small_textSize" />
+
+</RelativeLayout>

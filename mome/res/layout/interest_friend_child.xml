@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/news_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_marginOrpadding" >
+
+        <com.mome.main.netframe.volley.toolbox.NetworkImageView
+            android:id="@+id/user_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/common_marginOrpadding" >
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="古天乐"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_max_textSize" />
+
+            <TextView
+                android:id="@+id/user_sign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@+id/newsDate_tv"
+                android:gravity="left"
+                android:singleLine="true"
+                android:text="123445sdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_textSize" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/attention"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/discovery_icon_look_friend" />
+    </LinearLayout>
+
+    <View style="@style/line_horizontal" />
+
+</LinearLayout>

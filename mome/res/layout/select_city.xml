@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/combackgroud"
+    android:orientation="vertical" >
+
+    <com.mome.main.business.HeadRef
+        xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
+        android:id="@+id/head_layout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        head:leftBtnShow="show"
+        head:leftButton="img"
+        head:leftImg="@drawable/headview_btn_back"
+        head:titleShow="show"
+        head:titleText="选择城市" >
+    </com.mome.main.business.HeadRef>
+
+    <EditText
+        android:id="@+id/seachCity"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_middle_marginOrpadding"
+        android:background="@drawable/input_edittext_bg"
+        android:drawableLeft="@drawable/headview_icon_search"
+        android:hint="搜索" />
+
+    <TextView
+        android:id="@+id/gpsCity"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="@dimen/common_marginOrpadding"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:hint="北京"
+        android:padding="@dimen/common_marginOrpadding"
+        android:textColor="@color/black"
+        android:textSize="@dimen/common_middle_textSize" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/common_marginOrpadding"
+                android:gravity="center_vertical"
+                android:text="热门城市"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_small_textSize" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="@dimen/common_marginOrpadding"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:hint="北京"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_middle_textSize" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="@dimen/common_marginOrpadding"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:hint="北京"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_middle_textSize" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="@dimen/common_marginOrpadding"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:hint="北京"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_middle_textSize" />
+            </LinearLayout>
+
+            <se.emilsjolander.stickylistheaders.ExpandableStickyListHeadersListView
+                android:id="@+id/expandableList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:clipToPadding="false"
+                android:drawSelectorOnTop="true"
+                android:scrollbars="none" />
+        </LinearLayout>
+
+        <com.mome.pinyin.AssortView
+            android:id="@+id/letter_view"
+            android:layout_width="40dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right"
+            android:background="@android:color/transparent" />
+    </FrameLayout>
+
+</LinearLayout>

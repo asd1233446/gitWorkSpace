@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/combackgroud"
+    android:orientation="vertical" >
+    
+    <com.mome.main.business.HeadRef
+        xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
+        android:id="@+id/head_layout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        head:titleShow="show"
+        head:leftBtnShow="show"
+        head:leftButton="img"
+        head:leftImg="@drawable/headview_btn_back"
+        head:titleText="电影" >
+    </com.mome.main.business.HeadRef>
+
+       <EditText
+        android:id="@+id/search_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/headview_btn_search"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="搜索"
+        android:textColor="@color/B3B3B3" >
+
+    </EditText>
+    <com.mome.main.business.widget.pulltorefresh.PullToRefreshListView
+        android:id="@+id/pull_refresh_list"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:cacheColorHint="#00000000"
+        android:divider="#19000000"
+        android:dividerHeight="0dp"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:background="@color/white"
+        android:smoothScrollbar="true" >
+    </com.mome.main.business.widget.pulltorefresh.PullToRefreshListView>
+    
+</LinearLayout>
