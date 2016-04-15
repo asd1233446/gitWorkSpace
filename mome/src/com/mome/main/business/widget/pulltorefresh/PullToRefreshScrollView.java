@@ -20,7 +20,10 @@ import android.content.Context;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.mome.main.R;
@@ -82,7 +85,7 @@ public class PullToRefreshScrollView extends PullToRefreshBase<ScrollView> {
 
 	@TargetApi(9)
 	final class InternalScrollViewSDK9 extends ScrollView {
-
+		
 		public InternalScrollViewSDK9(Context context, AttributeSet attrs) {
 			super(context, attrs);
 		}
@@ -112,5 +115,36 @@ public class PullToRefreshScrollView extends PullToRefreshBase<ScrollView> {
 			}
 			return scrollRange;
 		}
+		
+		@Override
+		protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+			// TODO Auto-generated method stub
+			super.onScrollChanged(l, t, oldl, oldt);
+			LinearLayout ll=(LinearLayout) getChildAt(0);
+				if(null!=callBack){
+					callBack.onBack(this.getScrollY());
+				}
+			
+				
+		}
+		
+		
+		
+		
+	 
+	}	
+	public interface CallBack{
+		public void  onBack(int a);
 	}
+	
+	private CallBack callBack;
+
+	public CallBack getCallBack() {
+		return callBack;
+	}
+
+	public void setCallBack(CallBack callBack) {
+		this.callBack = callBack;
+	}
+	
 }

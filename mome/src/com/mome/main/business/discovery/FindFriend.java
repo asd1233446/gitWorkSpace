@@ -34,22 +34,7 @@ public class FindFriend extends BaseFragment {
 		
 	}
 	
-	/**
-	 * qq好友
-	 */
-	@OnClick(id = R.id.findfriend_qq)
-	public void qqFriendClick() {
-		
-	}
-	
-	/**
-	 * 附近好友
-	 */
-	@OnClick(id = R.id.findfriend_nearby)
-	public void nearbyFriendClick() {
-		
-	}
-	
+
 	/**
 	 * 新加入好友
 	 */

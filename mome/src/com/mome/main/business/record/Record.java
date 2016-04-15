@@ -1,7 +1,9 @@
 package com.mome.main.business.record;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnticipateOvershootInterpolator;
@@ -10,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mome.main.R;
+import com.mome.main.business.TabManager;
+import com.mome.main.business.movie.AddMovieMemoir;
 import com.mome.main.core.BaseFragment;
 import com.mome.main.core.annotation.LayoutInject;
 import com.mome.main.core.annotation.OnClick;
@@ -73,11 +77,7 @@ public class Record extends BaseFragment{
 	private Animation tvAnimationSet;
 	private Animation tvAlphaAni;
 	private Animation titleAni;
-	
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-	}
+
 
 	@Override
 	public void onResume() {
@@ -188,7 +188,8 @@ public class Record extends BaseFragment{
 	 */
 	@OnClick(id = R.id.record_cinema_btn)
 	public void cinemaClick(View view) {
-		Tools.pushScreen(AddRecord.class, null);
+		TabManager.topRecordLayout.setVisibility(View.GONE);
+		Tools.pushScreen(SelectCinema.class, null);
 	}
 	
 	/**
@@ -197,7 +198,7 @@ public class Record extends BaseFragment{
 	 */
 	@OnClick(id = R.id.record_net_btn)
 	public void netClick(View view) {
-		
+		Tools.pushScreen(AddMovieMemoir.class, null);
 	}
 	
 	/**
@@ -206,6 +207,13 @@ public class Record extends BaseFragment{
 	 */
 	@OnClick(id = R.id.record_tv_btn)
 	public void tvClick(View view) {
+		//Tools.pushScreen(MovieComment.class, null);
 		
 	}
+	@OnClick(id=R.id.clear)
+	public void clearClick(View view){
+		Tools.pullScreen();
+
+	}
+
 }

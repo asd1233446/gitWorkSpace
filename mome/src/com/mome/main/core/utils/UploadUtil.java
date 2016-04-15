@@ -8,6 +8,22 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.UUID;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.jessieray.api.model.Me;
+import com.jessieray.api.model.savePicture;
+import com.jessieray.api.request.base.Request;
+import com.jessieray.api.request.base.ResponseCallback;
+import com.jessieray.api.request.base.ResponseError;
+import com.jessieray.api.request.base.ResponseResult;
+import com.mome.main.netframe.volley.RequestQueue;
+import com.mome.main.netframe.volley.Response.ErrorListener;
+import com.mome.main.netframe.volley.Response.Listener;
+import com.mome.main.netframe.volley.VolleyError;
+import com.mome.main.netframe.volley.toolbox.MultipartRequest;
+import com.mome.main.netframe.volley.toolbox.MultipartRequestParams;
+import com.mome.main.netframe.volley.toolbox.Volley;
+
 import android.content.Context;
 /**
  * 上传头像 
@@ -116,4 +132,40 @@ public class UploadUtil {
 		return "";
 		
 	}
+	
+	 static String result="";
+	public static void upload(String imageUrl, MultipartRequestParams params,  final ResponseCallback callback){
+	         
+		    MultipartRequest multiPartRequest =new MultipartRequest(AppConfig.url+imageUrl, params, new Listener<String>() {
+
+				@Override
+				public void onResponse(String response) {
+					// TODO Auto-generated method stub
+					
+					callback.sucess(new com.google.gson.reflect.TypeToken<ResponseResult<Object>>() {}.getType(), getObject(response));
+				}
+			} , new ErrorListener() {
+
+				@Override
+				public void onErrorResponse(VolleyError error) {
+					// TODO Auto-generated method stub
+					ResponseError responseError=new ResponseError();
+					responseError.setMessage(error.getMessage());
+					callback.error(responseError);
+
+				}
+				
+			
+			});
+		    
+	   RequestQueue		requestQueue = Volley.newRequestQueue(AppConfig.context);
+			requestQueue.start();
+			requestQueue.add(multiPartRequest);
+}
+	
+	   public static <T> ResponseResult<?> getObject(String jsonString) {
+		   Gson gson=new Gson();
+			 ResponseResult<?> response = (ResponseResult<?>) gson.fromJson(jsonString, new com.google.gson.reflect.TypeToken<ResponseResult<savePicture>>() {}.getType());
+	        return response ;
+	    }
 }

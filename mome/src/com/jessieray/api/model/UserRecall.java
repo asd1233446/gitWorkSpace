@@ -10,27 +10,27 @@ import java.io.Serializable;
  */
 
 public class UserRecall implements Serializable {
-    /**
-     * 观影回忆录总数
-     */
-    private int total;
 
     /**
      * 观影回忆录列表
      */
+    
     private java.util.List<com.jessieray.api.model.MemoirsInfo> recalls;
+     
+    
+    private  java.util.List<com.jessieray.api.model.Year> yearcounts;
+    
+    
 
 
+    public java.util.List<com.jessieray.api.model.Year> getYearcounts() {
+		return yearcounts;
+	}
 
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-
+	public void setYearcounts(
+			java.util.List<com.jessieray.api.model.Year> yearcounts) {
+		this.yearcounts = yearcounts;
+	}
     public void setRecalls(java.util.List<com.jessieray.api.model.MemoirsInfo> recalls) {
         this.recalls = recalls;
     }

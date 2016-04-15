@@ -38,7 +38,7 @@ public class AddArticleCommentRequest {
         params.put("articleid", RequestUtils.object2String(articleid));
         params.put("brief", RequestUtils.object2String(brief));
         resultType = new com.google.gson.reflect.TypeToken<ResponseResult<AddArticleComment>>() {}.getType();
-        RequestProxy.getRequest().doRequest(url, Request.Method.GET, params, resultType, response);
+        RequestProxy.getRequest().doRequest(url, Request.Method.POST, params, resultType, response);
     }
 
 

@@ -4,8 +4,12 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jessieray.api.model.GetCircleMovieList;
+import com.jessieray.api.model.MovieInfo;
+import com.jessieray.api.model.UserFavorite;
 import com.jessieray.api.request.base.ResponseError;
 import com.jessieray.api.request.base.ResponseResult;
+import com.jessieray.api.service.GetCircleMovieListRequest;
 import com.mome.main.R;
 import com.mome.main.business.model.UserProperty;
 import com.mome.main.business.module.ListAdapter;
@@ -55,12 +59,11 @@ public class Movie extends BaseFragment {
 	/**
 	 * 列表数据
 	 */
-	private ArrayList<ListCellBase> hotListData = new ArrayList<ListCellBase>();
-	private ArrayList<ListCellBase> friendListData = new ArrayList<ListCellBase>();
+	private ArrayList<ListCellBase> movieListData = new ArrayList<ListCellBase>();
 	/**
 	 * 按钮的索引
 	 */
-	private final int BTN_LEFT = 0;
+	private final int BTN_LEFT = 2;
 	private final int BTN_RIGHT = 1;
 	/**
 	 * 当前tab索引
@@ -89,8 +92,7 @@ public class Movie extends BaseFragment {
 
 				// Update the LastUpdatedLabel
 				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-//				MovieRequest.getHotMovies(UserProperty.getInstance().getUid(),0,AppConfig.PAGE_SIZE,curIndex, Movie.this);
-				mPullRefreshListView.setMode(Mode.BOTH);
+				getMovieList();
 			}
 
 			@Override
@@ -101,65 +103,68 @@ public class Movie extends BaseFragment {
 
 				// Update the LastUpdatedLabel
 				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-				if(curPageIndex < totalPage) {
-					curPageIndex++;
-//					MovieRequest.getHotMovies(UserProperty.getInstance().getUid(),curPageIndex,AppConfig.PAGE_SIZE,curIndex, Movie.this);
-					mPullRefreshListView.setMode(Mode.BOTH);
-				} else {
-					mPullRefreshListView.setMode(Mode.PULL_FROM_START);
-				}
+
 			}
 		});
-		mPullRefreshListView.setMode(Mode.BOTH);
+		mPullRefreshListView.setMode(Mode.PULL_FROM_START);
 		listView = mPullRefreshListView.getRefreshableView();
 		adapter = new ListAdapter();
-		adapter.setDataList(hotListData);
+		adapter.setDataList(movieListData);
 		listView.setAdapter(adapter);
 		hotClick(null);
+	}
+	
+	private void getMovieList(){
+		
+			//2热门影片 1朋友圈
+			GetCircleMovieListRequest.findGetCircleMovieList(UserProperty.getInstance().getUid()+"", curIndex+"", AppConfig.PAGE_SIZE, 1, this);
+		
+	}
+	
+	
+	
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		this.headView.setLeftBtnShow(View.GONE);
+		super.onStart();
 	}
 	
 	@OnClick(id = R.id.movie_btn_hot)
 	public void hotClick(View view) {
 		updateBtn(BTN_LEFT);
 		curIndex = BTN_LEFT;
-		adapter.setDataList(hotListData);
-		if(hotListData.isEmpty()) {
-			mPullRefreshListView.autoRefresh();
-//			MovieRequest.getHotMovies(UserProperty.getInstance().getUid(),0,AppConfig.PAGE_SIZE,curIndex, Movie.this);
-		}
+		Tools.setRereshing(mPullRefreshListView);
+		
 	}
 	
 	@OnClick(id = R.id.movie_btn_friend)
 	public void friendClick(View view) {
 		updateBtn(BTN_RIGHT);
 		curIndex = BTN_RIGHT;
-		adapter.setDataList(friendListData);
-		if(friendListData.isEmpty()) {
-			mPullRefreshListView.autoRefresh();
-//			MovieRequest.getHotMovies(UserProperty.getInstance().getUid(),0,AppConfig.PAGE_SIZE,curIndex, Movie.this);
-		}
+		mPullRefreshListView.autoRefresh();
 	}
 	
 	/**
 	 * 更新列表数据
 	 * @param list
 	 */
-//	private void addMovieInfo(List<MovieResponseInfo> list) {
-//		if(list == null || list.isEmpty()) {
-//			return;
-//		}
-//
-//		for(MovieResponseInfo movieInfo : list) {
-//			MovieListCell movieListCell = new MovieListCell();
-//			movieListCell.setMovieInfo(movieInfo);
-//			if(curIndex == BTN_LEFT) {
-//				hotListData.add(movieListCell);
-//			} else if(curIndex == BTN_RIGHT) {
-//				friendListData.add(movieListCell);
-//			}
-//		}
-//		adapter.notifyDataSetChanged();
-//	}
+	private void updateView(GetCircleMovieList userFavorite) {
+		totalPage=(int) Tools.calculateTotalPage(userFavorite.getTotal());
+		if (userFavorite.getMovies() == null
+				|| userFavorite.getMovies().isEmpty()) {
+			return;
+		}
+		if (curPageIndex == 1) {
+			movieListData.clear();
+		}
+		for (MovieInfo movieInfo : userFavorite.getMovies()) {
+			MovieListCell movieListCell = new MovieListCell();
+			movieListCell.setMovieInfo(movieInfo);
+			movieListData.add(movieListCell);
+		}
+		adapter.notifyDataSetChanged();
+	}
 	
 	@Override
 	public void error(ResponseError arg0) {
@@ -169,11 +174,15 @@ public class Movie extends BaseFragment {
 	@Override
 	public <T> void sucess(Type type,ResponseResult<T> arg0) {
 		mPullRefreshListView.onRefreshComplete();
-//		if(arg0.getModel().getClass().equals(MovieResponseInfo.class)) {
-//			List<MovieResponseInfo> list = (List<MovieResponseInfo>) arg0.getModelList();
-//			totalPage = 1;
-//			addMovieInfo(list);
-//		}
+		GetCircleMovieList circleMovieList=arg0.getModel();
+		if(circleMovieList!=null&&circleMovieList.getTotal()>0)
+			updateView(circleMovieList);
+		else
+			movieListData.clear();
+		    adapter.notifyDataSetChanged();
+			mPullRefreshListView.setEmptyView(Tools.setEmptyView(getActivity()));
+		
+		
 	}
 	
 	/**
@@ -182,8 +191,6 @@ public class Movie extends BaseFragment {
 	private void updateBtn(int index) {
 		hotBtn.setTextColor(this.getActivity().getResources().getColor(R.color.dynamicTextNormal));
 		friendBtn.setTextColor(this.getActivity().getResources().getColor(R.color.dynamicTextNormal));
-//		hotBtn.setBackgroundResource(R.drawable.bg_left_round_corner_rect);
-//		friendBtn.setBackgroundResource(R.drawable.bg_left_round_corner_rect);
 		switch(index) {
 		case BTN_LEFT:
 			hotBtn.setTextColor(this.getActivity().getResources().getColor(R.color.dynamicTextPressed));

@@ -21,6 +21,8 @@ import android.util.AttributeSet;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
+import com.mome.main.R;
+import com.mome.main.core.utils.AppConfig;
 import com.mome.main.netframe.volley.VolleyError;
 import com.mome.main.netframe.volley.toolbox.ImageLoader.ImageContainer;
 import com.mome.main.netframe.volley.toolbox.ImageLoader.ImageListener;
@@ -36,7 +38,7 @@ public class NetworkImageView extends ImageView {
     /**
      * Resource ID of the image to be used as a placeholder until the network image is loaded.
      */
-    private int mDefaultImageId;
+    private int mDefaultImageId=R.drawable.defualt;
 
     /**
      * Resource ID of the image to be used if the network response fails.
@@ -74,6 +76,8 @@ public class NetworkImageView extends ImageView {
      * @param imageLoader ImageLoader that will be used to make the request.
      */
     public void setImageUrl(String url, ImageLoader imageLoader) {
+    	if(url!=null&&!url.contains("http"))
+    		url=AppConfig.Imageurl+"/"+url;
         mUrl = url;
         mImageLoader = imageLoader;
         // The URL has potentially changed. See if we need to load it.

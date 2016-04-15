@@ -34,9 +34,7 @@ public class CinemaInfo implements Serializable {
      * 城市名称
      */
     private String city;
-
-
-
+    
     public void setCinemaid(String cinemaid) {
          if (cinemaid == null) {
             return;

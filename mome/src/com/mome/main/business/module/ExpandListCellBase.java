@@ -9,12 +9,15 @@ public abstract class ExpandListCellBase {
 	 * @param convertView
 	 * @return
 	 */
-	public abstract View getGroupView(View convertView);
+	public abstract View getGroupView(int groupIndex, View convertView,boolean isExpanded);
 	
 	/**
 	 * 获取子视图
 	 * @param convertView
 	 * @return
 	 */
-	public abstract View getChildView(View convertView);
+	public abstract View getChildView(int groupIndex,int childIndex,View convertView);
+	
+
+   
 }

@@ -53,18 +53,6 @@ final class FlashlightManager {
   private FlashlightManager() {
   }
 
-  /**
-   * 控制相机闪光灯开关
-   */
-  //FIXME
-  static void enableFlashlight() {
-    setFlashlight(false);
-  }
-
-  static void disableFlashlight() {
-    setFlashlight(false);
-  }
-
   private static Object getHardwareService() {
     Class<?> serviceManagerClass = maybeForName("android.os.ServiceManager");
     if (serviceManagerClass == null) {
@@ -139,6 +127,14 @@ final class FlashlightManager {
       Log.w(TAG, "Unexpected error while invoking " + method, re);
       return null;
     }
+  }
+
+  static void enableFlashlight() {
+    setFlashlight(true);
+  }
+
+  static void disableFlashlight() {
+    setFlashlight(false);
   }
 
   private static void setFlashlight(boolean active) {

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.jessieray.api.model.ArticleListByUserId;
 import com.jessieray.api.model.DynamicInfo;
+import com.jessieray.api.model.Friend;
 import com.jessieray.api.model.GetArticleByUserId;
 import com.jessieray.api.model.MyHomepage;
 import com.jessieray.api.model.UserInfo;
@@ -20,37 +21,50 @@ import com.mome.main.R;
 import com.mome.main.business.model.UserProperty;
 import com.mome.main.business.module.ListAdapter;
 import com.mome.main.business.module.ListCellBase;
+import com.mome.main.business.movie.MovieMemoirs;
 import com.mome.main.core.BaseFragment;
 import com.mome.main.core.annotation.LayoutInject;
 import com.mome.main.core.annotation.OnClick;
 import com.mome.main.core.annotation.ViewInject;
+import com.mome.main.core.net.HttpRequest;
 import com.mome.main.core.utils.AppConfig;
 import com.mome.main.core.utils.Tools;
+import com.mome.main.netframe.volley.toolbox.NetworkImageView;
 
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.format.DateUtils;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 import com.mome.main.business.widget.pulltorefresh.PullToRefreshBase;
 import com.mome.main.business.widget.pulltorefresh.PullToRefreshListView;
+import com.mome.main.business.widget.pulltorefresh.PullToRefreshScrollView;
 import com.mome.main.business.widget.pulltorefresh.PullToRefreshBase.Mode;
+import com.mome.view.ListViewInScrollView;
 
 import android.widget.TextView;
 
 @LayoutInject(layout = R.layout.myself_home)
-public class UserHome extends BaseFragment {
+public class UserHome extends BaseFragment implements OnItemLongClickListener{
 
 	/**
 	 * 用户头像
 	 */
 	@ViewInject(id = R.id.user_icon)
-	private ImageView headIcon;
+	private NetworkImageView headIcon;
 
 	/**
 	 * 用户名
@@ -66,28 +80,74 @@ public class UserHome extends BaseFragment {
 	 */
 	@ViewInject(id = R.id.attentionNum)
 	private TextView attention;
+	@ViewInject(id = R.id.attentionLayout)
+	private RelativeLayout attentionLayout;
+
+	@OnClick(id = R.id.attentionLayout)
+	public void ToAttentionClick(View view) {
+		Tools.toastShow("我关注的人");
+		Bundle bundle = new Bundle();
+		bundle.putInt("realationType", 1);
+		bundle.putString("userId", UserProperty.getInstance().getUid());
+		bundle.putString("titleName", "我关注的人");
+		Tools.pushScreen(MyFriend.class, bundle);
+	}
+
 	/**
 	 * 粉丝数量
 	 */
 	@ViewInject(id = R.id.fansNum)
 	private TextView fans;
+	@ViewInject(id = R.id.fansLayout)
+	private RelativeLayout fansLayout;
+
+	@OnClick(id = R.id.fansLayout)
+	public void ToFansClick(View view) {
+		Bundle bundle = new Bundle();
+		bundle.putInt("realationType", 3);
+		bundle.putString("userId", UserProperty.getInstance().getUid());
+		bundle.putString("titleName", "我的粉丝");
+		Tools.pushScreen(MyFriend.class, bundle);
+	}
 
 	/**
 	 * 观影总数
 	 */
 	@ViewInject(id = R.id.seenFilmNum)
 	private TextView lookNum;
+	@ViewInject(id = R.id.seenFilmLayout)
+	private RelativeLayout seenFilmLayout;
+
+	@OnClick(id = R.id.seenFilmLayout)
+	public void ToFilmNumClick(View view) {
+		Tools.pushScreen(MovieMemoirs.class, null);
+	}
+
 	/**
 	 * 电影类型
 	 */
 	@ViewInject(id = R.id.filmStyle)
 	private TextView movieType;
 
+	@ViewInject(id = R.id.filmStyleLayout)
+	private RelativeLayout filmStyleLayout;
+
+	@OnClick(id = R.id.filmStyleLayout)
+	public void ToFilmStyleClick(View view) {
+		Tools.pushScreen(UserData.class, null);
+	}
+
 	/**
 	 * 动态信息容器
 	 */
 	@ViewInject(id = R.id.friendsDynamicList)
-	private PullToRefreshListView dynamicListLayout;
+	private ListViewInScrollView dynamicListLayout;
+
+	/**
+	 * 上拉刷新，下拉加载的scrollview
+	 */
+	@ViewInject(id = R.id.pull_refresh_scrollview)
+	private PullToRefreshScrollView scrollview;
 
 	/*
 	 * 编辑个人资料
@@ -98,7 +158,9 @@ public class UserHome extends BaseFragment {
 	@OnClick(id = R.id.userSet)
 	public void onUserSetClick(View view) {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable("userInfo", userinfo);
+		if (userinfo != null) {
+			bundle.putSerializable("userInfo", userinfo.getUserinfo());
+		}
 		Tools.pushScreen(UpdateUserInfo.class, bundle);
 
 	}
@@ -108,20 +170,17 @@ public class UserHome extends BaseFragment {
 	 * 列表数据容器
 	 */
 	private ListAdapter adapter;
+
 	/**
 	 * 当前页索引
 	 */
-	private int curPageIndex = 0;
+	private int curPageIndex = 1;
 
 	/**
-	 * 第一页
+	 * 一共多少页数
 	 */
-	private int firstPage = 1;
+	private double totalPage = 1;
 
-	/**
-	 * listView实例
-	 */
-	private ListView listView;
 
 	/**
 	 * 
@@ -151,9 +210,8 @@ public class UserHome extends BaseFragment {
 						if (arg0.getCode() == AppConfig.REQUEST_CODE_SUCCESS
 								&& arg0.getModel() != null) {
 							userinfo = arg0.getModel();
-							Tools.loadNetImage(headIcon, userinfo.getUserinfo()
-									.getAvatar(), R.drawable.default_ptr_flip,
-									R.drawable.default_ptr_flip);
+							headIcon.setImageUrl(userinfo.getUserinfo()
+									.getAvatar(),HttpRequest.getInstance().imageLoader);
 							userName.setText(userinfo.getUserinfo()
 									.getNickname());
 							fans.setText(userinfo.getUserinfo().getFans());
@@ -190,13 +248,19 @@ public class UserHome extends BaseFragment {
 	 * */
 	private void setUpListView() {
 		adapter = new ListAdapter();
-		dynamicListLayout.setMode(Mode.BOTH);
-		dynamicListLayout
-				.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener2<ListView>() {
+		adapter.setDataList(dynamicListData);
+		dynamicListLayout.setAdapter(adapter);
+		dynamicListLayout.setFocusable(false);
+		scrollview.setMode(Mode.PULL_FROM_START);
+		dynamicListLayout.setOnItemLongClickListener(this);
+		// 进入页面刷新
+		Tools.setRereshing(scrollview);
+		scrollview
+				.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener2<ScrollView>() {
 
 					@Override
 					public void onPullDownToRefresh(
-							PullToRefreshBase<ListView> refreshView) {
+							PullToRefreshBase<ScrollView> refreshView) {
 						String label = DateUtils.formatDateTime(
 								AppConfig.context, System.currentTimeMillis(),
 								DateUtils.FORMAT_SHOW_TIME
@@ -205,13 +269,15 @@ public class UserHome extends BaseFragment {
 						refreshView.getLoadingLayoutProxy()
 								.setLastUpdatedLabel(label);
 						// 下拉刷新，，只刷新服务器最新的
+						
+						
 						getData(1);
 
 					}
 
 					@Override
 					public void onPullUpToRefresh(
-							PullToRefreshBase<ListView> refreshView) {
+							PullToRefreshBase<ScrollView> refreshView) {
 						String label = DateUtils.formatDateTime(
 								AppConfig.context, System.currentTimeMillis(),
 								DateUtils.FORMAT_SHOW_TIME
@@ -224,10 +290,6 @@ public class UserHome extends BaseFragment {
 					}
 				});
 
-		listView = dynamicListLayout.getRefreshableView();
-		adapter.setDataList(dynamicListData);
-		listView.setAdapter(adapter);
-		getData(1);
 	}
 
 	private void getData(final int pageNo) {
@@ -239,24 +301,38 @@ public class UserHome extends BaseFragment {
 					@Override
 					public <T> void sucess(Type type, ResponseResult<T> arg0) {
 						// TODO Auto-generated method stub
-						dynamicListLayout.onRefreshComplete();
-						if (arg0.getCode() == AppConfig.REQUEST_CODE_SUCCESS
-								&& arg0.getModel() != null) {
-							ArticleListByUserId getArticleByUserId = arg0
-									.getModel();
-							if (getArticleByUserId != null) {
-								List<DynamicInfo> list = getArticleByUserId
-										.getArticles();
-								if (getArticleByUserId.getTotal() == 0) {
-									return;
-								}
-								if (pageNo == 1) {
-									curPageIndex = 1;
-								} else {
-									curPageIndex++;
-								}
-								setData(list);
+						scrollview.onRefreshComplete();
+
+						ArticleListByUserId getArticleByUserId = arg0
+								.getModel();
+						if (getArticleByUserId != null
+								&& getArticleByUserId.getTotal() > 0) {
+							totalPage = Tools
+									.calculateTotalPage(getArticleByUserId
+											.getTotal());
+							if (pageNo == 1) {
+								dynamicListData.clear();
+								curPageIndex = 1;}
+							
+							if (totalPage > curPageIndex){
+								scrollview.setMode(Mode.BOTH);
+							    curPageIndex++;
 							}
+							else {
+								scrollview.setMode(Mode.PULL_FROM_START);
+							}
+							for (DynamicInfo info : getArticleByUserId
+									.getArticles()) {
+								UserDynaicListCell userCell = new UserDynaicListCell();
+								userCell.setMomentInfo(info);
+
+								dynamicListData.add(userCell);
+
+							}
+							adapter.notifyDataSetChanged();
+						} else {
+							dynamicListLayout.setEmptyView(Tools
+									.setEmptyView(getActivity()));
 						}
 
 					}
@@ -264,7 +340,7 @@ public class UserHome extends BaseFragment {
 					@Override
 					public void error(ResponseError error) {
 						// TODO Auto-generated method stub
-						dynamicListLayout.onRefreshComplete();
+						scrollview.onRefreshComplete();
 						Tools.toastShow(error.getMessage());
 					}
 
@@ -277,16 +353,21 @@ public class UserHome extends BaseFragment {
 
 	}
 
-	private void setData(List<DynamicInfo> list) {
-		if (list == null || list.isEmpty()) {
-			return;
-		}
-		for (DynamicInfo info : list) {
-			UserDynaicListCell userCell = new UserDynaicListCell();
-			userCell.setMomentInfo(info);
-			dynamicListData.add(userCell);
-			adapter.notifyDataSetChanged();
-		}
+	@Override
+	public boolean onItemLongClick(AdapterView<?> parent, View view,
+			int position, long id) {
+		// TODO Auto-generated method stub
+		final UserDynaicListCell  dynaic=(UserDynaicListCell) parent.getItemAtPosition(position);
+		Tools.showDialog(getActivity(),"提示", "是否删除", "确定", new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				 dynamicListData.remove(dynaic);
+				adapter.notifyDataSetChanged();
+        
+			}
+		});
+		return false;
 	}
-
 }

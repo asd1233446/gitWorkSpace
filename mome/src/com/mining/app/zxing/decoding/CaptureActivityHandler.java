@@ -16,7 +16,19 @@
 
 package com.mining.app.zxing.decoding;
 
+import java.io.FileOutputStream;
 import java.util.Vector;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.hardware.Camera;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -26,17 +38,10 @@ import com.mome.main.R;
 import com.mome.main.core.MipcaActivityCapture;
 import com.mome.main.core.utils.Tools;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-
 /**
  * This class handles all the messaging which comprises the state machine for capture.
+ *
+ * @author dswitkin@google.com (Daniel Switkin)
  */
 public final class CaptureActivityHandler extends Handler {
 
@@ -45,10 +50,6 @@ public final class CaptureActivityHandler extends Handler {
   private final MipcaActivityCapture activity;
   private final DecodeThread decodeThread;
   private State state;
-  /**
-   * 扫描类型(0电影票1二维码)
-   */
-  private int scanType = 0;
 
   private enum State {
     PREVIEW,
@@ -56,19 +57,6 @@ public final class CaptureActivityHandler extends Handler {
     DONE
   }
 
-  /**
-   * 设置扫描类型
-   * @param type(0电影票1二维码)
-   */
-  public void setScanType(int type) {
-	  this.scanType = type;
-	  if(scanType == 0) {
-		  CameraManager.get().setPreviewSize(480,480,800, 800);
-	  } else {
-		  CameraManager.get().setPreviewSize(240,480,240, 360);
-	  }
-  }
-  
   public CaptureActivityHandler(MipcaActivityCapture activity, Vector<BarcodeFormat> decodeFormats,
       String characterSet) {
     this.activity = activity;
@@ -76,6 +64,7 @@ public final class CaptureActivityHandler extends Handler {
         new ViewfinderResultPointCallback(activity.getViewfinderView()));
     decodeThread.start();
     state = State.SUCCESS;
+
     // Start ourselves capturing previews and decoding.
     CameraManager.get().startPreview();
     restartPreviewAndDecode();
@@ -83,53 +72,40 @@ public final class CaptureActivityHandler extends Handler {
 
   @Override
   public void handleMessage(Message message) {
-	  Tools.Log("========="+message.what);
     switch (message.what) {
       case R.id.auto_focus:
         //Log.d(TAG, "Got auto-focus message");
         // When one auto focus pass finishes, start another. This is the closest thing to
         // continuous AF. It does seem to hunt a bit, but I'm not sure what else to do.
-    	  Tools.Log("自动对焦");
         if (state == State.PREVIEW) {
           CameraManager.get().requestAutoFocus(this, R.id.auto_focus);
         }
         break;
       case R.id.restart_preview:
-    	  Tools.Log("Got restart preview message");
+        Log.d(TAG, "Got restart preview message");
         restartPreviewAndDecode();
         break;
       case R.id.decode_succeeded:
-    	  Tools.Log( "Got decode succeeded message");
-        if(scanType == 0) {
-        	
-        } else {
-            state = State.SUCCESS;
-            Bundle bundle = message.getData();
-            
-            /***********************************************************************/
-            Bitmap barcode = bundle == null ? null :
-                (Bitmap) bundle.getParcelable(DecodeThread.BARCODE_BITMAP);//���ñ����߳�
-            
-            activity.handleDecode((Result) message.obj, barcode);//���ؽ��?        /***********************************************************************/
-        }
+        Log.d(TAG, "Got decode succeeded message");
+        state = State.SUCCESS;
+        Bundle bundle = message.getData();
+        Bitmap barcode = bundle == null ? null :
+            (Bitmap) bundle.getParcelable(DecodeThread.BARCODE_BITMAP);
+        activity.handleDecode((Result) message.obj, barcode);
         break;
       case R.id.decode_failed:
-    	  Tools.Log("扫描是不");
-    	  if(scanType == 0) {
-    		  
-    	  } else {
-    	        // We're decoding as fast as possible, so when one decode fails, start another.
-    	        state = State.PREVIEW;
-    	        CameraManager.get().requestPreviewFrame(decodeThread.getHandler(), R.id.decode);
-    	  }
+        // We're decoding as fast as possible, so when one decode fails, start another.
+    	  Log.e("==========", "decode_failed");
+        state = State.PREVIEW;
+        CameraManager.get().requestPreviewFrame(decodeThread.getHandler(), R.id.decode);
         break;
       case R.id.return_scan_result:
-    	  Tools.Log("Got return scan result message");
+        Log.d(TAG, "Got return scan result message");
         activity.setResult(Activity.RESULT_OK, (Intent) message.obj);
         activity.finish();
         break;
       case R.id.launch_product_query:
-    	  Tools.Log("Got product query message");
+        Log.d(TAG, "Got product query message");
         String url = (String) message.obj;
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
@@ -157,10 +133,38 @@ public final class CaptureActivityHandler extends Handler {
   private void restartPreviewAndDecode() {
     if (state == State.SUCCESS) {
       state = State.PREVIEW;
-      CameraManager.get().requestPreviewFrame(decodeThread.getHandler(), R.id.decode);
+   //   CameraManager.get().requestPreviewFrame(decodeThread.getHandler(), R.id.decode);
       CameraManager.get().requestAutoFocus(this, R.id.auto_focus);
       activity.drawViewfinder();
+      CameraManager.get().getCamera().takePicture(null, null, null, new takePicture());
     }
   }
+  
+  class takePicture implements Camera.PictureCallback {
 
+	@Override
+	public void onPictureTaken(byte[] data, Camera camera) {
+		// TODO Auto-generated method stub
+		 String path = Environment.getExternalStorageDirectory() +"/test.jpg";
+         try {
+			data2file(data, path);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	  
+  }
+  private void data2file(byte[] w, String fileName) throws Exception {//将二进制数据转换为文件的函数
+      FileOutputStream out =null;
+      try {
+          out =new FileOutputStream(fileName);
+          out.write(w);
+          out.close();
+      } catch (Exception e) {
+          if (out !=null)
+              out.close();
+          throw e;
+      }
+  }
 }

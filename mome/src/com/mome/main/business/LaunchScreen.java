@@ -1,8 +1,10 @@
 package com.mome.main.business;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.mome.main.R;
 import com.mome.main.business.access.Login;
@@ -45,6 +47,7 @@ public class LaunchScreen extends BaseFragment{
 				Tools.replaceCurScreen(NewuserGuide.class, null);
 			} else {
 				Tools.replaceCurScreen(Login.class, null);
+
 			}
 		}
 	};
@@ -68,4 +71,13 @@ public class LaunchScreen extends BaseFragment{
 			}
 		}
 	};
+	
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		Log.e("LaunchScreen", requestCode+"==");
+	
+	}
 }

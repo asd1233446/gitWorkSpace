@@ -50,7 +50,7 @@ public class DonutProgress extends View {
     private final float default_stroke_width;
     private final int default_finished_color = Color.rgb(66, 145, 241);
     private final int default_unfinished_color = Color.rgb(204, 204, 204);
-    private final int default_text_color = Color.rgb(66, 145, 241);
+    private final int default_text_color = Color.rgb(105, 105, 105);
     private final int default_inner_bottom_text_color = Color.rgb(66, 145, 241);
     private final int default_inner_background_color = Color.TRANSPARENT;
     private final int default_max = 100;
@@ -89,7 +89,7 @@ public class DonutProgress extends View {
 
         default_text_size = Tools.sp2px(getResources(), 18);
         min_size = (int) Tools.dp2px(getResources(), 100);
-        default_stroke_width = Tools.dp2px(getResources(), 10);
+        default_stroke_width = Tools.dp2px(getResources(), 5);
         default_inner_bottom_text_size = Tools.sp2px(getResources(), 18);
 
         final TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.DonutProgress, defStyleAttr, 0);
@@ -346,8 +346,8 @@ public class DonutProgress extends View {
 
         float innerCircleRadius = (getWidth() - Math.min(finishedStrokeWidth, unfinishedStrokeWidth) + Math.abs(finishedStrokeWidth - unfinishedStrokeWidth)) / 2f;
         canvas.drawCircle(getWidth() / 2.0f, getHeight() / 2.0f, innerCircleRadius, innerCirclePaint);
-        canvas.drawArc(finishedOuterRect, 0, getProgressAngle(), false, finishedPaint);
-        canvas.drawArc(unfinishedOuterRect, getProgressAngle(), 360 - getProgressAngle(), false, unfinishedPaint);
+        canvas.drawArc(finishedOuterRect, -90, getProgressAngle(), false, finishedPaint);
+        canvas.drawArc(unfinishedOuterRect, getProgressAngle()-90, 360 - getProgressAngle(), false, unfinishedPaint);
 
         String text = this.text != null ? this.text : prefixText + progress;
         if (!TextUtils.isEmpty(text)) {
@@ -363,6 +363,7 @@ public class DonutProgress extends View {
 
         String title = getSuffixText();
         if (!TextUtils.isEmpty(title)) {
+        	textPaint.setColor(default_text_color);
             float textHeight = textPaint.descent() + textPaint.ascent();
         	canvas.drawText(title,(getWidth() - textPaint.measureText(title)) / 2.0f, (getWidth() - textHeight) / 2.0f - (textPaint.getTextSize()/2.0f), textPaint);
         }

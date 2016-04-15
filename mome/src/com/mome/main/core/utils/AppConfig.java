@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 
+import com.jessieray.api.model.UserAlbum;
 import com.mome.main.core.BaseFragment;
 import com.mome.main.core.MainActivity;
 import com.mome.main.netframe.volley.RequestQueue;
@@ -43,6 +44,19 @@ public class AppConfig {
 	 * 当前屏幕
 	 */
 	public static BaseFragment currentScreen;
+	
+	/***
+	 * 微信授权信息
+	 * */
+	 public static final String WEBCHAT_APP_KEY = "wx6fcbd2b46b1c3ede";
+	    public static final String WEBCHAT_APP_SECRET = "ea70f64fb45d83fe41fd0ea9ef7c0eb4";
+	
+	    /***
+		 * 豆瓣授权信息
+		 * */
+		 public static final String DOUBAN_APP_KEY = "06bde2bd3efa01e81439a837bcee05b8";
+		    public static final String  DOUBAN_APP_SECRET = "54a62578344230a4";
+		
 	/**
 	 * 新浪微博登录用授权信息
 	 */
@@ -124,8 +138,9 @@ public class AppConfig {
 	public static final int HTTP_PUT = 2;
 	/**
 	 * 请求url
-	 */
-	public static String url;
+	 */	
+	public static String Imageurl="http://182.92.79.73:8080/hm";
+	public static String url="http://182.92.79.73:8080/hm/mome";
 	public static final String[] HTTP_URL = new String[]{
 		"http://182.92.79.73:8080/hm/mome",
 		"http://release"
@@ -133,7 +148,7 @@ public class AppConfig {
 	/**
 	 * 列表一页请求的数据条数
 	 */
-	public static final int PAGE_SIZE = 20;
+	public static final int PAGE_SIZE = 10;
 	/**
 	 * 用来通过xml创建view实例
 	 */

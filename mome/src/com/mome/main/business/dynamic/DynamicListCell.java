@@ -1,20 +1,34 @@
 package com.mome.main.business.dynamic;
 
+import java.lang.reflect.Type;
+
 import com.jessieray.api.model.DynamicInfo;
+import com.jessieray.api.model.MovieInfo;
+import com.jessieray.api.request.base.ResponseCallback;
+import com.jessieray.api.request.base.ResponseError;
+import com.jessieray.api.request.base.ResponseResult;
+import com.jessieray.api.service.AddArticleGoodRequest;
+import com.jessieray.api.service.UndoArticleGoodRequest;
 import com.mome.main.R;
+import com.mome.main.business.model.UserProperty;
 import com.mome.main.business.module.ListCellBase;
 import com.mome.main.business.movie.MovieDetail;
+import com.mome.main.business.userinfo.FriendHome;
 import com.mome.main.business.userinfo.UserHome;
 import com.mome.main.core.annotation.InjectProcessor;
 import com.mome.main.core.annotation.LayoutInject;
 import com.mome.main.core.annotation.OnClick;
 import com.mome.main.core.annotation.ViewInject;
 import com.mome.main.core.net.HttpRequest;
+import com.mome.main.core.utils.AppConfig;
 import com.mome.main.core.utils.Tools;
 import com.mome.main.netframe.volley.toolbox.NetworkImageView;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -29,12 +43,6 @@ public class DynamicListCell implements ListCellBase {
 	 * 动态数据类型
 	 */
 	private int type;
-	/**
-	 * 数据类型
-	 */
-	public static final int TYPE_PRAISE_NUM = 0;
-	public static final int TYPE_TIME = 1;
-	public static final int TYPE_DISTANCE = 2;
 
 	@Override
 	public View getView(View convertView) {
@@ -61,15 +69,15 @@ public class DynamicListCell implements ListCellBase {
 		viewHolder.score.setText(String.valueOf(dynamicInfo.getRecallid()));
 		viewHolder.commentValue.setText(String.valueOf(dynamicInfo.getComments()));
 		viewHolder.movieInfo.setText(dynamicInfo.getBrief());
-		if(type == TYPE_PRAISE_NUM) {
+		if(type == 2) {
 			viewHolder.date.setText(String.valueOf(dynamicInfo.getGoods()));
-		} else if(type == TYPE_TIME) {
+		} else if(type == 1) {
 			viewHolder.date.setText(dynamicInfo.getCreatetime());
-		} else {
-//			viewHolder.date.setText(momentInfo.getDistance());
-		}
+		} 
 		viewHolder.movieTitle.setText(dynamicInfo.getTitle());
-		viewHolder.praiseValue.setText(String.valueOf(dynamicInfo.getGoods()));
+		viewHolder.praiseValue.setText(dynamicInfo.getIsgood()==true?"取消赞":"赞");
+		selectorStyle(viewHolder.praiseValue,viewHolder.praiseValue.getText().toString());
+	
 		viewHolder.ratin.setEnabled(false);
 		return view;
 	}
@@ -107,6 +115,8 @@ public class DynamicListCell implements ListCellBase {
 
 		@ViewInject(id = R.id.dynamic_list_cell_movie_img)
 		private NetworkImageView movieImg;
+		
+		
 
 		@ViewInject(id = R.id.dynamic_list_cell_movie_info)
 		private TextView movieInfo;
@@ -132,41 +142,100 @@ public class DynamicListCell implements ListCellBase {
 		@OnClick(id = R.id.dynamic_list_cell_btn_comment)
 		public void commentClick(View paramView) {
 			Bundle bundle = new Bundle();
-			bundle.putString(DynamicComment.KEY_NAME, dynamicInfo.getNickname());
-			Tools.pushScreen(DynamicComment.class, bundle);
+			bundle.putSerializable("dynamic",dynamicInfo);
+			Tools.pushScreen(DynamicDetail.class, bundle);
 		}
 
 		@OnClick(id = R.id.dynamic_list_cell_head_icon)
 		public void headClick(View paramView) {
-			Tools.pushScreen(UserHome.class, null);
+			Tools.toastShow("进入好友主页");
+			Bundle bundle=new Bundle();
+			bundle.putSerializable("friendInfo",dynamicInfo);
+			Tools.pushScreen(FriendHome.class, bundle);
 		}
 
 		@OnClick(id = R.id.dynamic_list_cell_movie_img)
 		public void movieImgClick(View paramView) {
-			Tools.pushScreen(MovieDetail.class, null);
+			Bundle bundle =new Bundle();
+			MovieInfo movieinfo=new MovieInfo();
+			movieinfo.setMovieid(dynamicInfo.getMovieid());
+			movieinfo.setTitle(dynamicInfo.getTitle());
+			bundle.putSerializable("MovieInfo", movieinfo);
+			Tools.pushScreen(MovieDetail.class, bundle);
 		}
 
 		@OnClick(id = R.id.dynamic_list_cell_btn_praise)
 		public void praiseClick(View paramView) {
+			if (!"取消赞".equals(praiseValue.getText().toString()))
+				AddArticleGoodRequest.findAddArticleGood(UserProperty
+						.getInstance().getUid(), dynamicInfo.getArticleid()
+						+ "", new ResponseCallback() {
+
+					@Override
+					public <T> void sucess(Type type, ResponseResult<T> claszz) {
+						// TODO Auto-generated method stub
+						selectorStyle(praiseValue,"取消赞");
+					}
+
+					@Override
+					public boolean isRefreshNeeded() {
+						// TODO Auto-generated method stub
+						return false;
+					}
+
+					@Override
+					public void error(ResponseError error) {
+						// TODO Auto-generated method stub
+						Tools.toastShow(error.getMessage());
+					}
+				});
+			else
+				UndoArticleGoodRequest.findUndoArticleGood(UserProperty
+						.getInstance().getUid(), dynamicInfo.getArticleid()
+						+ "", new ResponseCallback() {
+
+					@Override
+					public <T> void sucess(Type type, ResponseResult<T> claszz) {
+						// TODO Auto-generated method stub
+						selectorStyle(praiseValue,"赞" );
+					}
+
+					@Override
+					public boolean isRefreshNeeded() {
+						// TODO Auto-generated method stub
+						return false;
+					}
+
+					@Override
+					public void error(ResponseError error) {
+						// TODO Auto-generated method stub
+						Tools.toastShow(error.getMessage());
+					}
+				});
+    	
+	
+			
 		}
 		
 		@OnClick(id = R.id.dynamic_list_cell_movie_info)
 		public void movieCommentClick(View paramView) {
-			Bundle bundle = new Bundle();
-			bundle.putString(DynamicDetail.KEY_HEAD_IMG_URL, dynamicInfo.getAvatar());
-			bundle.putString(DynamicDetail.KEY_NAME, dynamicInfo.getNickname());
-			bundle.putString(DynamicDetail.KEY_SCORE, String.valueOf(dynamicInfo.getRecallid()));
-			bundle.putString(DynamicDetail.KEY_COMMENT, String.valueOf(dynamicInfo.getComments()));
-			if(type == TYPE_PRAISE_NUM) {
-				bundle.putString(DynamicDetail.KEY_DATE, String.valueOf(dynamicInfo.getGoods()));
-			} else if(type == TYPE_TIME) {
-				bundle.putString(DynamicDetail.KEY_DATE, dynamicInfo.getCreatetime());
-			} else {
-//				bundle.putString(DynamicDetail.KEY_DATE, momentInfo.getDistance());
-			}
-			bundle.putString(DynamicDetail.KEY_MOVIE_IMG_URL, dynamicInfo.getImageSrc());
-			bundle.putString(DynamicDetail.KEY_MOVIE_TITLE, dynamicInfo.getTitle());
-			Tools.pushScreen(DynamicDetail.class, bundle);
+         Bundle bundle=new Bundle();
+         bundle.putSerializable("dynamic", dynamicInfo);
+		Tools.pushScreen(DynamicDetail.class, bundle);
+		}
+	}
+
+	private void selectorStyle(TextView view,String prise){
+		if(prise.equals("取消赞")){
+			Drawable drawable=AppConfig.context.getResources().getDrawable(R.drawable.iconfont_zan);
+		    drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+		    view.setCompoundDrawables(drawable, null, null, null);
+		    view.setText(prise);
+		}else{
+			Drawable drawable=AppConfig.context.getResources().getDrawable(R.drawable.dynamic_img_praise);
+		    drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+		    view.setCompoundDrawables(drawable, null, null, null);
+		    view.setText(prise);
 		}
 	}
 }

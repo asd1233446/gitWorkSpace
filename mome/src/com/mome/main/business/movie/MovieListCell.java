@@ -12,8 +12,10 @@ import com.mome.main.core.net.HttpRequest;
 import com.mome.main.core.utils.Tools;
 import com.mome.main.netframe.volley.toolbox.NetworkImageView;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -52,9 +54,8 @@ public class MovieListCell implements ListCellBase {
 		viewHolder.poster.setErrorImageResId(R.drawable.ic_launcher);
 		viewHolder.poster.setImageUrl(movieInfo.getImagesrc(), HttpRequest.getInstance().imageLoader);
 		if(movieInfo.getFavoers() > 0) {
-			viewHolder.collect.setText("共有 ");
-			viewHolder.collect.append(String.valueOf(movieInfo.getFavoers()));
-			viewHolder.collect.append(" 人收藏此片");
+			viewHolder.collect_ll.setVisibility(View.VISIBLE);
+			viewHolder.collect.setText(String.valueOf(movieInfo.getFavoers()));
 		}
 		return view;
 	}
@@ -97,23 +98,31 @@ public class MovieListCell implements ListCellBase {
 		@ViewInject(id = R.id.movie_list_cell_add)
 		private ImageView add;
 		
-		@ViewInject(id = R.id.movie_list_cell_collect)
+		@ViewInject(id = R.id.collectionNum)
 		private TextView collect;
+		@ViewInject(id=R.id.collect_ll)
+		private LinearLayout collect_ll;
 
 
 		@OnClick(id = R.id.movie_list_cell_img)
 		public void posterClick(View paramView) {
-			Tools.pushScreen(MovieDetail.class, null);
+			Bundle bundle=new Bundle();
+			bundle.putSerializable("MovieInfo",movieInfo);
+			Tools.pushScreen(MovieDetail.class, bundle);
 		}
 
 		@OnClick(id = R.id.movie_list_cell_eyes)
 		public void eyeClick(View paramView) {
-			Tools.pushScreen(MovieMemoirs.class, null);
+			Bundle bundle=new Bundle();
+			bundle.putSerializable("MovieInfo",movieInfo);
+			Tools.pushScreen(MovieMemoirs.class, bundle);
 		}
 
 		@OnClick(id = R.id.movie_list_cell_add)
 		public void addClick(View paramView) {
-			Tools.pushScreen(Record.class, null);
+			Bundle bundle=new Bundle();
+			bundle.putSerializable("MovieInfo",movieInfo);
+			Tools.pushScreen(Record.class, bundle);
 		}
 	}
 }

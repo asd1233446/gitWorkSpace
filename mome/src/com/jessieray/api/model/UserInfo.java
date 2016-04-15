@@ -19,7 +19,31 @@ public class UserInfo implements Serializable {
 	 * 用户昵称
 	 */
 	private String nickname;
+	/**
+	 * 生日
+	 */
+	private String brithday;
+	
+	public String getBrithday() {
+		return brithday;
+	}
 
+	public void setBrithday(String brithday) {
+		this.brithday = brithday;
+	}
+	/**
+	 * 性别
+	 */
+	private String sex;
+	
+	
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 	/**
 	 * 用户头像
 	 */

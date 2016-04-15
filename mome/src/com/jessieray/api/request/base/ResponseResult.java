@@ -12,6 +12,17 @@ public class ResponseResult<T> implements Serializable {
 	private long code;
 	private String message;
 	private long servertime;
+	private T image;
+	
+	
+
+	public <T>T getImage() {
+		return(T) image;
+	}
+
+	public void setImage(T image) {
+		this.image = image;
+	}
 
 	@SuppressWarnings({ "hiding", "unchecked" })
 	public <T> T getModel() {

@@ -27,7 +27,7 @@ public class Discovery extends BaseFragment {
 	
 	@OnClick(id = R.id.discovery_instract_layout)
 	public void instractClick(View view) {
-		Tools.pushScreen(FindFriend.class, null);
+		Tools.pushScreen(InterestFriend.class, null);
 	}
 	
 	@OnClick(id = R.id.discovery_activity_layout)

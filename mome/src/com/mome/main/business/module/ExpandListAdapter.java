@@ -73,7 +73,7 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
 	public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 		View view = convertView;
 		if(groupDataList != null && !groupDataList.isEmpty()) {
-			view = groupDataList.get(groupPosition).getGroupView(convertView);
+			view = groupDataList.get(groupPosition).getGroupView(groupPosition,convertView,isExpanded);
 		}
 		return view;
 	}
@@ -82,7 +82,7 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
 	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 		View view = convertView;
 		if(childDataList != null && !childDataList.isEmpty()) {
-			view = childDataList.get(groupPosition).get(childPosition).getChildView(convertView);
+			view = childDataList.get(groupPosition).get(childPosition).getChildView(groupPosition,childPosition,convertView);
 		}
 		return view;
 	}

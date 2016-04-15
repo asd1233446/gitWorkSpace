@@ -1,277 +1,258 @@
 package com.mome.main.business.access;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Intent;
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Toast;
 
-import com.mome.main.business.access.weibo.AsyncWeiboRunner;
-import com.mome.main.business.access.weibo.RequestListener;
+import com.jessieray.api.model.UserInfo;
+import com.mome.main.business.access.weibo.OpenAPI;
 import com.mome.main.core.datacache.DataSaveManager;
 import com.mome.main.core.utils.AppConfig;
 import com.mome.main.core.utils.Tools;
+import com.sina.weibo.sdk.api.ImageObject;
+import com.sina.weibo.sdk.api.TextObject;
+import com.sina.weibo.sdk.api.WebpageObject;
+import com.sina.weibo.sdk.api.WeiboMessage;
+import com.sina.weibo.sdk.api.WeiboMultiMessage;
+import com.sina.weibo.sdk.api.share.IWeiboShareAPI;
+import com.sina.weibo.sdk.api.share.SendMessageToWeiboRequest;
+import com.sina.weibo.sdk.api.share.SendMultiMessageToWeiboRequest;
+import com.sina.weibo.sdk.api.share.WeiboShareSDK;
+import com.sina.weibo.sdk.auth.AuthInfo;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
-import com.sina.weibo.sdk.auth.WeiboAuth;
 import com.sina.weibo.sdk.auth.WeiboAuthListener;
-import com.sina.weibo.sdk.auth.WeiboParameters;
 import com.sina.weibo.sdk.auth.sso.SsoHandler;
-import com.sina.weibo.sdk.constant.WBConstants;
 import com.sina.weibo.sdk.exception.WeiboException;
+import com.sina.weibo.sdk.net.RequestListener;
+import com.sina.weibo.sdk.utils.Utility;
 
 public class WeiboLogin {
-	private final static String cacheKey = "weibo_token";
-	/**
-	 * 请求微博客户端的requestCode
-	 */
-	public final static int AUTH_REQUEST_CODE = 12373;
-	/**
-	 * SSO登录对象
-	 */
-	private SsoHandler ssoHandler;
+	private AuthInfo mAuthInfo;
+	/** 封装了 "access_token"，"expires_in"，"refresh_token"，并提供了他们的管理功能 */
+	private Oauth2AccessToken mAccessToken;
+	/** 注意：SsoHandler 仅当 SDK 支持 SSO 时有效 */
+	private SsoHandler mSsoHandler;
+
+	private static WeiboLogin sinaLogin;
+
+	private Context context;
 	
-	/**
-	 * 最终登录成功后的消息，会发送到登录页面
-	 */
-	private Handler handler;
-	
+	private boolean isShare=false;
+
 	private final static int TOKEN_SUCCESS = 0;
 	private final static int FAILURE = TOKEN_SUCCESS + 1;
 	private final static int RE_GET_TOKEN = FAILURE + 1;
-	
-	/**
-	 * 第三方用户名
-	 */
-	private String userName;
-	/**
-	 * 自己内容的消息处理，
-	 */
-	private Handler loginHandler = new Handler(){
+	private final static String cacheKey = "weibo_token";
+	private TokenCache tokenCache;
+
+	private LoginInterface login;
+
+	public void setLoginInterface(LoginInterface login) {
+		this.login = login;
+
+	}
+
+	private WeiboLogin(Context context) {
+		this.context = context;
+		mAuthInfo = new AuthInfo(context, AppConfig.WEIBO_APP_KEY,
+				AppConfig.WEIBO_REDIRECT_URL, AppConfig.WEIBO_SCOPE);
+	}
+
+	public static WeiboLogin getInstance(Context context) {
+		if (sinaLogin == null) {
+			sinaLogin = new WeiboLogin(context);
+		}
+		return sinaLogin;
+	}
+
+	private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			if(msg.what == FAILURE){
-				loginFail();
-			} else if(msg.what == TOKEN_SUCCESS){
-				TokenCache tokenCache = (TokenCache)msg.obj;
-				getUserInfo(tokenCache.getToken(), tokenCache.getId(), false);
-			} else if(msg.what == RE_GET_TOKEN){
-				WeiboAuth weiboAuth = new WeiboAuth(AppConfig.mainActivity, AppConfig.WEIBO_APP_KEY, AppConfig.WEIBO_REDIRECT_URL, AppConfig.WEIBO_SCOPE);
-				weiboAuth.authorize(new AuthListener(), WeiboAuth.OBTAIN_AUTH_CODE);
+			if (msg.what == FAILURE) {
+				login.error("登陆失败");
+			} else if (msg.what == TOKEN_SUCCESS) {
+				getUserInfo();
 			}
 		}
 	};
+
+	private void getUserInfo() {
+		OpenAPI api = new OpenAPI(context, AppConfig.WEIBO_APP_KEY,
+				mAccessToken);
+		api.show(Long.valueOf(tokenCache.getId()), ResultListener);
+	}
 	
+	public void LogOut(){
+		OpenAPI api = new OpenAPI(context, AppConfig.WEIBO_APP_KEY,
+				mAccessToken);
+		api.logout(ResultListener);
+	}
+
 	/**
-	 * 用微博账号登录
+	 * 微博 OpenAPI 回调接口。
 	 */
-	public void login(Handler handler){
-		this.handler = handler;
-		boolean isValid = false;
-		Object obj = DataSaveManager.getInstance().readObject(cacheKey);
-		if(obj != null){
-			TokenCache tokenCache = (TokenCache)obj;
-			if(tokenCache.isValid()){
-				getUserInfo(tokenCache.getToken(), tokenCache.getId(), true);
-				isValid = true;
+	private RequestListener ResultListener = new RequestListener() {
+		@Override
+		public void onComplete(String response) {
+			Log.e("====用户查询查询==", response);
+			if (!TextUtils.isEmpty(response)) {
+				JSONObject jsonObject;
+				try {
+					jsonObject = new JSONObject(response);
+					UserInfo info = new UserInfo();
+					info.setUserid(jsonObject.getString("id"));
+					info.setAvatar(jsonObject.getString("profile_image_url"));
+					info.setNickname(jsonObject.getString("screen_name"));
+					login.sucess(info);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			}
 		}
-		
-		if(!isValid){
-			WeiboAuth weiboAuth = new WeiboAuth(AppConfig.mainActivity, AppConfig.WEIBO_APP_KEY, AppConfig.WEIBO_REDIRECT_URL, AppConfig.WEIBO_SCOPE);
-			ssoHandler = new SsoHandler(AppConfig.mainActivity, weiboAuth);
-			ssoHandler.authorize(AUTH_REQUEST_CODE, new AuthListener(), null);
+
+		@Override
+		public void onWeiboException(WeiboException e) {
+			e.printStackTrace();
 		}
+	};
+
+	public void login() {
+		mSsoHandler = new SsoHandler((Activity) context, mAuthInfo);
+		mSsoHandler.authorize(new AuthListener());
 	}
+
+	public SsoHandler getSsoHandler() {
+		return mSsoHandler;
+	}
+
 	/**
-     * 微博认证授权回调类。
-     * 1. SSO 授权时，需要在 {@link #onActivityResult} 中调用 {@link SsoHandler#authorizeCallBack} 后，
-     *    该回调才会被执行。
-     * 2. 非 SSO 授权时，当授权结束后，该回调就会被执行。
-     * 当授权成功后，请保存该 access_token、expires_in、uid 等信息到 SharedPreferences 中。
-     */
-    private class AuthListener implements WeiboAuthListener {
-        
-        @Override
-        public void onComplete(Bundle values) {
-            // 从 Bundle 中解析 Token
-        	Oauth2AccessToken mAccessToken = Oauth2AccessToken.parseAccessToken(values);
-            if (mAccessToken.isSessionValid()) {
-            	TokenCache tokenCache = new TokenCache();
+	 * 微博认证授权回调类。 1. SSO 授权时，需要在 {@link #onActivityResult} 中调用
+	 * {@link SsoHandler#authorizeCallBack} 后， 该回调才会被执行。 2. 非 SSO
+	 * 授权时，当授权结束后，该回调就会被执行。 当授权成功后，请保存该 access_token、expires_in、uid 等信息到
+	 * SharedPreferences 中。
+	 */
+	class AuthListener implements WeiboAuthListener {
+
+		@Override
+		public void onComplete(Bundle values) {
+			// 从 Bundle 中解析 Token
+			mAccessToken = Oauth2AccessToken.parseAccessToken(values);
+			// 从这里获取用户输入的 电话号码信息
+			String phoneNum = mAccessToken.getPhoneNum();
+			if (mAccessToken.isSessionValid()) {
+				// 保存 Token 到 SharedPreferences
+				tokenCache = new TokenCache();
 				tokenCache.setId(mAccessToken.getUid());
 				tokenCache.setToken(mAccessToken.getToken());
 				tokenCache.setExpiresIn(mAccessToken.getExpiresTime());
 				tokenCache.setLoginTime(System.currentTimeMillis());
 				DataSaveManager.getInstance().saveObject(cacheKey, tokenCache);
-				
-				Message message = new Message();
-				message.what = TOKEN_SUCCESS;
-				message.obj = tokenCache;
-				loginHandler.sendMessage(message);
-            } else {
-                String code = values.getString("code");
-                if (!TextUtils.isEmpty(code)) {
-                	fetchTokenAsync(code);
-                }else{
-                	loginHandler.sendEmptyMessage(FAILURE);
-                }
-            }
-        }
-
-        @Override
-        public void onCancel() {
-            
-        }
-
-        @Override
-        public void onWeiboException(WeiboException e) {
-        	loginHandler.sendEmptyMessage(FAILURE);
-        }
-    }
-    /**
-     * 异步获取 Token。
-     * 
-     * @param authCode  授权 Code，该 Code 是一次性的，只能被获取一次 Token
-     * @param appSecret 应用程序的 APP_SECRET，请务必妥善保管好自己的 APP_SECRET，
-     *                  不要直接暴露在程序中，此处仅作为一个DEMO来演示。
-     */
-    public void fetchTokenAsync(String authCode) {
-        WeiboParameters requestParams = new WeiboParameters();
-        requestParams.add(WBConstants.AUTH_PARAMS_CLIENT_ID,     AppConfig.WEIBO_APP_KEY);
-        requestParams.add(WBConstants.AUTH_PARAMS_CLIENT_SECRET, AppConfig.WEIBO_APP_SECRET);
-        requestParams.add(WBConstants.AUTH_PARAMS_GRANT_TYPE,    "authorization_code");
-        requestParams.add(WBConstants.AUTH_PARAMS_CODE,          authCode);
-        requestParams.add(WBConstants.AUTH_PARAMS_REDIRECT_URL,  AppConfig.WEIBO_REDIRECT_URL);
-    
-        /**
-         * 请注意：
-         * {@link RequestListener} 对应的回调是运行在后台线程中的，
-         * 因此，需要使用 Handler 来配合更新 UI。
-         */
-        AsyncWeiboRunner.request("https://open.weibo.cn/oauth2/access_token", requestParams, "POST", new RequestListener() {
-            @Override
-            public void onComplete(String response) {
-                // 获取 Token 成功
-                Oauth2AccessToken token = Oauth2AccessToken.parseAccessToken(response);
-                if (token != null && token.isSessionValid()) {
-                	TokenCache tokenCache = new TokenCache();
-    				tokenCache.setId(token.getUid());
-    				tokenCache.setToken(token.getToken());
-    				tokenCache.setExpiresIn(token.getExpiresTime());
-    				tokenCache.setLoginTime(System.currentTimeMillis());
-    				DataSaveManager.getInstance().saveObject(cacheKey, tokenCache);
-    				
-    				Message message = new Message();
-    				message.what = TOKEN_SUCCESS;
-    				message.obj = tokenCache;
-    				loginHandler.sendMessage(message);
-                } else {
-                	loginHandler.sendEmptyMessage(FAILURE);
-                }
-            }
-    
-            @Override
-            public void onComplete4binary(ByteArrayOutputStream responseOS) {
-            	loginHandler.sendEmptyMessage(FAILURE);
-            }
-    
-            @Override
-            public void onIOException(IOException e) {
-            	loginHandler.sendEmptyMessage(FAILURE);
-            }
-    
-            @Override
-            public void onError(WeiboException e) {
-            	loginHandler.sendEmptyMessage(FAILURE);
-            }
-        });
-    }
-    private void getUserInfo(String token, String uid, final boolean isReToken){
-    	WeiboParameters requestParams = new WeiboParameters();
-        requestParams.add("access_token", token);
-        requestParams.add("uid", uid);
-        Tools.toastShow("正在登录");
-        AsyncWeiboRunner.request("https://api.weibo.com/2/users/show.json", requestParams, "GET", new RequestListener(){
-			@Override
-			public void onComplete(String response) {
-				try{
-					JSONObject json = new JSONObject(response);
-					userName = json.optString("screen_name");
-//					SinaUserInfoHttpService.bind(json.optString("screen_name"), json.optString("id"), WeiboLogin.this);
-				}catch(Exception e){
-					if(isReToken){
-						loginHandler.sendEmptyMessage(RE_GET_TOKEN);
-					}else{
-						loginHandler.sendEmptyMessage(FAILURE);
-					}
+				if(!isShare){
+				handler.sendEmptyMessage(TOKEN_SUCCESS);
 				}
+				Tools.toastShow("授权成功");
+			} else {
+				// 以下几种情况，您会收到 Code：
+				// 1. 当您未在平台上注册的应用程序的包名与签名时；
+				// 2. 当您注册的应用程序包名与签名不正确时；
+				// 3. 当您在平台上注册的包名和签名与您当前测试的应用的包名和签名不匹配时。
+				String code = values.getString("code");
+				Tools.toastShow("授权失败错误吗" + code);
+				handler.sendEmptyMessage(FAILURE);
+				Log.e("==========", "授权授权失败");
 			}
+		}
 
-			@Override
-			public void onComplete4binary(
-					ByteArrayOutputStream responseOS) {
-				if(isReToken){
-					loginHandler.sendEmptyMessage(RE_GET_TOKEN);
-				}else{
-					loginHandler.sendEmptyMessage(FAILURE);
-				}
-			}
+		@Override
+		public void onCancel() {
+			Tools.toastShow("取消授权");
+			handler.sendEmptyMessage(FAILURE);
+			Log.e("==========", "取消授权");
+		}
 
-			@Override
-			public void onIOException(IOException e) {
-				if(isReToken){
-					loginHandler.sendEmptyMessage(RE_GET_TOKEN);
-				}else{
-					loginHandler.sendEmptyMessage(FAILURE);
-				}
-			}
+		@Override
+		public void onWeiboException(WeiboException e) {
+			e.printStackTrace();
+			Tools.toastShow("取消授权");
+			handler.sendEmptyMessage(FAILURE);
+			Log.e("==========", "取消WeiboException权");
+		}
+	}
 
-			@Override
-			public void onError(WeiboException e) {
-				if(isReToken){
-					loginHandler.sendEmptyMessage(RE_GET_TOKEN);
-				}else{
-					loginHandler.sendEmptyMessage(FAILURE);
-				}
-			}
-        	
-        });
-    }
-	/**
-	 * 代理ssoHandler的authorizeCallBack方法
-	 * @param requestCode
-	 * @param resultCode
-	 * @param data
+	/***
+	 * 分享
 	 */
-	public void authorizeCallBack(int requestCode, int resultCode, Intent data){
-		if(ssoHandler != null){
-			ssoHandler.authorizeCallBack(requestCode, resultCode, data);
-		}
-	}
-	
-	private void loginFail(){
-		Tools.toastShow("登录失败");
-	}
-	
-	
-	private static WeiboLogin weiboLogin;
-	public static WeiboLogin getInstance(){
-		if(weiboLogin == null){
-			weiboLogin = new WeiboLogin();
-		}
-		return weiboLogin;
+	/** 微博分享的接口实例 */
+	private IWeiboShareAPI mWeiboShareAPI;
+
+
+	public IWeiboShareAPI registerToSina(Context context) {
+		// 创建微博 SDK 接口实例
+		this.context = context;
+		mWeiboShareAPI = WeiboShareSDK.createWeiboAPI(context,
+				AppConfig.WEIBO_APP_KEY);
+		return mWeiboShareAPI;
 	}
 
-	public static void clearToken(){
-		TokenCache tokenCache = new TokenCache();
-		tokenCache.setId("");
-		tokenCache.setToken("");
-		tokenCache.setExpiresIn(0);
-		tokenCache.setLoginTime(0);
-		DataSaveManager.getInstance().saveObject(cacheKey, tokenCache);
+	public void sendMedia(String title, String description, Bitmap ThumbImage,
+			String url, String defaultText) {
+        WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
+		WebpageObject mediaObject = new WebpageObject();
+		mediaObject.identify = Utility.generateGUID();
+		mediaObject.title = title;
+		mediaObject.description = description;
+		// 设置 Bitmap 类型的图片到视频对象里 设置缩略图。 注意：最终压缩过的缩略图大小不得超过 32kb。
+		mediaObject.setThumbImage(ThumbImage);
+		mediaObject.actionUrl = url;
+		mediaObject.defaultText = defaultText;
+		weiboMessage.mediaObject = mediaObject;
+		send(weiboMessage);
+	}
+
+	public void sendText(String shareText) {
+
+		// 1. 初始化微博的分享消息
+        WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
+		if (!TextUtils.isEmpty(shareText)) {
+			Log.e("进入了发送", shareText);
+			TextObject textObject = new TextObject();
+			textObject.text = shareText;
+			weiboMessage.mediaObject = textObject;
+			send(weiboMessage);
+		}
+	}
+
+	public void sendImage(Bitmap shareImage) {
+        WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
+		if (shareImage != null) {
+			// 设置缩略图。 注意：最终压缩过的缩略图大小不得超过 32kb。
+			ImageObject imageObject = new ImageObject();
+			imageObject.setImageObject(shareImage);
+			weiboMessage.mediaObject = imageObject;
+			send(weiboMessage);
+		}
+	}
+
+	private void send(WeiboMultiMessage weiboMessage) {
+		  // 2. 初始化从第三方到微博的消息请求
+		isShare=true;
+        SendMultiMessageToWeiboRequest request = new SendMultiMessageToWeiboRequest();
+        // 用transaction唯一标识一个请求
+        request.transaction = String.valueOf(System.currentTimeMillis());
+        request.multiMessage = weiboMessage;
+        Log.e("mAuthInfo", mAuthInfo+"===");
+        mWeiboShareAPI.sendRequest((Activity) context, request, mAuthInfo,"", new AuthListener());
+    
 	}
 }

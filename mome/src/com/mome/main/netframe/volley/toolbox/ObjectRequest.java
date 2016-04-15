@@ -5,7 +5,9 @@ import java.lang.reflect.Type;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jessieray.api.model.UserAlbum;
 import com.jessieray.api.request.base.ResponseResult;
+import com.mome.main.core.utils.AppConfig;
 import com.mome.main.netframe.volley.NetworkResponse;
 import com.mome.main.netframe.volley.Request;
 import com.mome.main.netframe.volley.Response;
@@ -66,9 +68,8 @@ public abstract class ObjectRequest extends Request<String>{
 	protected void deliverResponse(String response) {
 	    GsonBuilder gsonBuilder = new GsonBuilder();
 	    gsonBuilder.setDateFormat("yyyy-MM-dd HH:mm:ss");
-	    
+	    Log.e("返回数据＝＝＝＝＝＝", response);
 	    Gson gson = gsonBuilder.create();
-	    Log.e("返回数据", response);
 	    ResponseResult<?> resultModel = gson.fromJson(response, getClassType());
 	    mListener.onResponse(resultModel);
 	}

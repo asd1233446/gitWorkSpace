@@ -1,12 +1,11 @@
 package com.mome.main.business.userinfo;
 
-
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,10 +28,9 @@ import com.mome.main.core.annotation.ViewInject;
 import com.mome.main.core.utils.AppConfig;
 import com.mome.main.core.utils.Tools;
 
-
 @LayoutInject(layout = R.layout.mycineama)
 public class MyCinema extends BaseFragment {
-	
+
 	@ViewInject(id = R.id.pull_refresh_list)
 	private PullToRefreshListView mPullRefreshListView;
 	private ArrayList<ListCellBase> CinemaListData = new ArrayList<ListCellBase>();
@@ -43,31 +41,46 @@ public class MyCinema extends BaseFragment {
 	/**
 	 * 当前页索引
 	 */
-	private int curPageIndex = 0;
-
+	private int curPageIndex = 1;
+	
 	/**
-	 * 第一页
+	 * 一共多少页数
 	 */
-	private int firstPage = 1;
+	private double totalPage = 1;
+	
 
 	/**
 	 * listView实例
 	 */
 	private ListView listView;
-	
-	
+
+	private String userid;
+
+	private Bundle bundle;
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
+		bundle = getArguments();
+		userid = bundle == null ? UserProperty.getInstance().getUid() : bundle
+				.getString("userid");
 		setUpListView();
 	}
+
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		headView.setTitle(bundle == null ? "我的影院" : "Ta的影院");
+	}
+
 	/**
 	 * 获取动态信息
 	 * */
 	private void setUpListView() {
-		
-		mPullRefreshListView.setMode(Mode.BOTH);
+
+		mPullRefreshListView.setMode(Mode.PULL_FROM_START);
 		mPullRefreshListView
 				.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener2<ListView>() {
 
@@ -83,6 +96,11 @@ public class MyCinema extends BaseFragment {
 								.setLastUpdatedLabel(label);
 						// 下拉刷新，，只刷新服务器最新的
 						getCinemaDatas(1);
+						  if(totalPage>curPageIndex)
+							  mPullRefreshListView.setMode(Mode.BOTH);
+						  else{
+							  mPullRefreshListView.setMode(Mode.PULL_FROM_START);  
+						  }
 
 					}
 
@@ -96,8 +114,9 @@ public class MyCinema extends BaseFragment {
 										| DateUtils.FORMAT_ABBREV_ALL);
 						refreshView.getLoadingLayoutProxy()
 								.setLastUpdatedLabel(label);
+                       
 						getCinemaDatas(curPageIndex);
-
+					
 					}
 				});
 		
@@ -107,41 +126,58 @@ public class MyCinema extends BaseFragment {
 		listView.setAdapter(adapter);
 		getCinemaDatas(1);
 	}
-	
-	
-	private void getCinemaDatas(int curPageIndex){
-		mPullRefreshListView.onRefreshComplete();
-		UserCinemasRequest.findUserCinemas(UserProperty.getInstance().getUid(), curPageIndex, AppConfig.PAGE_SIZE, new ResponseCallback() {
-			
-			@Override
-			public <T> void sucess(Type type, ResponseResult<T> claszz) {
-				// TODO Auto-generated method stub
-			  if(claszz.getCode()==AppConfig.REQUEST_CODE_SUCCESS&&claszz.getModel()!=null){
-				  UserCinemas  userCinemas=claszz.getModel();
-				  for(CinemaInfo cinema:userCinemas.getCinemas()){
-					  MyCinemaListCell myCinemaListCell=new MyCinemaListCell();
-					  myCinemaListCell.setCinemaInfo(cinema);
-					  CinemaListData.add(myCinemaListCell);
-					  
-				  }
-					adapter.notifyDataSetChanged();
-			  }
-			}
-			
-			@Override
-			public boolean isRefreshNeeded() {
-				// TODO Auto-generated method stub
-				return false;
-			}
-			
-			@Override
-			public void error(ResponseError error) {
-				// TODO Auto-generated method stub
-				mPullRefreshListView.onRefreshComplete();
-				Tools.toastShow(error.getMessage());
-			}
-		});
-	}
 
 	
+
+	
+	
+	private void getCinemaDatas(final int Index) {
+
+		UserCinemasRequest.findUserCinemas(userid, Index,
+				AppConfig.PAGE_SIZE, new ResponseCallback() {
+
+					@Override
+					public <T> void sucess(Type type, ResponseResult<T> claszz) {
+						// TODO Auto-generated method stub
+						mPullRefreshListView.onRefreshComplete();
+						UserCinemas userCinemas = claszz.getModel();
+						if (userCinemas != null
+								&&userCinemas.getTotal()> 0) {
+							   totalPage=Tools.calculateTotalPage(userCinemas.getTotal());
+							for (CinemaInfo cinema : userCinemas.getCinemas()) {
+								MyCinemaListCell myCinemaListCell = new MyCinemaListCell();
+								myCinemaListCell.setCinemaInfo(cinema);
+								if (Index == 1){
+									CinemaListData.clear();
+								    curPageIndex=1;
+								}
+								else{
+								     curPageIndex++;
+								}
+									CinemaListData.add(myCinemaListCell);
+								
+							}
+							adapter.notifyDataSetChanged();
+						} else {
+
+							listView.setEmptyView(Tools
+									.setEmptyView(getActivity()));
+						}
+					}
+
+					@Override
+					public boolean isRefreshNeeded() {
+						// TODO Auto-generated method stub
+						return false;
+					}
+
+					@Override
+					public void error(ResponseError error) {
+						// TODO Auto-generated method stub
+						mPullRefreshListView.onRefreshComplete();
+						Tools.toastShow(error.getMessage());
+					}
+				});
+	}
+
 }

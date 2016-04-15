@@ -58,7 +58,7 @@ public class MemoirsInfo implements Serializable {
     /**
      * 票价
      */
-    private float price;
+    private String price;
 
     /**
      * 座位
@@ -81,8 +81,22 @@ public class MemoirsInfo implements Serializable {
     private String movieid;
 
 
+    /**
+     * 回忆录类型
+     */
+    private int  type;
+    
+    
 
-    public void setStartime(String startime) {
+    public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public void setStartime(String startime) {
          if (startime == null) {
             return;
          }
@@ -181,11 +195,11 @@ public class MemoirsInfo implements Serializable {
     }
 
 
-    public void setPrice(float price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public float getPrice() {
+    public String getPrice() {
         return price;
     }
 

@@ -3,6 +3,7 @@ package com.mome.main.business;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.app.FragmentTransaction;
@@ -83,7 +84,7 @@ public class TabManager extends BaseFragment {
 	/**
 	 * 记录页面布局
 	 */
-	private LinearLayout topRecordLayout;
+	public static  LinearLayout topRecordLayout;
 	/**
 	 * 记录页面实例
 	 */
@@ -111,20 +112,20 @@ public class TabManager extends BaseFragment {
 		trans.commit();
 		return view;
 	}
-
+       
 	/**
 	 * 初始化组件
 	 */
 	private void initView(View view) {
 		topRecordLayout = (LinearLayout) view.findViewById(R.id.tabmanager_record);
-		topRecordLayout.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				iconList.get(RECORD_INDEX).setImageResource(iconNormal[RECORD_INDEX]);
-				topRecordLayout.setVisibility(View.GONE);
-			}
-		});
+//		topRecordLayout.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				iconList.get(RECORD_INDEX).setImageResource(iconNormal[RECORD_INDEX]);
+//				topRecordLayout.setVisibility(View.GONE);
+//			}
+//		});
 		mTabHost = (FragmentTabHost) view.findViewById(android.R.id.tabhost);
 		mTabHost.setup(this.getActivity(), getChildFragmentManager(), R.id.realtabcontent);
 		inflater = LayoutInflater.from(AppConfig.context);
@@ -145,7 +146,7 @@ public class TabManager extends BaseFragment {
 				if(!tabId.equals(mTextArray[2])) {
 					updateTab();
 					mTabHost.setTag(new Integer(mTabHost.getCurrentTab()));
-				} else {
+				} else {			
 					showRecord();
 					mTabHost.setCurrentTab((Integer)mTabHost.getTag());
 				}

@@ -2,17 +2,22 @@ package com.mome.main.business.movie;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.jessieray.api.model.DynamicInfo;
 import com.mome.main.R;
+import com.mome.main.business.dynamic.DynamicDetail;
 import com.mome.main.business.module.ListCellBase;
+import com.mome.main.business.userinfo.FriendHome;
 import com.mome.main.core.annotation.InjectProcessor;
 import com.mome.main.core.annotation.LayoutInject;
+import com.mome.main.core.annotation.OnClick;
 import com.mome.main.core.annotation.ViewInject;
 import com.mome.main.core.net.HttpRequest;
+import com.mome.main.core.utils.Tools;
 import com.mome.main.netframe.volley.toolbox.NetworkImageView;
 
 public class MovieDetailListCell implements ListCellBase{
@@ -44,7 +49,7 @@ public class MovieDetailListCell implements ListCellBase{
 		} else {
 			viewHolder = (ViewHolder) view.getTag();
 		}
-		viewHolder.userIcon.setImageUrl(dynamicInfo.getImageSrc(), HttpRequest.getInstance().imageLoader);
+		viewHolder.userIcon.setImageUrl(dynamicInfo.getAvatar(), HttpRequest.getInstance().imageLoader);
 		viewHolder.nickName.setText(dynamicInfo.getNickname());
 		viewHolder.score.setText(""+dynamicInfo.getMark());
 		viewHolder.rating.setRating((float) (dynamicInfo.getMark()*0.5));
@@ -62,6 +67,16 @@ public class MovieDetailListCell implements ListCellBase{
 		@ViewInject(id = R.id.user_icon)
 		private NetworkImageView userIcon;
 		
+		@OnClick(id = R.id.user_icon)
+		public void FriendHomeOnClick(View view) {
+			Tools.toastShow("进入好友主页");
+			Bundle bundle=new Bundle();
+			bundle.putSerializable("friendInfo",dynamicInfo);
+			Tools.pushScreen(FriendHome.class, bundle);
+			
+
+		}
+		
 		@ViewInject(id = R.id.userName_tv)
 		private TextView nickName;
 		
@@ -76,5 +91,14 @@ public class MovieDetailListCell implements ListCellBase{
 		
 		@ViewInject(id = R.id.movie_comment_info_tv)
 		private TextView info;
+		@OnClick(id = R.id.movie_comment_info_tv)
+		public void MovieIntroductionOnClick(View view) {
+			Tools.toastShow("进入动态正文");
+           Bundle bundle=new Bundle();
+			bundle.putSerializable("dynamic",dynamicInfo);
+			Tools.pushScreen(DynamicDetail.class, bundle);
+			// 进入动态正文
+
+		}
 	}
 }

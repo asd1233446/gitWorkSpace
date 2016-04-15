@@ -2,6 +2,7 @@ package com.mome.main.core.net;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -156,34 +157,49 @@ public class HttpRequest implements Request {
 	 */
 	private String getPostUrl(String url, Map<String, String> signParams) {
 		StringBuffer strbuf = new StringBuffer();
-		strbuf.append(url);
-		strbuf.append("?deviceId=");
+		
+		StringBuffer params = new StringBuffer();
+		params.append(url+"?");
+		
+		
+		strbuf.append("deviceId=");
 		strbuf.append(AppConfig.DEVICE_TOKEN);
-		strbuf.append("&clientId=");
-		strbuf.append(AppConfig.DEVICE_TOKEN);//push没有暂时用deviceId代替
-		strbuf.append("&deviceType=");
-		strbuf.append(AppConfig.DEVICE_TYPE);
-		if (!TextUtils.isEmpty(AppConfig.DEV_APPKEY_VALUE)) {
-			strbuf.append("&appkey=");
-			strbuf.append(AppConfig.DEV_APPKEY_VALUE);
-		} else {
-			strbuf.append("&sourceId=");
-			strbuf.append(AppConfig.SOURCE_ID);
-			strbuf.append("&platform=");
-			strbuf.append(AppConfig.PLATFORM_VALUE);
-		}
-		strbuf.append("&version=");
-		strbuf.append(AppConfig.CLIENT_VERSION_VALUE);
-		strbuf.append("&" + AppConfig.TIMESTAMP_STRING + "=");
-		strbuf.append(signParams.get(AppConfig.TIMESTAMP_STRING));
-		strbuf.append("&" + AppConfig.SIGN + "=");
-		strbuf.append(signParams.get(AppConfig.SIGN));
-		if (TextUtils.isEmpty(signParams.get("uid")) && !TextUtils.isEmpty(UserProperty.getInstance().getUid())) {
-			strbuf.append("&uid=");
-			strbuf.append(UserProperty.getInstance().getUid());
-		}
-		Tools.Log("网络请求url:" + strbuf.toString());
-		return strbuf.toString();
+//		strbuf.append("&clientId=");
+//		strbuf.append(AppConfig.DEVICE_TOKEN);//push没有暂时用deviceId代替
+//		strbuf.append("&deviceType=");
+//		strbuf.append(AppConfig.DEVICE_TYPE);
+//		if (!TextUtils.isEmpty(AppConfig.DEV_APPKEY_VALUE)) {
+//			strbuf.append("&appkey=");
+//			strbuf.append(AppConfig.DEV_APPKEY_VALUE);
+//		} else {
+//			strbuf.append("&sourceId=");
+//			strbuf.append(AppConfig.SOURCE_ID);
+//			strbuf.append("&platform=");
+//			strbuf.append(AppConfig.PLATFORM_VALUE);
+//		}
+//		strbuf.append("&version=");
+//		strbuf.append(AppConfig.CLIENT_VERSION_VALUE);
+//		strbuf.append("&" + AppConfig.TIMESTAMP_STRING + "=");
+//		strbuf.append(signParams.get(AppConfig.TIMESTAMP_STRING));
+//		strbuf.append("&" + AppConfig.SIGN + "=");
+//		strbuf.append(signParams.get(AppConfig.SIGN));
+		for (String key : signParams.keySet()) {
+			strbuf.append("&"+key+"=");
+			strbuf.append( signParams.get(key));
+			   System.out.println("key= "+ key + " and value= " + signParams.get(key));
+			  }
+//		if (TextUtils.isEmpty(signParams.get("uid")) && !TextUtils.isEmpty(UserProperty.getInstance().getUid())) {
+//			strbuf.append("&uid=");
+//			strbuf.append(UserProperty.getInstance().getUid());
+//		}
+		String result="";
+		
+
+			result=URLEncoder.encode(strbuf.toString());
+	
+		params.append(result);
+		Tools.Log("网络请求url:" + params.toString());
+		return params.toString();
 	}
 
 	/**
@@ -239,7 +255,13 @@ public class HttpRequest implements Request {
 			ResponseResult<?> response = getCacheResult(cacheKey,resultType);
 			if(response != null) {
 				try {
+					if(response.getCode()==AppConfig.REQUEST_CODE_SUCCESS)
 					callback.sucess(resultType,	response);
+					else{
+						ResponseError responseError = new ResponseError();
+						responseError.setMessage(response.getMessage());
+						callback.error(responseError);	
+					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -256,7 +278,13 @@ public class HttpRequest implements Request {
 					String temp = gson.toJson(response);
 					Tools.Log("响应成功:"+temp);
 				}
-				callback.sucess(resultType,	response);
+				if(response.getCode()==AppConfig.REQUEST_CODE_SUCCESS)
+					callback.sucess(resultType,	response);
+					else{
+						ResponseError responseError = new ResponseError();
+						responseError.setMessage(response.getMessage());
+						callback.error(responseError);
+					}
 			}
 		};
 		Response.ErrorListener errorListener = new Response.ErrorListener() {

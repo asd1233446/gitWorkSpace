@@ -148,7 +148,7 @@ public class BaseFragment extends Fragment implements HeadViewBtnOnClickListener
 	}
 
 	@Override
-	public void editTextChange() {
+	public void editTextChange(String text) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -156,7 +156,7 @@ public class BaseFragment extends Fragment implements HeadViewBtnOnClickListener
 	@Override
 	public void error(ResponseError arg0) {
 		// TODO Auto-generated method stub
-		
+		Tools.toastShow(arg0.getMessage());
 	}
 
 	@Override

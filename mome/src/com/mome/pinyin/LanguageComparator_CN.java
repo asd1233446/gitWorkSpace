@@ -4,6 +4,11 @@ package com.mome.pinyin;
 import java.util.Comparator;
 
 import net.sourceforge.pinyin4j.PinyinHelper;
+import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
+import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
+import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 /**
  * ��������
@@ -12,34 +17,63 @@ public class LanguageComparator_CN implements Comparator<String> {
 	
 
 	public int compare(String ostr1, String ostr2) {
+		String py1 = getPingYin(ostr1);  
+        String py2 =getPingYin(ostr2);  
+        // 判断是否为空""  
+        if (isEmpty(py1) && isEmpty(py2))  
+            return 0;  
+        if (isEmpty(py1))  
+            return -1;  
+        if (isEmpty(py2))  
+            return 1;  
+        String str1 = "";  
+        String str2 = "";  
+        try {  
+            str1 = ((getPingYin(ostr1)).toUpperCase()).substring(0, 1);  
+            str2 = ((getPingYin(ostr2)).toUpperCase()).substring(0, 1);  
+        } catch (Exception e) {  
+            // TODO: handle exception  
+            System.out.println("某个str为\" \" 空");  
+        }  
+        return str1.compareTo(str2);  
+  }
 
-		for (int i = 0; i < ostr1.length() && i < ostr2.length(); i++) {
+	
+	private boolean isEmpty(String str) {  
+        return "".equals(str.trim());  
+    } 
+	/** 
+     *  
+     * @param inputString 
+     * @return 
+     */  
+     public static String getPingYin(String inputString) {  
+         HanyuPinyinOutputFormat format = new  
+         HanyuPinyinOutputFormat();  
+         format.setCaseType(HanyuPinyinCaseType.LOWERCASE);  
+         format.setToneType(HanyuPinyinToneType.WITHOUT_TONE);  
+         format.setVCharType(HanyuPinyinVCharType.WITH_V);  
 
-			int codePoint1 = ostr1.charAt(i);
-			int codePoint2 = ostr2.charAt(i);
-			if (Character.isSupplementaryCodePoint(codePoint1)
-					|| Character.isSupplementaryCodePoint(codePoint2)) {
-				i++;
-			}
-			if (codePoint1 != codePoint2) {
-				if (Character.isSupplementaryCodePoint(codePoint1)
-						|| Character.isSupplementaryCodePoint(codePoint2)) {
-					return codePoint1 - codePoint2;
-				}
-				String pinyin1 = pinyin((char) codePoint1);
-				String pinyin2 = pinyin((char) codePoint2);
+         char[] input = inputString.trim().toCharArray();  
+         String output = "";  
 
-				if (pinyin1 != null && pinyin2 != null) { // �����ַ��Ǻ���
-					if (!pinyin1.equals(pinyin2)) {
-						return pinyin1.compareTo(pinyin2);
-					}
-				} else {
-					return codePoint1 - codePoint2;
-				}
-			}
-		}
-		return ostr1.length() - ostr2.length();
-	}
+         try {  
+             for (int i = 0; i < input.length; i++) {  
+                 if (java.lang.Character.toString(input[i]).  
+                 matches("[\\u4E00-\\u9FA5]+")) {  
+                     String[] temp = PinyinHelper.  
+                     toHanyuPinyinStringArray(input[i],  
+                     format);  
+                     output += temp[0];  
+                 } else  
+                     output += java.lang.Character.toString(  
+                     input[i]);  
+             }  
+         } catch (BadHanyuPinyinOutputFormatCombination e) {  
+             e.printStackTrace();  
+         }  
+         return output;  
+     }  
 
 	// ��ú���ƴ�������ַ�
 	private String pinyin(char c) {

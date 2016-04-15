@@ -4,11 +4,24 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jessieray.api.model.AddMovieFavor;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.text.format.DateUtils;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.RatingBar;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
 import com.jessieray.api.model.ArticleListByMovieId;
 import com.jessieray.api.model.DynamicInfo;
-import com.jessieray.api.model.UndoMovieFavor;
-import com.jessieray.api.model.UserInfo;
+import com.jessieray.api.model.MovieInfo;
 import com.jessieray.api.request.base.ResponseCallback;
 import com.jessieray.api.request.base.ResponseError;
 import com.jessieray.api.request.base.ResponseResult;
@@ -20,11 +33,13 @@ import com.mome.main.R;
 import com.mome.main.business.model.UserProperty;
 import com.mome.main.business.module.ListAdapter;
 import com.mome.main.business.module.ListCellBase;
+import com.mome.main.business.record.Record;
 import com.mome.main.business.userinfo.MyFriend;
 import com.mome.main.business.widget.pulltorefresh.PullToRefreshBase;
-import com.mome.main.business.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener2;
+import com.mome.main.business.widget.pulltorefresh.PullToRefreshBase.Mode;
 import com.mome.main.business.widget.pulltorefresh.PullToRefreshListView;
 import com.mome.main.business.widget.pulltorefresh.PullToRefreshScrollView;
+import com.mome.main.business.widget.pulltorefresh.PullToRefreshScrollView.CallBack;
 import com.mome.main.core.BaseFragment;
 import com.mome.main.core.annotation.LayoutInject;
 import com.mome.main.core.annotation.OnClick;
@@ -33,21 +48,7 @@ import com.mome.main.core.net.HttpRequest;
 import com.mome.main.core.utils.AppConfig;
 import com.mome.main.core.utils.Tools;
 import com.mome.main.netframe.volley.toolbox.NetworkImageView;
-
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.text.Html;
-import android.text.format.DateUtils;
-import android.view.View;
-import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
-import android.widget.RatingBar;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
+import com.mome.view.ListViewInScrollView;
 
 /**
  * 电影详情页面
@@ -56,6 +57,22 @@ import android.widget.Toast;
 @LayoutInject(layout = R.layout.movie_detail)
 public class MovieDetail extends BaseFragment implements
 		OnCheckedChangeListener {
+
+	/**
+	 * 置顶悬浮框处理
+	 */
+	@ViewInject(id = R.id.suspend_ll)
+	private LinearLayout suspend_ll;
+	@ViewInject(id = R.id.head_ll)
+	private LinearLayout head_ll;
+	@ViewInject(id = R.id.originally_ll)
+	private LinearLayout originally_ll;
+
+	/**
+	 * 上拉刷新，下拉加载的scrollview
+	 */
+	@ViewInject(id = R.id.pull_refresh_scrollview)
+	private PullToRefreshScrollView scrollview;
 
 	/**
 	 * 电影海报
@@ -101,6 +118,8 @@ public class MovieDetail extends BaseFragment implements
 	@OnClick(id = R.id.movie_detail_add_record)
 	public void ToMovieRecord(View view) {
 		Tools.toastShow("添加观影纪录");
+		Tools.pushScreen(Record.class, null);
+
 	}
 
 	/**
@@ -112,6 +131,8 @@ public class MovieDetail extends BaseFragment implements
 	@OnClick(id = R.id.movie_detail_look_record)
 	public void ToLookedRecord(View view) {
 		Tools.toastShow("查看观影纪录");
+		Tools.pushScreen(MovieMemoirs.class, null);
+
 	}
 
 	/**
@@ -125,6 +146,10 @@ public class MovieDetail extends BaseFragment implements
 	@OnClick(id = R.id.movie_detail_looked_rl)
 	public void goLookedClick(View view) {
 		Tools.toastShow("观看过的人数");
+		Bundle bundle = new Bundle();
+		bundle.putInt("realationType", 2);
+		bundle.putString("titleName", "我的好友");
+		Tools.pushScreen(MyFriend.class, bundle);
 	}
 
 	/**
@@ -139,6 +164,10 @@ public class MovieDetail extends BaseFragment implements
 	@OnClick(id = R.id.movie_detail_collect_rl)
 	public void goCollectedClick(View view) {
 		Tools.toastShow("观收藏该片的人数过的人数");
+		Bundle bundle = new Bundle();
+		bundle.putInt("realationType", 3);
+		bundle.putString("titleName", "我的好友");
+		Tools.pushScreen(MyFriend.class, bundle);
 	}
 
 	/**
@@ -166,8 +195,9 @@ public class MovieDetail extends BaseFragment implements
 	@OnClick(id = R.id.movie_detail_commend_friends)
 	public void toCommentFriendClick(View view) {
 		Tools.toastShow("推荐给好友");
-		Bundle bundle=new Bundle();
-		bundle.putInt("realationType", 1);
+		Bundle bundle = new Bundle();
+		bundle.putInt("realationType", 2);
+		bundle.putString("titleName", "我的好友");
 		Tools.pushScreen(MyFriend.class, bundle);
 	}
 
@@ -179,8 +209,8 @@ public class MovieDetail extends BaseFragment implements
 	// /**
 	// * 按最新排序
 	// */
-	 @ViewInject(id = R.id.movie_detail_new_btn)
-	 private RadioButton newBtn;
+	@ViewInject(id = R.id.movie_detail_new_btn)
+	private RadioButton newBtn;
 	//
 	// // @OnClick(id=R.id.movie_detail_new_btn)
 	// // public void newClick(View view){
@@ -222,7 +252,7 @@ public class MovieDetail extends BaseFragment implements
 	 * 下拉刷新评论列表
 	 */
 	@ViewInject(id = R.id.movie_detail_listview)
-	private PullToRefreshListView pullListView;
+	private ListViewInScrollView pullListView;
 
 	/**
 	 * 列表数据容器
@@ -235,7 +265,7 @@ public class MovieDetail extends BaseFragment implements
 	/**
 	 * 上个页面传过来的数据
 	 */
-	private DynamicInfo dynamicInfo;
+	private MovieInfo movieinfo;
 
 	private com.jessieray.api.model.MovieDetail movieInfo;
 
@@ -244,20 +274,49 @@ public class MovieDetail extends BaseFragment implements
 	 */
 	private int orderType = 1;
 
+	/**
+	 * 当前页索引
+	 */
+	private int curPageIndex = 1;
+
+	/**
+	 * 一共多少页数
+	 */
+	private double totalPage = 1;
+
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setUpListView();
-		
+
 		rGroup.setOnCheckedChangeListener(this);
 		newBtn.setChecked(true);
-		rGroup.check(0);
+		// 置顶悬浮框
+		scrollview.setCallBack(new CallBack() {
+
+			@Override
+			public void onBack(int a) {
+				// TODO Auto-generated method stub
+				if (a >= head_ll.getBottom()) {
+					if (rGroup.getParent() != suspend_ll) {
+						originally_ll.removeView(rGroup);
+						suspend_ll.addView(rGroup);
+					}
+				} else {
+					if (rGroup.getParent() != originally_ll) {
+						suspend_ll.removeView(rGroup);
+						originally_ll.addView(rGroup);
+					}
+				}
+			}
+		});
 	}
 
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
-		headView.setTitle(dynamicInfo.getTitle());
+		headView.setTitle(movieinfo.getTitle());
 		super.onResume();
 	}
 
@@ -270,12 +329,17 @@ public class MovieDetail extends BaseFragment implements
 
 	private void setUpListView() {
 		adapter = new ListAdapter();
-		pullListView
-				.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener2<ListView>() {
+		adapter.setDataList(listData);
+		pullListView.setAdapter(adapter);
+		pullListView.setFocusable(false);
+		scrollview.setMode(Mode.PULL_FROM_START);
+		Tools.setRereshing(scrollview);
+		scrollview
+				.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener2<ScrollView>() {
 
 					@Override
 					public void onPullDownToRefresh(
-							PullToRefreshBase<ListView> refreshView) {
+							PullToRefreshBase<ScrollView> refreshView) {
 						String label = DateUtils.formatDateTime(
 								AppConfig.context, System.currentTimeMillis(),
 								DateUtils.FORMAT_SHOW_TIME
@@ -284,13 +348,14 @@ public class MovieDetail extends BaseFragment implements
 						refreshView.getLoadingLayoutProxy()
 								.setLastUpdatedLabel(label);
 						// 下拉刷新，，只刷新服务器最新的
+						curPageIndex = 1;
 						getMovieComment();
 
 					}
 
 					@Override
 					public void onPullUpToRefresh(
-							PullToRefreshBase<ListView> refreshView) {
+							PullToRefreshBase<ScrollView> refreshView) {
 						String label = DateUtils.formatDateTime(
 								AppConfig.context, System.currentTimeMillis(),
 								DateUtils.FORMAT_SHOW_TIME
@@ -311,9 +376,9 @@ public class MovieDetail extends BaseFragment implements
 
 	private void setUpMovieInfo() {
 		Bundle bundle = getArguments();
-		dynamicInfo = (DynamicInfo) bundle.getSerializable("MovieInfo");
+		movieinfo = (MovieInfo) bundle.getSerializable("MovieInfo");
 		MovieDetailRequest.findMovieDetail(UserProperty.getInstance().getUid(),
-				dynamicInfo.getMovieid() + "", new ResponseCallback() {
+				movieinfo.getMovieid() + "", new ResponseCallback() {
 
 					@Override
 					public <T> void sucess(Type type, ResponseResult<T> arg0) {
@@ -326,10 +391,8 @@ public class MovieDetail extends BaseFragment implements
 							movieTitle.setText(movieInfo.getTitle());
 							rating.setRating((float) (movieInfo.getMark() * 0.5));
 							score.setText(movieInfo.getMark() + "");
-							String newMessageInfo = "来自<font color='red'><b>"
-									+ movieInfo.getAttentions()
-									+ "</b></font>位关注的人";
-							attentionNum.setText(Html.fromHtml(newMessageInfo));
+						
+							attentionNum.setText(movieInfo.getAttentions()+"");
 							MovieDetail.this.type.setText("类型："
 									+ movieInfo.getType());
 							time.setText("时长：" + movieInfo.getDuration() + "分钟");
@@ -344,6 +407,7 @@ public class MovieDetail extends BaseFragment implements
 									: View.GONE);
 							line.setVisibility(movieInfo.getWasrecall() == true ? View.VISIBLE
 									: View.GONE);
+							selectorStyle(notCollectNum);
 						}
 					}
 
@@ -367,22 +431,41 @@ public class MovieDetail extends BaseFragment implements
 
 	private void getMovieComment() {
 		ArticleListByMovieIdRequest.findArticleListByMovieId(
-				dynamicInfo.getMovieid() + "", orderType, 1,
+				movieinfo.getMovieid() + "", orderType, 1,
 				AppConfig.PAGE_SIZE, this);
 	}
 
 	@Override
 	public void error(ResponseError arg0) {
+		scrollview.onRefreshComplete();
 		Tools.toastShow(arg0.getMessage());
 	}
 
 	@Override
 	public <T> void sucess(Type type, ResponseResult<T> arg0) {
-		if (arg0.getCode() == AppConfig.REQUEST_CODE_SUCCESS
-				&& arg0.getModel() != null) {
+		scrollview.onRefreshComplete();
+		if (arg0.getModel() != null) {
 			// 影评排序
-				ArticleListByMovieId movieDetailList = arg0.getModel();
+			ArticleListByMovieId movieDetailList = arg0.getModel();
+			if (movieDetailList.getTotal() > 0) {
+				totalPage = Tools
+						.calculateTotalPage(movieDetailList.getTotal());
+				if (curPageIndex == 1) {
+					listData.clear();
+				}
+
+				if (totalPage > curPageIndex) {
+					scrollview.setMode(Mode.BOTH);
+					curPageIndex++;
+				} else {
+					scrollview.setMode(Mode.PULL_FROM_START);
+				}
 				setDataListView(movieDetailList.getArticles());
+			}else{
+				listData.clear();
+				adapter.notifyDataSetChanged();
+				scrollview.setMode(Mode.PULL_FROM_START);
+			}
 		}
 	}
 
@@ -395,8 +478,7 @@ public class MovieDetail extends BaseFragment implements
 				listCell.setMomentInfo(momentInfo);
 				listData.add(listCell);
 			}
-			adapter.setDataList(listData);
-			pullListView.getRefreshableView().setAdapter(adapter);
+			adapter.notifyDataSetChanged();
 
 		}
 
@@ -409,6 +491,7 @@ public class MovieDetail extends BaseFragment implements
 			orderType = 1;
 		else
 			orderType = 2;
+		    curPageIndex = 1;
 		getMovieComment();
 	}
 
@@ -417,21 +500,23 @@ public class MovieDetail extends BaseFragment implements
 	 */
 	public void addMovieFavor() {
 		AddMovieFavorRequest.findAddMovieFavor(UserProperty.getInstance()
-				.getUid(), dynamicInfo.getMovieid() + "", new ResponseCallback() {
-					
+				.getUid(), movieinfo.getMovieid() + "",
+				new ResponseCallback() {
+
 					@Override
 					public <T> void sucess(Type type, ResponseResult<T> claszz) {
 						// TODO Auto-generated method stub
 						if (claszz.getCode() == AppConfig.REQUEST_CODE_SUCCESS)
 							notCollectNum.setText("取消收藏");
+						selectorStyle(notCollectNum);
 					}
-					
+
 					@Override
 					public boolean isRefreshNeeded() {
 						// TODO Auto-generated method stub
 						return false;
 					}
-					
+
 					@Override
 					public void error(ResponseError error) {
 						// TODO Auto-generated method stub
@@ -446,28 +531,46 @@ public class MovieDetail extends BaseFragment implements
 
 	public void undoMovieFavor() {
 		UndoMovieFavorRequest.findUndoMovieFavor(UserProperty.getInstance()
-				.getUid(), dynamicInfo.getMovieid() + "", new ResponseCallback() {
-					
+				.getUid(), movieinfo.getMovieid() + "",
+				new ResponseCallback() {
+
 					@Override
 					public <T> void sucess(Type type, ResponseResult<T> claszz) {
 						// TODO Auto-generated method stub
 						if (claszz.getCode() == AppConfig.REQUEST_CODE_SUCCESS)
 							notCollectNum.setText("收藏");
-							
+						selectorStyle(notCollectNum);
+
 					}
-					
+
 					@Override
 					public boolean isRefreshNeeded() {
 						// TODO Auto-generated method stub
 						return false;
 					}
-					
+
 					@Override
 					public void error(ResponseError error) {
 						// TODO Auto-generated method stub
 						Tools.toastShow(error.getMessage());
-						
+
 					}
 				});
+	}
+
+	private void selectorStyle(TextView view) {
+		if (view.getText().toString().equals("取消收藏")) {
+			Drawable drawable = AppConfig.context.getResources().getDrawable(
+					R.drawable.xin_select);
+			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
+					drawable.getIntrinsicHeight());
+			view.setCompoundDrawables(null,drawable, null, null);
+		} else {
+			Drawable drawable = AppConfig.context.getResources().getDrawable(
+					R.drawable.xin);
+			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
+					drawable.getIntrinsicHeight());
+			view.setCompoundDrawables(null,drawable, null, null);
+		}
 	}
 }

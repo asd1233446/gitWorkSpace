@@ -11,17 +11,17 @@ import java.io.Serializable;
 
 public class MayInterestIn implements Serializable {
     /**
-     * 动态详情信息
+     * 同类型爱好用户
      */
     private java.util.List<com.jessieray.api.model.UserInfo> same_hobby;
 
     /**
-     * 动态详情信息
+     * 常去同一影院
      */
     private java.util.List<com.jessieray.api.model.UserInfo> same_cinema;
 
     /**
-     * 动态详情信息
+     * 通场次观影用户
      */
     private java.util.List<com.jessieray.api.model.UserInfo> same_movie;
 

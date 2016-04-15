@@ -9,6 +9,7 @@ import com.mome.main.core.utils.AppConfig;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,7 +98,7 @@ public class InjectProcessor {
 							//遍历所有的View，设置事件   
 							for (int viewId : viewIds) { 
 								View childView = null;
-								if(activity.getClass().equals(Activity.class)) {
+								if(activity instanceof Activity) {
 									childView = ((Activity) activity).findViewById(viewId); 
 								} else {
 									childView = view.findViewById(viewId); 

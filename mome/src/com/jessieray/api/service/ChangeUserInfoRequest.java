@@ -47,7 +47,7 @@ public class ChangeUserInfoRequest {
         params.put("signature", RequestUtils.object2String(signature));
         params.put("location", RequestUtils.object2String(location));
         resultType = new com.google.gson.reflect.TypeToken<ResponseResult<ChangeUserInfo>>() {}.getType();
-        RequestProxy.getRequest().doRequest(url, Request.Method.GET, params, resultType, response);
+        RequestProxy.getRequest().doRequest(url, Request.Method.POST, params, resultType, response);
     }
 
 

@@ -33,12 +33,12 @@ public class AssortView extends Button {
 	}
 
 	// ����
-	private String[] assort = { "?", "#", "A", "B", "C", "D", "E", "F", "G",
+	private String[] assort = { "#", "A", "B", "C", "D", "E", "F", "G",
 			"H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
 			"U", "V", "W", "X", "Y", "Z" };
 	private Paint paint = new Paint();
 	// ѡ�������
-	private int selectIndex = -1;
+	private int selectIndex = 0;
 	// ��ĸ������
 	private OnTouchAssortListener onTouch;
 
@@ -60,13 +60,14 @@ public class AssortView extends Button {
 			paint.setAntiAlias(true);
 			// Ĭ�ϴ���
 			paint.setTypeface(Typeface.DEFAULT_BOLD);
+			paint.setTextSize(20);
 			// ��ɫ
-			paint.setColor(Color.WHITE);
+			paint.setColor(Color.BLUE);
 			if (i == selectIndex) {
 				// ��ѡ�����ĸ�ı���ɫ�ʹ���
-				paint.setColor(Color.parseColor("#3399ff"));
+				paint.setColor(Color.RED);
 				paint.setFakeBoldText(true);
-				paint.setTextSize(30);
+				paint.setTextSize(40);
 			}
 			// ������ĸ��X���
 			float xPos = width / 2 - paint.measureText(assort[i]) / 2;
@@ -107,11 +108,11 @@ public class AssortView extends Button {
 				if (onTouch != null) {
 					onTouch.onTouchAssortUP();
 				}
-				selectIndex = -1;
+				selectIndex = 0;
 				break;
 			}
 		} else {
-			selectIndex = -1;
+			selectIndex =0;
 			if (onTouch != null) {
 				onTouch.onTouchAssortUP();
 			}

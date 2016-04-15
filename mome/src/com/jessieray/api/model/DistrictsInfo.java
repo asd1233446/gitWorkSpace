@@ -25,9 +25,18 @@ public class DistrictsInfo implements Serializable {
      */
     private String city;
 
+    private java.util.List<com.jessieray.api.model.CinemaInfo> cinemas;
 
+    public java.util.List<com.jessieray.api.model.CinemaInfo> getCinemas() {
+		return cinemas;
+	}
 
-    public void setTotal(int total) {
+	public void setCinemas(
+			java.util.List<com.jessieray.api.model.CinemaInfo> cinemas) {
+		this.cinemas = cinemas;
+	}
+
+	public void setTotal(int total) {
         this.total = total;
     }
 

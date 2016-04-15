@@ -42,7 +42,7 @@ public class DataSaveManager {
 	/**
 	 * sdcard存储目录名
 	 */
-	public static final String saveDataDir = "/mome/";
+	public static final String SDFile="/mome";
 	public static final String sfkeyString = "key";
 	/**
 	 * 缓存默认值
@@ -80,19 +80,20 @@ public class DataSaveManager {
 	 * 初始化磁盘当前缓存容量
 	 */
 	private void initDiskCurSize() {
-		if(!android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)){
-			return;
-		}
-		String sdCardDir = Environment.getExternalStorageDirectory().getAbsolutePath();
-		if(!TextUtils.isEmpty(sdCardDir)) {
-			File diskPath = new File(sdCardDir+saveDataDir);
-			if(diskPath.exists()) {
+//		if(!android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)){
+//			return;
+//		}
+//		String sdCardDir = Environment.getExternalStorageDirectory().getAbsolutePath();
+			File diskPath = new File(Tools.SAVE_PIC_PATH+SDFile);
+		 	if (!diskPath.exists()) {
+		 		diskPath.mkdirs();
+		    	}
 				File[] files = diskPath.listFiles();
+				if(files!=null){
 				for(File file : files) {
 					setmTotalSize(getmTotalSize() + file.length());
 				}
-			}
-		}
+				}
 	}
 	
 	/**
@@ -152,9 +153,9 @@ public class DataSaveManager {
 		if(!android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)){
 			return false;
 		}
-		String sdCardDir = Environment.getExternalStorageDirectory()
-				.getAbsolutePath();
-		String path = sdCardDir + saveDataDir;
+//		String sdCardDir = Environment.getExternalStorageDirectory()
+//				.getAbsolutePath();
+		String path = Tools.SAVE_PIC_PATH+SDFile;
 		if(mTotalSize >= mMaxCacheSizeInBytes) {
 			deleteFile(path);
 		}
@@ -182,9 +183,9 @@ public class DataSaveManager {
 	 * @throws IOException
 	 */
 	public String getSDCardFile(String fileName) throws IOException {
-		String sdCardDir = Environment.getExternalStorageDirectory()
-				.getAbsolutePath();
-		String path = sdCardDir + saveDataDir;
+	//	String sdCardDir = Environment.getExternalStorageDirectory()
+		//		.getAbsolutePath();
+		String path = Tools.SAVE_PIC_PATH+SDFile;
 		File file = new File(path);
 		if (!file.exists()) {
 			file.mkdirs();
@@ -215,12 +216,12 @@ public class DataSaveManager {
 	 * @throws IOException
 	 */
 	public boolean saveImage(String imageName,Bitmap bitmap) throws IOException{
-		if(bitmap == null || !android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+		if(bitmap == null) {
 			return false;
 		}
 
-		String sdCardDir = Environment.getExternalStorageDirectory().getAbsolutePath();
-		String path = sdCardDir + saveDataDir;
+	//	String sdCardDir = Environment.getExternalStorageDirectory().getAbsolutePath();
+		String path = Tools.SAVE_PIC_PATH+SDFile;
 		if(mTotalSize >= mMaxCacheSizeInBytes) {
 			deleteFile(path);
 		}
@@ -282,8 +283,8 @@ public class DataSaveManager {
 	 * @throws FileNotFoundException
 	 */
 	public Bitmap getImageFromSdcard(String imageName) throws Exception{
-		String sdCardDir = Environment.getExternalStorageDirectory().getAbsolutePath();
-		String path = sdCardDir + saveDataDir;
+	//	String sdCardDir = Environment.getExternalStorageDirectory().getAbsolutePath();
+		String path = Tools.SAVE_PIC_PATH+SDFile;
 		File file = new File(path);
 		if(!file.exists()){
 			file.mkdirs();
@@ -310,8 +311,8 @@ public class DataSaveManager {
 	 * @throws Exception
 	 */
 	public void deleteSaveImage(String imageName) throws Exception{
-		String sdCardDir = Environment.getExternalStorageDirectory().getAbsolutePath();
-		String path = sdCardDir + saveDataDir;
+		//String sdCardDir = Environment.getExternalStorageDirectory().getAbsolutePath();
+		String path = Tools.SAVE_PIC_PATH+SDFile;
 		File file = new File(path);
 		if(!file.exists()){
 			return;

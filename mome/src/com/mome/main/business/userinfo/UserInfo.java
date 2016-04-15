@@ -15,6 +15,7 @@ import com.mome.main.core.annotation.ViewInject;
 import com.mome.main.core.utils.AppConfig;
 import com.mome.main.core.utils.Tools;
 
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -62,14 +63,14 @@ public class UserInfo extends BaseFragment {
 	 * 我的影院名称
 	 */
 	@ViewInject(id = R.id.userinfo_my_cinema_value)
-	private TextView cinemaName;
+	private TextView cinemaName;	
+   @Override
+public void onActivityCreated(Bundle savedInstanceState) {
+	// TODO Auto-generated method stub
+	super.onActivityCreated(savedInstanceState);
+	MeRequest.findMe(UserProperty.getInstance().getUid(), this);
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		MeRequest.findMe(UserProperty.getInstance().getUid(), this);
-	}
-	
+}
 	/**
 	 * 设置点击事件
 	 * @param view
@@ -86,6 +87,8 @@ public class UserInfo extends BaseFragment {
 	@OnClick(id = R.id.userinfo_mail_layout)
 	public void mailClick(View view) {
 		Tools.pushScreen(MyMessage.class, null);
+		
+		
 		
 	}
 	
@@ -122,16 +125,16 @@ public class UserInfo extends BaseFragment {
 		Tools.pushScreen(MovieMemoirs.class, null);
 	}
 	
-	/**
-	 * 用户头像点击
-	 * @param view
-	 */
-	@OnClick(id = R.id.userinfo_head_icon)
-	public void userHeadClick(View view) {
-	Tools.pushScreen(MovieMemoirs.class, null);
-
-	}
-	
+//	/**
+//	 * 用户头像点击
+//	 * @param view
+//	 */
+//	@OnClick(id = R.id.userinfo_head_icon)
+//	public void userHeadClick(View view) {
+//	Tools.pushScreen(MovieMemoirs.class, null);
+//
+//	}
+//	
 	/**
 	 * 用户信息点击
 	 * @param view
@@ -175,7 +178,10 @@ public class UserInfo extends BaseFragment {
 	 */
 	@OnClick(id = R.id.userinfo_my_friend)
 	public void myFriendClick(View view) {
-		Tools.pushScreen(MyFriend.class, null);
+		Bundle bundle=new Bundle();
+		bundle.putInt("realationType", 2);
+		bundle.putString("titleName", "我的好友");
+		Tools.pushScreen(MyFriend.class, bundle);
 
 	}
 	

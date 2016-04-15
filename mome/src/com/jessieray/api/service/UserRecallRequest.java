@@ -27,10 +27,13 @@ public class UserRecallRequest {
      * @param userid 
      *           用户ID
      */
-    public static void findUserRecall(java.lang.String userid, ResponseCallback response) {
+    public static void findUserRecall(java.lang.String userid,String year,int pageNo ,int pageSize,  ResponseCallback response) {
         String url = RequestProxy.getRequest().getRequestUrl() + "/UserRecall.shtml";
         java.util.Map<String, String> params = new java.util.HashMap<String, String>();
         params.put("userid", RequestUtils.object2String(userid));
+        params.put("year", RequestUtils.object2String(year));
+        params.put("pageNo", RequestUtils.object2String(pageNo));
+        params.put("pageSize", RequestUtils.object2String(pageSize));
         resultType = new com.google.gson.reflect.TypeToken<ResponseResult<UserRecall>>() {}.getType();
         RequestProxy.getRequest().doRequest(url, Request.Method.GET, params, resultType, response);
     }

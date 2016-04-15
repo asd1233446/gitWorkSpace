@@ -7,6 +7,7 @@ import com.jessieray.api.model.MovieInfo;
 import com.jessieray.api.model.UserFavorite;
 import com.jessieray.api.request.base.ResponseError;
 import com.jessieray.api.request.base.ResponseResult;
+import com.jessieray.api.service.RecallStatisticalRequest;
 import com.jessieray.api.service.UserFavoriteRequest;
 import com.mome.main.R;
 import com.mome.main.business.model.UserProperty;
@@ -60,98 +61,124 @@ public class MyCollect extends BaseFragment {
 	/**
 	 * 当前页索引
 	 */
-	private int curPageIndex = 0;
+	private int curPageIndex = 1;
 	/**
 	 * 总页数
 	 */
 	private int totalPage = 0;
 	
+	
+	private  String userId;
+	
+	private Bundle bundle;
+	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		 bundle=getArguments();
+		userId=bundle!=null?bundle.getString("userId"):UserProperty.getInstance().getUid();
 		initView();
-		UserFavoriteRequest.findUserFavorite(UserProperty.getInstance().getUid(), curPageIndex, AppConfig.PAGE_SIZE, this);
+		UserFavoriteRequest.findUserFavorite(userId, 1, AppConfig.PAGE_SIZE, this);
 	}
+
 	
 	@Override
-	public void onResume() {
-		super.onResume();
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		this.headView.setLeftBtnShow(View.VISIBLE);
 		this.headView.setRightBtnShow(View.GONE);
-		this.headView.setTitle("我的收藏");
+		this.headView.setTitle(bundle==null?"我的收藏":"Ta的收藏");
+	
 	}
 	
 	private void initView() {
 		upLine.setVisibility(View.GONE);
 		btnLayout.setVisibility(View.GONE);
 		downLine.setVisibility(View.GONE);
-		mPullRefreshListView.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener2<ListView>() {
+		mPullRefreshListView
+				.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener2<ListView>() {
 
-			@Override
-			public void onPullDownToRefresh(
-					PullToRefreshBase<ListView> refreshView) {
-				String label = DateUtils.formatDateTime(AppConfig.context, System.currentTimeMillis(),
-						DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+					@Override
+					public void onPullDownToRefresh(
+							PullToRefreshBase<ListView> refreshView) {
+						String label = DateUtils.formatDateTime(
+								AppConfig.context, System.currentTimeMillis(),
+								DateUtils.FORMAT_SHOW_TIME
+										| DateUtils.FORMAT_SHOW_DATE
+										| DateUtils.FORMAT_ABBREV_ALL);
 
-				// Update the LastUpdatedLabel
-				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-				curPageIndex = 1;
-				UserFavoriteRequest.findUserFavorite(UserProperty.getInstance().getUid(), curPageIndex, AppConfig.PAGE_SIZE, MyCollect.this);
-				mPullRefreshListView.setMode(Mode.BOTH);
-			}
+						// Update the LastUpdatedLabel
+						refreshView.getLoadingLayoutProxy()
+								.setLastUpdatedLabel(label);
+						curPageIndex = 1;
+						UserFavoriteRequest.findUserFavorite(UserProperty
+								.getInstance().getUid(), curPageIndex,
+								AppConfig.PAGE_SIZE, MyCollect.this);
+						mPullRefreshListView.setMode(Mode.BOTH);
+					}
 
-			@Override
-			public void onPullUpToRefresh(
-					PullToRefreshBase<ListView> refreshView) {
-				String label = DateUtils.formatDateTime(AppConfig.context, System.currentTimeMillis(),
-						DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+					@Override
+					public void onPullUpToRefresh(
+							PullToRefreshBase<ListView> refreshView) {
+						String label = DateUtils.formatDateTime(
+								AppConfig.context, System.currentTimeMillis(),
+								DateUtils.FORMAT_SHOW_TIME
+										| DateUtils.FORMAT_SHOW_DATE
+										| DateUtils.FORMAT_ABBREV_ALL);
 
-				// Update the LastUpdatedLabel
-				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-				if(curPageIndex < totalPage) {
-					curPageIndex++;
-					UserFavoriteRequest.findUserFavorite(UserProperty.getInstance().getUid(), curPageIndex, AppConfig.PAGE_SIZE, MyCollect.this);
-					mPullRefreshListView.setMode(Mode.BOTH);
-				} else {
-					mPullRefreshListView.setMode(Mode.PULL_FROM_START);
-				}
-			}
-		});
+						// Update the LastUpdatedLabel
+						refreshView.getLoadingLayoutProxy()
+								.setLastUpdatedLabel(label);
+						if (curPageIndex < totalPage) {
+							curPageIndex++;
+							UserFavoriteRequest.findUserFavorite(UserProperty
+									.getInstance().getUid(), curPageIndex,
+									AppConfig.PAGE_SIZE, MyCollect.this);
+							mPullRefreshListView.setMode(Mode.BOTH);
+						} else {
+							mPullRefreshListView.setMode(Mode.PULL_FROM_START);
+						}
+					}
+				});
 		mPullRefreshListView.setMode(Mode.BOTH);
 		listView = mPullRefreshListView.getRefreshableView();
 		adapter = new ListAdapter();
 		adapter.setDataList(movieListData);
 		listView.setAdapter(adapter);
 	}
-	
+
 	private void updateView(UserFavorite userFavorite) {
-		totalPage = userFavorite.getTotal();
-		if(userFavorite.getMovies() == null || userFavorite.getMovies().isEmpty()) {
+		totalPage=(int) Tools.calculateTotalPage(userFavorite.getTotal());
+		if (userFavorite.getMovies() == null
+				|| userFavorite.getMovies().isEmpty()) {
 			return;
 		}
-		if(curPageIndex == 1) {
+		if (curPageIndex == 1) {
 			movieListData.clear();
 		}
-		for(MovieInfo movieInfo : userFavorite.getMovies()) {
+		for (MovieInfo movieInfo : userFavorite.getMovies()) {
 			MovieListCell movieListCell = new MovieListCell();
 			movieListCell.setMovieInfo(movieInfo);
 			movieListData.add(movieListCell);
 		}
 		adapter.notifyDataSetChanged();
 	}
-	
+
 	@Override
 	public void error(ResponseError arg0) {
 		mPullRefreshListView.onRefreshComplete();
 		Tools.toastShow(arg0.getMessage());
 	}
-	
+
 	@Override
 	public <T> void sucess(Type type, ResponseResult<T> data) {
 		mPullRefreshListView.onRefreshComplete();
-		if(data.getCode() == AppConfig.REQUEST_CODE_SUCCESS) {
-			if(UserFavoriteRequest.resultType.equals(type)) {
+		if (data.getCode() == AppConfig.REQUEST_CODE_SUCCESS
+				&& data.getModel() != null) {
+			if (UserFavoriteRequest.resultType.equals(type)) {
 				UserFavorite userFavorite = data.getModel();
-				if(userFavorite != null) {
+				if (userFavorite != null) {
 					updateView(userFavorite);
 				}
 			}

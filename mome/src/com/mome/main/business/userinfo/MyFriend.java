@@ -1,16 +1,30 @@
 package com.mome.main.business.userinfo;
 
 import java.lang.reflect.Type;
-import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
+import se.emilsjolander.stickylistheaders.ExpandableStickyListHeadersListView;
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
+
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
+
 import com.jessieray.api.model.Friend;
 import com.jessieray.api.model.RelationListByUserId;
 import com.jessieray.api.request.base.ResponseCallback;
@@ -27,100 +41,268 @@ import com.mome.main.core.utils.Tools;
 import com.mome.pinyin.AssortView;
 import com.mome.pinyin.AssortView.OnTouchAssortListener;
 
-@LayoutInject(layout=R.layout.myfriends)
-public class MyFriend extends BaseFragment implements OnTouchAssortListener  {
-
-/** 好友列表 */
-@ViewInject(id=R.id.expandableList)
-private ExpandableListView myFriendsView;
-
-/** 好友列表对应的Adapter **/
-private FriendsExpandablelistAdapter friendAdapter;
-
-/** 字母索引 **/
-@ViewInject(id=R.id.letter_view)
-/** 分组集合 */
-private ArrayList<String> groupList = new ArrayList<String>();
-
-/** 分组下城市集合 */
-private ArrayList<Friend>childList = new ArrayList<Friend>();
-
-/** 好友模型 **/
-private Friend selectedFriendModel;
-/** 字母**/
-@ViewInject(id=R.id.letter_view)
-private AssortView assortView;
-
-
-/** 好友关系 **/
-private int  realationType=1;
+@LayoutInject(layout = R.layout.myfriends)
+public class MyFriend extends BaseFragment implements OnTouchAssortListener,OnItemLongClickListener{
+   @ViewInject(id=R.id.seachFriend)
+	private EditText seachFriend;
+   
+   /** 刷新 */
+   @ViewInject(id=R.id.refresh_layout)
+   private SwipeRefreshLayout swipeRefresh;
 	
+	/** 好友列表 */
+	@ViewInject(id = R.id.expandableList)
+	private ExpandableStickyListHeadersListView myFriendsView;
+
+	/** 好友列表对应的Adapter **/
+	private FriendsExpandablelistAdapter friendAdapter;
+	/** 字母索引 **/
+	@ViewInject(id = R.id.letter_view)
+	
+
+	/** 分组下集合 */
+	private ArrayList<Friend> childList = new ArrayList<Friend>();
+
+	/** 字母 **/
+	@ViewInject(id = R.id.letter_view)
+	private AssortView assortView;
+
+	/** 好友关系 **/
+	private int realationType = 1;
+	private String userId;
+	private Bundle bundle;
+	private String titleName;
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		 // 设置adapter并且全部展开
-		Bundle bundle=getArguments();
-		realationType=bundle.getInt("realationType", 1);
-		getFriends();
+		// 设置adapter并且全部展开
+		bundle = getArguments();
+		realationType = bundle.getInt("realationType", 1);
+		titleName=bundle.getString("titleName");
+		userId = bundle.getString("userId") != null ? bundle
+				.getString("userId") : UserProperty.getInstance().getUid();
+
+				
 		setUpListView();
+		fastSearch();
+		setRefresh();
 
 	}
-	
-	private void setUpListView(){
+
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+			this.headView.setTitle(titleName);	
+	}
+
+	private void setUpListView() {
 		friendAdapter = new FriendsExpandablelistAdapter();
-		
-	
-
+		friendAdapter.setInfo(realationType+"");
+		assortView.setOnTouchAssortListener(this);
+		myFriendsView.setOnHeaderClickListener(new StickyListHeadersListView.OnHeaderClickListener() {
+	            @Override
+	            public void onHeaderClick(StickyListHeadersListView l, View header, int itemPosition, long headerId, boolean currentlySticky) {
+	                if(myFriendsView.isHeaderCollapsed(headerId)){
+	                	myFriendsView.expand(headerId);
+	                }else {
+	                	myFriendsView.collapse(headerId);
+	                }
+	            }
+	        });
+		myFriendsView.setOnItemLongClickListener(this);
 	}
-
-    private void getFriends(){
-    	RelationListByUserIdRequest.findRelationListByUserId(UserProperty.getInstance().getUid(), realationType, 1, AppConfig.PAGE_SIZE, new ResponseCallback() {
-			
-			@Override
-			public <T> void sucess(Type type, ResponseResult<T> claszz) {
-				// TODO Auto-generated method stub
-				if(claszz.getCode()==AppConfig.REQUEST_CODE_SUCCESS&&claszz.getModel()!=null){
-					RelationListByUserId relationListByUserId=claszz.getModel();
-					for(Friend friend:relationListByUserId.getRelations()){
-				    	 childList.add(friend);
-					}
-					friendAdapter.setChildList(childList);
-					myFriendsView.setAdapter(friendAdapter);
-					for (int i = 0, length = friendAdapter.getGroupCount(); i < length; i++) {
-				     	myFriendsView.expandGroup(i);
+	
+	
+	private void closeRefresh(){
+		 swipeRefresh.post(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					swipeRefresh.setRefreshing(false);
 				}
-					friendAdapter.notifyDataSetChanged();
-				}
-			}
+			});
+	}
+	
+	/**
+	 * 刷新
+	 * */
+	private void setRefresh(){
+		  swipeRefresh.post(new Runnable() {
 			
 			@Override
-			public boolean isRefreshNeeded() {
+			public void run() {
 				// TODO Auto-generated method stub
-				return false;
-			}
-			
-			@Override
-			public void error(ResponseError error) {
-				// TODO Auto-generated method stub
-				Tools.toastShow(error.getMessage());
+				swipeRefresh.setRefreshing(true);
 			}
 		});
-    }
+		  OnRefreshListener listener = new OnRefreshListener(){
+			    public void onRefresh(){
+			         //TODO
+			    	getFriends();
+			    }
+			};
+			swipeRefresh.setOnRefreshListener(listener);
+			listener.onRefresh();
+		
+		
+	}
+	
+	/**
+	 * 快速搜索
+	 * */
+	private void fastSearch(){
+		
+		seachFriend.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				String content =seachFriend.getText().toString();
+				if(!TextUtils.isEmpty(content)){
+				
+				Log.e("模糊查询", search(content).size()+"  ");
+				friendAdapter.updateListView(search(content));
+				}else{
+					friendAdapter.updateListView(childList);
+				}
+			}
+		});
+		
+	}
+	
+	/**
+	 * 模糊查询
+	 * @param str
+	 * @return
+	 */
+	private ArrayList<Friend> search(String str) {
+		ArrayList<Friend> filterList = new ArrayList<Friend>();// 过滤后的list
+		//if (str.matches("^([0-9]|[/+])*$")) {// 正则表达式 匹配号码
+		if (str.matches("^([0-9]|[/+]).*")) {// 正则表达式 匹配以数字或者加号开头的字符串(包括了带空格及-分割的号码)
+			String simpleStr = str.replaceAll("\\-|\\s", "");
+			for (Friend friend : childList) {
+				if (friend.getNickname() != null) {
+					if (friend.getNickname().contains(simpleStr) || friend.getNickname().contains(str)) {
+						if (!filterList.contains(friend)) {
+							filterList.add(friend);
+						}
+					}
+				}
+			}
+		}else {
+			for (Friend friend : childList) {
+				if (friend!=null) {
+					//姓名全匹配,姓名首字母简拼匹配,姓名全字母匹配
+					if (friend.getNickname().toLowerCase(Locale.CHINESE).contains(str.toLowerCase(Locale.CHINESE))
+							|| friendAdapter.getAssort().getFirstChar(friend.getNickname()).toLowerCase(Locale.CHINESE).replace(" ", "").contains(str.toLowerCase(Locale.CHINESE))) {
+						if (!filterList.contains(friend)) {
+							filterList.add(friend);
+						}
+					}
+				}
+			}
+		}
+		return filterList;
+	}
+	
+	
+	
+	
+
+	private void getFriends() {
+		RelationListByUserIdRequest.findRelationListByUserId(userId, realationType, 1, AppConfig.PAGE_SIZE,
+				new ResponseCallback() {
+
+					@Override
+					public <T> void sucess(Type type, ResponseResult<T> claszz) {
+						// TODO Auto-generated method stub
+						closeRefresh();
+						if (claszz.getCode() == AppConfig.REQUEST_CODE_SUCCESS
+								&& claszz.getModel() != null) {
+							Friend friend1=new Friend();
+							friend1.setRelationtype("2");
+							friend1.setUserid("2");
+							friend1.setNickname("sfsdf");
+							RelationListByUserId relationListByUserId = claszz
+									.getModel();
+							childList.clear();
+							for (Friend friend : relationListByUserId
+									.getRelations()) {
+								
+								childList.add(friend);
+							}
+							childList.add(friend1);
+							friendAdapter.setChildList(childList);
+							myFriendsView.setAdapter(friendAdapter);
+						}
+					}
+
+					@Override
+					public boolean isRefreshNeeded() {
+						// TODO Auto-generated method stub
+						return false;
+					}
+
+					@Override
+					public void error(ResponseError error) {
+						// TODO Auto-generated method stub
+						Tools.toastShow(error.getMessage());
+					}
+				});
+	}
 
 	@Override
 	public void onTouchAssortListener(String str) {
 		// TODO Auto-generated method stub
-		int index=friendAdapter.getAssort().getHashList().indexOfKey(str);
-		   if(index!=-1)
-		   {
-			   myFriendsView.setSelectedGroup(index);;
-		   }
+		int index = friendAdapter.getAssort().getHashList().getFristCharIndex(str);
+		//Tools.toastShow("==="+index);
+		if (index != -1) {
+			myFriendsView.setSelection(index);			
+		}
 	}
 
 	@Override
 	public void onTouchAssortUP() {
 		// TODO Auto-generated method stub
-		
+
 	}
+	 
+	@Override
+	public boolean onItemLongClick(AdapterView<?> parent, View view,
+			int position, long id) {
+		// TODO Auto-generated method stub
+		final Friend  friend=(Friend) parent.getItemAtPosition(position);
+		Tools.toastShow(friend.getNickname());
+		Tools.showDialog(getActivity(),"提示", "是否删除", "确定", new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				 childList.remove(friend);
+				   	friendAdapter.updateListView(childList);
+        
+			}
+		});
+	
+		return false;
+	}
+
+	
 }

@@ -4,6 +4,7 @@ package com.jessieray.api.model;
 import com.jessieray.api.model.base.ApiResult;
 
 import java.io.Serializable;
+import java.util.List;
 /**
  * This file is auto generated, do not modify it by hand
  *
@@ -11,19 +12,47 @@ import java.io.Serializable;
 
 public class GetMovieUserArticleByKeyWord implements Serializable {
     /**
-     * 动态详情信息
+     * 个人信息
      */
-    private com.jessieray.api.model.UserInfo users;
+    private List<com.jessieray.api.model.UserInfo> users;
+    
+    
+    /**
+     * 动态信息
+     */
+    private List<com.jessieray.api.model.DynamicInfo> articles;
+    
+    /**
+     * 电影信息
+     */
+    private List<com.jessieray.api.model.MovieInfo> movies;
 
+	public List<com.jessieray.api.model.UserInfo> getUsers() {
+		return users;
+	}
 
+	public void setUsers(List<com.jessieray.api.model.UserInfo> users) {
+		this.users = users;
+	}
 
-    public void setUsers(com.jessieray.api.model.UserInfo users) {
-        this.users = users;
-    }
+	public List<com.jessieray.api.model.DynamicInfo> getArticles() {
+		return articles;
+	}
 
-    public com.jessieray.api.model.UserInfo getUsers() {
-        return users;
-    }
+	public void setArticles(List<com.jessieray.api.model.DynamicInfo> articles) {
+		this.articles = articles;
+	}
+
+	public List<com.jessieray.api.model.MovieInfo> getMovies() {
+		return movies;
+	}
+
+	public void setMovies(List<com.jessieray.api.model.MovieInfo> movies) {
+		this.movies = movies;
+	}
+    
+   
+
 
 
 }

@@ -50,6 +50,10 @@ public class HashList<K, V> {
 		Collections.sort(keyArr, comparator);
 	}
 
+	
+	public List<K> getKeyArr(){
+		return keyArr;
+	}
 	/** �������ؼ�ֵ */
 	public K getKeyIndex(int key) {
 		return keyArr.get(key);
@@ -123,16 +127,9 @@ public class HashList<K, V> {
 	}
 
 	public boolean add(Object object) {
-		V v = (V) object;
-		K key = getKey(v);
-		if (!map.containsKey(key)) {
-			List<V> list = new ArrayList<V>();
-			list.add(v);
-			keyArr.add(key);
-			map.put(key, list);
-		} else {
-			map.get(key).add(v);
-		}
+//		V v = (V) object;
+//		K key = getKey(v);
+			keyArr.add((K) object);
 		return false;
 	}
 	
@@ -140,4 +137,17 @@ public class HashList<K, V> {
 	{
 		return keyArr.indexOf(k);
 	}
+	
+	public int getFristCharIndex(K k){
+	
+		return FristCharList.indexOf(k);
+	}
+	
+	public ArrayList<String> FristCharList=new ArrayList<String>();
+
+
+	public void setFristCharList(String name) {
+		FristCharList.add(name);
+	}
+	
 }

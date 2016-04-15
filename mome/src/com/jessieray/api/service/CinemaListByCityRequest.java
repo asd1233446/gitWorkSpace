@@ -29,10 +29,10 @@ public class CinemaListByCityRequest {
      * @param city 
      *           城市
      */
-    public static void findCinemaListByCity(java.lang.String district, java.lang.String city, ResponseCallback response) {
+    public static void findCinemaListByCity(java.lang.String userid, java.lang.String city, ResponseCallback response) {
         String url = RequestProxy.getRequest().getRequestUrl() + "/CinemaListByCity.shtml";
         java.util.Map<String, String> params = new java.util.HashMap<String, String>();
-        params.put("district", RequestUtils.object2String(district));
+        params.put("userid", RequestUtils.object2String(userid));
         params.put("city", RequestUtils.object2String(city));
         resultType = new com.google.gson.reflect.TypeToken<ResponseResult<CinemaListByCity>>() {}.getType();
         RequestProxy.getRequest().doRequest(url, Request.Method.GET, params, resultType, response);

@@ -2,10 +2,12 @@ package com.mome.main.business;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mome.main.R;
@@ -33,7 +35,7 @@ public class HeadView extends BaseFragment{
 	 * 左按钮
 	 */
 	@ViewInject(id = R.id.titlebar_left)
-	private TextView btnLeft;
+	private  TextView btnLeft;
 	/**
 	 * 标题
 	 */
@@ -43,17 +45,21 @@ public class HeadView extends BaseFragment{
 	 * 右按钮
 	 */
 	@ViewInject(id = R.id.titlebar_right)
-	private TextView btnRight;
+	public TextView btnRight;
 	/**
 	 * 输入框布局
 	 */
 	@ViewInject(id = R.id.titlebar_input)
-	private LinearLayout inputLayout;
+	private FrameLayout inputLayout;
 	/**
 	 * 输入框
 	 */
 	@ViewInject(id = R.id.titlebar_input_edittext)
 	private EditText inputText;
+	@ViewInject(id = R.id.titlebar_bg_layout)
+	public  RelativeLayout titlebar_bg_layout;
+	
+	
 	
 	public HeadView(HeadRef headRef,HeadViewBtnOnClickListener listener) {
 		this.headRef = headRef;
@@ -65,6 +71,7 @@ public class HeadView extends BaseFragment{
 		super.onActivityCreated(savedInstanceState);
 		initHead();
 	}
+
 	
 	/**
 	 * 初始化头布局
@@ -124,8 +131,8 @@ public class HeadView extends BaseFragment{
 		
 		@Override
 		public void afterTextChanged(Editable s) {
-			if(headViewBtnOnClickListener != null) {
-				headViewBtnOnClickListener.editTextChange();
+			if(headViewBtnOnClickListener != null&&!TextUtils.isEmpty(inputText.getText())) {
+				headViewBtnOnClickListener.editTextChange(inputText.getText().toString());
 			}
 		}
 	};
@@ -168,6 +175,6 @@ public class HeadView extends BaseFragment{
 	public interface HeadViewBtnOnClickListener {
 		public void leftOnClick();
 		public void rightOnClick();
-		public void editTextChange();
+		public void editTextChange(String text);
 	}
 }
