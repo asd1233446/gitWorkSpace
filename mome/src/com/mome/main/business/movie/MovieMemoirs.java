@@ -14,6 +14,7 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -21,7 +22,8 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,10 +38,13 @@ import com.mome.main.R;
 import com.mome.main.business.model.UserProperty;
 import com.mome.main.business.module.ExpandListAdapter;
 import com.mome.main.business.module.ExpandListCellBase;
+import com.mome.main.business.module.ListAdapter;
+import com.mome.main.business.module.ListCellBase;
 import com.mome.main.business.userinfo.FriendsExpandablelistAdapter;
 import com.mome.main.business.widget.coverflow.FancyCoverFlow;
 import com.mome.main.business.widget.pulltorefresh.PullToRefreshBase;
 import com.mome.main.business.widget.pulltorefresh.PullToRefreshExpandableListView;
+import com.mome.main.business.widget.pulltorefresh.PullToRefreshListView;
 import com.mome.main.business.widget.timeshaft.CenteringHorizontalScrollView;
 import com.mome.main.business.widget.timeshaft.CustomTimeShaft.ItemSelectedListener;
 import com.mome.main.core.BaseFragment;
@@ -53,48 +58,52 @@ import com.mome.main.core.utils.Tools;
  * 
  */
 @LayoutInject(layout = R.layout.movie_memoirs)
-public class MovieMemoirs extends BaseFragment implements OnChildClickListener,
-		OnGroupClickListener {
+public class MovieMemoirs extends BaseFragment implements OnItemClickListener {
 
 	/** 回忆录列表 */
 	@ViewInject(id = R.id.expandableList)
-	private PullToRefreshExpandableListView myFriendsView;
+	private PullToRefreshListView myFriendsView;
 
 	/** 回忆录列表对应的Adapter **/
-	private ExpandListAdapter friendAdapter;
+	private ListAdapter friendAdapter;
 
-	/** 分组集合 */
-	private ArrayList<ExpandListCellBase> groupList = new ArrayList<ExpandListCellBase>();
-
-	/** 分组下集合 */
-	private ArrayList<List<ExpandListCellBase>> dataList = new ArrayList<List<ExpandListCellBase>>();
-	private ArrayList<ExpandListCellBase> childList = new ArrayList<ExpandListCellBase>();
-	private ExpandableListView listview;
+	private ArrayList<ListCellBase> dataList = new ArrayList<ListCellBase>();
+	private ListView listview;
 
 	private String year = "2015";
-
+	
+	@ViewInject(id=R.id.year)
+	private Spinner spinner;
+    private ArrayAdapter<String>spinnerAdapter;
+    private List<String> list=new ArrayList<String>();
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setUpListView();
+		initSpinner();
+	}
+	
+	private void initSpinner(){
+		spinnerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item);
+		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+		spinnerAdapter.addAll(list);
+		spinner.setAdapter(spinnerAdapter);
 	}
 
 	private void setUpListView() {
-		friendAdapter = new ExpandListAdapter();
+		friendAdapter = new com.mome.main.business.module.ListAdapter();
 		friendAdapter.setDataList(dataList);
-		friendAdapter.setGroupDataList(groupList);
 		listview = myFriendsView.getRefreshableView();
 		listview.setAdapter(friendAdapter);
-		listview.setOnChildClickListener(this);
-		listview.setOnGroupClickListener(this);
+		listview.setOnItemClickListener(this);
 		Tools.setRereshing(myFriendsView);
 
 		myFriendsView
-				.setOnRefreshListener(new PullToRefreshExpandableListView.OnRefreshListener2<ExpandableListView>() {
+				.setOnRefreshListener(new PullToRefreshExpandableListView.OnRefreshListener2<ListView>() {
 
 					@Override
 					public void onPullDownToRefresh(
-							PullToRefreshBase<ExpandableListView> refreshView) {
+							PullToRefreshBase<ListView> refreshView) {
 						// TODO Auto-generated method stub
 						String label = DateUtils.formatDateTime(
 								AppConfig.context, System.currentTimeMillis(),
@@ -108,7 +117,7 @@ public class MovieMemoirs extends BaseFragment implements OnChildClickListener,
 
 					@Override
 					public void onPullUpToRefresh(
-							PullToRefreshBase<ExpandableListView> refreshView) {
+							PullToRefreshBase<ListView> refreshView) {
 						// TODO Auto-generated method stub
 						String label = DateUtils.formatDateTime(
 								AppConfig.context, System.currentTimeMillis(),
@@ -133,31 +142,8 @@ public class MovieMemoirs extends BaseFragment implements OnChildClickListener,
 		// TODO Auto-generated method stub
 		UserRecall userRecall = arg1.getModel();
 		List<Year> list = userRecall.getYearcounts();
-		MovieMemoirsAdapter adapter;
 		if (list.size() > 0) {
-			for (int i = 0; i < list.size(); i++) {
-				adapter = new MovieMemoirsAdapter();
-				adapter.setYear(list.get(i));
-				groupList.add(adapter);
-				childList = new ArrayList<ExpandListCellBase>();
-				if (year.equals(list.get(i).getYear())
-						&& userRecall.getRecalls().size() > 0) {
-					Log.e("回忆录记录个数", userRecall.getRecalls().size() + "");
-					for (MemoirsInfo info : userRecall.getRecalls()) {
-						adapter = new MovieMemoirsAdapter();
-						adapter.setMemoirsChild(info);
-						childList.add(adapter);
-
-					}
-					dataList.add(childList);
-					listview.expandGroup(i);
-					continue;
-				}
-				Log.e("跳过continue", "continue");
-				adapter = new MovieMemoirsAdapter();
-				childList.add(adapter);
-				dataList.add(childList);
-			}
+			
 		} else {
 			myFriendsView.setEmptyView(Tools.setEmptyView(getActivity()));
 		}
@@ -173,22 +159,11 @@ public class MovieMemoirs extends BaseFragment implements OnChildClickListener,
 	}
 
 	@Override
-	public boolean onChildClick(ExpandableListView parent, View v,
-			int groupPosition, int childPosition, long id) {
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
 		// TODO Auto-generated method stub
-		Tools.toastShow("回忆录详情页面");
-		Tools.pushScreen(MovieMemoirDetail.class, null);
-
-		return true;
+		
 	}
 
-	@Override
-	public boolean onGroupClick(ExpandableListView parent, View v,
-			int groupPosition, long id) {
-		// TODO Auto-generated method stub
-		MovieMemoirsAdapter adpter=(MovieMemoirsAdapter) groupList.get(groupPosition);
-		Log.e("=====", groupPosition + "");
-		getUserRecall(1,adpter.getYear().getYear());
-		return false;
-	}
+
 }

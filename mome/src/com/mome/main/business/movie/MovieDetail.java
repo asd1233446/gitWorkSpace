@@ -118,7 +118,7 @@ public class MovieDetail extends BaseFragment implements
 	@OnClick(id = R.id.movie_detail_add_record)
 	public void ToMovieRecord(View view) {
 		Tools.toastShow("添加观影纪录");
-		Tools.pushScreen(Record.class, null);
+		Tools.pushScreen(Record.class, new Bundle());
 
 	}
 

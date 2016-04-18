@@ -43,7 +43,7 @@ public class MemoirsInfo implements Serializable {
     /**
      * 观影回忆录ID
      */
-    private int recallid;
+    private int recallid,id;
 
     /**
      * 电影名称
@@ -73,7 +73,7 @@ public class MemoirsInfo implements Serializable {
     /**
      * 影院名称
      */
-    private String cinema;
+    private String cinema,cinemaid;
 
     /**
      * 影片ID
@@ -87,8 +87,60 @@ public class MemoirsInfo implements Serializable {
     private int  type;
     
     
+    /**
+     * 年份
+     * */
+    
+    private String year;
+    
+    /**
+     * 短评
+     * */
+    private String  brief;
+    
+    private String userid;
+    
+    public int getId() {
+		return id;
+	}
 
-    public int getType() {
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getCinemaid() {
+		return cinemaid;
+	}
+
+	public void setCinemaid(String cinemaid) {
+		this.cinemaid = cinemaid;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public String getBrief() {
+		return brief;
+	}
+
+	public void setBrief(String brief) {
+		this.brief = brief;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public int getType() {
 		return type;
 	}
 

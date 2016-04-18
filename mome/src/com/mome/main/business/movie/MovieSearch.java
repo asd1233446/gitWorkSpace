@@ -47,6 +47,7 @@ public class MovieSearch extends BaseFragment{
 	
 	
 	private void setUpList(){
+		listAdapter=new ExpandListAdapter();
 		listAdapter.setDataList(dataList);
 		expandableList.setAdapter(listAdapter);
 	}

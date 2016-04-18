@@ -210,10 +210,25 @@ public class Record extends BaseFragment{
 		//Tools.pushScreen(MovieComment.class, null);
 		
 	}
+	
+	@ViewInject(id=R.id.clear)
+	private ImageView clear;
+	
 	@OnClick(id=R.id.clear)
 	public void clearClick(View view){
+		if(bundle!=null)
 		Tools.pullScreen();
+		else
+	TabManager	.topRecordLayout.setVisibility(View.GONE);
+	}
+	
+	private Bundle bundle;
 
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		bundle=getArguments();
 	}
 
 }

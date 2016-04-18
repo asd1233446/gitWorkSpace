@@ -85,6 +85,7 @@ final class DecodeHandler extends Handler {
     BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
     try {
       rawResult = multiFormatReader.decodeWithState(bitmap);
+
     } catch (ReaderException re) {
       // continue
     } finally {

@@ -23,6 +23,7 @@ import com.mome.main.core.BaseFragment;
 import com.mome.main.core.annotation.LayoutInject;
 import com.mome.main.core.annotation.ViewInject;
 import com.mome.main.core.utils.AppConfig;
+import com.mome.main.core.utils.Tools;
 @LayoutInject(layout=R.layout.myphotos)
 public class MyPhoto extends BaseFragment {
 	/**
@@ -60,14 +61,7 @@ private void setUpGridview(){
 	adapter=new ListAdapter();
 	adapter.setDataList(dataList);
 	mGridView.setAdapter(adapter);
-	//进入页面刷新
-	new Handler().postDelayed(new Runnable() {
-
-		@Override
-		public void run() {
-			myPhotosGridView.setRefreshing();
-		}
-		}, 500);
+	Tools.setRereshing(myPhotosGridView);
 	myPhotosGridView.setOnRefreshListener(new PullToRefreshGridView.OnRefreshListener2<GridView>() {
 
 		

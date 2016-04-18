@@ -171,7 +171,7 @@ public class MovieList extends BaseFragment implements OnItemClickListener{
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		// TODO Auto-generated method stub
-		MovieListCell cell=(MovieListCell) adapter.getItem(position+1);
+		MovieListCell cell=(MovieListCell) adapter.getItem(position-1);
 		
 		MovieInfo info=cell.getMovieInfo();
 		Tools.toastShow(bundle.getSerializable("cinemaInfo")+"");

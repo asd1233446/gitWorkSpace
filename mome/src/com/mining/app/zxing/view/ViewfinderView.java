@@ -144,14 +144,11 @@ public final class ViewfinderView extends View {
 			slideBottom = frame.bottom;
 		}
 		
-		//��ȡ��Ļ�Ŀ�͸�
 		int width = canvas.getWidth();
 		int height = canvas.getHeight();
 
 		paint.setColor(resultBitmap != null ? resultColor : maskColor);
-		
-		//����ɨ����������Ӱ���֣����ĸ����֣�ɨ�������浽��Ļ���棬ɨ�������浽��Ļ����
-		//ɨ��������浽��Ļ��ߣ�ɨ�����ұߵ���Ļ�ұ�
+
 		canvas.drawRect(0, 0, width, frame.top, paint);
 		canvas.drawRect(0, frame.top, frame.left, frame.bottom + 1, paint);
 		canvas.drawRect(frame.right + 1, frame.top, width, frame.bottom + 1,
@@ -186,7 +183,6 @@ public final class ViewfinderView extends View {
 					frame.right, frame.bottom, paint);
 
 			
-			//�����м����,ÿ��ˢ�½��棬�м���������ƶ�SPEEN_DISTANCE
 			
 			slideTop += SPEEN_DISTANCE;
 			if(slideTop >= frame.bottom){
@@ -199,7 +195,6 @@ public final class ViewfinderView extends View {
             lineRect.bottom = slideTop + 18;  
             canvas.drawBitmap(((BitmapDrawable)(getResources().getDrawable(R.drawable.qrcode_scan_line))).getBitmap(), null, lineRect, paint); 
 			
-        	//��ɨ����������
             paint.setColor(Color.WHITE);    
             paint.setTextSize(TEXT_SIZE * density);    
             paint.setAlpha(0x40);    
@@ -235,7 +230,6 @@ public final class ViewfinderView extends View {
 			}
 
 			
-			//ֻˢ��ɨ�������ݣ������ط���ˢ��
 			postInvalidateDelayed(ANIMATION_DELAY, frame.left, frame.top,
 					frame.right, frame.bottom);
 			

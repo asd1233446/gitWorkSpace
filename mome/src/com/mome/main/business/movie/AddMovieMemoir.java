@@ -38,7 +38,7 @@ import com.mome.main.netframe.volley.toolbox.MultipartRequestParams;
 import com.mome.main.netframe.volley.toolbox.NetworkImageView;
 import com.mome.view.MyDeImageView;
 import com.mome.view.MyDeImageView.OnRemveListener;
-@LayoutInject(layout=R.layout.movie_memoirs_detail)
+@LayoutInject(layout=R.layout.add_movie_memoirs)
 public class AddMovieMemoir extends BaseFragment {
 	
 	/**
@@ -67,12 +67,7 @@ public class AddMovieMemoir extends BaseFragment {
 	 * */
 	@ViewInject(id=R.id.movie_times)
 	private TextView movie_times;
-	/**
-	 * 我的评分
-	 * 
-	 * */
-	@ViewInject(id=R.id.movie_mark)
-	private TextView movie_mark;
+	
 	/**
 	 * 电影票照片
 	 * 
@@ -152,8 +147,8 @@ public class AddMovieMemoir extends BaseFragment {
 	 * 我的影评
 	 * 
 	 * */
-	@ViewInject(id=R.id.movie_comment)
-	private TextView movie_comment;
+	@ViewInject(id=R.id.addComment)
+	private ImageView movie_comment;
 	
 	private Bundle bundle;
 	private MemoirsInfo memoirsInfo;

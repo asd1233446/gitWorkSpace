@@ -13,12 +13,12 @@ public class DynamicInfo implements Serializable {
     /**
      * 动态id
      */
-    private int articleid;
+    private int articleid,id;
 
     /**
      * 动态内容
      */
-    private String brief;
+    private String brief,key_brief;
 
     /**
      * 电影id
@@ -109,7 +109,23 @@ public class DynamicInfo implements Serializable {
     }
 
 
-    public void setBrief(String brief) {
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getKey_brief() {
+		return key_brief;
+	}
+
+	public void setKey_brief(String key_brief) {
+		this.key_brief = key_brief;
+	}
+
+	public void setBrief(String brief) {
          if (brief == null) {
             return;
          }

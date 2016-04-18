@@ -51,9 +51,9 @@ public class SelectCinemaListCell extends ExpandListCellBase{
 		
 		viewHolder.area.setText(distance.getDistrict()+"("+distance.getTotal()+")");
 		  if(isExpanded){
-              viewHolder.arrow.setImageResource(R.drawable.dynamic_img_rating_select);
+              viewHolder.arrow.setImageResource(R.drawable.openarrow);
           }else{
-        	  viewHolder.arrow.setImageResource(R.drawable.dynamic_bg_rating);
+        	  viewHolder.arrow.setImageResource(R.drawable.closearrow);
           }
 		return view;
 	}

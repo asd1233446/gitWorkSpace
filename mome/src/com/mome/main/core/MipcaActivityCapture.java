@@ -215,42 +215,7 @@ public class MipcaActivityCapture extends Activity implements Callback , View.On
 	{
 		inactivityTimer.onActivity();
 		playBeepSoundAndVibrate();
-		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-		if (barcode == null)
-		{
-			dialog.setIcon(null);
-		}
-		else
-		{
-
-			Drawable drawable = new BitmapDrawable(barcode);
-			dialog.setIcon(drawable);
-		}
-		dialog.setTitle("ɨ����");
-		dialog.setMessage(obj.getText());
-		dialog.setNegativeButton("ȷ��", new DialogInterface.OnClickListener()
-		{
-			@Override
-			public void onClick(DialogInterface dialog, int which)
-			{
-				//��Ĭ���������ɨ��õ��ĵ�ַ
-				Intent intent = new Intent();
-				intent.setAction("android.intent.action.VIEW");
-				Uri content_url = Uri.parse(obj.getText());
-				intent.setData(content_url);
-				startActivity(intent);
-				finish();
-			}
-		});
-		dialog.setPositiveButton("ȡ��", new DialogInterface.OnClickListener()
-		{
-			@Override
-			public void onClick(DialogInterface dialog, int which)
-			{
-				finish();
-			}
-		});
-		dialog.create().show();
+		Log.e("扫码结果", "========="+obj.getText());
 	}
 
 	private void initBeepSound()

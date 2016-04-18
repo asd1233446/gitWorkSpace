@@ -87,8 +87,9 @@ public class AddRecord extends BaseFragment {
 		if(bundle!=null){
 			movieInfo=(MovieInfo) bundle.getSerializable("movieInfo");
 			mCinemaInfo=(CinemaInfo) bundle.getSerializable("cinemaInfo");
+			setUpView();
 		}
-		setUpView();
+	
 		
 	}
 	
