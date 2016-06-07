@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/head_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_max_marginOrpadding" >
+
+        <com.mome.main.netframe.volley.toolbox.NetworkImageView
+            android:id="@+id/headicon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:scaleType="fitXY"
+            android:layout_marginRight="@dimen/common_marginOrpadding"
+             />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/headicon"
+            android:text="sjofsdo"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_max_textSize" />
+
+        <TextView
+            android:id="@+id/comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/username"
+            android:layout_marginTop="@dimen/common_samll_marginOrpadding"
+            android:layout_toRightOf="@+id/headicon"
+            android:text="sjofsdo"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_textSize" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawableLeft="@drawable/dynamic_img_date"
+            android:text="fsodfjsdof"
+            android:textColor="@color/dynamicDateColor"
+            android:textSize="@dimen/common_textSize" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/findMore_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_margin="@dimen/common_max_marginOrpadding" >
+
+        <TextView
+            android:id="@+id/findmore_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/search_xiao" 
+            android:textColor="@color/Purple"
+            android:textSize="@dimen/common_small_textSize"
+            android:text="查看更多"/>
+        
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/discovery_icon_arrow"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <View style="@style/line_horizontal" />
+
+</LinearLayout>

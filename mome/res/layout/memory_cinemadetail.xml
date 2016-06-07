@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cinema_linear"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+   >
+
+    <TextView
+        android:id="@+id/cinema_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gary_line"
+        android:paddingLeft="@dimen/common_samll_marginOrpadding"
+        android:paddingTop="@dimen/common_max_marginOrpadding"
+        android:text="影院观影信息"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/common_small_textSize" />
+
+   
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_below="@+id/cinema_text"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/movie_ticket"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_margin="@dimen/common_samll_marginOrpadding"
+            android:background="@drawable/addimage"
+            android:scaleType="fitXY" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_margin="@dimen/common_marginOrpadding"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/cinema_name"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:text="双井影院"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_max_textSize" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_samll_marginOrpadding" >
+
+                <TextView
+                    android:id="@+id/cinema_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_small_textSize"
+                    android:text="2012-12-9"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
+
+                <TextView
+                    android:id="@+id/cinema_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12:00"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="@dimen/common_samll_marginOrpadding" >
+
+                <TextView
+                    android:id="@+id/cinema_hallNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/movie_memoirs_card_cinema"
+                    android:text="1号厅"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
+
+                <View
+                    android:id="@+id/line"
+                    style="@style/line_vercal"
+                    android:layout_alignBottom="@+id/cinema_hallNum"
+                    android:layout_below="@id/movie_memoirs_card_cinema"
+                    android:layout_marginLeft="@dimen/common_marginOrpadding"
+                    android:layout_marginRight="@dimen/common_marginOrpadding"
+                    android:layout_toRightOf="@+id/cinema_hallNum" />
+
+                <TextView
+                    android:id="@+id/cinema_seatNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/line"
+                    android:text="1排1号"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/movie_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="@dimen/common_max_marginOrpadding"
+            android:text="80"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_max_textSize" />
+    </LinearLayout>
+
+</RelativeLayout>

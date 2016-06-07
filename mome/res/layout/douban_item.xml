@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/findMovie_btn"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/searchList"
+    android:layout_marginTop="@dimen/common_line_height"
+    android:background="@color/white"
+    android:padding="@dimen/common_marginOrpadding" >
+
+    <ImageView
+        android:id="@+id/discovery_icon_friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:src="@drawable/douban_select" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/discovery_icon_friend"
+        android:text="去豆瓣看看"
+        android:textColor="@color/tabBackground"
+        android:textSize="@dimen/common_middle_textSize" />
+
+    <ImageView
+        android:id="@+id/ImageView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/discovery_icon_arrow" />
+
+</RelativeLayout>

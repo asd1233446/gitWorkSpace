@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+     <RelativeLayout
+        android:id="@+id/head_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/common_head_height"
+        android:background="@color/white"
+       android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_marginOrpadding"
+        android:paddingRight="@dimen/common_marginOrpadding" >
+
+        <TextView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/headview_btn_back"
+             />
+
+        
+        
+        <TextView
+            android:id="@+id/titlebar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:text="意见反馈"
+            android:textSize="18sp"
+             />
+        
+        <TextView
+            android:id="@+id/addOpinion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/Purple"
+            android:text="提交"
+            android:textSize="@dimen/common_middle_textSize"
+             />
+        </RelativeLayout>
+    <View style="@style/line_horizontal_Max" />
+     
+    <RadioGroup
+        android:id="@+id/adviseType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_samll_marginOrpadding" >
+
+        <RadioButton
+            android:id="@+id/bug"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="BUG"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_middle_textSize" />
+
+        <RadioButton
+            android:id="@+id/advise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="建议"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_middle_textSize" />
+
+        <RadioButton
+            android:id="@+id/complain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="投诉"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_middle_textSize" />
+    </RadioGroup>
+
+    <View style="@style/line_horizontal" />
+
+    <RelativeLayout
+        android:id="@+id/opinion_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:padding="@dimen/common_samll_marginOrpadding" >
+
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/common_samll_marginOrpadding"
+            android:text="意见反馈:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_textSize" />
+
+        <EditText
+            android:id="@+id/opinion_et"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/textview"
+            android:background="@drawable/input_edittext_bg"
+            android:imeOptions="actionDone"
+            android:maxLength="140"
+            android:maxLines="3"
+            android:padding="@dimen/common_marginOrpadding"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_small_textSize" />
+    </RelativeLayout>
+
+    <View style="@style/line_horizontal" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:padding="@dimen/common_samll_marginOrpadding" >
+
+        <TextView
+            android:id="@+id/textview1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/common_samll_marginOrpadding"
+            android:text="Q Q号码: "
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_textSize" />
+
+        <EditText
+            android:id="@+id/qq_edite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/textview1"
+            android:background="@drawable/input_edittext_bg"
+            android:hint="方便与您联系"
+            android:maxLines="3"
+            android:padding="@dimen/common_marginOrpadding"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_small_textSize" />
+    </RelativeLayout>
+<View style="@style/line_horizontal" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:padding="@dimen/common_samll_marginOrpadding" >
+
+        <TextView
+            android:id="@+id/textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/common_samll_marginOrpadding"
+            android:text="座机号码:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_textSize" />
+
+        <EditText
+            android:id="@+id/telephone_edite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/textview2"
+            android:background="@drawable/input_edittext_bg"
+            android:hint="方便与您联系"
+            android:maxLines="3"
+            android:padding="@dimen/common_marginOrpadding"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_small_textSize" />
+    </RelativeLayout>
+<View style="@style/line_horizontal" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:padding="@dimen/common_samll_marginOrpadding" >
+
+        <TextView
+            android:id="@+id/textview3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/common_samll_marginOrpadding"
+            android:text="手机号码:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_textSize" />
+
+        <EditText
+            android:id="@+id/phone_edite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/textview3"
+            android:background="@drawable/input_edittext_bg"
+            android:hint="方便与您联系"
+            android:maxLines="3"
+            android:padding="@dimen/common_marginOrpadding"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_small_textSize" />
+    </RelativeLayout>
+<View style="@style/line_horizontal" />
+</LinearLayout>
