@@ -5,7 +5,8 @@
     android:background="@color/white"
     android:orientation="vertical" >
 
-<View style="@style/line_horizontal_Max" />
+    <View style="@style/line_horizontal_Max" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,108 +14,102 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="@dimen/common_marginOrpadding"
             android:layout_weight="1" >
 
             <com.mome.main.netframe.volley.toolbox.NetworkImageView
                 android:id="@+id/user_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/common_marginOrpadding"
-                android:src="@drawable/ic_launcher" />
-
-            <TextView
-                android:id="@+id/userName_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/user_icon"
-                android:text="英雄饶命"
-                android:textColor="@color/black"
-                android:textSize="@dimen/common_middle_textSize" />
-
-            <RatingBar
-                android:id="@+id/dynamic_rating"
-                style="?android:attr/ratingBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/userName_tv"
-                android:layout_marginTop="@dimen/common_middle_marginOrpadding"
-                android:layout_toRightOf="@+id/user_icon"
-                android:isIndicator="true"
-                android:numStars="5"
-                android:progressDrawable="@drawable/bg_rating"
-                android:rating="1.5" />
-
-            <TextView
-                android:id="@+id/movieScore_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/userName_tv"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="@dimen/common_middle_marginOrpadding"
-                android:layout_toRightOf="@+id/dynamic_rating"
-                android:text="6.5"
-                android:textColor="@color/dynamicScoreClolor" />
+                android:layout_width="@dimen/common_userhead_widht"
+                android:layout_height="@dimen/common_userhead_height"
+                android:layout_marginRight="@dimen/common_samll_marginOrpadding"
+                android:scaleType="fitXY" />
 
             <TextView
                 android:id="@+id/movieinfo_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/user_icon"
+                android:layout_marginTop="@dimen/common_middle_marginOrpadding"
                 android:text="一个特色传统，建党的古装奇幻个特色传统，建党的古装"
                 android:textColor="@color/gray"
-                android:layout_marginTop="@dimen/common_middle_marginOrpadding"
                 android:textSize="@dimen/common_textSize" />
 
-            <LinearLayout
-                android:layout_width="fill_parent"
+            <TextView
+                android:id="@+id/movieDate_tv"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/movieinfo_tv"
-                android:layout_marginTop="@dimen/common_middle_marginOrpadding"
-                android:gravity="center_vertical" >
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="5dp"
+                android:drawableLeft="@drawable/dynamic_img_date"
+                android:text="2015-04-11"
+                android:textColor="@color/dynamicDateColor" />
 
-                <ImageView
-                    android:id="@+id/imageView4"
+            <TextView
+                android:id="@+id/userName_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/common_samll_marginOrpadding"
+                android:text="英雄饶命"
+                android:layout_toRightOf="@+id/user_icon"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_middle_textSize" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/userName_tv"
+                android:layout_marginTop="@dimen/common_marginOrpadding"
+                android:layout_toRightOf="@+id/user_icon"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <RatingBar
+                    android:id="@+id/dynamic_rating"
+                    style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/dynamic_img_date" />
+                    android:layout_height="35px"
+                    android:numStars="5"
+                    android:progressDrawable="@drawable/bg_rating"
+                    android:rating="1.5" />
 
                 <TextView
-                    android:id="@+id/movieDate_tv"
+                    android:id="@+id/movieScore_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="2015-04-11"
-                    android:textColor="@color/dynamicDateColor" />
+                    android:text="6.5"
+                    android:textColor="@color/dynamicScoreClolor" />
             </LinearLayout>
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/linear"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/common_marginOrpadding"
             android:orientation="vertical" >
 
             <com.mome.main.netframe.volley.toolbox.NetworkImageView
                 android:id="@+id/movieImage_iv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:src="@drawable/ic_launcher" />
+                android:layout_width="@dimen/common_moviehead_widht"
+                android:layout_height="@dimen/common_moviehead_small_height"
+                android:layout_gravity="center"
+                android:scaleType="fitXY" />
 
             <TextView
                 android:id="@+id/movieTitile_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:text="电影名称"
-                android:textSize="@dimen/common_textSize"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_textSize" />
         </LinearLayout>
     </LinearLayout>
 
-    <View style="@style/line_horizontal" 
-        android:layout_marginTop="@dimen/common_middle_marginOrpadding"/>
+    <View style="@style/line_horizontal" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -161,10 +156,12 @@
                 android:drawableLeft="@drawable/dynamic_img_comment"
                 android:drawablePadding="5dp"
                 android:gravity="center"
-                android:text="评论(205555536)"
+                android:text="评论(0)"
                 android:textColor="@color/B3B3B3"
                 android:textSize="@dimen/common_textSize" />
         </LinearLayout>
     </LinearLayout>
+
+    <View style="@style/line_horizontal" />
 
 </LinearLayout>

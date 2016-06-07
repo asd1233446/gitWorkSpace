@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -75,7 +76,7 @@ public class FriendHome extends BaseFragment{
 	@OnClick(id=R.id.message)
 	public void sendMessageClick(View view){
 		Bundle bundle=new Bundle();
-		bundle.putString("friendName", friendInfo.getNickname());
+		bundle.putString("friendName", userinfo.getUserinfo().getNickname());
 		Tools.pushScreen(MyChat.class, bundle);
 	}
 	
@@ -86,7 +87,7 @@ public class FriendHome extends BaseFragment{
 	 */
 	private boolean isAttention=false;
 	@ViewInject(id = R.id.attention)
-	private ImageButton attention;
+	private ImageView attention;
 	@OnClick(id=R.id.attention)
 	public void takeAttention(View view){
 		if(isAttention)
@@ -117,7 +118,7 @@ public class FriendHome extends BaseFragment{
     public void TAMovieHouseClick(View view){
     	Tools.toastShow("Ta电影院");
     	Bundle bundle=new Bundle();
-    	bundle.putString("userid", friendInfo.getUserid()+"");
+    	bundle.putString("userid", userid);
     	Tools.pushScreen(MyCinema.class, bundle);
     }
 	
@@ -138,7 +139,7 @@ public class FriendHome extends BaseFragment{
 	@OnClick(id=R.id.TAphotosLayout)
     public void TAphotosClick(View view){
 		Bundle bundle=new Bundle();
-		bundle.putString("userId", friendInfo.getUserid()+"");
+		bundle.putString("userId",userid);
 		Tools.pushScreen(MyPhoto.class, bundle);
 		
     	
@@ -153,7 +154,7 @@ public class FriendHome extends BaseFragment{
 	@OnClick(id=R.id.TAcollectionLayout)
     public void TAcollectionClick(View view){
 		Bundle  bundle=new Bundle();
-		bundle.putString("userId", friendInfo.getUserid()+"");
+		bundle.putString("userId",userid);
        Tools.pushScreen(MyCollect.class, bundle);
     }
 	
@@ -169,7 +170,7 @@ public class FriendHome extends BaseFragment{
     	 Tools.toastShow("Ta关注的人");
     	 Bundle bundle=new Bundle();
     	 bundle.putInt("realationType", 1);
-     bundle.putString("userId", friendInfo.getUserid()+"");
+     bundle.putString("userId", userid);
      bundle.putString("titleName", "Ta关注的人");
     	 Tools.pushScreen(MyFriend.class, bundle);
     }
@@ -198,7 +199,7 @@ public class FriendHome extends BaseFragment{
 	private PersonalHomepage userinfo;
 	
 	
-	 private DynamicInfo friendInfo;
+	 private String userid ;
 	 
 	 /**
 		 * 当前页索引
@@ -216,7 +217,7 @@ public class FriendHome extends BaseFragment{
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		Bundle bundle=getArguments();
-		friendInfo=(DynamicInfo)bundle.getSerializable("friendInfo");
+		userid=(String)bundle.getString("userid");
 		getUserPage();
 		setUpListView();
 	}
@@ -227,7 +228,7 @@ public class FriendHome extends BaseFragment{
 	 * */
 
 	private void getUserPage() {
-		PersonalHomepageRequest.findPersonalHomepage(friendInfo.getUserid()+"",UserProperty.getInstance().getUid(),
+		PersonalHomepageRequest.findPersonalHomepage(userid,UserProperty.getInstance().getUid(),
 				new ResponseCallback() {
 
 					@Override
@@ -245,7 +246,7 @@ public class FriendHome extends BaseFragment{
 							signature_tv.setText(userinfo.getUserinfo()
 									.getSignature());
 							movieHouse.setText(userinfo.getUserinfo().getCinema());
-							userId.setText("ID: "+ friendInfo.getUserid());
+							userId.setText("ID: "+ userid);
 							isAttention=userinfo.getUserinfo().isIsattention();
 							 selectorStyle();
 
@@ -316,7 +317,7 @@ public class FriendHome extends BaseFragment{
 
 	private void getData(final int pageNo) {
 
-		ArticleListByUserIdRequest.findArticleListByUserIdRequest(friendInfo.getUserid()+"", UserProperty.getInstance().getUid(),
+		ArticleListByUserIdRequest.findArticleListByUserIdRequest(userid, UserProperty.getInstance().getUid(),
 				pageNo, AppConfig.PAGE_SIZE, new ResponseCallback() {
 
 					@Override
@@ -347,10 +348,11 @@ public class FriendHome extends BaseFragment{
 								}
 								
 								adapter.notifyDataSetChanged();
-							}else{
-								dynamicListLayout.setEmptyView(Tools
-										.setEmptyView(getActivity()));
 							}
+//							else{
+//								dynamicListLayout.setEmptyView(Tools
+//										.setEmptyView(getActivity()));
+//							}
 						
 
 					}
@@ -373,7 +375,7 @@ public class FriendHome extends BaseFragment{
 
 
 	private void addAddttention(){
-	AddttentionRequest.findAddttention(UserProperty.getInstance().getUid(), friendInfo.getUserid()+"", new ResponseCallback() {
+	AddttentionRequest.findAddttention(UserProperty.getInstance().getUid(), userid, new ResponseCallback() {
 		
 		@Override
 		public <T> void sucess(Type type, ResponseResult<T> claszz) {
@@ -397,7 +399,7 @@ public class FriendHome extends BaseFragment{
 	}
 	
 	private void cancelAddttention(){
-	CancelttentionRequest.findCancelAddttention(UserProperty.getInstance().getUid(), friendInfo.getUserid()+"", new ResponseCallback() {
+	CancelttentionRequest.findCancelAddttention(UserProperty.getInstance().getUid(),userid, new ResponseCallback() {
 		
 		@Override
 		public <T> void sucess(Type type, ResponseResult<T> claszz) {

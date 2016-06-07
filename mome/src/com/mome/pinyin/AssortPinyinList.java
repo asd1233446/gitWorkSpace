@@ -31,6 +31,7 @@ public class AssortPinyinList {
 			if (first == null) {
 				first = "?";
 			}
+			
 			return first;
 		}
 

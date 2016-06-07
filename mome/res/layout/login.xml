@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/B3B3B3"
+    android:background="@color/gary_line"
     android:gravity="bottom|center_horizontal"
     android:orientation="vertical" >
 
@@ -25,11 +25,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_round_corner_rect"
-            android:drawableLeft="@drawable/ic_launcher"
+            android:drawableLeft="@drawable/sina_select"
             android:drawablePadding="10dp"
             android:gravity="center"
+            android:paddingBottom="@dimen/common_samll_marginOrpadding"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
+            android:paddingTop="@dimen/common_samll_marginOrpadding"
             android:text="新浪微博登录"
             android:textColor="@color/black" />
 
@@ -39,11 +41,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_round_corner_rect"
-            android:drawableLeft="@drawable/ic_launcher"
+            android:drawableLeft="@drawable/weichat_select"
             android:drawablePadding="10dp"
             android:gravity="center"
+            android:paddingBottom="@dimen/common_samll_marginOrpadding"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
+            android:paddingTop="@dimen/common_samll_marginOrpadding"
             android:text="微信账号登录"
             android:textColor="@color/black" />
 
@@ -53,14 +57,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_round_corner_rect"
-            android:drawableLeft="@drawable/ic_launcher"
+            android:drawableLeft="@drawable/douban_select"
             android:drawablePadding="10dp"
             android:gravity="center"
+            android:paddingBottom="@dimen/common_samll_marginOrpadding"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
+            android:paddingTop="@dimen/common_samll_marginOrpadding"
             android:text="豆瓣账号登录"
             android:textColor="@color/black" />
-
     </LinearLayout>
 
 </LinearLayout>

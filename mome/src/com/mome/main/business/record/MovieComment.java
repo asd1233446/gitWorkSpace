@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jessieray.api.model.MemoirsInfo;
 import com.jessieray.api.request.base.ResponseCallback;
 import com.jessieray.api.request.base.ResponseError;
 import com.jessieray.api.request.base.ResponseResult;
@@ -23,12 +25,16 @@ import com.jessieray.api.service.addRecallArticleRequest;
 import com.mome.main.R;
 import com.mome.main.business.HeadRef;
 import com.mome.main.business.HeadView;
+import com.mome.main.business.access.WXLogin;
 import com.mome.main.business.access.WeiboLogin;
+import com.mome.main.business.model.UserProperty;
 import com.mome.main.core.annotation.InjectProcessor;
 import com.mome.main.core.annotation.LayoutInject;
 import com.mome.main.core.annotation.OnClick;
 import com.mome.main.core.annotation.ViewInject;
+import com.mome.main.core.net.HttpRequest;
 import com.mome.main.core.utils.Tools;
+import com.mome.main.netframe.volley.toolbox.NetworkImageView;
 import com.mome.view.MySeekBar;
 import com.sina.weibo.sdk.api.share.BaseResponse;
 import com.sina.weibo.sdk.api.share.IWeiboHandler;
@@ -48,7 +54,7 @@ public class MovieComment extends Activity implements IWeiboHandler.Response {
 	private EditText comment;
 
 	@ViewInject(id = R.id.movieIcon)
-	private ImageView movieIcon;
+	private NetworkImageView movieIcon;
 
 	@OnClick(id = R.id.movieIcon)
 	public void movieIconClick(View view) {
@@ -79,10 +85,10 @@ public class MovieComment extends Activity implements IWeiboHandler.Response {
 	 * */
 	@OnClick(id = R.id.titlebar_right)
 	public void sendCommentClick(View view) {
-		if(!TextUtils.isEmpty(comment.getText()))
+		if(!TextUtils.isEmpty(comment.getText())&&seekBar.getProgress()!=0)
 		sendComment();
 		else
-			Toast.makeText(this, "添加影评", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "添加影评并对影片评分", Toast.LENGTH_LONG).show();
 	}
 
 	/**
@@ -93,42 +99,53 @@ public class MovieComment extends Activity implements IWeiboHandler.Response {
 
 	@OnClick(id = R.id.sina_btn)
 	public void sinaClick(View view) {
-		weiboLogin.sendText("我来自莫么");
-		// Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
-		// R.drawable.ic_launcher);
-		// weiboLogin.sendImage(bitmap);
-		// Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
-		// R.drawable.ic_launcher);
-		// weiboLogin.sendMedia("猫咪", "我是一个孤独的孩纸", bitmap,
-		// "http//:www.baidu.com", "分享一个url");
-		//
+		Bitmap bitmap=Tools.getBitmapByImage(movieIcon);
+		 weiboLogin.sendMedia("mome影评", comment.getText().toString(), bitmap,
+		 "http//:www.baidu.com", "分享一个url");
+		
 
 	}
 
 	@OnClick(id = R.id.wechat_btn)
 	public void wechatClick(View view) {
-
+		Bitmap bitmap=Tools.getBitmapByImage(movieIcon);
+		WXLogin wxlogin=WXLogin.getInstance(this);
+		wxlogin.sendPage("http//:www.baidu.com", "mome影评", comment.getText().toString(), bitmap, false);
 	}
 
 	@OnClick(id = R.id.douban_btn)
 	public void doubanClick(View view) {
-
+		Bitmap bitmap=Tools.getBitmapByImage(movieIcon);
+		WXLogin wxlogin=WXLogin.getInstance(this);
+		wxlogin.sendPage("http//:www.baidu.com", "mome影评", comment.getText().toString(), bitmap, true);
 	}
 
 	private WeiboLogin weiboLogin;
 	private IWeiboShareAPI mWeiboShareAPI;
+	
+	
+	private MemoirsInfo memoirsInfo;
+	
+	private Intent intent;
+	
+	private String myComment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		InjectProcessor.activityInject(this);
-		weiboLogin = WeiboLogin.getInstance(this);
-		mWeiboShareAPI = weiboLogin.registerToSina(this);
+		weiboLogin = new WeiboLogin(this);
+		mWeiboShareAPI = weiboLogin.registerToSina();
 		if (savedInstanceState != null) {
 			mWeiboShareAPI.handleWeiboResponse(getIntent(), this);
 		}
-
+	
+		intent=getIntent();
+		memoirsInfo=(MemoirsInfo) intent.getExtras().getSerializable("memoirsInfo");
+		myComment=intent.getStringExtra("comment");
+		movieIcon.setImageUrl(memoirsInfo.getImageSrc(), HttpRequest.getInstance().imageLoader);
+		comment.setText(myComment);
 	}
 
 	@Override
@@ -152,10 +169,10 @@ public class MovieComment extends Activity implements IWeiboHandler.Response {
 			Toast.makeText(this, "成功", Toast.LENGTH_LONG).show();
 			break;
 		case WBConstants.ErrorCode.ERR_CANCEL:
-			Toast.makeText(this, "失败", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "失败"+baseResp.errMsg+baseResp.errCode, Toast.LENGTH_LONG).show();
 			break;
 		case WBConstants.ErrorCode.ERR_FAIL:
-			Toast.makeText(this, "失败", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "失败"+baseResp.errMsg+baseResp.errCode, Toast.LENGTH_LONG).show();
 			break;
 		}
 	}
@@ -163,13 +180,16 @@ public class MovieComment extends Activity implements IWeiboHandler.Response {
 	
 	
 	private void  sendComment(){
-		float progress=(float) ((float)seekBar.getProgress()/2.0);
-		addRecallArticleRequest.findaddRecallArticle("1",progress+"" , comment.getText().toString(), new ResponseCallback() {
+		final float progress=(float) ((float)seekBar.getProgress()/2.0);
+		addRecallArticleRequest.findaddRecallArticle(UserProperty.getInstance().getUid(),memoirsInfo.getRecallid()+"",memoirsInfo.getMovieid(),progress+"" , comment.getText().toString(), new ResponseCallback() {
 			
 			@Override
 			public <T> void sucess(Type type, ResponseResult<T> claszz) {
 				// TODO Auto-generated method stub
-				
+				intent.putExtra("comment", comment.getText().toString());
+				intent.putExtra("mark", progress+"");
+				setResult(RESULT_OK,intent );
+				finish();
 			}
 			
 			@Override

@@ -3,6 +3,7 @@ package com.mome.main.business.movie;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -39,7 +40,7 @@ public class MovieDetailListCell implements ListCellBase{
 	//网络数据
 	
 	@Override
-	public View getView(View convertView) {
+	public View getView(int postion,View convertView) {
 		View view = convertView;
 		ViewHolder viewHolder;
 		if (view == null) {
@@ -55,7 +56,7 @@ public class MovieDetailListCell implements ListCellBase{
 		viewHolder.rating.setRating((float) (dynamicInfo.getMark()*0.5));
 		viewHolder.info.setText(dynamicInfo.getBrief());
 		viewHolder.date.setText(dynamicInfo.getOrderType()==1?dynamicInfo.getCreatetime():dynamicInfo.getGoods()+"");
-	    Drawable drawable=this.context.getResources().getDrawable(dynamicInfo.getOrderType()==1?R.drawable.dynamic_img_date:R.drawable.dynamic_img_praise);
+	    Drawable drawable=this.context.getResources().getDrawable(dynamicInfo.getOrderType()==1?R.drawable.dynamic_img_date:R.drawable.garyzan);
 	    drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
 		viewHolder.date.setCompoundDrawables(drawable, null, null, null);
 		return view;
@@ -71,7 +72,7 @@ public class MovieDetailListCell implements ListCellBase{
 		public void FriendHomeOnClick(View view) {
 			Tools.toastShow("进入好友主页");
 			Bundle bundle=new Bundle();
-			bundle.putSerializable("friendInfo",dynamicInfo);
+			bundle.putString("userid",dynamicInfo.getUserid()+"");
 			Tools.pushScreen(FriendHome.class, bundle);
 			
 

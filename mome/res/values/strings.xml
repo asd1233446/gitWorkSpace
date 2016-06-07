@@ -36,14 +36,22 @@
        
        <string name="record_looked_date">观影日期</string>
        <string name="record_looked_time">观影时间</string>
+        <string name="record_looked_type">观影平台</string>
        <string name="record_ciname_name">影院名称</string>
+       <string name="record_ciname_name_hint">选择影院</string>
        <string name="record_ciname_no">影厅号码</string>
        <string name="record_seat_no">座位牌号</string>
        <string name="record_ticket_monery">票价</string>
        
        <string name="record_looked_date_hint">选择观影日期</string>
        <string name="record_looked_time_hint">选择观影时间</string>
+       <string name="record_looked_type_hint">选择观影平台</string>
        <string name="record_ciname_no_hint">如：1</string>
        <string name="record_seat_no_hint">如：1排1座</string>
-        <string name="record_ticket_monery_hint">如：1元</string>
+        <string name="record_ticket_monery_hint">如：1</string>
+        
+        <!--邀请好友信息  -->
+        
+                <string name="inviteMessage">发现了一款好玩的应用。mome帮助您保存最美的记忆</string>
+        
 </resources>

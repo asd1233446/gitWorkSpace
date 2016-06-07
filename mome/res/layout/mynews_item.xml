@@ -11,13 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/common_marginOrpadding" >
+        android:padding="@dimen/common_samll_marginOrpadding" >
 
         <com.mome.main.netframe.volley.toolbox.NetworkImageView
             android:id="@+id/user_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher" 
+            android:layout_width="@dimen/common_userhead_widht"
+            android:layout_height="@dimen/common_userhead_height"
+            android:scaleType="fitXY"
             />
 
         <RelativeLayout
@@ -31,7 +31,6 @@
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="古天乐"
                 android:textColor="@color/black"
                 android:textSize="@dimen/common_max_textSize" />
 
@@ -40,7 +39,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="2-05"
                 android:textColor="@color/black"
                 android:textSize="@dimen/common_middle_textSize" />
 
@@ -54,7 +52,6 @@
                 android:gravity="center"
                 android:paddingLeft="@dimen/common_marginOrpadding"
                 android:paddingRight="@dimen/common_marginOrpadding"
-                android:text="300"
                 android:textColor="@color/white"
                 android:textSize="@dimen/common_textSize" />
 
@@ -66,7 +63,6 @@
                 android:layout_toLeftOf="@+id/newsNum_tv"
                 android:gravity="left"
                 android:singleLine="true"
-                android:text="123445sdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/common_textSize" />
 

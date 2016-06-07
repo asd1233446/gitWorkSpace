@@ -43,9 +43,9 @@ public class DynamicListCell implements ListCellBase {
 	 * 动态数据类型
 	 */
 	private int type;
-
+	
 	@Override
-	public View getView(View convertView) {
+	public View getView(int postion,View convertView) {
 		View view = convertView;
 		ViewHolder viewHolder;
 		if (view == null) {
@@ -56,12 +56,8 @@ public class DynamicListCell implements ListCellBase {
 			viewHolder = (ViewHolder) view.getTag();
 		}
 		
-		viewHolder.headIcon.setDefaultImageResId(R.drawable.ic_launcher);
-		viewHolder.headIcon.setErrorImageResId(R.drawable.ic_launcher);
 		viewHolder.headIcon.setImageUrl(dynamicInfo.getAvatar(), HttpRequest.getInstance().imageLoader);
 		
-		viewHolder.movieImg.setDefaultImageResId(R.drawable.ic_launcher);
-		viewHolder.movieImg.setErrorImageResId(R.drawable.ic_launcher);
 		viewHolder.movieImg.setImageUrl(dynamicInfo.getImageSrc(), HttpRequest.getInstance().imageLoader);
 		
 		viewHolder.userName.setText(dynamicInfo.getNickname());
@@ -71,13 +67,20 @@ public class DynamicListCell implements ListCellBase {
 		viewHolder.movieInfo.setText(dynamicInfo.getBrief());
 		if(type == 2) {
 			viewHolder.date.setText(String.valueOf(dynamicInfo.getGoods()));
+			dateOrTimes(R.drawable.garyzan,viewHolder.date, dynamicInfo.getGoods()+"");
 		} else if(type == 1) {
-			viewHolder.date.setText(dynamicInfo.getCreatetime());
+			dateOrTimes(R.drawable.dynamic_img_date, viewHolder.date, dynamicInfo.getCreatetime());
+
 		} 
+		
 		viewHolder.movieTitle.setText(dynamicInfo.getTitle());
 		viewHolder.praiseValue.setText(dynamicInfo.getIsgood()==true?"取消赞":"赞");
 		selectorStyle(viewHolder.praiseValue,viewHolder.praiseValue.getText().toString());
-	
+		viewHolder.praiseValue.setOnClickListener(new mMyOnClickListener());
+		viewHolder.commentValue.setOnClickListener(new mMyOnClickListener());
+		viewHolder.movieImg.setOnClickListener(new mMyOnClickListener());
+		viewHolder.headIcon.setOnClickListener(new mMyOnClickListener());
+		viewHolder.movieInfo.setOnClickListener(new mMyOnClickListener());
 		viewHolder.ratin.setEnabled(false);
 		return view;
 	}
@@ -139,90 +142,6 @@ public class DynamicListCell implements ListCellBase {
 		@ViewInject(id = R.id.dynamic_list_cell_user_name)
 		private TextView userName;
 
-		@OnClick(id = R.id.dynamic_list_cell_btn_comment)
-		public void commentClick(View paramView) {
-			Bundle bundle = new Bundle();
-			bundle.putSerializable("dynamic",dynamicInfo);
-			Tools.pushScreen(DynamicDetail.class, bundle);
-		}
-
-		@OnClick(id = R.id.dynamic_list_cell_head_icon)
-		public void headClick(View paramView) {
-			Tools.toastShow("进入好友主页");
-			Bundle bundle=new Bundle();
-			bundle.putSerializable("friendInfo",dynamicInfo);
-			Tools.pushScreen(FriendHome.class, bundle);
-		}
-
-		@OnClick(id = R.id.dynamic_list_cell_movie_img)
-		public void movieImgClick(View paramView) {
-			Bundle bundle =new Bundle();
-			MovieInfo movieinfo=new MovieInfo();
-			movieinfo.setMovieid(dynamicInfo.getMovieid());
-			movieinfo.setTitle(dynamicInfo.getTitle());
-			bundle.putSerializable("MovieInfo", movieinfo);
-			Tools.pushScreen(MovieDetail.class, bundle);
-		}
-
-		@OnClick(id = R.id.dynamic_list_cell_btn_praise)
-		public void praiseClick(View paramView) {
-			if (!"取消赞".equals(praiseValue.getText().toString()))
-				AddArticleGoodRequest.findAddArticleGood(UserProperty
-						.getInstance().getUid(), dynamicInfo.getArticleid()
-						+ "", new ResponseCallback() {
-
-					@Override
-					public <T> void sucess(Type type, ResponseResult<T> claszz) {
-						// TODO Auto-generated method stub
-						selectorStyle(praiseValue,"取消赞");
-					}
-
-					@Override
-					public boolean isRefreshNeeded() {
-						// TODO Auto-generated method stub
-						return false;
-					}
-
-					@Override
-					public void error(ResponseError error) {
-						// TODO Auto-generated method stub
-						Tools.toastShow(error.getMessage());
-					}
-				});
-			else
-				UndoArticleGoodRequest.findUndoArticleGood(UserProperty
-						.getInstance().getUid(), dynamicInfo.getArticleid()
-						+ "", new ResponseCallback() {
-
-					@Override
-					public <T> void sucess(Type type, ResponseResult<T> claszz) {
-						// TODO Auto-generated method stub
-						selectorStyle(praiseValue,"赞" );
-					}
-
-					@Override
-					public boolean isRefreshNeeded() {
-						// TODO Auto-generated method stub
-						return false;
-					}
-
-					@Override
-					public void error(ResponseError error) {
-						// TODO Auto-generated method stub
-						Tools.toastShow(error.getMessage());
-					}
-				});
-    	
-	
-			
-		}
-		
-		@OnClick(id = R.id.dynamic_list_cell_movie_info)
-		public void movieCommentClick(View paramView) {
-         Bundle bundle=new Bundle();
-         bundle.putSerializable("dynamic", dynamicInfo);
-		Tools.pushScreen(DynamicDetail.class, bundle);
-		}
 	}
 
 	private void selectorStyle(TextView view,String prise){
@@ -238,4 +157,101 @@ public class DynamicListCell implements ListCellBase {
 		    view.setText(prise);
 		}
 	}
+	
+	
+	private void dateOrTimes(int id,TextView view,String text){
+		Drawable drawable=AppConfig.context.getResources().getDrawable(id);
+	    drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+	    view.setCompoundDrawables(drawable, null, null, null);
+	    view.setText(text);
+	}
+	
+	class mMyOnClickListener implements OnClickListener{
+
+		@Override
+		public void onClick(View view) {
+			// TODO Auto-generated method stub
+			Bundle bundle =new Bundle();
+			switch (view.getId()) {
+			case R.id.dynamic_list_cell_txt_praise_value:
+				praise((TextView) view);
+				break;
+			case R.id.dynamic_list_cell_movie_info:
+		         bundle.putSerializable("dynamic", dynamicInfo);
+				Tools.pushScreen(DynamicDetail.class, bundle);
+				break;
+			case  R.id.dynamic_list_cell_movie_img:
+				bundle.putString("movieId",dynamicInfo.getMovieid()+"");
+				Tools.pushScreen(MovieDetail.class, bundle);
+				break;
+			case R.id.dynamic_list_cell_head_icon:
+				bundle.putString("userid",dynamicInfo.getUserid()+"");
+				Tools.pushScreen(FriendHome.class, bundle);
+				break;
+			case R.id.dynamic_list_cell_txt_comment_value:
+				bundle.putSerializable("dynamic",dynamicInfo);
+				Tools.pushScreen(DynamicDetail.class, bundle);
+				break;
+			default:
+				break;
+			}
+			
+		}
+		
+	}
+	
+	
+	private void praise(final TextView praiseValue){
+		if (!"取消赞".equals(praiseValue.getText().toString()))
+			AddArticleGoodRequest.findAddArticleGood(UserProperty
+					.getInstance().getUid(), dynamicInfo.getArticleid()
+					+ "", new ResponseCallback() {
+
+				@Override
+				public <T> void sucess(Type type, ResponseResult<T> claszz) {
+					// TODO Auto-generated method stub
+					dynamicInfo.setIsgood(true);
+					selectorStyle(praiseValue,"取消赞");
+				}
+
+				@Override
+				public boolean isRefreshNeeded() {
+					// TODO Auto-generated method stub
+					return false;
+				}
+
+				@Override
+				public void error(ResponseError error) {
+					// TODO Auto-generated method stub
+					Tools.toastShow(error.getMessage());
+				}
+			});
+		else
+			UndoArticleGoodRequest.findUndoArticleGood(UserProperty
+					.getInstance().getUid(), dynamicInfo.getArticleid()
+					+ "", new ResponseCallback() {
+
+				@Override
+				public <T> void sucess(Type type, ResponseResult<T> claszz) {
+					// TODO Auto-generated method stub
+					dynamicInfo.setIsgood(false);
+					selectorStyle(praiseValue,"赞" );
+				}
+
+				@Override
+				public boolean isRefreshNeeded() {
+					// TODO Auto-generated method stub
+					return false;
+				}
+
+				@Override
+				public void error(ResponseError error) {
+					// TODO Auto-generated method stub
+					Tools.toastShow(error.getMessage());
+				}
+			});
+	
+	}
+	
+	
 }

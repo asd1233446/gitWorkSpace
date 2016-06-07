@@ -51,7 +51,7 @@ public class AddRecallRequest {
      * @param price 
      *           票价
      */
-    public static void findAddRecall(java.lang.String userid, java.lang.String movieid, java.lang.Integer type, java.lang.String title, java.lang.String date, java.lang.Float mark, java.lang.String theater, java.lang.String cinemaid, java.lang.String seat, java.lang.String brief, java.lang.String starttime, java.lang.String ticketphoto, java.lang.Integer price, ResponseCallback response) {
+    public static void findAddRecall(java.lang.String userid, java.lang.String movieid, java.lang.Integer type, java.lang.String title, java.lang.String date, java.lang.Float mark, java.lang.String theater, java.lang.String cinemaid, java.lang.String seat, java.lang.String brief, java.lang.String starttime, java.lang.String ticketphoto, java.lang.String price, ResponseCallback response) {
         String url = RequestProxy.getRequest().getRequestUrl() + "/addRecall.shtml";
         java.util.Map<String, String> params = new java.util.HashMap<String, String>();
         params.put("userid", RequestUtils.object2String(userid));
@@ -62,13 +62,15 @@ public class AddRecallRequest {
         params.put("mark", RequestUtils.object2String(mark));
         params.put("theater", RequestUtils.object2String(theater));
         params.put("cinemaid", RequestUtils.object2String(cinemaid));
-        params.put("seat", RequestUtils.object2String(seat));
         params.put("brief", RequestUtils.object2String(brief));
-        params.put("starttime", RequestUtils.object2String(starttime));
         params.put("ticketphoto", RequestUtils.object2String(ticketphoto));
+        if(type==1){
         params.put("price", RequestUtils.object2String(price));
+        params.put("seat", RequestUtils.object2String(seat));
+        params.put("starttime", RequestUtils.object2String(starttime));
+        }
         resultType = new com.google.gson.reflect.TypeToken<ResponseResult<AddRecall>>() {}.getType();
-        RequestProxy.getRequest().doRequest(url, Request.Method.GET, params, resultType, response);
+        RequestProxy.getRequest().doRequest(url, Request.Method.POST, params, resultType, response);
     }
 
 

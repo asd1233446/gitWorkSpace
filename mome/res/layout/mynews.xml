@@ -2,18 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/gary_line"
     android:orientation="vertical" >
      <com.mome.main.business.HeadRef
         xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
         android:id="@+id/head_layout"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         head:titleShow="show"
         head:leftBtnShow="show"
         head:leftButton="img"
         head:leftImg="@drawable/headview_btn_back"
-        head:titleText="私信列表" >
+        head:titleText="消息列表" >
     </com.mome.main.business.HeadRef>
     <com.mome.main.business.widget.pulltorefresh.PullToRefreshListView
         android:id="@+id/pull_refresh_list"
@@ -27,6 +27,7 @@
         android:fastScrollEnabled="false"
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"
+        android:listSelector="#00000000"
         android:smoothScrollbar="true" >
     </com.mome.main.business.widget.pulltorefresh.PullToRefreshListView>
     

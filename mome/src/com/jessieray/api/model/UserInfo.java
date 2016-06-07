@@ -10,6 +10,70 @@ import java.io.Serializable;
  */
 
 public class UserInfo implements Serializable {
+	
+	private String weiboname;
+	
+	private String weixinname;
+	
+	private String doubanname;
+	
+	private String key_nickname;
+	
+	private String nickname;
+	
+	private String id;
+	
+	
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getWeiboname() {
+		return weiboname;
+	}
+
+	public void setWeiboname(String weiboname) {
+		this.weiboname = weiboname;
+	}
+
+	public String getWeixinname() {
+		return weixinname;
+	}
+
+	public void setWeixinname(String weixinname) {
+		this.weixinname = weixinname;
+	}
+
+	public String getDoubanname() {
+		return doubanname;
+	}
+
+	public void setDoubanname(String doubanname) {
+		this.doubanname = doubanname;
+	}
+
+	public String getKey_nickname() {
+		return key_nickname;
+	}
+
+	public void setKey_nickname(String key_nickname) {
+		this.key_nickname = key_nickname;
+	}
+
+	public String getUsername_seo() {
+		return username_seo;
+	}
+
+	public void setUsername_seo(String username_seo) {
+		this.username_seo = username_seo;
+	}
+	
+	
 	/**
 	 * 用户id
 	 */
@@ -18,7 +82,7 @@ public class UserInfo implements Serializable {
 	/**
 	 * 用户昵称
 	 */
-	private String nickname;
+	private String username_seo;
 	/**
 	 * 生日
 	 */
@@ -63,6 +127,11 @@ public class UserInfo implements Serializable {
 	 * MOME号
 	 */
 	private String momeid;
+	
+	/**
+	 * 电话号
+	 */
+	private String phone;
 
 	/**
 	 * 未读系统消息数
@@ -107,6 +176,21 @@ public class UserInfo implements Serializable {
 	 * 
 	 */
 	private String watchtotal;
+	
+	/**
+	 * 感兴趣的人描述，，影院，类型，海报名
+	 * 
+	 */
+	private String bartitle;
+	
+
+	public String getBartitle() {
+		return bartitle;
+	}
+
+	public void setBartitle(String bartitle) {
+		this.bartitle = bartitle;
+	}
 
 	public boolean isIsattention() {
 		return isattention;
@@ -124,6 +208,13 @@ public class UserInfo implements Serializable {
 		this.location = location;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	/**
 	 * 是否已经关注此用户
 	 */

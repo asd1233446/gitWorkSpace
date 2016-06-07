@@ -34,7 +34,7 @@ public class DynamicDetailListCell implements ListCellBase {
 	}
 
 	@Override
-	public View getView(View convertView) {
+	public View getView(int position,View convertView) {
 		View view = convertView;
 		ViewHolder viewHolder;
 		if (view == null) {
@@ -44,8 +44,7 @@ public class DynamicDetailListCell implements ListCellBase {
 		} else {
 			viewHolder = (ViewHolder) view.getTag();
 		}
-		viewHolder.head.setDefaultImageResId(R.drawable.ic_launcher);
-		viewHolder.head.setErrorImageResId(R.drawable.ic_launcher);
+
 		viewHolder.head.setImageUrl(dynamicInfo.getAvatar(),
 				HttpRequest.getInstance().imageLoader);
 
@@ -65,7 +64,7 @@ public class DynamicDetailListCell implements ListCellBase {
 		public void headClick(View paramView) {
 			Tools.toastShow("进入好友主页");
 			Bundle bundle = new Bundle();
-			bundle.putSerializable("friendInfo", dynamicInfo);
+			bundle.putString("userid",dynamicInfo.getUserid()+"");
 			Tools.pushScreen(FriendHome.class, bundle);
 		}
 

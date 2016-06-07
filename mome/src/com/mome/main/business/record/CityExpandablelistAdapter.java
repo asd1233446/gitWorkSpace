@@ -50,30 +50,28 @@ import android.widget.Toast;
 public class CityExpandablelistAdapter extends BaseAdapter implements
 StickyListHeadersAdapter, SectionIndexer {
 
-	private ArrayList<String> childList;
+	private List<String> childList;
 	private AssortPinyinList assort = new AssortPinyinList();
 	private Map<String , String> map=new HashMap<String , String>();
-	public ArrayList<String> getChildList() {
+	public List<String> getChildList() {
 		return childList;
 	}
 
-	public void setChildList(ArrayList<String> childList) {
+	public void setChildList(List<String> childList) {
 		this.childList = childList;
-		sort() ;
+		sort();
 	}
 	
-	private LanguageComparator_CN cnSort = new LanguageComparator_CN();
 		
-	private void sort() {
+	public  List<String> sort() {
 		assort.getHashList().getKeyArr().clear();
 		for (String str :childList) {
 			assort.getHashList().add(str);
 		}
-		assort.getHashList().sortKeyComparator(cnSort);
 		for(String i:assort.getHashList().getKeyArr()){
 			assort.getHashList().setFristCharList(assort.getFirstChar(i));
 		}
-
+          return assort.getHashList().getKeyArr();
 	}
 
 
@@ -183,7 +181,7 @@ StickyListHeadersAdapter, SectionIndexer {
 	 * 当ListView数据发生变化时,调用此方法来更新ListView
 	 * @param list
 	 */
-	public void updateListView(ArrayList<String> list) {
+	public void updateListView(List<String> list) {
 		if (list == null) {
 			this.childList = new ArrayList<String>();
 		} else {

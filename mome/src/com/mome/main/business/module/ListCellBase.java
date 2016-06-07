@@ -9,6 +9,6 @@ public abstract interface ListCellBase {
 	 * @param convertView
 	 * @return
 	 */
-	public abstract View getView(View convertView);
+	public abstract View getView(int postion,View convertView);
 	
 }

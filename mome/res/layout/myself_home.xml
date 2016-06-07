@@ -17,7 +17,8 @@
         head:titleText="个人主页" >
     </com.mome.main.business.HeadRef>
 
-  <com.mome.main.business.widget.pulltorefresh.PullToRefreshScrollView
+   
+      <com.mome.main.business.widget.pulltorefresh.PullToRefreshScrollView
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/pull_refresh_scrollview"
        android:layout_width="fill_parent"
@@ -36,186 +37,194 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical" >
+  
 
-            <LinearLayout
-                android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_marginOrpadding"
+        android:layout_marginBottom="1dp"
+        android:orientation="horizontal" >
+
+        <com.mome.main.netframe.volley.toolbox.NetworkImageView
+            android:id="@+id/user_icon"
+            android:layout_width="@dimen/common_userhead_widht"
+            android:layout_height="@dimen/common_userhead_height"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_marginOrpadding"
+            android:layout_marginTop="@dimen/common_middle_marginOrpadding"
+            android:layout_gravity=""
+            android:layout_weight="1"
+            android:focusable="false"
+            android:text="古天乐"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_max_textSize" />
+
+        <RelativeLayout
+            android:id="@+id/attentionLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8" >
+
+            <TextView
+                android:id="@+id/attentionNum"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_marginOrpadding"
-                android:layout_marginBottom="1dp"
-                android:orientation="horizontal" >
+                android:layout_above="@+id/attention"
+                android:layout_centerHorizontal="true"
+                android:singleLine="true"
+                android:text="205"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_middle_textSize" />
 
-                <com.mome.main.netframe.volley.toolbox.NetworkImageView
-                    android:id="@+id/user_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_launcher" />
-
-                <TextView
-                    android:id="@+id/user_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/common_marginOrpadding"
-                    android:layout_weight="1"
-                    android:focusable="false"
-                    android:text="古天乐"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/common_max_textSize" />
-
-                <RelativeLayout
-                    android:id="@+id/attentionLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.8" >
-
-                    <TextView
-                        android:id="@+id/attentionNum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/attention"
-                        android:layout_centerHorizontal="true"
-                        android:singleLine="true"
-                        android:text="205"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/common_middle_textSize" />
-
-                    <TextView
-                        android:id="@+id/attention"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="@dimen/common_samll_marginOrpadding"
-                        android:text="@string/attention"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/common_textSize" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/fansLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.8" >
-
-                    <TextView
-                        android:id="@+id/fansNum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/fans"
-                        android:layout_centerHorizontal="true"
-                        android:singleLine="true"
-                        android:text="2054"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/common_middle_textSize" />
-
-                    <TextView
-                        android:id="@+id/fans"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="@dimen/common_samll_marginOrpadding"
-                        android:text="@string/fans"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/common_textSize" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/attention"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="1dp"
-                android:padding="@dimen/common_middle_marginOrpadding" >
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/common_samll_marginOrpadding"
+                android:text="@string/attention"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_textSize" />
+        </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/signature_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/user_sign"
-                    android:text="他比较懒，什么都没留下"
-                    android:textColor="@color/gray"
-                    android:textSize="@dimen/common_textSize" />
+        <RelativeLayout
+            android:id="@+id/fansLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8" >
 
-                <ImageButton
-                    android:id="@+id/userSet"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/userhome_btn_set" />
-            </RelativeLayout>
-
-            <View style="@style/line_horizontal" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/fansNum"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                 >
+                android:layout_above="@+id/fans"
+                android:layout_centerHorizontal="true"
+                android:singleLine="true"
+                android:text="2054"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_middle_textSize" />
 
-                <RelativeLayout
-                    android:id="@+id/seenFilmLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/common_marginOrpadding"
-                    android:layout_weight="1" >
+            <TextView
+                android:id="@+id/fans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/common_samll_marginOrpadding"
+                android:text="@string/fans"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_textSize" />
+        </RelativeLayout>
+    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/seenFilmNum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:singleLine="true"
-                        android:text="205"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/common_middle_textSize"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_middle_marginOrpadding"
+        android:paddingTop="1dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/seenFilmNum"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/seenFilmNum"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/common_textSize" />
-                </RelativeLayout>
+        <TextView
+            android:id="@+id/signature_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/user_sign"
+            android:layout_weight="1"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_textSize" />
 
-                <View
-                    style="@style/line_vercal"
-                    android:layout_height="match_parent" />
+        <ImageButton
+            android:id="@+id/userSet"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/userhome_btn_set" />
+    </LinearLayout>
 
-                <RelativeLayout
-                    android:id="@+id/filmStyleLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/common_marginOrpadding"
-                    android:layout_weight="1" >
+    <View style="@style/line_horizontal" />
 
-                    <TextView
-                        android:id="@+id/filmStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:singleLine="true"
-                        android:text="2054"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/common_middle_textSize"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/filmStyle"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/filmStyle"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/common_textSize" />
-                </RelativeLayout>
-            </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/seenFilmLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/common_samll_marginOrpadding" >
 
-            <com.mome.view.ListViewInScrollView
-                android:id="@+id/friendsDynamicList"
-                style="@style/listView" >
-            </com.mome.view.ListViewInScrollView>
-       </LinearLayout>
+            <TextView
+                android:id="@+id/seenFilmNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:singleLine="true"
+                android:text="205"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_middle_textSize" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/seenFilmNum"
+                android:layout_centerHorizontal="true"
+                android:text="@string/seenFilmNum"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_textSize" />
+        </RelativeLayout>
+
+        <View
+            style="@style/line_vercal"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:id="@+id/filmStyleLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/common_samll_marginOrpadding" >
+
+            <TextView
+                android:id="@+id/filmStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:singleLine="true"
+                android:text="2054"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_middle_textSize" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/filmStyle"
+                android:layout_centerHorizontal="true"
+                android:text="@string/filmStyle"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/common_textSize" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        style="@style/line_horizontal"
+         />
+
+    <com.mome.view.ListViewInScrollView
+        android:id="@+id/friendsDynamicList"
+        style="@style/listView" >
+    </com.mome.view.ListViewInScrollView>
+    
+   </LinearLayout>
     </com.mome.main.business.widget.pulltorefresh.PullToRefreshScrollView>
+ 
 
 </LinearLayout>

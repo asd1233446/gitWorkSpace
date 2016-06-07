@@ -16,6 +16,8 @@
 package com.mome.main.netframe.volley.toolbox;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.ViewGroup.LayoutParams;
@@ -23,9 +25,12 @@ import android.widget.ImageView;
 
 import com.mome.main.R;
 import com.mome.main.core.utils.AppConfig;
+import com.mome.main.core.utils.BitmapUtils;
+import com.mome.main.core.utils.Tools;
 import com.mome.main.netframe.volley.VolleyError;
 import com.mome.main.netframe.volley.toolbox.ImageLoader.ImageContainer;
 import com.mome.main.netframe.volley.toolbox.ImageLoader.ImageListener;
+import com.mome.view.MyDeImageView;
 
 /**
  * Handles fetching an image from a URL as well as the life-cycle of the
@@ -44,12 +49,14 @@ public class NetworkImageView extends ImageView {
      * Resource ID of the image to be used if the network response fails.
      */
     private int mErrorImageId;
-
+    int maxWidth = 0;
+     int maxHeight =0;
     /** Local copy of the ImageLoader. */
     private ImageLoader mImageLoader;
 
     /** Current ImageContainer. (either in-flight or finished) */
     private ImageContainer mImageContainer;
+    private Context context;
 
     public NetworkImageView(Context context) {
         this(context, null);
@@ -61,6 +68,8 @@ public class NetworkImageView extends ImageView {
 
     public NetworkImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+    	this.context=context;
+
     }
 
     /**
@@ -146,8 +155,8 @@ public class NetworkImageView extends ImageView {
         }
 
         // Calculate the max image width / height to use while ignoring WRAP_CONTENT dimens.
-        int maxWidth = wrapWidth ? 0 : width;
-        int maxHeight = wrapHeight ? 0 : height;
+         maxWidth = wrapWidth ? 0 : width;
+         maxHeight = wrapHeight ? 0 : height;
 
         // The pre-existing content of this view didn't match the current URL. Load the new image
         // from the network.
@@ -177,7 +186,11 @@ public class NetworkImageView extends ImageView {
                         }
 
                         if (response.getBitmap() != null) {
-                            setImageBitmap(response.getBitmap());
+                        	Bitmap bitmap=response.getBitmap();
+                        	    setImageBitmap(bitmap);
+                            if(burImageView!=null){
+                            	burImageView.setImageBitmap(BitmapUtils.fastblur(context, bitmap, 10));
+                            }
                         } else if (mDefaultImageId != 0) {
                             setImageResource(mDefaultImageId);
                         }
@@ -190,10 +203,10 @@ public class NetworkImageView extends ImageView {
 
     private void setDefaultImageOrNull() {
         if(mDefaultImageId != 0) {
-            setImageResource(mDefaultImageId);
+         setImageResource(mDefaultImageId);
         }
         else {
-            setImageBitmap(null);
+            setImageBitmap(NativeBitmap);
         }
     }
 
@@ -221,4 +234,24 @@ public class NetworkImageView extends ImageView {
         super.drawableStateChanged();
         invalidate();
     }
+    
+    private Bitmap NativeBitmap;
+
+	public Bitmap getNativeBitmap() {
+		return NativeBitmap;
+	}
+
+	public void setNativeBitmap(Bitmap nativeBitmap) {
+		NativeBitmap = nativeBitmap;
+	}
+ 
+	/**
+	 * 毛玻璃效果的北京
+	 * */
+	private ImageView burImageView;
+	
+	public void setBurImageView(ImageView view){
+		this.burImageView=view;
+	}
+ 
 }

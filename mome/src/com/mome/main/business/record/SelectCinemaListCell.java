@@ -124,5 +124,4 @@ public class SelectCinemaListCell extends ExpandListCellBase{
 		private ImageView arrow;
 		
 	}
-
 }

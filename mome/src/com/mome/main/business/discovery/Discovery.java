@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mome.main.R;
+import com.mome.main.business.movie.MovieSearch;
 import com.mome.main.core.BaseFragment;
 import com.mome.main.core.annotation.LayoutInject;
 import com.mome.main.core.annotation.OnClick;
@@ -33,5 +34,13 @@ public class Discovery extends BaseFragment {
 	@OnClick(id = R.id.discovery_activity_layout)
 	public void activityClick(View view) {
 		Tools.toastShow("敬请期待");
+	}
+	
+	@Override
+	public void rightOnClick() {
+		// TODO Auto-generated method stub
+		super.rightOnClick();
+		Tools.pushScreen(MovieSearch.class, null);
+
 	}
 }

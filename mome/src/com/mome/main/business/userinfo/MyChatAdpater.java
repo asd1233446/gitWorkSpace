@@ -1,9 +1,14 @@
 package com.mome.main.business.userinfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.jessieray.api.model.Friend;
+import com.jessieray.api.model.MessageInfo;
 import com.mome.db.ChatItem;
 import com.mome.main.R;
+import com.mome.main.business.model.UserProperty;
+import com.mome.main.business.module.BaseAdapter;
 import com.mome.main.business.userinfo.UserDynaicListCell.ViewHolder;
 import com.mome.main.core.annotation.InjectProcessor;
 import com.mome.main.core.annotation.LayoutInject;
@@ -19,50 +24,41 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class MyChatAdpater extends ArrayAdapter<ChatItem>{
+public class MyChatAdpater extends BaseAdapter<MessageInfo>{
    private Context context;
-   private String userName;
    /**
     * 发送还是收入
     * */
-   
-	public MyChatAdpater(Context context, String userName) {
-		// TODO Auto-generated constructor stub
-		super(context, 0);		
+   public MyChatAdpater(Context context, ArrayList<MessageInfo> models) {
+		super(context, models);
 		this.context=context;
-		this.userName=userName;
+		// TODO Auto-generated constructor stub
 	}
-	
-	@Override
-		public int getItemViewType(int position) {
-			// TODO Auto-generated method stub
-		ChatItem nowMsg = (ChatItem)getItem(position);
-		return nowMsg.inOrOut;
+
+   @Override
+	public int getItemViewType(int position) {
+		// TODO Auto-generated method stub
+		if(models.get(position).getFromid().equals(UserProperty.getInstance().getUid())){
+			return 0;
+		}else{
+			return 1;
 		}
-	
-	
-	@Override
+	}
+   
+   @Override
 	public int getViewTypeCount() {
+		// TODO Auto-generated method stub
 		return 2;
 	}
 
 	
 	@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return super.getCount();
-		}
-	
-	
-	@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
-		Tools.toastShow("getView");
 		ViewHolder viewHolder = null;
-		int msgType = getItemViewType(position);
-		final ChatItem item = (ChatItem)getItem(position);
+		final MessageInfo item = models.get(position);
 		if (convertView == null) {
-			if (msgType ==0) {
+			if (getItemViewType(position)==0) {
 				convertView = LayoutInflater.from(context).inflate(R.layout.mine_chat_item, null);
 			} 
 			else {
@@ -76,9 +72,9 @@ public class MyChatAdpater extends ArrayAdapter<ChatItem>{
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		viewHolder.time.setText(item.sendDate);
-		viewHolder.msg.setText(item.msg);
-		//viewHolder.headIcon.setImageUrl(item.imageUrl, HttpRequest.getInstance().imageLoader);
+		viewHolder.time.setText(item.getCreatetime());
+		viewHolder.msg.setText(item.getBreif());
+		viewHolder.headIcon.setImageUrl(item.getAvatar(), HttpRequest.getInstance().imageLoader);
 		
 			return convertView;
 		}

@@ -46,7 +46,7 @@ public class UserDynaicListCell implements ListCellBase{
 		this.dynamicInfo = momentInfo;
 	}	
 	@Override
-	public View getView(View convertView) {
+	public View getView(int postion,View convertView) {
 		// TODO Auto-generated method stub
 		
 		ViewHolder viewHolder = null;
@@ -82,7 +82,6 @@ public class UserDynaicListCell implements ListCellBase{
 	        @Override
 	        public void onClick(View view) {
 	    			final TextView text=(TextView) view;
-	    			Tools.toastShow("==="+text.getText().toString());
 	    			if (!"取消赞".equals(text.getText().toString()))
 	    				AddArticleGoodRequest.findAddArticleGood(UserProperty
 	    						.getInstance().getUid(), dynamicInfo.getArticleid()
@@ -135,7 +134,6 @@ public class UserDynaicListCell implements ListCellBase{
 	
 	
 	private void selectorStyle(TextView view,String prise){
-		Log.e("==进入了selectorStyle=",prise+"===="+view.getText().toString());
 		if(prise.equals("取消赞")){
 			Drawable drawable=AppConfig.context.getResources().getDrawable(R.drawable.iconfont_zan);
 		    drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
@@ -201,10 +199,7 @@ public class UserDynaicListCell implements ListCellBase{
 			// 进入电影详情
 			Tools.toastShow("电影详情");
 			Bundle bundle=new Bundle();
-			MovieInfo movieinfo=new MovieInfo();
-			movieinfo.setMovieid(dynamicInfo.getMovieid());
-			movieinfo.setTitle(dynamicInfo.getTitle());
-			bundle.putSerializable("MovieInfo", movieinfo);
+			bundle.putString("movieId", dynamicInfo.getMovieid()+"");
 			 Tools.pushScreen(MovieDetail.class, bundle);
 
 		}
@@ -224,7 +219,7 @@ public class UserDynaicListCell implements ListCellBase{
 		public void FriendHomeOnClick(View view) {
 			Tools.toastShow("进入好友主页");
 			Bundle bundle=new Bundle();
-			bundle.putSerializable("friendInfo",dynamicInfo);
+			bundle.putString("userid",dynamicInfo.getUserid()+"");
 			Tools.pushScreen(FriendHome.class, bundle);
 			
 

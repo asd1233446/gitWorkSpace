@@ -27,7 +27,7 @@ public class MovieListCell implements ListCellBase {
 	private MovieInfo movieInfo;
 
 	@Override
-	public View getView(View convertView) {
+	public View getView(int postion,View convertView) {
 		View view = convertView;
 		ViewHolder viewHolder;
 		if (view == null) {
@@ -50,8 +50,6 @@ public class MovieListCell implements ListCellBase {
 		} else {
 			viewHolder.eye.setVisibility(View.INVISIBLE);
 		}
-		viewHolder.poster.setDefaultImageResId(R.drawable.ic_launcher);
-		viewHolder.poster.setErrorImageResId(R.drawable.ic_launcher);
 		viewHolder.poster.setImageUrl(movieInfo.getImagesrc(), HttpRequest.getInstance().imageLoader);
 		if(movieInfo.getFavoers() > 0) {
 			viewHolder.collect_ll.setVisibility(View.VISIBLE);
@@ -107,7 +105,7 @@ public class MovieListCell implements ListCellBase {
 		@OnClick(id = R.id.movie_list_cell_img)
 		public void posterClick(View paramView) {
 			Bundle bundle=new Bundle();
-			bundle.putSerializable("MovieInfo",movieInfo);
+			bundle.putString("movieId",movieInfo.getMovieid()+"");
 			Tools.pushScreen(MovieDetail.class, bundle);
 		}
 

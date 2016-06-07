@@ -201,8 +201,7 @@ public class UpdateUserInfo extends BaseFragment {
 					&& arg1.getImage().getClass() == savePicture.class) {
 				savePicture picture = arg1.getImage();
 				avatar = picture.getPath();
-				Log.e("=====", "===="+userIcon_iv+"==="+photo);
-				userIcon_iv.setImageBitmap(photo);
+				userIcon_iv.setImageBitmap(Tools.toRoundBitmap(photo));
 				Tools.toastShow("上传成功");
 			} else {
 				Tools.toastShow("修改成功");
@@ -225,12 +224,13 @@ public class UpdateUserInfo extends BaseFragment {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		if (resultCode == getActivity().RESULT_OK) {
+			Log.e("---------------", Tools.dip2px(getActivity(), 60)+"==");
 			switch (requestCode) {
 			case 1:
-				Tools.cropPhoto(this,Uri.fromFile(new File(Tools.SAVE_REAL_PATH, Tools.IMAGE_FILE_NAME)),150,150);
+				Tools.cropPhoto(this,Uri.fromFile(new File(Tools.SAVE_REAL_PATH, Tools.IMAGE_FILE_NAME)),Tools.dip2px(getActivity(), 60),Tools.dip2px(getActivity(), 60));
 				break;
 			case 2:
-				Tools.cropPhoto(this,data.getData(),150,150);
+				Tools.cropPhoto(this,data.getData(),Tools.dip2px(getActivity(), 60),Tools.dip2px(getActivity(), 60));
 				break;
 			case 3:
 				setImageToHeadView(data);

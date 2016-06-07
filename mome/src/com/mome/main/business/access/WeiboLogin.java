@@ -1,5 +1,8 @@
 package com.mome.main.business.access;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,52 +46,71 @@ public class WeiboLogin {
 	private SsoHandler mSsoHandler;
 
 	private static WeiboLogin sinaLogin;
+	
+	private ResultListener listener;
 
 	private Context context;
-	
-	private boolean isShare=false;
-
 	private final static int TOKEN_SUCCESS = 0;
 	private final static int FAILURE = TOKEN_SUCCESS + 1;
-	private final static int RE_GET_TOKEN = FAILURE + 1;
-	private final static String cacheKey = "weibo_token";
 	private TokenCache tokenCache;
-
-	private LoginInterface login;
-
-	public void setLoginInterface(LoginInterface login) {
-		this.login = login;
-
+	
+	private Map<String, String> parmes=new HashMap<String, String>();
+	//授权入口;0 查询用户信息，1获取好友列表
+	private int type=-1;
+	public WeiboLogin(Context context) {
+		this.context = context;
 	}
 
-	private WeiboLogin(Context context) {
-		this.context = context;
+
+	public void  query(int type,Map<String, String> parmes,ResultListener listener){
+	this.type=type;
+	this.parmes=parmes;
+	this.listener=listener;
+	auth();
+	}
+	
+	
+	private void auth(){
 		mAuthInfo = new AuthInfo(context, AppConfig.WEIBO_APP_KEY,
 				AppConfig.WEIBO_REDIRECT_URL, AppConfig.WEIBO_SCOPE);
-	}
-
-	public static WeiboLogin getInstance(Context context) {
-		if (sinaLogin == null) {
-			sinaLogin = new WeiboLogin(context);
-		}
-		return sinaLogin;
-	}
-
+		mSsoHandler = new SsoHandler((Activity) context, mAuthInfo);
+		mSsoHandler.authorize(new AuthListener());
+			}
+	
+	
 	private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			if (msg.what == FAILURE) {
-				login.error("登陆失败");
-			} else if (msg.what == TOKEN_SUCCESS) {
-				getUserInfo();
+			 if (msg.what == TOKEN_SUCCESS) {
+				 Log.e("type", "type"+type);
+				 switch (type) {
+				case 0:
+					//查询用户信息
+					getUserInfo();
+					break;
+				case 1:
+					//好友列表；
+					getFriends(parmes);
+					break;
+				default:
+					break;
+				}
+				
 			}
 		}
 	};
 
+//获得用户信息
 	private void getUserInfo() {
 		OpenAPI api = new OpenAPI(context, AppConfig.WEIBO_APP_KEY,
 				mAccessToken);
 		api.show(Long.valueOf(tokenCache.getId()), ResultListener);
+	}
+	//新浪微博好友列表
+	public void getFriends(Map parmes){
+		OpenAPI api = new OpenAPI(context, AppConfig.WEIBO_APP_KEY,
+				mAccessToken);
+		api.getFriends(tokenCache.getId(), (String)parmes.get("count"), (String) parmes.get("page"), "0", ResultListener);
 	}
 	
 	public void LogOut(){
@@ -104,33 +126,16 @@ public class WeiboLogin {
 		@Override
 		public void onComplete(String response) {
 			Log.e("====用户查询查询==", response);
-			if (!TextUtils.isEmpty(response)) {
-				JSONObject jsonObject;
-				try {
-					jsonObject = new JSONObject(response);
-					UserInfo info = new UserInfo();
-					info.setUserid(jsonObject.getString("id"));
-					info.setAvatar(jsonObject.getString("profile_image_url"));
-					info.setNickname(jsonObject.getString("screen_name"));
-					login.sucess(info);
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
+			listener.sucess(response);
 		}
 
 		@Override
 		public void onWeiboException(WeiboException e) {
 			e.printStackTrace();
+			listener.error("查询失败");
 		}
 	};
 
-	public void login() {
-		mSsoHandler = new SsoHandler((Activity) context, mAuthInfo);
-		mSsoHandler.authorize(new AuthListener());
-	}
 
 	public SsoHandler getSsoHandler() {
 		return mSsoHandler;
@@ -157,36 +162,36 @@ public class WeiboLogin {
 				tokenCache.setToken(mAccessToken.getToken());
 				tokenCache.setExpiresIn(mAccessToken.getExpiresTime());
 				tokenCache.setLoginTime(System.currentTimeMillis());
-				DataSaveManager.getInstance().saveObject(cacheKey, tokenCache);
-				if(!isShare){
+//				DataSaveManager.getInstance().saveObject(cacheKey, tokenCache);
+
 				handler.sendEmptyMessage(TOKEN_SUCCESS);
-				}
-				Tools.toastShow("授权成功");
+				Log.e("================","====授权成功==");
+				
+
+
 			} else {
 				// 以下几种情况，您会收到 Code：
 				// 1. 当您未在平台上注册的应用程序的包名与签名时；
 				// 2. 当您注册的应用程序包名与签名不正确时；
 				// 3. 当您在平台上注册的包名和签名与您当前测试的应用的包名和签名不匹配时。
 				String code = values.getString("code");
-				Tools.toastShow("授权失败错误吗" + code);
-				handler.sendEmptyMessage(FAILURE);
-				Log.e("==========", "授权授权失败");
+				Log.e("授权失败", code);
+
+				listener.error("登陆失败");
+
 			}
 		}
 
 		@Override
 		public void onCancel() {
-			Tools.toastShow("取消授权");
-			handler.sendEmptyMessage(FAILURE);
-			Log.e("==========", "取消授权");
+			Log.e("================","====授权取消==");
+
 		}
 
 		@Override
 		public void onWeiboException(WeiboException e) {
 			e.printStackTrace();
-			Tools.toastShow("取消授权");
-			handler.sendEmptyMessage(FAILURE);
-			Log.e("==========", "取消WeiboException权");
+		
 		}
 	}
 
@@ -197,11 +202,11 @@ public class WeiboLogin {
 	private IWeiboShareAPI mWeiboShareAPI;
 
 
-	public IWeiboShareAPI registerToSina(Context context) {
-		// 创建微博 SDK 接口实例
-		this.context = context;
+	public IWeiboShareAPI registerToSina() {
+		// 创建微博 SDK 接口实例		
 		mWeiboShareAPI = WeiboShareSDK.createWeiboAPI(context,
 				AppConfig.WEIBO_APP_KEY);
+		  mWeiboShareAPI.registerApp();
 		return mWeiboShareAPI;
 	}
 
@@ -221,14 +226,13 @@ public class WeiboLogin {
 	}
 
 	public void sendText(String shareText) {
-
 		// 1. 初始化微博的分享消息
         WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
 		if (!TextUtils.isEmpty(shareText)) {
 			Log.e("进入了发送", shareText);
 			TextObject textObject = new TextObject();
 			textObject.text = shareText;
-			weiboMessage.mediaObject = textObject;
+			weiboMessage.textObject = textObject;
 			send(weiboMessage);
 		}
 	}
@@ -239,20 +243,22 @@ public class WeiboLogin {
 			// 设置缩略图。 注意：最终压缩过的缩略图大小不得超过 32kb。
 			ImageObject imageObject = new ImageObject();
 			imageObject.setImageObject(shareImage);
-			weiboMessage.mediaObject = imageObject;
+			weiboMessage.imageObject = imageObject;
 			send(weiboMessage);
 		}
 	}
 
 	private void send(WeiboMultiMessage weiboMessage) {
 		  // 2. 初始化从第三方到微博的消息请求
-		isShare=true;
         SendMultiMessageToWeiboRequest request = new SendMultiMessageToWeiboRequest();
         // 用transaction唯一标识一个请求
         request.transaction = String.valueOf(System.currentTimeMillis());
         request.multiMessage = weiboMessage;
-        Log.e("mAuthInfo", mAuthInfo+"===");
-        mWeiboShareAPI.sendRequest((Activity) context, request, mAuthInfo,"", new AuthListener());
+//        String token="";
+//        if(tokenCache!=null){
+//        	token=tokenCache.getToken();
+//        }
+        mWeiboShareAPI.sendRequest((Activity) context, request, mAuthInfo, "", new AuthListener());
     
 	}
 }

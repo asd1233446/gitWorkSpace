@@ -6,6 +6,8 @@ package com.jessieray.api.model;
 
 import java.io.Serializable;
 
+import android.graphics.Bitmap;
+
 /**
  *
  * @deprecated关系列表
@@ -67,6 +69,19 @@ public class Friend implements Serializable{
 	 * 
 	 */
 	private String avatar;
+	
+	
+	private Bitmap bitmap;
+
+	public Bitmap getBitmap() {
+		return bitmap;
+	}
+
+	public void setBitmap(Bitmap bitmap) {
+		this.bitmap = bitmap;
+	}
+	
+	
 	
     
    

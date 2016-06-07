@@ -6,25 +6,27 @@
     android:orientation="vertical" >
 
     <RelativeLayout
+        android:id="@+id/head_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/common_max_marginOrpadding" >
 
         <com.mome.main.netframe.volley.toolbox.NetworkImageView
             android:id="@+id/dynamic_detail_list_cell_head_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/common_userhead_widht"
+            android:layout_height="@dimen/common_userhead_height"
             android:layout_marginRight="@dimen/common_marginOrpadding"
-            android:src="@drawable/ic_launcher" />
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/dynamic_detail_list_cell_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_samll_marginOrpadding"
             android:layout_toRightOf="@+id/dynamic_detail_list_cell_head_icon"
-            android:textColor="@color/black"
             android:text="sjofsdo"
-            android:textSize="@dimen/common_max_textSize" />
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_middle_textSize" />
 
         <TextView
             android:id="@+id/dynamic_detail_list_cell_comment"
@@ -33,6 +35,7 @@
             android:layout_below="@+id/dynamic_detail_list_cell_username"
             android:layout_marginTop="@dimen/common_marginOrpadding"
             android:layout_toRightOf="@+id/dynamic_detail_list_cell_head_icon"
+            android:text="sjofsdo"
             android:textColor="@color/gray"
             android:textSize="@dimen/common_textSize" />
 
@@ -41,12 +44,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/common_samll_marginOrpadding"
             android:drawableLeft="@drawable/dynamic_img_date"
             android:text="fsodfjsdof"
             android:textColor="@color/dynamicDateColor"
             android:textSize="@dimen/common_textSize" />
     </RelativeLayout>
-    
-    <View style="@style/line_horizontal"/>
+
+    <View style="@style/line_horizontal" />
 
 </LinearLayout>

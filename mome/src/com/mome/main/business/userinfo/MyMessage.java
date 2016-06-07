@@ -108,7 +108,7 @@ public class MyMessage extends BaseFragment implements OnItemClickListener{
 		     info.setAverage(i+100);
 		     info.setMovietype(i+"剧情");
 			MyMessageListCell cell=new MyMessageListCell();
-			cell.setTypeInfo(info);
+			//cell.setTypeInfo(info);
 			messageData.add(cell);			
 		}
 		adapter.notifyDataSetChanged();

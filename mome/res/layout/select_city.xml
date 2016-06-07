@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/combackgroud"
+    android:background="@color/gary_line"
     android:orientation="vertical" >
 
     <com.mome.main.business.HeadRef
         xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
         android:id="@+id/head_layout"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         head:leftBtnShow="show"
         head:leftButton="img"
         head:leftImg="@drawable/headview_btn_back"
@@ -20,23 +20,24 @@
     <EditText
         android:id="@+id/seachCity"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_margin="@dimen/common_middle_marginOrpadding"
-        android:background="@drawable/input_edittext_bg"
-        android:drawableLeft="@drawable/headview_icon_search"
-        android:hint="搜索" />
+        android:background="@drawable/edit_bg"
+        android:drawableLeft="@drawable/search_xiao"
+        android:hint="搜索"
+        android:paddingLeft="10dp"
+        android:textSize="@dimen/common_small_textSize" />
 
     <TextView
         android:id="@+id/gpsCity"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginBottom="@dimen/common_marginOrpadding"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:hint="北京"
-        android:padding="@dimen/common_marginOrpadding"
-        android:textColor="@color/black"
-        android:textSize="@dimen/common_middle_textSize" />
+        android:hint="北京GPS"
+        android:padding="@dimen/common_middle_marginOrpadding"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/common_textSize" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -51,7 +52,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_marginOrpadding"
+                android:layout_marginLeft="@dimen/common_middle_marginOrpadding"
+                android:layout_marginTop="@dimen/common_samll_marginOrpadding"
                 android:gravity="center_vertical"
                 android:text="热门城市"
                 android:textColor="@color/black"
@@ -61,49 +63,67 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="40dp"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:padding="@dimen/common_middle_marginOrpadding" >
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="@dimen/common_marginOrpadding"
+                    android:id="@+id/bj_tv"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="@dimen/common_middle_marginOrpadding"
                     android:layout_weight="1"
-                    android:background="@color/white"
+                    android:background="@drawable/edit_bg"
                     android:gravity="center"
                     android:hint="北京"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/common_middle_textSize" />
+                    android:textSize="@dimen/common_textSize" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="@dimen/common_marginOrpadding"
+                    android:id="@+id/sh_tv"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="@dimen/common_middle_marginOrpadding"
                     android:layout_weight="1"
-                    android:background="@color/white"
+                    android:background="@drawable/edit_bg"
                     android:gravity="center"
-                    android:hint="北京"
+                    android:hint="上海"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/common_middle_textSize" />
+                    android:textSize="@dimen/common_textSize" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="@dimen/common_marginOrpadding"
+                    android:id="@+id/gz_tv"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="@dimen/common_middle_marginOrpadding"
                     android:layout_weight="1"
-                    android:background="@color/white"
+                    android:background="@drawable/edit_bg"
                     android:gravity="center"
-                    android:hint="北京"
+                    android:hint="广州"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/common_middle_textSize" />
+                    android:textSize="@dimen/common_textSize" />
+
+                <TextView
+                    android:id="@+id/tj_tv"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_bg"
+                    android:gravity="center"
+                    android:hint="天津"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_textSize" />
             </LinearLayout>
 
             <se.emilsjolander.stickylistheaders.ExpandableStickyListHeadersListView
                 android:id="@+id/expandableList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
                 android:clipToPadding="false"
+                android:divider="@color/gary_line"
+                android:dividerHeight="@dimen/common_line_height"
                 android:drawSelectorOnTop="true"
+                android:listSelector="#00000000"
+                
                 android:scrollbars="none" />
         </LinearLayout>
 

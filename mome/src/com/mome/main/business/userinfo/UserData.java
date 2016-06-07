@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -387,7 +388,7 @@ public class UserData extends BaseFragment implements OnCheckedChangeListener {
 			markgood = (TextView) view.findViewById(R.id.markGood_tv);
 			markOrdinary = (TextView) view.findViewById(R.id.markOrdinary_tv);
 			marklow = (TextView) view.findViewById(R.id.marklow_tv);
-			markLower = (TextView) view.findViewById(R.id.markLower_tv);
+			markLower = (TextView) view.findViewById(R.id.markLower_tv);			
 
 		}
 	}

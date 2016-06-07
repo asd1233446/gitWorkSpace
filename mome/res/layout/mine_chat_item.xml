@@ -31,7 +31,7 @@
         android:gravity="center_vertical"
         android:layout_toLeftOf="@+id/userIcon"
         android:maxWidth="200dp"
-        android:padding="@dimen/common_max_marginOrpadding"
+        android:padding="@dimen/common_samll_marginOrpadding"
         android:text="我不是我的的饿死地方还送电风扇等候发生地附近搜到福建省东方手动方式都放松的"
         android:textColor="@color/gray"
         android:textSize="@dimen/common_middle_textSize" />

@@ -1,5 +1,6 @@
 package com.mome.main.business.record;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +20,19 @@ import com.mome.main.business.module.ExpandListAdapter;
 import com.mome.main.business.module.ExpandListCellBase;
 import com.mome.main.business.widget.pulltorefresh.PullToRefreshExpandableListView;
 import com.mome.main.core.BaseFragment;
+import com.mome.main.core.MainActivity;
 import com.mome.main.core.annotation.LayoutInject;
+import com.mome.main.core.annotation.OnClick;
 import com.mome.main.core.annotation.ViewInject;
 import com.mome.main.core.utils.Tools;
-import com.mome.main.core.utils.Tools.callBack;
+import com.mome.main.core.utils.Tools.CallBack;
+import com.mome.main.core.utils.Tools.CallInnerBack;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -33,12 +41,21 @@ import android.widget.ExpandableListView.OnChildClickListener;
 
 @LayoutInject(layout = R.layout.select_cinema)
 public class SelectCinema extends BaseFragment implements OnChildClickListener {
+	List<CinemaInfo> fuzzySearch = new ArrayList<CinemaInfo>();
 
 	/**
 	 * 搜索框
 	 */
 	@ViewInject(id = R.id.select_cinema_search_edittext)
 	private EditText search;
+
+	@OnClick(id = R.id.select_cinema_search_edittext)
+	public void onSearchClick(View view) {
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("list", (Serializable) fuzzySearch);
+		Tools.pushScreen(CinemaSearch.class, bundle);
+	}
+
 	/**
 	 * 影院列表
 	 */
@@ -53,7 +70,7 @@ public class SelectCinema extends BaseFragment implements OnChildClickListener {
 
 	/** 分组下集合 */
 	private ArrayList<List<ExpandListCellBase>> dataList = new ArrayList<List<ExpandListCellBase>>();
-	private String cityName = "北京";
+	private String cityName = MainActivity.cityName;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -62,24 +79,27 @@ public class SelectCinema extends BaseFragment implements OnChildClickListener {
 
 	}
 
-	private void setUpListview() {
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		headView.btnRight.setText(cityName);
+		super.onStart();
+	}
 
+	private void setUpListview() {
 		adapter = new ExpandListAdapter();
 		adapter.setDataList(dataList);
 		adapter.setGroupDataList(groupList);
 		listView.setAdapter(adapter);
 		listView.expandGroup(0);
 		listView.setOnChildClickListener(this);
-		Tools.setCallListener(new callBack() {
-
+		Tools.setCallInnerListener(new CallInnerBack() {
 			@Override
 			public void Back(Object params) {
 				// TODO Auto-generated method stub
 				cityName = (String) params;
 				headView.btnRight.setText(cityName);
 				getUserRecall();
-				groupList.clear();
-				dataList.clear();
 			}
 		});
 		getUserRecall();
@@ -94,6 +114,10 @@ public class SelectCinema extends BaseFragment implements OnChildClickListener {
 	public <T> void sucess(Type arg0, ResponseResult<T> arg1) {
 		// TODO Auto-generated method stub
 		super.sucess(arg0, arg1);
+		fuzzySearch.clear();
+		groupList.clear();
+		dataList.clear();
+
 		CinemaListByCity cinema = arg1.getModel();
 		if (cinema.getMycinemas().size() > 0) {
 			SelectCinemaListCell cell = new SelectCinemaListCell();
@@ -107,6 +131,7 @@ public class SelectCinema extends BaseFragment implements OnChildClickListener {
 				cell = new SelectCinemaListCell();
 				cell.setInfo(cinemainfo);
 				childList.add(cell);
+				fuzzySearch.add(cinemainfo);
 			}
 			dataList.add(childList);
 		}
@@ -120,6 +145,7 @@ public class SelectCinema extends BaseFragment implements OnChildClickListener {
 					cell = new SelectCinemaListCell();
 					cell.setInfo(cinemainfo);
 					childList.add(cell);
+					fuzzySearch.add(cinemainfo);
 				}
 				dataList.add(childList);
 			}
@@ -136,10 +162,8 @@ public class SelectCinema extends BaseFragment implements OnChildClickListener {
 		SelectCinemaListCell cell = (SelectCinemaListCell) adapter.getChild(
 				groupPosition, childPosition);
 		CinemaInfo info = cell.getInfo();
-		Bundle bundle = new Bundle();
-		bundle.putSerializable("cinemaInfo", info);
-		Tools.toastShow(info.getTitle());
-		Tools.pushScreen(MovieList.class, bundle);
+		Tools.getCallListener().Back(info);
+		Tools.pullScreen();
 		return false;
 	}
 

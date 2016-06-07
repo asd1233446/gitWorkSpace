@@ -7,17 +7,6 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
-        android:id="@+id/dynamic_list_cell_line"
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/dynamicLineColor"
-        android:orientation="horizontal" />
-
-    <LinearLayout
-        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/common_marginOrpadding"
         android:layout_marginRight="@dimen/common_marginOrpadding"
@@ -35,84 +24,75 @@
 
                 <com.mome.main.netframe.volley.toolbox.NetworkImageView
                     android:id="@+id/dynamic_list_cell_head_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_launcher" />
+                    android:layout_width="@dimen/common_userhead_widht"
+                    android:layout_height="@dimen/common_userhead_height"
+                    android:layout_marginRight="@dimen/common_samll_marginOrpadding"
+                    android:scaleType="fitXY" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_marginLeft="10.0dip"
                     android:gravity="center_vertical"
                     android:orientation="vertical" >
 
                     <TextView
                         android:id="@+id/dynamic_list_cell_user_name"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:gravity="center"
                         android:text="用户名"
                         android:textColor="@color/black"
                         android:textSize="@dimen/common_max_textSize" />
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp" >
+                        android:gravity="center_vertical" >
 
                         <RatingBar
                             android:id="@+id/dynamic_list_cell_rating"
-                            style="?android:attr/ratingBarStyleSmall"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxHeight="20dp"
-                            android:maxWidth="20dp"
-                            android:minHeight="20dp"
-                            android:minWidth="20dp"
+                            android:layout_height="32px"
+                            android:layout_centerVertical="true"
+                            android:isIndicator="true"
                             android:numStars="5"
                             android:progressDrawable="@drawable/bg_rating"
-                            android:rating="1.5" />
+                            android:rating="6" />
 
                         <TextView
                             android:id="@+id/dynamic_list_cell_score"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@+id/dynamic_list_cell_rating"
                             android:text="6.5"
                             android:textColor="@color/dynamicScoreClolor" />
-                    </LinearLayout>
+                    </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
 
             <TextView
                 android:id="@+id/dynamic_list_cell_movie_info"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="10dp"
+                android:layout_weight="1"
                 android:text="一个传统的电影"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/common_textSize" />
 
-            <LinearLayout
-                android:layout_width="fill_parent"
+            <TextView
+                android:id="@+id/dynamic_list_cell_date"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical" >
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/dynamic_img_date" />
-
-                <TextView
-                    android:id="@+id/dynamic_list_cell_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="2015-04-11"
-                    android:textColor="@color/dynamicDateColor"
-                    android:textSize="@dimen/common_textSize" />
-            </LinearLayout>
+                android:layout_marginBottom="@dimen/common_samll_marginOrpadding"
+                android:drawableStart="@drawable/dynamic_img_date"
+                android:gravity="bottom"
+                android:text="2015-04-11"
+                android:textColor="@color/dynamicDateColor"
+                android:textSize="@dimen/common_textSize" />
         </LinearLayout>
 
         <LinearLayout
@@ -123,27 +103,23 @@
 
             <com.mome.main.netframe.volley.toolbox.NetworkImageView
                 android:id="@+id/dynamic_list_cell_movie_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher" />
+                android:layout_width="@dimen/common_moviehead_widht"
+                android:layout_height="@dimen/common_moviehead_small_height"
+                android:scaleType="fitXY" />
 
             <TextView
                 android:id="@+id/dynamic_list_cell_movie_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="@dimen/common_samll_marginOrpadding"
+                android:layout_marginTop="@dimen/common_samll_marginOrpadding"
                 android:text="电影名称"
-                android:textColor="@color/black"
+                android:textColor="@color/gray"
                 android:textSize="@dimen/common_max_textSize" />
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/dynamicLineColor"
-        android:orientation="horizontal" />
+    <View style="@style/line_horizontal" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -194,19 +170,5 @@
                 android:textSize="@dimen/common_textSize" />
         </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/dynamicLineColor"
-        android:orientation="horizontal" />
-
-    <LinearLayout
-        android:id="@+id/dynamic_list_cell_bottom_line"
-        android:layout_width="fill_parent"
-        android:layout_height="15dp"
-        android:background="@color/combackgroud"
-        android:orientation="horizontal"
-        android:visibility="visible" />
 
 </LinearLayout>

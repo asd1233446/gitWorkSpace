@@ -191,16 +191,17 @@ public class BoutiqueFrgment extends Fragment implements ResponseCallback{
 		if (getArticleByUserId != null && getArticleByUserId.getTotal() > 0) {
 			addComment(getArticleByUserId);
 
-		} else {
-			mPullRefreshListView
-					.setEmptyView(Tools.setEmptyView(getActivity()));
-		}
+		} 
+//		else {
+//			mPullRefreshListView
+//					.setEmptyView(Tools.setEmptyView(getActivity()));
+//		}
 	}
 
 	@Override
 	public boolean isRefreshNeeded() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }

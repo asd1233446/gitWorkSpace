@@ -7,6 +7,7 @@ import com.jessieray.api.model.MovieInfo;
 import com.jessieray.api.model.UserFavorite;
 import com.jessieray.api.request.base.ResponseError;
 import com.jessieray.api.request.base.ResponseResult;
+import com.jessieray.api.service.GetCircleMovieListRequest;
 import com.jessieray.api.service.RecallStatisticalRequest;
 import com.jessieray.api.service.UserFavoriteRequest;
 import com.mome.main.R;
@@ -78,7 +79,6 @@ public class MyCollect extends BaseFragment {
 		 bundle=getArguments();
 		userId=bundle!=null?bundle.getString("userId"):UserProperty.getInstance().getUid();
 		initView();
-		UserFavoriteRequest.findUserFavorite(userId, 1, AppConfig.PAGE_SIZE, this);
 	}
 
 	
@@ -96,6 +96,7 @@ public class MyCollect extends BaseFragment {
 		upLine.setVisibility(View.GONE);
 		btnLayout.setVisibility(View.GONE);
 		downLine.setVisibility(View.GONE);
+		Tools.setRereshing(mPullRefreshListView);
 		mPullRefreshListView
 				.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener2<ListView>() {
 
@@ -112,10 +113,7 @@ public class MyCollect extends BaseFragment {
 						refreshView.getLoadingLayoutProxy()
 								.setLastUpdatedLabel(label);
 						curPageIndex = 1;
-						UserFavoriteRequest.findUserFavorite(UserProperty
-								.getInstance().getUid(), curPageIndex,
-								AppConfig.PAGE_SIZE, MyCollect.this);
-						mPullRefreshListView.setMode(Mode.BOTH);
+						getMovieList();
 					}
 
 					@Override
@@ -130,18 +128,12 @@ public class MyCollect extends BaseFragment {
 						// Update the LastUpdatedLabel
 						refreshView.getLoadingLayoutProxy()
 								.setLastUpdatedLabel(label);
-						if (curPageIndex < totalPage) {
-							curPageIndex++;
-							UserFavoriteRequest.findUserFavorite(UserProperty
-									.getInstance().getUid(), curPageIndex,
-									AppConfig.PAGE_SIZE, MyCollect.this);
-							mPullRefreshListView.setMode(Mode.BOTH);
-						} else {
-							mPullRefreshListView.setMode(Mode.PULL_FROM_START);
-						}
+						
+						getMovieList();
+					
 					}
 				});
-		mPullRefreshListView.setMode(Mode.BOTH);
+		mPullRefreshListView.setMode(Mode.PULL_FROM_START);
 		listView = mPullRefreshListView.getRefreshableView();
 		adapter = new ListAdapter();
 		adapter.setDataList(movieListData);
@@ -157,6 +149,13 @@ public class MyCollect extends BaseFragment {
 		if (curPageIndex == 1) {
 			movieListData.clear();
 		}
+		if (totalPage > curPageIndex){
+			mPullRefreshListView.setMode(Mode.BOTH);
+		    curPageIndex++;
+		}
+		else {
+			mPullRefreshListView.setMode(Mode.PULL_FROM_START);
+		}		
 		for (MovieInfo movieInfo : userFavorite.getMovies()) {
 			MovieListCell movieListCell = new MovieListCell();
 			movieListCell.setMovieInfo(movieInfo);
@@ -184,4 +183,12 @@ public class MyCollect extends BaseFragment {
 			}
 		}
 	}
+	
+	private void getMovieList(){
+		
+		UserFavoriteRequest.findUserFavorite(UserProperty
+				.getInstance().getUid(), curPageIndex,
+				AppConfig.PAGE_SIZE, MyCollect.this);
+	
+}
 }

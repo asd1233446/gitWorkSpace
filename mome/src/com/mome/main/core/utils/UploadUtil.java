@@ -1,11 +1,15 @@
 package com.mome.main.core.utils;
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Map;
 import java.util.UUID;
 
 import com.google.gson.Gson;
@@ -16,6 +20,7 @@ import com.jessieray.api.request.base.Request;
 import com.jessieray.api.request.base.ResponseCallback;
 import com.jessieray.api.request.base.ResponseError;
 import com.jessieray.api.request.base.ResponseResult;
+import com.mome.main.core.utils.Tools.CallBack;
 import com.mome.main.netframe.volley.RequestQueue;
 import com.mome.main.netframe.volley.Response.ErrorListener;
 import com.mome.main.netframe.volley.Response.Listener;
@@ -23,149 +28,140 @@ import com.mome.main.netframe.volley.VolleyError;
 import com.mome.main.netframe.volley.toolbox.MultipartRequest;
 import com.mome.main.netframe.volley.toolbox.MultipartRequestParams;
 import com.mome.main.netframe.volley.toolbox.Volley;
+import com.mome.view.LoadingDialog;
 
 import android.content.Context;
+import android.util.Log;
+
 /**
- * 上传头像 
+ * 上传头像
+ * 
  * @author Administrator
- *
+ * 
  */
 public class UploadUtil {
-	private static final String TAG = "uploadFile";
-
 	private static final int TIME_OUT = 10 * 1000; // 超时时间
 
 	private static final String CHARSET = "utf-8"; // 设置编码
-	/**
-	 * Android上传文件到服务端
-	 * 
-	 * @param file
-	 *            需要上传的文件
-	 * @param RequestURL请求的rul
-	 * @return 返回响应的内容
-	 */
-	public static String uploadFile(Context context, File file, String RequestURL,String key) {
-			
-//		Log.e("上传图片的url", RequestURL);
-		String result = "";
-		String BOUNDARY = UUID.randomUUID().toString(); // 边界标识 随机生成
-		String CONTENT_TYPE = "multipart/form-data"; // 内容类型
-		String PREFIX = "--", LINE_END = "\r\n";
-		// StringBuffer sb1=new StringBuffer();;
-//		MySharePreferences mySpf=new MySharePreferences(context);
-//		String PHPSESSID =mySpf.getCookie();
-//		String _account = mySpf.get_account();
-//		String keepLogin=mySpf.getKeepLogin();
-		try {
-			URL url = new URL(RequestURL);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setReadTimeout(TIME_OUT);
-			conn.setConnectTimeout(TIME_OUT);
-			conn.setDoInput(true); // 允许输入流
-			conn.setDoOutput(true); // 允许输出流
-			conn.setUseCaches(false); // 不允许使用缓存
-			conn.setRequestMethod("POST"); // 请求方式
-			conn.setRequestProperty("Charset", CHARSET); // 设置编码
-			conn.setRequestProperty("connection", "keep-alive");
-//			conn.setRequestProperty("Cookie","PHPSESSID="+PHPSESSID+";"+"_account="+_account+";"+"keepLogin="+keepLogin);
-			conn.setReadTimeout(8000);
-			conn.setConnectTimeout(3000);
-			conn.setRequestProperty("Content-Type", CONTENT_TYPE + ";boundary=" + BOUNDARY);
-			if (file != null) {
-				/**
-				 * 当文件不为空，把文件包装并且上传
-				 */
-				DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-				StringBuffer sb = new StringBuffer();
-				sb.append(PREFIX);
-				sb.append(BOUNDARY);
-				sb.append(LINE_END);
-				/**
-				 * 这里重点注意： name里面的值为服务端需要key 只有这个key 才可以得到对应的文件
-				 * filename是文件的名字，包含后缀名的 比如:abc.png
-				 */
 
-				sb.append("Content-Disposition: form-data; name=\""+key+"\"; filename=\"" + file.getName() + "\"" + LINE_END);
-				sb.append("Content-Type: application/octet-stream; charset=" + CHARSET + LINE_END);
-				sb.append(LINE_END);
-				dos.write(sb.toString().getBytes());
-				InputStream is = new FileInputStream(file);
-				byte[] bytes = new byte[1024];
-				int len = 0;
-				while ((len = is.read(bytes)) != -1) {
-					dos.write(bytes, 0, len);
-				}
-				is.close();
-				dos.write(LINE_END.getBytes());
-				byte[] end_data = (PREFIX + BOUNDARY + PREFIX + LINE_END).getBytes();
-				dos.write(end_data);
-				dos.flush();
-				/**
-				 * 获取响应码 200=成功 当响应成功，获取响应的流
-				 */
-				int res = conn.getResponseCode();
-//				Log.e(TAG, "response code:" + res);
-				 if(res==200)
-				 {
-//						Log.e(TAG, "request success"); 
+	public static void httpUtil(String RequestURL,
+			Map<String, String> signParams, final String RequestMethod,
+			final CallBack callBack) {
+		final String spanUrl;
+		final StringBuilder strbuf = new StringBuilder();
+		for (Map.Entry<String, String> paramEntry : signParams.entrySet()) {
+			if (strbuf.length() > 0) {
+				strbuf.append("&");
+			}
+			strbuf.append(paramEntry.getKey()).append("=")
+					.append(paramEntry.getValue());
+		}
+		if ("GET".equals(RequestMethod)&&signParams.size()>0) {
+			spanUrl = strbuf.insert(0, "?").insert(0, RequestURL).toString();
+		} else {
+			spanUrl = RequestURL;
+		}
+		Tools.Log("网络请求url:" + spanUrl);
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				String result = "";
+				try {
+					URL url = new URL(spanUrl);
+					final HttpURLConnection conn = (HttpURLConnection) url
+							.openConnection();
+					conn.setReadTimeout(TIME_OUT);
+					conn.setConnectTimeout(TIME_OUT);
+					conn.setUseCaches(false); // 不允许使用缓存
+					conn.setRequestMethod(RequestMethod); // 请求方式
+					conn.setRequestProperty("Charset", CHARSET); // 设置编码
+					conn.setRequestProperty("connection", "keep-alive");
+					conn.setReadTimeout(8000);
+					conn.setConnectTimeout(3000);
+					conn.setRequestProperty("Content-Type",
+							"application/x-www-form-urlencoded; charset=utf-8");
+					if ("POST".equals(RequestMethod)) {
+						conn.setDoInput(true); // 允许输入流
+						conn.setDoOutput(true); // 允许输出流
+						byte[] bypes = strbuf.toString().getBytes();
+						conn.getOutputStream().write(bypes);// 输入参数
+					}
+					int res = conn.getResponseCode();
+					Log.e("=============", "res" + res);
+					if (res == 200) {
 						InputStream input = conn.getInputStream();
+						BufferedReader br = new BufferedReader(
+								new InputStreamReader(input, "utf-8"));
 						StringBuffer sb1 = new StringBuffer();
 						int ss;
-						while ((ss = input.read()) != -1) {
+						while ((ss = br.read()) != -1) {
 							sb1.append((char) ss);
 						}
-
 						result = sb1.toString();
-						
-						return result;
-				 }
-			
-			
-				return result;
-				//Log.v("==result", result+"");
+						callBack.Back(result);
+
+					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+					callBack.Back(result);
+
+				}
 
 			}
-		} catch (/*MalformedURLException*/Exception e) {
-			e.printStackTrace();
-			return "";
-		}
-		return "";
-		
+		}).start();
+
 	}
-	
-	 static String result="";
-	public static void upload(String imageUrl, MultipartRequestParams params,  final ResponseCallback callback){
-	         
-		    MultipartRequest multiPartRequest =new MultipartRequest(AppConfig.url+imageUrl, params, new Listener<String>() {
 
-				@Override
-				public void onResponse(String response) {
-					// TODO Auto-generated method stub
-					
-					callback.sucess(new com.google.gson.reflect.TypeToken<ResponseResult<Object>>() {}.getType(), getObject(response));
+	public static void upload(String imageUrl, MultipartRequestParams params,
+			final ResponseCallback callback) {
+		MultipartRequest multiPartRequest = new MultipartRequest(AppConfig.url
+				+ imageUrl, params, new Listener<String>() {
+
+			@Override
+			public void onResponse(String response) {
+				// TODO Auto-generated method stub
+				ResponseResult result = getObject(response);
+				if (result.getCode() == AppConfig.REQUEST_CODE_SUCCESS) {
+					callback.sucess(
+							new com.google.gson.reflect.TypeToken<ResponseResult<Object>>() {
+							}.getType(), result);
+				} else {
+					ResponseError error = new ResponseError();
+					error.setMessage(result.getMessage());
+					callback.error(error);
 				}
-			} , new ErrorListener() {
+			}
+		}, new ErrorListener() {
 
-				@Override
-				public void onErrorResponse(VolleyError error) {
-					// TODO Auto-generated method stub
-					ResponseError responseError=new ResponseError();
-					responseError.setMessage(error.getMessage());
-					callback.error(responseError);
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				// TODO Auto-generated method stub
+				ResponseError responseError = new ResponseError();
+				responseError.setMessage(error.getMessage());
+				callback.error(responseError);
 
-				}
-				
-			
-			});
-		    
-	   RequestQueue		requestQueue = Volley.newRequestQueue(AppConfig.context);
-			requestQueue.start();
-			requestQueue.add(multiPartRequest);
-}
-	
-	   public static <T> ResponseResult<?> getObject(String jsonString) {
-		   Gson gson=new Gson();
-			 ResponseResult<?> response = (ResponseResult<?>) gson.fromJson(jsonString, new com.google.gson.reflect.TypeToken<ResponseResult<savePicture>>() {}.getType());
-	        return response ;
-	    }
+			}
+
+		});
+
+		RequestQueue requestQueue = Volley.newRequestQueue(AppConfig.context);
+		requestQueue.start();
+		requestQueue.add(multiPartRequest);
+	}
+
+	public static <T> ResponseResult<?> getObject(String jsonString) {
+		Log.e("上传图片返回的结果", jsonString);
+		Gson gson = new Gson();
+		ResponseResult<?> response = (ResponseResult<?>) gson
+				.fromJson(
+						jsonString,
+						new com.google.gson.reflect.TypeToken<ResponseResult<savePicture>>() {
+						}.getType());
+		return response;
+	}
+
 }

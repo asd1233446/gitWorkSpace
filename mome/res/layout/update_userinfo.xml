@@ -29,9 +29,9 @@
 
         <com.mome.main.netframe.volley.toolbox.NetworkImageView
             android:id="@+id/userIcon_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher" />
+            android:layout_width="@dimen/common_userhead_widht"
+            android:layout_height="@dimen/common_userhead_height"
+            android:scaleType="fitXY"/>
 
         <TextView
             android:layout_width="wrap_content"

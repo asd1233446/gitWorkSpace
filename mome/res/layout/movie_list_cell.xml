@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical" >
 
-   
-
     <com.mome.main.netframe.volley.toolbox.NetworkImageView
         android:id="@+id/movie_list_cell_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_marginOrpadding"
-        android:layout_marginLeft="@dimen/common_marginOrpadding"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_launcher" />
+        android:layout_width="@dimen/common_moviehead_widht"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/line"
+        android:layout_alignTop="@+id/line"
+        android:layout_marginLeft="@dimen/common_middle_marginOrpadding"
+        android:scaleType="fitXY" />
 
     <LinearLayout
         android:id="@+id/line"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/common_marginOrpadding"
+        android:layout_margin="@dimen/common_middle_marginOrpadding"
         android:layout_toRightOf="@+id/movie_list_cell_img"
         android:gravity="center_vertical"
         android:orientation="vertical" >
@@ -53,8 +51,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:textColor="@color/gray" 
-                    android:text="共有" />
+                    android:text="共有"
+                    android:textColor="@color/gray" />
 
                 <TextView
                     android:id="@+id/collectionNum"
@@ -83,12 +81,13 @@
                 android:id="@+id/movie_list_cell_rating"
                 style="androidratingBarStyleSmall"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35px"
                 android:maxHeight="20dp"
                 android:maxWidth="20dp"
                 android:minHeight="20dp"
                 android:minWidth="20dp"
                 android:numStars="5"
+                android:layout_marginTop="2dp"
                 android:progressDrawable="@drawable/bg_rating"
                 android:rating="1.5" />
 
@@ -96,7 +95,7 @@
                 android:id="@+id/movie_list_cell_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/common_middle_marginOrpadding"
+                android:layout_marginLeft="@dimen/common_samll_marginOrpadding"
                 android:text="6.5"
                 android:textColor="@color/dynamicScoreClolor" />
 
@@ -168,22 +167,19 @@
 
             <ImageView
                 android:id="@+id/movie_list_cell_eyes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_toLeftOf="@+id/movie_list_cell_add"
                 android:src="@drawable/movie_btn_eye" />
 
             <ImageView
                 android:id="@+id/movie_list_cell_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/movie_btn_add" />
         </RelativeLayout>
-        
     </LinearLayout>
- <View
-       android:layout_below="@+id/line"
-        style="@style/line_horizontal_Max" />
+
 </RelativeLayout>

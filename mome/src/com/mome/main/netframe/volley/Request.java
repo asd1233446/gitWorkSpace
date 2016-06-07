@@ -27,7 +27,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.mome.main.core.utils.AppConfig;
+import com.mome.main.core.utils.Tools;
 import com.mome.main.netframe.volley.VolleyLog.MarkerLog;
 
 /**
@@ -82,7 +85,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
     private RequestQueue mRequestQueue;
 
     /** Whether or not responses to this request should be cached. */
-    private boolean mShouldCache = false;//是否设置缓存
+    private boolean mShouldCache = true;//是否设置缓存
 
     /** Whether or not this request has been canceled. */
     private boolean mCanceled = false;
@@ -439,6 +442,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
     public String getBodyContentType() {
         return "application/x-www-form-urlencoded; charset=" + getParamsEncoding();
     }
+    
 
     /**
      * Returns the raw POST or PUT body to be sent.
@@ -473,6 +477,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
                 }
                 index++;
             }
+            Log.e("post参数", "post参数"+encodedParams.toString());
             return encodedParams.toString().getBytes(paramsEncoding);
         } catch (UnsupportedEncodingException uee) {
             throw new RuntimeException("Encoding not supported: " + paramsEncoding, uee);
@@ -620,7 +625,8 @@ public abstract class Request<T> implements Comparable<Request<T>> {
     }
     
     public boolean isRefreshNeeded() {
-    	return isRefreshNeeded;
+    	
+    	return Tools.isNetworkAvailable(AppConfig.context);
     }
     
 	public void setCacheRefreshNeeded(boolean isCacheRefreshNeeded) {

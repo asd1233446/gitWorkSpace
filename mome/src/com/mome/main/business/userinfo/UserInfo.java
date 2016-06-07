@@ -6,15 +6,20 @@ import com.jessieray.api.model.Me;
 import com.jessieray.api.request.base.ResponseResult;
 import com.jessieray.api.service.MeRequest;
 import com.mome.main.R;
+import com.mome.main.business.access.Login;
 import com.mome.main.business.model.UserProperty;
 import com.mome.main.business.movie.MovieMemoirs;
 import com.mome.main.core.BaseFragment;
 import com.mome.main.core.annotation.LayoutInject;
 import com.mome.main.core.annotation.OnClick;
 import com.mome.main.core.annotation.ViewInject;
+import com.mome.main.core.net.HttpRequest;
 import com.mome.main.core.utils.AppConfig;
 import com.mome.main.core.utils.Tools;
+import com.mome.main.netframe.volley.toolbox.ImageLoader;
+import com.mome.main.netframe.volley.toolbox.NetworkImageView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -28,7 +33,7 @@ public class UserInfo extends BaseFragment {
 	 * 用户头像
 	 */
 	@ViewInject(id = R.id.userinfo_head_icon)
-	private ImageView userIcon;
+	private NetworkImageView userIcon;
 	/**
 	 * 用户名称
 	 */
@@ -77,7 +82,8 @@ public void onActivityCreated(Bundle savedInstanceState) {
 	 */
 	@OnClick(id = R.id.userinfo_set)
 	public void setClick(View view) {
-		Tools.pushScreen(Set.class, null);
+		Intent intent=new Intent(this.getActivity(),Set.class);
+		startActivity(intent);
 	}
 	
 	/**
@@ -86,7 +92,9 @@ public void onActivityCreated(Bundle savedInstanceState) {
 	 */
 	@OnClick(id = R.id.userinfo_mail_layout)
 	public void mailClick(View view) {
-		Tools.pushScreen(MyMessage.class, null);
+		Bundle bundle =new Bundle();
+		bundle.putInt("mgsType", 1);
+		Tools.pushScreen(MyNews.class, bundle);
 		
 		
 		
@@ -98,7 +106,9 @@ public void onActivityCreated(Bundle savedInstanceState) {
 	 */
 	@OnClick(id = R.id.userinfo_message_layout)
 	public void messageClick(View view) {
-		Tools.pushScreen(MyNews.class, null);
+		Bundle bundle =new Bundle();
+		bundle.putInt("mgsType", 2);
+		Tools.pushScreen(MyNews.class, bundle);
 	}
 	
 	/**
@@ -211,11 +221,12 @@ public void onActivityCreated(Bundle savedInstanceState) {
 	 */
 	@OnClick(id = R.id.userinfo_btn_quit)
 	public void quitClick(View view) {
+		Tools.replaceRootPushScreen(Login.class, null);
 		
 	}
 	
 	private void updateUI() {
-		Tools.loadNetImage(userIcon, UserProperty.getInstance().getUserInfo().getAvatar(), R.drawable.default_ptr_flip, R.drawable.default_ptr_flip);
+		userIcon.setImageUrl(UserProperty.getInstance().getUserInfo().getAvatar(), HttpRequest.getInstance().imageLoader);
 		name.setText(UserProperty.getInstance().getUserInfo().getNickname());
 		if(TextUtils.isEmpty(UserProperty.getInstance().getUserInfo().getMomeid())) {
 			momeNumber.setText("MOME号:"+UserProperty.getInstance().getUserInfo().getMomeid());

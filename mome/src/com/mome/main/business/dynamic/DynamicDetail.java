@@ -19,6 +19,7 @@ import com.mome.main.R;
 import com.mome.main.business.model.UserProperty;
 import com.mome.main.business.module.ListAdapter;
 import com.mome.main.business.module.ListCellBase;
+import com.mome.main.business.userinfo.FriendHome;
 import com.mome.main.business.widget.pulltorefresh.PullToRefreshBase;
 import com.mome.main.business.widget.pulltorefresh.PullToRefreshBase.Mode;
 import com.mome.main.business.widget.pulltorefresh.PullToRefreshScrollView;
@@ -30,6 +31,7 @@ import com.mome.main.core.annotation.OnClick;
 import com.mome.main.core.annotation.ViewInject;
 import com.mome.main.core.net.HttpRequest;
 import com.mome.main.core.utils.AppConfig;
+import com.mome.main.core.utils.DateUtil;
 import com.mome.main.core.utils.Tools;
 import com.mome.main.netframe.volley.toolbox.NetworkImageView;
 
@@ -116,6 +118,14 @@ public class DynamicDetail extends BaseFragment {
 	 */
 	@ViewInject(id = R.id.user_icon)
 	private NetworkImageView headIcon;
+	@OnClick(id = R.id.user_icon)
+	public void headClick(View paramView) {
+		Bundle bundle = new Bundle();
+		bundle.putString("userid",dynamic.getUserid()+"");
+		Tools.pushScreen(FriendHome.class, bundle);
+	}
+	
+	
 	/**
 	 * 电影详情
 	 */
@@ -286,6 +296,7 @@ public class DynamicDetail extends BaseFragment {
 			if (arg0.getModel().getClass().equals(ArticleDetail.class)) {
 				// 获取动态详情
 				ArticleDetail articleDetail = arg0.getModel();
+				dynamic=articleDetail.getInfo();
 				setArticleDetail(articleDetail.getInfo());
 			}
 			if (arg0.getModel().getClass().equals(GetCommentsByArticleId.class)) {
@@ -305,7 +316,6 @@ public class DynamicDetail extends BaseFragment {
 					else {
 						mPullRefreshListView.setMode(Mode.PULL_FROM_START);
 					}
-					
 				for (DynamicInfo comments : getCommentsByArticleId.getRows()) {
 					DynamicDetailListCell cell = new DynamicDetailListCell();
 					cell.setDynamicInfo(comments);
@@ -313,10 +323,11 @@ public class DynamicDetail extends BaseFragment {
 				}
 				adapter.notifyDataSetChanged();
 			}
-		}else{
-			listView.setEmptyView(Tools
-					.setEmptyView(getActivity()));
 		}
+			//				else{
+//			listView.setEmptyView(Tools
+//					.setEmptyView(getActivity()));
+//		}
 	      }
 	}
 
@@ -436,7 +447,17 @@ public class DynamicDetail extends BaseFragment {
 					public <T> void sucess(Type type, ResponseResult<T> claszz) {
 						// TODO Auto-generated method stub
 						// 发表评论
-						Tools.toastShow("发布成功");
+						
+						DynamicDetailListCell cell = new DynamicDetailListCell();
+						DynamicInfo dynamic=new DynamicInfo();
+						dynamic.setCreatetime(DateUtil.now_yyyy_MM_dd_HH_mm_ss());
+						dynamic.setBrief(sendComment_et.getText().toString());
+						dynamic.setAvatar(DynamicDetail.this.dynamic.getAvatar());
+						dynamic.setNickname(DynamicDetail.this.dynamic.getNickname());
+						cell.setDynamicInfo(dynamic);
+						listData.add(0,cell);
+						adapter.notifyDataSetChanged();
+						sendComment_et.setText("");
 					}
 					
 					@Override

@@ -10,7 +10,116 @@ import java.io.Serializable;
  */
 
 public class MessageInfo implements Serializable {
-    /**
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	//昵称
+	private String nickname;
+	
+	//最新消息
+	private String lastwords;
+	
+	//用户id
+	private String userid;
+	
+	//关联用户id
+	private String activeid;
+	
+	//未读数
+	
+	private String unread;
+	
+	//最新信息事件
+	
+	private String lastDate;
+	
+	
+	//消息分类1 系统消息，2用户关联消息
+	private int classification;
+	
+	//消息类型id
+	
+	private int typeid;
+	//消息类型1为用户头像跳转到用户主页；2为用户头像跳转至动态正文；3为跳转到电影详情，4为跳转到回忆录详情
+	private int type;
+	
+	
+
+    public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getLastwords() {
+		return lastwords;
+	}
+
+	public void setLastwords(String lastwords) {
+		this.lastwords = lastwords;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public String getActiveid() {
+		return activeid;
+	}
+
+	public void setActiveid(String activeid) {
+		this.activeid = activeid;
+	}
+
+	public String getUnread() {
+		return unread;
+	}
+
+	public void setUnread(String unread) {
+		this.unread = unread;
+	}
+
+	public String getLastDate() {
+		return lastDate;
+	}
+
+	public void setLastDate(String lastDate) {
+		this.lastDate = lastDate;
+	}
+
+	public int getClassification() {
+		return classification;
+	}
+
+	public void setClassification(int classification) {
+		this.classification = classification;
+	}
+
+	public int getTypeid() {
+		return typeid;
+	}
+
+	public void setTypeid(int typeid) {
+		this.typeid = typeid;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	/**
      * 消息id
      */
     private int messageid;

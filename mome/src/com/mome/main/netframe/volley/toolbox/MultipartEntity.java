@@ -32,6 +32,8 @@ public class MultipartEntity implements HttpEntity {
         this.boundary = buf.toString();  
   
     }  
+    
+    
   
     public void writeFirstBoundaryIfNeeds(){  
         if(!isSetFirst){  

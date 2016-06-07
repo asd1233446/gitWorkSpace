@@ -79,7 +79,6 @@ private void setUpGridview(){
 
 private void getPhotoList(){
 	UserAlbumRequest.findUserAlbum(userId, pageNo, AppConfig.PAGE_SIZE, this);
-	
 }
 
 @Override

@@ -7,14 +7,14 @@
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="@dimen/common_marginOrpadding"
+            android:layout_height="35dp"
+            android:layout_margin="@dimen/common_samll_marginOrpadding"
             android:gravity="center_vertical"
             android:text="北京"
-            android:textColor="@color/black"
-            android:textSize="@dimen/common_max_textSize" />
+            android:textColor="@color/gray"
+            android:textSize="@dimen/common_textSize" />
 
         
-    <View style="@style/line_horizontal"/>
+    
 
 </LinearLayout>

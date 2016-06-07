@@ -149,6 +149,12 @@ public class AppConfig {
 	 * 列表一页请求的数据条数
 	 */
 	public static final int PAGE_SIZE = 10;
+	
+	/**
+	 * 默认选中的tab
+	 */
+	
+	public static  int currentIndex=0;
 	/**
 	 * 用来通过xml创建view实例
 	 */

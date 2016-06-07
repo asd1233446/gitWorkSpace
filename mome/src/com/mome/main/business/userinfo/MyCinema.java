@@ -42,12 +42,11 @@ public class MyCinema extends BaseFragment {
 	 * 当前页索引
 	 */
 	private int curPageIndex = 1;
-	
+
 	/**
 	 * 一共多少页数
 	 */
 	private double totalPage = 1;
-	
 
 	/**
 	 * listView实例
@@ -81,6 +80,7 @@ public class MyCinema extends BaseFragment {
 	private void setUpListView() {
 
 		mPullRefreshListView.setMode(Mode.PULL_FROM_START);
+		Tools.setRereshing(mPullRefreshListView);
 		mPullRefreshListView
 				.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener2<ListView>() {
 
@@ -95,12 +95,8 @@ public class MyCinema extends BaseFragment {
 						refreshView.getLoadingLayoutProxy()
 								.setLastUpdatedLabel(label);
 						// 下拉刷新，，只刷新服务器最新的
-						getCinemaDatas(1);
-						  if(totalPage>curPageIndex)
-							  mPullRefreshListView.setMode(Mode.BOTH);
-						  else{
-							  mPullRefreshListView.setMode(Mode.PULL_FROM_START);  
-						  }
+						curPageIndex = 1;
+						getCinemaDatas();
 
 					}
 
@@ -114,26 +110,21 @@ public class MyCinema extends BaseFragment {
 										| DateUtils.FORMAT_ABBREV_ALL);
 						refreshView.getLoadingLayoutProxy()
 								.setLastUpdatedLabel(label);
-                       
-						getCinemaDatas(curPageIndex);
-					
+
+						getCinemaDatas();
+
 					}
 				});
-		
+
 		adapter = new ListAdapter();
 		listView = mPullRefreshListView.getRefreshableView();
 		adapter.setDataList(CinemaListData);
 		listView.setAdapter(adapter);
-		getCinemaDatas(1);
 	}
 
-	
+	private void getCinemaDatas() {
 
-	
-	
-	private void getCinemaDatas(final int Index) {
-
-		UserCinemasRequest.findUserCinemas(userid, Index,
+		UserCinemasRequest.findUserCinemas(userid, curPageIndex,
 				AppConfig.PAGE_SIZE, new ResponseCallback() {
 
 					@Override
@@ -141,28 +132,34 @@ public class MyCinema extends BaseFragment {
 						// TODO Auto-generated method stub
 						mPullRefreshListView.onRefreshComplete();
 						UserCinemas userCinemas = claszz.getModel();
-						if (userCinemas != null
-								&&userCinemas.getTotal()> 0) {
-							   totalPage=Tools.calculateTotalPage(userCinemas.getTotal());
+						if (userCinemas != null && userCinemas.getTotal() > 0) {
+							totalPage = Tools.calculateTotalPage(userCinemas
+									.getTotal());
+							if (curPageIndex == 1) {
+								CinemaListData.clear();
+							}
+							if (totalPage > curPageIndex) {
+								mPullRefreshListView.setMode(Mode.BOTH);
+								curPageIndex++;
+							} else {
+								mPullRefreshListView
+										.setMode(Mode.PULL_FROM_START);
+							}
 							for (CinemaInfo cinema : userCinemas.getCinemas()) {
 								MyCinemaListCell myCinemaListCell = new MyCinemaListCell();
 								myCinemaListCell.setCinemaInfo(cinema);
-								if (Index == 1){
-									CinemaListData.clear();
-								    curPageIndex=1;
-								}
-								else{
-								     curPageIndex++;
-								}
-									CinemaListData.add(myCinemaListCell);
-								
-							}
-							adapter.notifyDataSetChanged();
-						} else {
 
-							listView.setEmptyView(Tools
-									.setEmptyView(getActivity()));
+								CinemaListData.add(myCinemaListCell);
+
+							}
+
+							adapter.notifyDataSetChanged();
 						}
+						// else {
+						//
+						// listView.setEmptyView(Tools
+						// .setEmptyView(getActivity()));
+						// }
 					}
 
 					@Override

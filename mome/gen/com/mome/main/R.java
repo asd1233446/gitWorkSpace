@@ -172,6 +172,15 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int donut_unfinished_stroke_width=0x7f01002a;
+        /**  StickyListHeaders attributes 
+         <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int hasStickyHeaders=0x7f010035;
         /** <p>Must be one or more (separated by '|') of the following constant values.</p>
 <table>
 <colgroup align="left" />
@@ -183,6 +192,14 @@ containing a value of this type.
 </table>
          */
         public static final int inputShow=0x7f01000a;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int isDrawingListUnderStickyHeader=0x7f010036;
         /** <p>Must be one or more (separated by '|') of the following constant values.</p>
 <table>
 <colgroup align="left" />
@@ -409,6 +426,10 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int scaleDownGravity=0x7f010023;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int stickyListHeadersListViewStyle=0x7f010034;
         /** <p>Must be one or more (separated by '|') of the following constant values.</p>
 <table>
 <colgroup align="left" />
@@ -454,52 +475,80 @@ containing a value of this type.
         public static final int unselectedScale=0x7f010021;
     }
     public static final class color {
-        public static final int B3B3B3=0x7f06000c;
-        public static final int E0DEDA=0x7f060010;
-        public static final int EEEEEE=0x7f06000d;
-        public static final int F0F0F0=0x7f06000e;
-        public static final int alpha=0x7f06000f;
+        public static final int B3B3B3=0x7f06000d;
+        public static final int E0DEDA=0x7f060011;
+        public static final int F0F0F0=0x7f06000f;
+        /**  紫色 
+         */
+        public static final int Purple=0x7f060018;
+        public static final int alpha=0x7f060010;
         public static final int black=0x7f060001;
+        public static final int combackgroud=0x7f06000e;
         public static final int dynamicDateColor=0x7f06000a;
         public static final int dynamicHLineColor=0x7f06000b;
         public static final int dynamicLineColor=0x7f060008;
         public static final int dynamicScoreClolor=0x7f060009;
         public static final int dynamicTextNormal=0x7f060007;
         public static final int dynamicTextPressed=0x7f060006;
+        public static final int dynamic_text_selector=0x7f06001b;
         public static final int gary_line=0x7f060002;
         /**  灰色 
          */
-        public static final int gray=0x7f060016;
-        public static final int possible_result_points=0x7f060013;
-        public static final int result_view=0x7f060011;
+        public static final int gray=0x7f060017;
+        /** 浅灰色 
+         */
+        public static final int losergray=0x7f06001a;
+        /** 深灰色 
+         */
+        public static final int mostgray=0x7f060019;
+        public static final int movieLineColor=0x7f06000c;
+        public static final int possible_result_points=0x7f060014;
+        public static final int result_view=0x7f060012;
         public static final int tabBackground=0x7f060003;
         public static final int tabTitleDefault=0x7f060004;
         public static final int tabTitlePressed=0x7f060005;
-        public static final int viewfinder_frame=0x7f060014;
-        public static final int viewfinder_laser=0x7f060015;
-        public static final int viewfinder_mask=0x7f060012;
+        public static final int text_view_selector=0x7f06001c;
+        public static final int viewfinder_frame=0x7f060015;
+        public static final int viewfinder_laser=0x7f060016;
+        public static final int viewfinder_mask=0x7f060013;
         public static final int white=0x7f060000;
     }
     public static final class dimen {
         /**  文字尺寸设置 
          */
-        public static final int BIG_FONT=0x7f07000d;
-        public static final int MIDDLE_FONT=0x7f07000e;
-        public static final int SMALL_FONT=0x7f07000f;
+        public static final int BIG_FONT=0x7f070017;
+        public static final int MIDDLE_FONT=0x7f070018;
+        public static final int SMALL_FONT=0x7f070019;
+        /**  head的高度 
+         */
+        public static final int common_head_height=0x7f070011;
         /** 线的高度  
          */
-        public static final int common_line_height=0x7f07000b;
-        public static final int common_line_height_max=0x7f07000c;
+        public static final int common_line_height=0x7f07000f;
+        public static final int common_line_height_max=0x7f070010;
         /**  距离定义 
          */
-        public static final int common_marginOrpadding=0x7f070008;
-        public static final int common_max_marginOrpadding=0x7f07000a;
-        public static final int common_max_textSize=0x7f070007;
-        public static final int common_middle_marginOrpadding=0x7f070009;
-        public static final int common_middle_textSize=0x7f070006;
+        public static final int common_marginOrpadding=0x7f07000a;
+        public static final int common_max_marginOrpadding=0x7f07000c;
+        public static final int common_max_textSize=0x7f070009;
+        public static final int common_middle_marginOrpadding=0x7f07000b;
+        public static final int common_middle_textSize=0x7f070008;
+        public static final int common_moreMax_textSize=0x7f070006;
+        public static final int common_moremax_marginOrpadding=0x7f07000d;
+        /**  海报的高度 
+         */
+        public static final int common_moviehead_height=0x7f070012;
+        public static final int common_moviehead_small_height=0x7f070014;
+        public static final int common_moviehead_widht=0x7f070013;
+        public static final int common_samll_marginOrpadding=0x7f07000e;
         /**  字体定义 
          */
-        public static final int common_textSize=0x7f070005;
+        public static final int common_small_textSize=0x7f070005;
+        public static final int common_textSize=0x7f070007;
+        /**  头像的高度 
+         */
+        public static final int common_userhead_height=0x7f070015;
+        public static final int common_userhead_widht=0x7f070016;
         public static final int header_footer_left_right_padding=0x7f070003;
         public static final int header_footer_top_bottom_padding=0x7f070004;
         public static final int indicator_corner_radius=0x7f070001;
@@ -514,493 +563,708 @@ containing a value of this type.
         public static final int add_record_btn_camera_pressed=0x7f020002;
         public static final int add_record_btn_manual_normal=0x7f020003;
         public static final int add_record_btn_manual_pressed=0x7f020004;
-        public static final int bg_left_round_corner_rect=0x7f020005;
-        public static final int bg_rating=0x7f020006;
-        public static final int bg_right_round_corner_rect=0x7f020007;
-        public static final int bg_ring_progressbar=0x7f020008;
-        public static final int bg_round_corner_blue_rect=0x7f020009;
-        public static final int bg_round_corner_rect=0x7f02000a;
-        public static final int choice_close=0x7f02000b;
-        public static final int choice_open=0x7f02000c;
-        public static final int default_ptr_flip=0x7f02000d;
-        public static final int default_ptr_rotate=0x7f02000e;
-        public static final int discovery_icon_activity=0x7f02000f;
-        public static final int discovery_icon_arrow=0x7f020010;
-        public static final int discovery_icon_interest=0x7f020011;
-        public static final int discovery_icon_look_friend=0x7f020012;
-        public static final int discovery_icon_store=0x7f020013;
-        public static final int discovery_icon_ticket=0x7f020014;
-        public static final int dynamic_bg_rating=0x7f020015;
-        public static final int dynamic_img_comment=0x7f020016;
-        public static final int dynamic_img_date=0x7f020017;
-        public static final int dynamic_img_praise=0x7f020018;
-        public static final int dynamic_img_rating_select=0x7f020019;
-        public static final int headview_btn_back=0x7f02001a;
-        public static final int headview_btn_close=0x7f02001b;
-        public static final int headview_btn_scan=0x7f02001c;
-        public static final int headview_btn_search=0x7f02001d;
-        public static final int headview_icon_cross=0x7f02001e;
-        public static final int headview_icon_search=0x7f02001f;
-        public static final int ic_launcher=0x7f020020;
-        public static final int image1=0x7f020021;
-        public static final int image2=0x7f020022;
-        public static final int image3=0x7f020023;
-        public static final int image4=0x7f020024;
-        public static final int image5=0x7f020025;
-        public static final int image6=0x7f020026;
-        public static final int indicator_arrow=0x7f020027;
-        public static final int indicator_bg_bottom=0x7f020028;
-        public static final int indicator_bg_top=0x7f020029;
-        public static final int login_logo=0x7f02002a;
-        public static final int login_qq=0x7f02002b;
-        public static final int login_wechat=0x7f02002c;
-        public static final int login_weibo=0x7f02002d;
-        public static final int memoirs_bg_my_grade=0x7f02002e;
-        public static final int memoirs_bg_selector=0x7f02002f;
-        public static final int memoirs_icon_look_type_cinema=0x7f020030;
-        public static final int more_icon=0x7f020031;
-        public static final int movie_btn_add=0x7f020032;
-        public static final int movie_btn_eye=0x7f020033;
-        public static final int navbar=0x7f020034;
-        public static final int newuser_guide_img_indicator_one=0x7f020035;
-        public static final int newuser_guide_img_indicator_two=0x7f020036;
-        public static final int pulltorefresh_down_arrow=0x7f020037;
-        public static final int pulltorefresh_up_arrow=0x7f020038;
-        public static final int qrcode_scan_line=0x7f020039;
-        public static final int record_btn_movie=0x7f02003a;
-        public static final int record_btn_net=0x7f02003b;
-        public static final int record_btn_tv=0x7f02003c;
-        public static final int tabmanager_tab_discovery_normal=0x7f02003d;
-        public static final int tabmanager_tab_discovery_pressed=0x7f02003e;
-        public static final int tabmanager_tab_dynamic_normal=0x7f02003f;
-        public static final int tabmanager_tab_dynamic_pressed=0x7f020040;
-        public static final int tabmanager_tab_movie_normal=0x7f020041;
-        public static final int tabmanager_tab_movie_pressed=0x7f020042;
-        public static final int tabmanager_tab_record_normal=0x7f020043;
-        public static final int tabmanager_tab_record_pressed=0x7f020044;
-        public static final int tabmanager_tab_userinfo_normal=0x7f020045;
-        public static final int tabmanager_tab_userinfo_pressed=0x7f020046;
-        public static final int userhome_btn_add=0x7f020047;
-        public static final int userhome_btn_message=0x7f020048;
-        public static final int userhome_btn_set=0x7f020049;
-        public static final int zk_line=0x7f02004a;
+        public static final int addcomment=0x7f020005;
+        public static final int addfriends=0x7f020006;
+        public static final int addimage=0x7f020007;
+        public static final int addmoviememory=0x7f020008;
+        public static final int addphoto=0x7f020009;
+        public static final int allfriends=0x7f02000a;
+        public static final int atfriend=0x7f02000b;
+        public static final int attention_selector=0x7f02000c;
+        public static final int attentioned=0x7f02000d;
+        public static final int attenton=0x7f02000e;
+        public static final int bg_rating=0x7f02000f;
+        public static final int bg_ring_progressbar=0x7f020010;
+        public static final int bg_round_corner_blue_rect=0x7f020011;
+        public static final int bg_round_corner_rect=0x7f020012;
+        public static final int button_corner=0x7f020013;
+        public static final int button_corner_gary=0x7f020014;
+        public static final int checkbox_checked=0x7f020015;
+        public static final int checkbox_unchecked=0x7f020016;
+        public static final int choice_close=0x7f020017;
+        public static final int choice_open=0x7f020018;
+        public static final int closearrow=0x7f020019;
+        public static final int default_ptr_flip=0x7f02001a;
+        public static final int default_ptr_rotate=0x7f02001b;
+        public static final int defualt=0x7f02001c;
+        public static final int discovery_icon_activity=0x7f02001d;
+        public static final int discovery_icon_arrow=0x7f02001e;
+        public static final int discovery_icon_interest=0x7f02001f;
+        public static final int discovery_icon_look_friend=0x7f020020;
+        public static final int discovery_icon_store=0x7f020021;
+        public static final int discovery_icon_ticket=0x7f020022;
+        public static final int dot=0x7f020023;
+        public static final int dotselect=0x7f020024;
+        public static final int douban=0x7f020025;
+        public static final int douban_select=0x7f020026;
+        public static final int douban_selector=0x7f020027;
+        public static final int dp_ad_icon_star_small=0x7f020028;
+        public static final int dynamic_bg_rating=0x7f020029;
+        public static final int dynamic_img_comment=0x7f02002a;
+        public static final int dynamic_img_date=0x7f02002b;
+        public static final int dynamic_img_praise=0x7f02002c;
+        public static final int dynamic_img_rating_select=0x7f02002d;
+        public static final int edit_bg=0x7f02002e;
+        public static final int garyzan=0x7f02002f;
+        public static final int group_arrow_selector=0x7f020030;
+        public static final int headview_btn_back=0x7f020031;
+        public static final int headview_btn_close=0x7f020032;
+        public static final int headview_btn_scan=0x7f020033;
+        public static final int headview_btn_search=0x7f020034;
+        public static final int headview_icon_cross=0x7f020035;
+        public static final int headview_icon_search=0x7f020036;
+        public static final int ic_launcher=0x7f020037;
+        public static final int iconfont_zan=0x7f020038;
+        public static final int indicator_arrow=0x7f020039;
+        public static final int indicator_bg_bottom=0x7f02003a;
+        public static final int indicator_bg_top=0x7f02003b;
+        public static final int input_edittext_bg=0x7f02003c;
+        public static final int loading=0x7f02003d;
+        public static final int login_logo=0x7f02003e;
+        public static final int login_qq=0x7f02003f;
+        public static final int login_wechat=0x7f020040;
+        public static final int login_weibo=0x7f020041;
+        public static final int lookmovidmemory=0x7f020042;
+        public static final int memoirs_bg_my_grade=0x7f020043;
+        public static final int memoirs_bg_selector=0x7f020044;
+        public static final int memoirs_icon_look_type_cinema=0x7f020045;
+        public static final int more_icon=0x7f020046;
+        public static final int movie_btn_add=0x7f020047;
+        public static final int movie_btn_eye=0x7f020048;
+        public static final int moviedetail=0x7f020049;
+        public static final int msg_bg=0x7f02004a;
+        public static final int msg_bg_mine=0x7f02004b;
+        public static final int mymessage=0x7f02004c;
+        public static final int navbar=0x7f02004d;
+        public static final int openarrow=0x7f02004e;
+        public static final int phone=0x7f02004f;
+        public static final int pulltorefresh_down_arrow=0x7f020050;
+        public static final int pulltorefresh_up_arrow=0x7f020051;
+        public static final int qrcode=0x7f020052;
+        public static final int qrcode_scan_line=0x7f020053;
+        public static final int record_btn_movie=0x7f020054;
+        public static final int record_btn_net=0x7f020055;
+        public static final int record_btn_tv=0x7f020056;
+        public static final int scorebar=0x7f020057;
+        public static final int search_xiao=0x7f020058;
+        public static final int sina=0x7f020059;
+        public static final int sina_select=0x7f02005a;
+        public static final int sina_selector=0x7f02005b;
+        public static final int systemicon=0x7f02005c;
+        public static final int tabmanager_tab_discovery_normal=0x7f02005d;
+        public static final int tabmanager_tab_discovery_pressed=0x7f02005e;
+        public static final int tabmanager_tab_dynamic_normal=0x7f02005f;
+        public static final int tabmanager_tab_dynamic_pressed=0x7f020060;
+        public static final int tabmanager_tab_movie_normal=0x7f020061;
+        public static final int tabmanager_tab_movie_pressed=0x7f020062;
+        public static final int tabmanager_tab_record_normal=0x7f020063;
+        public static final int tabmanager_tab_record_pressed=0x7f020064;
+        public static final int tabmanager_tab_userinfo_normal=0x7f020065;
+        public static final int tabmanager_tab_userinfo_pressed=0x7f020066;
+        public static final int takescore=0x7f020067;
+        public static final int tofriend=0x7f020068;
+        public static final int user_sign=0x7f020069;
+        public static final int userhome_btn_add=0x7f02006a;
+        public static final int userhome_btn_message=0x7f02006b;
+        public static final int userhome_btn_set=0x7f02006c;
+        public static final int wb_refresh_arrow=0x7f02006d;
+        public static final int wb_refresh_arrow_reverse=0x7f02006e;
+        public static final int wechat_selector=0x7f02006f;
+        public static final int weichat=0x7f020070;
+        public static final int weichat_select=0x7f020071;
+        public static final int xin=0x7f020072;
+        public static final int xin_select=0x7f020073;
     }
     public static final class id {
-        public static final int ImageView01=0x7f08004a;
-        public static final int ImageView02=0x7f08006e;
-        public static final int ImageView03=0x7f080044;
-        public static final int ImageView04=0x7f080047;
-        public static final int ImageView05=0x7f08006d;
-        public static final int ImageView06=0x7f08006b;
-        public static final int ImageView07=0x7f08004c;
-        public static final int ImageView08=0x7f08006a;
-        public static final int ImageView11=0x7f08015a;
-        public static final int NetworkImageView01=0x7f0800db;
-        public static final int TAMovieHouseLayout=0x7f080081;
-        public static final int TAattentionLayout=0x7f080085;
-        public static final int TAcollectionLayout=0x7f080084;
-        public static final int TAphotosLayout=0x7f080083;
-        public static final int TextView01=0x7f08013f;
-        public static final int TextView02=0x7f0800dc;
-        public static final int TextView03=0x7f0800dd;
-        public static final int TextView04=0x7f0800ad;
-        public static final int TextView05=0x7f0800ab;
-        public static final int TextView06=0x7f08013e;
-        public static final int TextView07=0x7f08013d;
-        public static final int TextView08=0x7f08013c;
-        public static final int TextView09=0x7f080138;
-        public static final int TextView10=0x7f08013b;
-        public static final int TextView11=0x7f08013a;
-        public static final int TextView12=0x7f080139;
-        public static final int TextView13=0x7f080134;
-        public static final int TextView14=0x7f080137;
-        public static final int TextView15=0x7f080136;
-        public static final int TextView16=0x7f080135;
-        public static final int TextView17=0x7f080130;
-        public static final int TextView18=0x7f080133;
-        public static final int TextView19=0x7f080132;
-        public static final int TextView20=0x7f080131;
-        public static final int TextView21=0x7f08012c;
-        public static final int TextView22=0x7f08012f;
-        public static final int TextView23=0x7f08012e;
-        public static final int TextView24=0x7f08012d;
-        public static final int TextView25=0x7f080128;
-        public static final int TextView26=0x7f08012b;
-        public static final int TextView27=0x7f08012a;
-        public static final int TextView28=0x7f080129;
-        public static final int add_record_bg=0x7f080036;
-        public static final int add_record_btn_ok=0x7f08003a;
-        public static final int add_record_context=0x7f080039;
-        public static final int add_record_coverflow=0x7f080037;
-        public static final int add_record_title=0x7f080038;
-        public static final int attention=0x7f08007b;
-        public static final int attentionLayout=0x7f0800eb;
-        public static final int attentionNum=0x7f0800ec;
+        public static final int AllAttention=0x7f0800db;
+        public static final int Comment_rl=0x7f080085;
+        public static final int Companion=0x7f08003f;
+        public static final int ImageView01=0x7f080071;
+        public static final int ImageView02=0x7f0800ae;
+        public static final int ImageView03=0x7f08006b;
+        public static final int ImageView04=0x7f08006e;
+        public static final int ImageView05=0x7f0800ad;
+        public static final int ImageView06=0x7f0800ab;
+        public static final int ImageView07=0x7f080073;
+        public static final int ImageView08=0x7f0800aa;
+        public static final int ImageView11=0x7f0801ce;
+        public static final int MovieCompanion=0x7f080041;
+        public static final int NetworkImageView01=0x7f08013c;
+        public static final int TAMovieHouseLayout=0x7f0800c1;
+        public static final int TAattentionLayout=0x7f0800c5;
+        public static final int TAcollectionLayout=0x7f0800c4;
+        public static final int TAphotosLayout=0x7f0800c3;
+        public static final int TextView02=0x7f08013d;
+        public static final int TextView03=0x7f08013e;
+        public static final int TextView04=0x7f08013f;
+        public static final int addComment=0x7f080044;
+        public static final int addCompanion=0x7f080042;
+        public static final int addOpinion=0x7f080046;
+        public static final int addSouvenir=0x7f08003e;
+        public static final int advise=0x7f080049;
+        public static final int adviseType=0x7f080047;
+        public static final int all=0x7f08018d;
+        public static final int all_time=0x7f080196;
+        public static final int answer_tv=0x7f08005e;
+        public static final int arrow=0x7f0800dc;
+        public static final int atFriend=0x7f080080;
+        public static final int attention=0x7f0800bb;
+        public static final int attentionLayout=0x7f080153;
+        public static final int attentionNum=0x7f080154;
         public static final int auto=0x7f08001e;
         /**  扫描 
          */
         public static final int auto_focus=0x7f080004;
-        public static final int bangding_tv=0x7f08002e;
-        public static final int bindPhone_bt=0x7f080030;
-        public static final int bindPhone_tv=0x7f08002f;
+        public static final int back=0x7f080045;
+        public static final int bangding_tv=0x7f08002d;
+        public static final int beat_tv=0x7f0801a2;
+        public static final int bindPhone_bt=0x7f08002f;
+        public static final int bindPhone_tv=0x7f08002e;
+        public static final int bj_tv=0x7f080174;
         public static final int both=0x7f080015;
-        public static final int button1=0x7f0800f2;
-        public static final int clearCache_tv=0x7f080035;
-        public static final int custom_time_shaft_curdate=0x7f08003f;
-        public static final int custom_time_shaft_date_layout=0x7f08003c;
-        public static final int custom_time_shaft_horizontalScrollView=0x7f08003b;
-        public static final int custom_time_shaft_img=0x7f08003e;
-        public static final int custom_time_shaft_item_img=0x7f080040;
-        public static final int custom_time_shaft_item_txt=0x7f080041;
-        public static final int custom_time_shaft_selector=0x7f08003d;
+        public static final int bug=0x7f080048;
+        public static final int button1=0x7f08015b;
+        public static final int cb_photo_lpsi=0x7f0800e1;
+        public static final int cinema=0x7f080197;
+        public static final int cinema_date=0x7f0800ea;
+        public static final int cinema_hallNum=0x7f0800ec;
+        public static final int cinema_linear=0x7f080056;
+        public static final int cinema_name=0x7f080058;
+        public static final int cinema_no=0x7f080059;
+        public static final int cinema_seatNum=0x7f0800ef;
+        public static final int cinema_text=0x7f0800e8;
+        public static final int cinema_time=0x7f0800eb;
+        public static final int clear=0x7f0800d0;
+        public static final int clearCache_tv=0x7f080034;
+        public static final int collect_ll=0x7f08011b;
+        public static final int collectionNum=0x7f08011c;
+        public static final int comment=0x7f080144;
+        public static final int complain=0x7f08004a;
+        public static final int content=0x7f08005c;
+        public static final int core=0x7f080121;
+        public static final int custom_time_shaft_curdate=0x7f080066;
+        public static final int custom_time_shaft_date_layout=0x7f080063;
+        public static final int custom_time_shaft_horizontalScrollView=0x7f080062;
+        public static final int custom_time_shaft_img=0x7f080065;
+        public static final int custom_time_shaft_item_img=0x7f080067;
+        public static final int custom_time_shaft_item_txt=0x7f080068;
+        public static final int custom_time_shaft_selector=0x7f080064;
+        public static final int dataTypeMark_tv=0x7f0801b6;
+        public static final int dataTypeName_tv=0x7f0801b4;
+        public static final int dataTypeValue_tv=0x7f0801b5;
+        public static final int datatype_ls=0x7f080194;
+        public static final int date=0x7f080145;
+        public static final int day_tv=0x7f08019f;
         public static final int decode=0x7f080006;
         public static final int decode_failed=0x7f080007;
         public static final int decode_succeeded=0x7f080008;
+        public static final int detail_tv=0x7f0800e3;
         public static final int disabled=0x7f080016;
-        public static final int discovery_activity_layout=0x7f080048;
-        public static final int discovery_friend_layout=0x7f080042;
-        public static final int discovery_icon_activity=0x7f080049;
-        public static final int discovery_icon_friend=0x7f080043;
-        public static final int discovery_icon_instract=0x7f080046;
-        public static final int discovery_icon_movie_ticket=0x7f08004b;
-        public static final int discovery_icon_store=0x7f08004d;
-        public static final int discovery_instract_layout=0x7f080045;
-        public static final int doubanBind_bt=0x7f08002b;
-        public static final int doubanBind_tv=0x7f08002a;
+        public static final int discovery_activity_layout=0x7f08006f;
+        public static final int discovery_friend_layout=0x7f080069;
+        public static final int discovery_icon_activity=0x7f080070;
+        public static final int discovery_icon_friend=0x7f08006a;
+        public static final int discovery_icon_instract=0x7f08006d;
+        public static final int discovery_icon_movie_ticket=0x7f080072;
+        public static final int discovery_icon_store=0x7f080074;
+        public static final int discovery_instract_layout=0x7f08006c;
+        public static final int doubanBind_bt=0x7f08002a;
+        public static final int douban_btn=0x7f080083;
         public static final int douban_icon=0x7f080028;
         public static final int douban_tv=0x7f080029;
-        public static final int dynamic=0x7f08007c;
-        public static final int dynamic_btn_boutique=0x7f08004f;
-        public static final int dynamic_btn_dynamic=0x7f080050;
-        public static final int dynamic_btn_nearby=0x7f080051;
-        public static final int dynamic_comment_edit=0x7f080053;
-        public static final int dynamic_detail_list_cell_comment=0x7f080059;
-        public static final int dynamic_detail_list_cell_date=0x7f080058;
-        public static final int dynamic_detail_list_cell_head_icon=0x7f080055;
-        public static final int dynamic_detail_list_cell_title_layout=0x7f080056;
-        public static final int dynamic_detail_list_cell_username=0x7f080057;
-        public static final int dynamic_detail_top=0x7f080054;
-        public static final int dynamic_list_cell_bottom_line=0x7f080068;
-        public static final int dynamic_list_cell_btn_comment=0x7f080066;
-        public static final int dynamic_list_cell_btn_praise=0x7f080064;
-        public static final int dynamic_list_cell_date=0x7f080061;
-        public static final int dynamic_list_cell_head_icon=0x7f08005b;
-        public static final int dynamic_list_cell_line=0x7f08005a;
-        public static final int dynamic_list_cell_movie_img=0x7f080062;
-        public static final int dynamic_list_cell_movie_info=0x7f08005f;
-        public static final int dynamic_list_cell_movie_title=0x7f080063;
-        public static final int dynamic_list_cell_rating=0x7f08005d;
-        public static final int dynamic_list_cell_score=0x7f08005e;
-        public static final int dynamic_list_cell_txt_comment_value=0x7f080067;
-        public static final int dynamic_list_cell_txt_praise_value=0x7f080065;
-        public static final int dynamic_list_cell_user_name=0x7f08005c;
+        public static final int dropview_edit=0x7f0800a7;
+        public static final int dropview_image=0x7f0800a8;
+        public static final int dynamicComment_tv=0x7f08008f;
+        public static final int dynamic_btn_boutique=0x7f080078;
+        public static final int dynamic_btn_dynamic=0x7f080079;
+        public static final int dynamic_comment_edit=0x7f08007f;
+        public static final int dynamic_detail_list_cell_comment=0x7f080099;
+        public static final int dynamic_detail_list_cell_date=0x7f08009a;
+        public static final int dynamic_detail_list_cell_head_icon=0x7f080097;
+        public static final int dynamic_detail_list_cell_username=0x7f080098;
+        public static final int dynamic_list_cell_btn_comment=0x7f0800a4;
+        public static final int dynamic_list_cell_btn_praise=0x7f0800a3;
+        public static final int dynamic_list_cell_date=0x7f0800a0;
+        public static final int dynamic_list_cell_head_icon=0x7f08009b;
+        public static final int dynamic_list_cell_movie_img=0x7f0800a1;
+        public static final int dynamic_list_cell_movie_info=0x7f08009f;
+        public static final int dynamic_list_cell_movie_title=0x7f0800a2;
+        public static final int dynamic_list_cell_rating=0x7f08009d;
+        public static final int dynamic_list_cell_score=0x7f08009e;
+        public static final int dynamic_list_cell_txt_comment_value=0x7f0800a5;
+        public static final int dynamic_list_cell_txt_praise_value=0x7f080090;
+        public static final int dynamic_list_cell_user_name=0x7f08009c;
+        public static final int dynamic_rating=0x7f08008a;
         public static final int encode_failed=0x7f080009;
         public static final int encode_succeeded=0x7f08000a;
-        public static final int fansLayout=0x7f0800ed;
-        public static final int fansNum=0x7f0800ee;
-        public static final int filmStyle=0x7f080080;
-        public static final int filmStyleLayout=0x7f08007f;
-        public static final int findfriend_address_book=0x7f08006f;
-        public static final int findfriend_mome=0x7f080073;
-        public static final int findfriend_mome_img=0x7f080074;
-        public static final int findfriend_nearby=0x7f080071;
-        public static final int findfriend_nearby_img=0x7f080072;
-        public static final int findfriend_new_add=0x7f080075;
-        public static final int findfriend_new_img=0x7f080076;
-        public static final int findfriend_qq=0x7f080070;
-        public static final int findfriend_weibo=0x7f080069;
-        public static final int findfriend_weixin=0x7f08006c;
-        public static final int fl_inner=0x7f0800fc;
+        public static final int expandableList=0x7f0800d6;
+        public static final int fans=0x7f080157;
+        public static final int fansLayout=0x7f080155;
+        public static final int fansNum=0x7f080156;
+        public static final int filmStyle=0x7f0800c0;
+        public static final int filmStyleLayout=0x7f0800bf;
+        public static final int findMore_layout=0x7f080146;
+        public static final int findMovie_btn=0x7f080076;
+        public static final int findfriend_address_book=0x7f0800af;
+        public static final int findfriend_mome=0x7f0800d2;
+        public static final int findfriend_mome_img=0x7f0800d3;
+        public static final int findfriend_new_add=0x7f0800d4;
+        public static final int findfriend_new_img=0x7f0800d5;
+        public static final int findfriend_weibo=0x7f0800a9;
+        public static final int findfriend_weixin=0x7f0800ac;
+        public static final int findmore_tv=0x7f080147;
+        public static final int fl_inner=0x7f08015e;
+        public static final int flimDount_pg=0x7f0801ad;
         public static final int flip=0x7f08001c;
-        public static final int friendsDynamicList=0x7f080086;
-        public static final int graph_btn_qr=0x7f0800f9;
-        public static final int graph_btn_ticket=0x7f0800f8;
-        public static final int graph_left_btn=0x7f0800f4;
-        public static final int graph_right_photo=0x7f0800f6;
-        public static final int graph_title=0x7f0800f5;
+        public static final int framelayout=0x7f08007a;
+        public static final int friendType=0x7f0800da;
+        public static final int friendsDynamicList=0x7f0800c6;
+        public static final int fromTv=0x7f080100;
+        public static final int gpsCity=0x7f080173;
         public static final int gridview=0x7f080001;
+        public static final int gv_photos_ar=0x7f080178;
+        public static final int gz_tv=0x7f080176;
+        public static final int head=0x7f0800b6;
+        public static final int head_arrowImageView=0x7f0800ca;
+        public static final int head_contentLayout=0x7f0800c9;
+        public static final int head_lastUpdatedTextView=0x7f0800cd;
         public static final int head_layout=0x7f08001f;
+        public static final int head_ll=0x7f080086;
+        public static final int head_progressBar=0x7f0800cb;
+        public static final int head_tipsTextView=0x7f0800cc;
+        public static final int headicon=0x7f080143;
         public static final int hide=0x7f080013;
-        public static final int horizontalScrollView1=0x7f0800df;
-        public static final int horizontalScrollView2=0x7f0800e0;
-        public static final int imageView1=0x7f080090;
-        public static final int imageView2=0x7f08004e;
-        public static final int imageView4=0x7f080060;
-        public static final int imageview=0x7f080111;
+        public static final int horizontalScrollView1=0x7f080141;
+        public static final int horizontalScrollView2=0x7f080040;
+        public static final int hours_tv=0x7f08019d;
+        public static final int icon_bur=0x7f080053;
+        public static final int imageView1=0x7f08003a;
+        public static final int imageView2=0x7f080075;
+        public static final int imageview=0x7f08017b;
         public static final int img=0x7f080011;
-        public static final int iv_switch_close=0x7f080032;
-        public static final int iv_switch_open=0x7f080031;
-        public static final int launchLogo=0x7f08008e;
+        public static final int internet=0x7f080198;
+        public static final int internetDonut_pg=0x7f0801ae;
+        public static final int internet_linear=0x7f080036;
+        public static final int invite_btn=0x7f0800dd;
+        public static final int iv_photo_lpsi=0x7f0800e0;
+        public static final int iv_route=0x7f0800e2;
+        public static final int iv_switch_close=0x7f080031;
+        public static final int iv_switch_open=0x7f080030;
+        public static final int launchLogo=0x7f0800de;
         public static final int launch_product_query=0x7f08000b;
-        public static final int login_douban_btn=0x7f080093;
-        public static final int login_sina_btn=0x7f080091;
-        public static final int login_weixin_btn=0x7f080092;
+        public static final int letter_view=0x7f08014f;
+        public static final int line=0x7f0800ee;
+        public static final int line1=0x7f080108;
+        public static final int line2=0x7f08010d;
+        public static final int linear=0x7f0801b7;
+        public static final int linearLayout=0x7f080129;
+        public static final int listView=0x7f0800b0;
+        public static final int login_douban_btn=0x7f0800e6;
+        public static final int login_sina_btn=0x7f0800e4;
+        public static final int login_weixin_btn=0x7f0800e5;
+        public static final int lookedNum_tv=0x7f0801ac;
+        public static final int looked_num=0x7f080135;
+        public static final int looked_type=0x7f080038;
+        public static final int man=0x7f080189;
         public static final int manualOnly=0x7f080017;
-        public static final int message=0x7f08007a;
-        public static final int movieHouse=0x7f080082;
-        public static final int movie_btn_down_line=0x7f080099;
-        public static final int movie_btn_friend=0x7f080098;
-        public static final int movie_btn_hot=0x7f080097;
-        public static final int movie_btn_layout=0x7f080096;
-        public static final int movie_btn_up_line=0x7f080095;
-        public static final int movie_detail_add_record=0x7f0800a4;
-        public static final int movie_detail_attention_num=0x7f08009f;
-        public static final int movie_detail_collect_num=0x7f0800a9;
-        public static final int movie_detail_commend_friends=0x7f0800ac;
-        public static final int movie_detail_comment_num=0x7f0800ae;
-        public static final int movie_detail_hot_btn=0x7f0800b0;
-        public static final int movie_detail_info=0x7f0800a3;
-        public static final int movie_detail_list_cell_img=0x7f0800b2;
-        public static final int movie_detail_list_cell_info=0x7f0800b7;
-        public static final int movie_detail_list_cell_name=0x7f0800b3;
-        public static final int movie_detail_list_cell_rating=0x7f0800b4;
-        public static final int movie_detail_list_cell_score=0x7f0800b5;
-        public static final int movie_detail_list_cell_time=0x7f0800b8;
-        public static final int movie_detail_listview=0x7f0800b1;
-        public static final int movie_detail_look_record=0x7f0800a6;
-        public static final int movie_detail_looked_num=0x7f0800a8;
-        public static final int movie_detail_movie_title=0x7f08009c;
-        public static final int movie_detail_new_btn=0x7f0800af;
-        public static final int movie_detail_not_collect_num=0x7f0800aa;
-        public static final int movie_detail_poster=0x7f08009b;
-        public static final int movie_detail_rating=0x7f08009d;
-        public static final int movie_detail_score=0x7f08009e;
-        public static final int movie_detail_time=0x7f0800a2;
-        public static final int movie_detail_type=0x7f0800a1;
-        public static final int movie_detail_type_layout=0x7f0800a0;
-        public static final int movie_layout_scroe_layout=0x7f0800b6;
-        public static final int movie_list_cell_add=0x7f0800c2;
-        public static final int movie_list_cell_attention_num=0x7f0800be;
-        public static final int movie_list_cell_collect=0x7f0800bb;
-        public static final int movie_list_cell_eyes=0x7f0800c1;
-        public static final int movie_list_cell_img=0x7f0800b9;
-        public static final int movie_list_cell_looked_num=0x7f0800bf;
-        public static final int movie_list_cell_my_score=0x7f0800c0;
-        public static final int movie_list_cell_name=0x7f0800ba;
-        public static final int movie_list_cell_rating=0x7f0800bc;
-        public static final int movie_list_cell_score=0x7f0800bd;
-        public static final int movie_memoirs_card=0x7f0800c5;
-        public static final int movie_memoirs_card_cinema=0x7f0800d1;
-        public static final int movie_memoirs_card_date=0x7f0800c9;
-        public static final int movie_memoirs_card_layout=0x7f0800c4;
-        public static final int movie_memoirs_card_look_type=0x7f0800d0;
-        public static final int movie_memoirs_card_money=0x7f0800d4;
-        public static final int movie_memoirs_card_movie_time=0x7f0800cc;
-        public static final int movie_memoirs_card_movie_title=0x7f0800ca;
-        public static final int movie_memoirs_card_movie_type=0x7f0800cb;
-        public static final int movie_memoirs_card_my_grade=0x7f0800cd;
-        public static final int movie_memoirs_card_poster=0x7f0800ce;
-        public static final int movie_memoirs_card_seat_number=0x7f0800d2;
-        public static final int movie_memoirs_card_show_time=0x7f0800d3;
-        public static final int movie_memoirs_fancyCoverFlow=0x7f0800c7;
-        public static final int movie_memoirs_look_type_icon=0x7f0800cf;
-        public static final int movie_memoirs_num=0x7f0800c3;
-        public static final int movie_memoirs_selector=0x7f0800c8;
-        public static final int movie_memoirs_time_point=0x7f0800c6;
-        public static final int movie_record_info=0x7f0800da;
-        public static final int movie_record_movie_icon=0x7f0800d6;
-        public static final int movie_record_name=0x7f0800d7;
-        public static final int movie_record_time=0x7f0800d9;
-        public static final int movie_record_type=0x7f0800d8;
-        public static final int myFriendsListView=0x7f0800e8;
-        public static final int myMessage_lv=0x7f0800e9;
-        public static final int myPhotosGridView=0x7f0800ea;
-        public static final int mycinema_group_arrow=0x7f0800e7;
-        public static final int mycinema_group_name=0x7f0800e5;
-        public static final int mycinema_group_num=0x7f0800e6;
-        public static final int mycinema_list_cell_address=0x7f0800e3;
-        public static final int mycinema_list_cell_distance=0x7f0800e4;
-        public static final int mycinema_list_cell_name=0x7f0800e2;
-        public static final int newuser_guide_indicator=0x7f0800f1;
-        public static final int newuser_guide_viewpager=0x7f0800f0;
-        public static final int opinion_rl=0x7f080033;
-        public static final int phone_icon=0x7f08002c;
-        public static final int phone_tv=0x7f08002d;
+        public static final int markGood_tv=0x7f0801a7;
+        public static final int markLinearLayout=0x7f0800f3;
+        public static final int markLower_tv=0x7f0801ab;
+        public static final int markOrdinary_tv=0x7f0801a9;
+        public static final int markValue_tv=0x7f0801a5;
+        public static final int marklow_tv=0x7f0801aa;
+        public static final int markrating_rb=0x7f0801a3;
+        public static final int markyear_tv=0x7f0801a4;
+        public static final int message=0x7f0800ba;
+        public static final int monery_tv=0x7f0801a1;
+        public static final int movieDate_tv=0x7f08008e;
+        public static final int movieHouse=0x7f0800c2;
+        public static final int movieIcon=0x7f08007e;
+        public static final int movieImage_iv=0x7f0801b8;
+        public static final int movieIntroduce_tv=0x7f080104;
+        public static final int movieName_tv=0x7f08008d;
+        public static final int movieScore_tv=0x7f08008b;
+        public static final int movieTitile_tv=0x7f0801b9;
+        public static final int movie_btn_down_line=0x7f0800f9;
+        public static final int movie_btn_friend=0x7f0800f8;
+        public static final int movie_btn_hot=0x7f0800f7;
+        public static final int movie_btn_layout=0x7f0800f6;
+        public static final int movie_btn_up_line=0x7f0800f5;
+        public static final int movie_comment=0x7f080133;
+        public static final int movie_comment_date_tv=0x7f0800fb;
+        public static final int movie_comment_info_tv=0x7f0800fa;
+        public static final int movie_date=0x7f080037;
+        public static final int movie_detail_add_record=0x7f080105;
+        public static final int movie_detail_attention_num=0x7f080101;
+        public static final int movie_detail_collect_num=0x7f08010b;
+        public static final int movie_detail_collect_rl=0x7f08010a;
+        public static final int movie_detail_commend_friends=0x7f08010e;
+        public static final int movie_detail_comment_num=0x7f080092;
+        public static final int movie_detail_hot_btn=0x7f080110;
+        public static final int movie_detail_list_cell_img=0x7f080112;
+        public static final int movie_detail_list_cell_info=0x7f080117;
+        public static final int movie_detail_list_cell_name=0x7f080113;
+        public static final int movie_detail_list_cell_rating=0x7f080114;
+        public static final int movie_detail_list_cell_score=0x7f080115;
+        public static final int movie_detail_list_cell_time=0x7f080118;
+        public static final int movie_detail_listview=0x7f080111;
+        public static final int movie_detail_look_record=0x7f080106;
+        public static final int movie_detail_looked_num=0x7f080109;
+        public static final int movie_detail_looked_rl=0x7f080107;
+        public static final int movie_detail_movie_title=0x7f0800fd;
+        public static final int movie_detail_new_btn=0x7f08010f;
+        public static final int movie_detail_not_collec=0x7f08010c;
+        public static final int movie_detail_poster=0x7f0800fc;
+        public static final int movie_detail_rating=0x7f0800fe;
+        public static final int movie_detail_score=0x7f0800ff;
+        public static final int movie_detail_time=0x7f080103;
+        public static final int movie_detail_type=0x7f080102;
+        public static final int movie_icon=0x7f080054;
+        public static final int movie_info=0x7f080131;
+        public static final int movie_layout_scroe_layout=0x7f080116;
+        public static final int movie_list_cell_add=0x7f080124;
+        public static final int movie_list_cell_attention_num=0x7f08011f;
+        public static final int movie_list_cell_eyes=0x7f080123;
+        public static final int movie_list_cell_img=0x7f080119;
+        public static final int movie_list_cell_looked_num=0x7f080120;
+        public static final int movie_list_cell_my_score=0x7f080122;
+        public static final int movie_list_cell_name=0x7f08011a;
+        public static final int movie_list_cell_rating=0x7f08011d;
+        public static final int movie_list_cell_score=0x7f08011e;
+        public static final int movie_mark=0x7f0800f4;
+        public static final int movie_memoirs_card_cinema=0x7f0800ed;
+        public static final int movie_memoirs_card_date=0x7f080125;
+        public static final int movie_memoirs_card_hall_number=0x7f08012d;
+        public static final int movie_memoirs_card_look_type=0x7f08012c;
+        public static final int movie_memoirs_card_money=0x7f080130;
+        public static final int movie_memoirs_card_movie_time=0x7f080128;
+        public static final int movie_memoirs_card_movie_title=0x7f080126;
+        public static final int movie_memoirs_card_movie_type=0x7f080127;
+        public static final int movie_memoirs_card_my_grade=0x7f08012a;
+        public static final int movie_memoirs_card_poster=0x7f08012b;
+        public static final int movie_memoirs_card_seat_number=0x7f08012e;
+        public static final int movie_memoirs_card_show_time=0x7f08012f;
+        public static final int movie_money=0x7f0800f0;
+        public static final int movie_name=0x7f080055;
+        public static final int movie_record_info=0x7f08013b;
+        public static final int movie_record_movie_icon=0x7f080137;
+        public static final int movie_record_name=0x7f080138;
+        public static final int movie_record_time=0x7f08013a;
+        public static final int movie_record_type=0x7f080139;
+        public static final int movie_ticket=0x7f0800e9;
+        public static final int movie_time=0x7f080057;
+        public static final int movie_times=0x7f0800f2;
+        public static final int movie_type=0x7f0800f1;
+        public static final int movieinfo_tv=0x7f08008c;
+        public static final int msgText=0x7f0800b1;
+        public static final int msgView=0x7f0800b5;
+        public static final int myComment=0x7f080043;
+        public static final int mycinema_group_arrow=0x7f08014c;
+        public static final int mycinema_group_name=0x7f08014a;
+        public static final int mycinema_group_num=0x7f08014b;
+        public static final int mycinema_list_cell_name=0x7f080149;
+        public static final int name=0x7f080060;
+        public static final int newsDate_tv=0x7f0800d9;
+        public static final int newsNum_tv=0x7f080150;
+        public static final int news_ll=0x7f0800d7;
+        public static final int newuser_guide_indicator=0x7f08015a;
+        public static final int newuser_guide_viewpager=0x7f080159;
+        public static final int oftenCinemaName_tv=0x7f0801b0;
+        public static final int oftenCinemaNum_tv=0x7f0801b1;
+        public static final int oftenLookedTypeName_tv=0x7f0801b2;
+        public static final int oftenLookedTypeNum_tv=0x7f0801b3;
+        public static final int opinion_et=0x7f08004c;
+        public static final int opinion_rl=0x7f080032;
+        public static final int opinion_tv=0x7f08005d;
+        public static final int originally_ll=0x7f080091;
+        public static final int phone_edite=0x7f080052;
+        public static final int phone_icon=0x7f08002b;
+        public static final int phone_tv=0x7f08002c;
+        public static final int photo=0x7f0801ba;
+        public static final int photoSouvenir=0x7f08003d;
         public static final int photograph=0x7f080005;
-        public static final int photograph_foot_layout=0x7f0800f7;
-        public static final int photograph_head_layout=0x7f0800f3;
-        public static final int preview_view=0x7f0800fa;
+        public static final int preview_view=0x7f08015c;
         public static final int pullDownFromTop=0x7f080018;
         public static final int pullFromEnd=0x7f080019;
         public static final int pullFromStart=0x7f08001a;
         public static final int pullUpFromBottom=0x7f08001b;
-        public static final int pull_refresh_list=0x7f080052;
-        public static final int pull_refresh_scrollview=0x7f08009a;
-        public static final int pull_to_refresh_image=0x7f0800fd;
-        public static final int pull_to_refresh_progress=0x7f0800fe;
-        public static final int pull_to_refresh_sub_text=0x7f080100;
-        public static final int pull_to_refresh_text=0x7f0800ff;
+        public static final int pull_refresh_grid=0x7f080152;
+        public static final int pull_refresh_list=0x7f080093;
+        public static final int pull_refresh_scrollview=0x7f080084;
+        public static final int pull_to_refresh_image=0x7f08015f;
+        public static final int pull_to_refresh_progress=0x7f080160;
+        public static final int pull_to_refresh_sub_text=0x7f080162;
+        public static final int pull_to_refresh_text=0x7f080161;
+        public static final int qq_edite=0x7f08004e;
         public static final int quit=0x7f08000c;
-        public static final int realtabcontent=0x7f08010f;
-        public static final int record_cinema_btn=0x7f080103;
-        public static final int record_cinema_title=0x7f080106;
-        public static final int record_net_btn=0x7f080102;
-        public static final int record_net_title=0x7f080105;
-        public static final int record_title=0x7f080101;
-        public static final int record_tv_btn=0x7f080104;
-        public static final int record_tv_title=0x7f080107;
+        public static final int radioGroup=0x7f080077;
+        public static final int radio_gp=0x7f080188;
+        public static final int realtabcontent=0x7f080179;
+        public static final int realtion_rb=0x7f0800b7;
+        public static final int record_cinema_btn=0x7f080166;
+        public static final int record_cinema_title=0x7f080169;
+        public static final int record_net_btn=0x7f080165;
+        public static final int record_net_title=0x7f080168;
+        public static final int record_title=0x7f080164;
+        public static final int record_tv_btn=0x7f080167;
+        public static final int record_tv_title=0x7f08016a;
+        public static final int refresh_layout=0x7f08014e;
         public static final int restart_preview=0x7f08000d;
         public static final int return_scan_result=0x7f08000e;
         public static final int rotate=0x7f08001d;
-        public static final int scrollView1=0x7f0800d5;
+        public static final int sameMovieNum=0x7f08003c;
+        public static final int sameMovieNum_linear=0x7f080039;
+        public static final int score_ll=0x7f080089;
+        public static final int scrollView1=0x7f080035;
         public static final int scrollview=0x7f080003;
+        public static final int seachCity=0x7f080172;
+        public static final int seachFriend=0x7f08014d;
+        public static final int searchList=0x7f08005f;
+        public static final int searchName=0x7f080148;
         public static final int search_book_contents_failed=0x7f08000f;
         public static final int search_book_contents_succeeded=0x7f080010;
-        public static final int seenFilmLayout=0x7f08007d;
-        public static final int seenFilmNum=0x7f08007e;
-        public static final int select_cinema_child_address=0x7f08010b;
-        public static final int select_cinema_child_distance=0x7f08010c;
-        public static final int select_cinema_child_name=0x7f08010a;
-        public static final int select_cinema_group_arrow=0x7f08010e;
-        public static final int select_cinema_group_title=0x7f08010d;
-        public static final int select_cinema_list=0x7f080109;
-        public static final int select_cinema_search_edittext=0x7f080108;
+        public static final int search_edit=0x7f080163;
+        public static final int seat_no=0x7f08005a;
+        public static final int seekBar=0x7f08007d;
+        public static final int seenFilmLayout=0x7f0800bd;
+        public static final int seenFilmNum=0x7f0800be;
+        public static final int select_cinema_child_address=0x7f08016e;
+        public static final int select_cinema_child_distance=0x7f08016f;
+        public static final int select_cinema_child_name=0x7f08016d;
+        public static final int select_cinema_group_arrow=0x7f080171;
+        public static final int select_cinema_group_title=0x7f080170;
+        public static final int select_cinema_list=0x7f08016c;
+        public static final int select_cinema_search_edittext=0x7f08016b;
+        public static final int sendComment_et=0x7f080094;
+        public static final int sendCommetn_bt=0x7f080095;
+        public static final int sendMgs=0x7f0800b2;
+        public static final int sh_tv=0x7f080175;
         public static final int show=0x7f080014;
-        public static final int sinaBind_bt=0x7f080023;
-        public static final int sinaBind_tv=0x7f080022;
-        public static final int tabmanager_record=0x7f080110;
+        public static final int showPoP=0x7f0800a6;
+        public static final int signature_tv=0x7f0800bc;
+        public static final int sinaBind_bt=0x7f080024;
+        public static final int sina_btn=0x7f080081;
+        public static final int status=0x7f080061;
+        public static final int suspend_ll=0x7f080096;
+        public static final int tabmanager_record=0x7f08017a;
+        public static final int telephone_edite=0x7f080050;
         public static final int text=0x7f080012;
-        public static final int textView1=0x7f08008f;
-        public static final int textView10=0x7f080142;
-        public static final int textView11=0x7f080145;
-        public static final int textView12=0x7f080146;
-        public static final int textView2=0x7f0800a5;
-        public static final int textView3=0x7f0800a7;
-        public static final int textView4=0x7f0800de;
-        public static final int textView5=0x7f0800e1;
-        public static final int textView6=0x7f080140;
-        public static final int textView7=0x7f080141;
-        public static final int textView8=0x7f080143;
-        public static final int textView9=0x7f080144;
-        public static final int textview=0x7f080112;
-        public static final int titlebar_bg_layout=0x7f080087;
-        public static final int titlebar_bottom_line=0x7f08008d;
-        public static final int titlebar_input=0x7f08008b;
-        public static final int titlebar_input_edittext=0x7f08008c;
-        public static final int titlebar_left=0x7f080088;
-        public static final int titlebar_right=0x7f080089;
-        public static final int titlebar_title=0x7f08008a;
-        public static final int userAddress_rl=0x7f08011b;
-        public static final int userAddress_tv=0x7f08011c;
-        public static final int userBirthday_rl=0x7f08011d;
-        public static final int userBirthday_tv=0x7f08011e;
-        public static final int userIcon_iv=0x7f080114;
-        public static final int userIcon_rl=0x7f080113;
-        public static final int userName_rl=0x7f080115;
-        public static final int userName_tv=0x7f080116;
-        public static final int userSet=0x7f0800ef;
-        public static final int userSex_rl=0x7f080117;
-        public static final int userSex_tv=0x7f080118;
-        public static final int userSign_rl=0x7f080119;
-        public static final int userSign_tv=0x7f08011a;
-        public static final int user_data_btn_all=0x7f080120;
-        public static final int user_data_btn_year=0x7f080121;
-        public static final int user_data_digital_cloud_view=0x7f080127;
-        public static final int user_data_indicator_four=0x7f080126;
-        public static final int user_data_indicator_one=0x7f080123;
-        public static final int user_data_indicator_three=0x7f080125;
-        public static final int user_data_indicator_two=0x7f080124;
-        public static final int user_data_type_name=0x7f08011f;
-        public static final int user_data_viewpager=0x7f080122;
-        public static final int user_icon=0x7f080077;
-        public static final int user_id=0x7f080079;
-        public static final int user_name=0x7f080078;
-        public static final int userinfo_btn_quit=0x7f080163;
-        public static final int userinfo_clear_layout=0x7f080161;
-        public static final int userinfo_clear_value=0x7f080162;
-        public static final int userinfo_comment_layout=0x7f080157;
-        public static final int userinfo_comment_title=0x7f080158;
-        public static final int userinfo_comment_value=0x7f080159;
-        public static final int userinfo_feedback=0x7f08015f;
-        public static final int userinfo_head_icon=0x7f080148;
-        public static final int userinfo_head_layout=0x7f080147;
-        public static final int userinfo_mail_layout=0x7f08015b;
-        public static final int userinfo_mail_title=0x7f08015c;
-        public static final int userinfo_mail_value=0x7f08015d;
-        public static final int userinfo_memory=0x7f08014c;
-        public static final int userinfo_message_layout=0x7f080154;
-        public static final int userinfo_message_title=0x7f080155;
-        public static final int userinfo_message_value=0x7f080156;
-        public static final int userinfo_mome_number=0x7f08014a;
-        public static final int userinfo_my_arrow=0x7f080152;
-        public static final int userinfo_my_cinema=0x7f080151;
-        public static final int userinfo_my_cinema_value=0x7f080153;
-        public static final int userinfo_my_data=0x7f08014d;
-        public static final int userinfo_my_dynamic=0x7f08014b;
-        public static final int userinfo_my_enshrine=0x7f08014e;
-        public static final int userinfo_my_friend=0x7f080150;
-        public static final int userinfo_my_photo=0x7f08014f;
-        public static final int userinfo_my_score=0x7f080160;
-        public static final int userinfo_name=0x7f080149;
-        public static final int userinfo_set=0x7f08015e;
-        public static final int viewContainer=0x7f080094;
-        public static final int viewfinder_view=0x7f0800fb;
+        public static final int textView=0x7f080136;
+        public static final int textView1=0x7f0800df;
+        public static final int textView10=0x7f08019c;
+        public static final int textView12=0x7f0801a0;
+        public static final int textView2=0x7f08003b;
+        public static final int textView3=0x7f080132;
+        public static final int textView4=0x7f080140;
+        public static final int textView5=0x7f080142;
+        public static final int textView6=0x7f0801a8;
+        public static final int textView7=0x7f08019b;
+        public static final int textView8=0x7f0801a6;
+        public static final int textView9=0x7f08019e;
+        public static final int textview=0x7f08004b;
+        public static final int textview1=0x7f08004d;
+        public static final int textview2=0x7f08004f;
+        public static final int textview3=0x7f080051;
+        public static final int ticket_price=0x7f08005b;
+        public static final int timeView=0x7f0800b3;
+        public static final int timeradioGroup=0x7f080195;
+        public static final int times_tv=0x7f08019a;
+        public static final int titlebar_bg_layout=0x7f08007b;
+        public static final int titlebar_bottom_line=0x7f0800d1;
+        public static final int titlebar_input=0x7f0800ce;
+        public static final int titlebar_input_edittext=0x7f0800cf;
+        public static final int titlebar_left=0x7f080020;
+        public static final int titlebar_right=0x7f08007c;
+        public static final int titlebar_title=0x7f080021;
+        public static final int tj_tv=0x7f080177;
+        public static final int tv=0x7f080199;
+        public static final int tvDount_pg=0x7f0801af;
+        public static final int userAddress_rl=0x7f080183;
+        public static final int userAddress_tv=0x7f080184;
+        public static final int userBirthday_rl=0x7f080185;
+        public static final int userBirthday_tv=0x7f080186;
+        public static final int userIcon=0x7f0800b4;
+        public static final int userIcon_iv=0x7f08017d;
+        public static final int userIcon_rl=0x7f08017c;
+        public static final int userName_rl=0x7f08017e;
+        public static final int userName_tv=0x7f080088;
+        public static final int userNickName_et=0x7f080187;
+        public static final int userSet=0x7f080158;
+        public static final int userSex_rl=0x7f08017f;
+        public static final int userSex_tv=0x7f080180;
+        public static final int userSign_et=0x7f08018b;
+        public static final int userSign_rl=0x7f080181;
+        public static final int userSign_tv=0x7f080182;
+        public static final int user_data_digital_cloud_view=0x7f080193;
+        public static final int user_data_indicator_four=0x7f080192;
+        public static final int user_data_indicator_one=0x7f08018f;
+        public static final int user_data_indicator_three=0x7f080191;
+        public static final int user_data_indicator_two=0x7f080190;
+        public static final int user_data_type_name=0x7f08018c;
+        public static final int user_data_viewpager=0x7f08018e;
+        public static final int user_icon=0x7f080087;
+        public static final int user_id=0x7f0800b9;
+        public static final int user_name=0x7f0800b8;
+        public static final int user_news=0x7f080151;
+        public static final int user_sign=0x7f0800d8;
+        public static final int usericon=0x7f0800c7;
+        public static final int userinfo_btn_quit=0x7f0801d7;
+        public static final int userinfo_clear_layout=0x7f0801d5;
+        public static final int userinfo_clear_value=0x7f0801d6;
+        public static final int userinfo_comment_layout=0x7f0801cb;
+        public static final int userinfo_comment_title=0x7f0801cc;
+        public static final int userinfo_comment_value=0x7f0801cd;
+        public static final int userinfo_feedback=0x7f0801d3;
+        public static final int userinfo_head_icon=0x7f0801bc;
+        public static final int userinfo_head_layout=0x7f0801bb;
+        public static final int userinfo_mail_layout=0x7f0801cf;
+        public static final int userinfo_mail_title=0x7f0801d0;
+        public static final int userinfo_mail_value=0x7f0801d1;
+        public static final int userinfo_memory=0x7f0801c0;
+        public static final int userinfo_message_layout=0x7f0801c8;
+        public static final int userinfo_message_title=0x7f0801c9;
+        public static final int userinfo_message_value=0x7f0801ca;
+        public static final int userinfo_mome_number=0x7f0801be;
+        public static final int userinfo_my_arrow=0x7f0801c6;
+        public static final int userinfo_my_cinema=0x7f0801c5;
+        public static final int userinfo_my_cinema_value=0x7f0801c7;
+        public static final int userinfo_my_data=0x7f0801c1;
+        public static final int userinfo_my_dynamic=0x7f0801bf;
+        public static final int userinfo_my_enshrine=0x7f0801c2;
+        public static final int userinfo_my_friend=0x7f0801c4;
+        public static final int userinfo_my_photo=0x7f0801c3;
+        public static final int userinfo_my_score=0x7f0801d4;
+        public static final int userinfo_name=0x7f0801bd;
+        public static final int userinfo_set=0x7f0801d2;
+        public static final int username=0x7f0800c8;
+        public static final int viewContainer=0x7f0800e7;
+        public static final int viewfinder_view=0x7f08015d;
         public static final int viewpager=0x7f080000;
         public static final int webview=0x7f080002;
         public static final int wechatBind_bt=0x7f080027;
-        public static final int wechatBind_tv=0x7f080026;
-        public static final int wechat_icon=0x7f080024;
-        public static final int wechat_tv=0x7f080025;
-        public static final int xinlang_icon=0x7f080020;
-        public static final int xinlang_tv=0x7f080021;
-        public static final int yijian_more=0x7f080034;
+        public static final int wechat_btn=0x7f080082;
+        public static final int wechat_icon=0x7f080025;
+        public static final int wechat_tv=0x7f080026;
+        public static final int woman=0x7f08018a;
+        public static final int xinlang_icon=0x7f080022;
+        public static final int xinlang_tv=0x7f080023;
+        public static final int year=0x7f080134;
+        public static final int yijian_more=0x7f080033;
     }
     public static final class layout {
         public static final int activity_setting=0x7f030000;
-        public static final int add_record=0x7f030001;
-        public static final int custom_time_shaft=0x7f030002;
-        public static final int custom_time_shaft_item=0x7f030003;
-        public static final int discovery=0x7f030004;
-        public static final int dynamic=0x7f030005;
-        public static final int dynamic_comment=0x7f030006;
-        public static final int dynamic_detail=0x7f030007;
-        public static final int dynamic_detail_list_cell=0x7f030008;
-        public static final int dynamic_list_cell=0x7f030009;
-        public static final int findfriend=0x7f03000a;
-        public static final int friends_home=0x7f03000b;
-        public static final int include_head_layout=0x7f03000c;
-        public static final int launchscreen=0x7f03000d;
-        public static final int login=0x7f03000e;
-        public static final int main=0x7f03000f;
-        public static final int movie=0x7f030010;
-        public static final int movie_detail=0x7f030011;
-        public static final int movie_detail_list_cell=0x7f030012;
-        public static final int movie_list_cell=0x7f030013;
-        public static final int movie_memoirs=0x7f030014;
-        public static final int movie_memoirs_card=0x7f030015;
-        public static final int movie_record=0x7f030016;
-        public static final int mycineam_list_cell=0x7f030017;
-        public static final int mycineama=0x7f030018;
-        public static final int mycinema_group_list_cell=0x7f030019;
-        public static final int myfriends=0x7f03001a;
-        public static final int mymessage=0x7f03001b;
-        public static final int mynews=0x7f03001c;
-        public static final int myphotos=0x7f03001d;
-        public static final int myself_home=0x7f03001e;
-        public static final int newuser_guide=0x7f03001f;
-        public static final int newuser_guide_one=0x7f030020;
-        public static final int newuser_guide_three=0x7f030021;
-        public static final int newuser_guide_two=0x7f030022;
-        public static final int photograph=0x7f030023;
-        public static final int pull_to_refresh_header_horizontal=0x7f030024;
-        public static final int pull_to_refresh_header_vertical=0x7f030025;
-        public static final int record=0x7f030026;
-        public static final int select_cinema=0x7f030027;
-        public static final int select_cinema_child=0x7f030028;
-        public static final int select_cinema_group=0x7f030029;
-        public static final int tabmanager=0x7f03002a;
-        public static final int tabmanager_tab_item_view=0x7f03002b;
-        public static final int update_userinfo=0x7f03002c;
-        public static final int user_data=0x7f03002d;
-        public static final int user_data_digital_cloud=0x7f03002e;
-        public static final int user_data_expenditure_time=0x7f03002f;
-        public static final int user_data_grade=0x7f030030;
-        public static final int user_data_look_num=0x7f030031;
-        public static final int userinfo=0x7f030032;
+        public static final int add_movie_memoirs=0x7f030001;
+        public static final int add_opinion=0x7f030002;
+        public static final int add_record=0x7f030003;
+        public static final int alert_dialog_menu_layout=0x7f030004;
+        public static final int answer_opinion=0x7f030005;
+        public static final int cinema_search=0x7f030006;
+        public static final int city_group_item=0x7f030007;
+        public static final int city_list_item=0x7f030008;
+        public static final int complain_item=0x7f030009;
+        public static final int custom_time_shaft=0x7f03000a;
+        public static final int custom_time_shaft_item=0x7f03000b;
+        public static final int discovery=0x7f03000c;
+        public static final int dou_movie_search=0x7f03000d;
+        public static final int douban_item=0x7f03000e;
+        public static final int dynamic=0x7f03000f;
+        public static final int dynamic_comment=0x7f030010;
+        public static final int dynamic_detail=0x7f030011;
+        public static final int dynamic_detail_header=0x7f030012;
+        public static final int dynamic_detail_list_cell=0x7f030013;
+        public static final int dynamic_detail_suspend=0x7f030014;
+        public static final int dynamic_fragment=0x7f030015;
+        public static final int dynamic_list_cell=0x7f030016;
+        public static final int edit_layout=0x7f030017;
+        public static final int empty_view=0x7f030018;
+        public static final int findfriend=0x7f030019;
+        public static final int friend_chat=0x7f03001a;
+        public static final int friend_chat_item=0x7f03001b;
+        public static final int friend_list_item=0x7f03001c;
+        public static final int friends_home=0x7f03001d;
+        public static final int gridview_item=0x7f03001e;
+        public static final int head=0x7f03001f;
+        public static final int include_head_layout=0x7f030020;
+        public static final int interest_friend=0x7f030021;
+        public static final int interest_friend_child=0x7f030022;
+        public static final int interest_friend_group=0x7f030023;
+        public static final int invite_friend_list_item=0x7f030024;
+        public static final int invite_friends_list=0x7f030025;
+        public static final int launchscreen=0x7f030026;
+        public static final int layout_photoitem=0x7f030027;
+        public static final int list_group_item=0x7f030028;
+        public static final int loadinglayout=0x7f030029;
+        public static final int login=0x7f03002a;
+        public static final int main=0x7f03002b;
+        public static final int memory_cinemadetail=0x7f03002c;
+        public static final int memory_moviedetail=0x7f03002d;
+        public static final int mine_chat_item=0x7f03002e;
+        public static final int movie=0x7f03002f;
+        public static final int movie_comment_item=0x7f030030;
+        public static final int movie_detail=0x7f030031;
+        public static final int movie_detail_list_cell=0x7f030032;
+        public static final int movie_list_cell=0x7f030033;
+        public static final int movie_memoirs=0x7f030034;
+        public static final int movie_memoirs_card=0x7f030035;
+        public static final int movie_memoirs_detail=0x7f030036;
+        public static final int movie_memoirs_group=0x7f030037;
+        public static final int movie_record=0x7f030038;
+        public static final int movie_search=0x7f030039;
+        public static final int movie_search_child=0x7f03003a;
+        public static final int movie_search_detail_list=0x7f03003b;
+        public static final int movie_search_group=0x7f03003c;
+        public static final int movie_search_item=0x7f03003d;
+        public static final int mycineam_list_cell=0x7f03003e;
+        public static final int mycineama=0x7f03003f;
+        public static final int mycinema_group_list_cell=0x7f030040;
+        public static final int myfriends=0x7f030041;
+        public static final int mymessage=0x7f030042;
+        public static final int mynews=0x7f030043;
+        public static final int mynews_item=0x7f030044;
+        public static final int myphoto_item=0x7f030045;
+        public static final int myphotos=0x7f030046;
+        public static final int myself_home=0x7f030047;
+        public static final int newuser_guide=0x7f030048;
+        public static final int newuser_guide_one=0x7f030049;
+        public static final int newuser_guide_three=0x7f03004a;
+        public static final int newuser_guide_two=0x7f03004b;
+        public static final int opinion_list=0x7f03004c;
+        public static final int photograph=0x7f03004d;
+        public static final int pop_view=0x7f03004e;
+        public static final int pull_to_refresh_header_horizontal=0x7f03004f;
+        public static final int pull_to_refresh_header_vertical=0x7f030050;
+        public static final int recod_movie_list=0x7f030051;
+        public static final int recode_movie_list_item=0x7f030052;
+        public static final int record=0x7f030053;
+        public static final int same_friends_list=0x7f030054;
+        public static final int searchmovie=0x7f030055;
+        public static final int select_cinema=0x7f030056;
+        public static final int select_cinema_child=0x7f030057;
+        public static final int select_cinema_group=0x7f030058;
+        public static final int select_city=0x7f030059;
+        public static final int selector_photo=0x7f03005a;
+        public static final int spinner_item=0x7f03005b;
+        public static final int tabmanager=0x7f03005c;
+        public static final int tabmanager_tab_item_view=0x7f03005d;
+        public static final int update_userinfo=0x7f03005e;
+        public static final int update_usernickname=0x7f03005f;
+        public static final int update_usersex=0x7f030060;
+        public static final int update_usersig=0x7f030061;
+        public static final int user_data=0x7f030062;
+        public static final int user_data_digital_cloud=0x7f030063;
+        public static final int user_data_expenditure_time=0x7f030064;
+        public static final int user_data_grade=0x7f030065;
+        public static final int user_data_look_num=0x7f030066;
+        public static final int user_data_type_list=0x7f030067;
+        public static final int user_dynamic_item=0x7f030068;
+        public static final int user_photo_detail=0x7f030069;
+        public static final int userinfo=0x7f03006a;
+        public static final int webview=0x7f03006b;
     }
     public static final class raw {
         public static final int beep=0x7f050000;
-        public static final int realm_properties=0x7f050001;
+        public static final int city=0x7f050001;
+        public static final int realm_properties=0x7f050002;
     }
     public static final class string {
         public static final int ExitHint=0x7f090007;
@@ -1008,16 +1272,33 @@ containing a value of this type.
         public static final int TAattention=0x7f090010;
         public static final int TAcollection=0x7f09000f;
         public static final int TAfilm=0x7f09000d;
+        public static final int TV=0x7f090024;
         public static final int UpdateIcon=0x7f090011;
         public static final int UserAddress=0x7f090015;
         public static final int UserName=0x7f090012;
         public static final int UserSex=0x7f090013;
         public static final int UserSign=0x7f090014;
         public static final int Userbirthday=0x7f090016;
+        public static final int add_look_record=0x7f090018;
+        public static final int all=0x7f090020;
         public static final int app_name=0x7f090006;
         public static final int attention=0x7f09000a;
+        public static final int collect_num=0x7f09001b;
+        public static final int commend_to_friends=0x7f09001c;
+        public static final int commetn_edit_hint=0x7f09001f;
+        public static final int emptyhint=0x7f090025;
         public static final int fans=0x7f090009;
+        public static final int film=0x7f090022;
         public static final int filmStyle=0x7f09000c;
+        public static final int get_look_record=0x7f090019;
+        public static final int get_looked_friends=0x7f09001a;
+        public static final int internet=0x7f090023;
+        /** 邀请好友信息  
+         */
+        public static final int inviteMessage=0x7f090034;
+        public static final int movieIntroduce=0x7f090017;
+        public static final int order_by_hot=0x7f09001e;
+        public static final int order_by_new=0x7f09001d;
         /**  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
          */
         public static final int pull_to_refresh_from_bottom_pull_label=0x7f090003;
@@ -1026,18 +1307,37 @@ containing a value of this type.
         public static final int pull_to_refresh_pull_label=0x7f090000;
         public static final int pull_to_refresh_refreshing_label=0x7f090002;
         public static final int pull_to_refresh_release_label=0x7f090001;
+        public static final int record_ciname_name=0x7f090029;
+        public static final int record_ciname_name_hint=0x7f09002a;
+        public static final int record_ciname_no=0x7f09002b;
+        public static final int record_ciname_no_hint=0x7f090031;
+        public static final int record_looked_date=0x7f090026;
+        public static final int record_looked_date_hint=0x7f09002e;
+        public static final int record_looked_time=0x7f090027;
+        public static final int record_looked_time_hint=0x7f09002f;
+        public static final int record_looked_type=0x7f090028;
+        public static final int record_looked_type_hint=0x7f090030;
+        public static final int record_seat_no=0x7f09002c;
+        public static final int record_seat_no_hint=0x7f090032;
+        public static final int record_ticket_monery=0x7f09002d;
+        public static final int record_ticket_monery_hint=0x7f090033;
         public static final int scan_text=0x7f090008;
         public static final int seenFilmNum=0x7f09000b;
+        public static final int year=0x7f090021;
     }
     public static final class style {
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
+
         
          */
         public static final int AppBaseTheme=0x7f0a0000;
@@ -1045,6 +1345,9 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0a0001;
+        /**  模糊 
+         */
+        public static final int MyDialogStyle=0x7f0a0006;
         public static final int line_horizontal=0x7f0a0002;
         public static final int line_horizontal_Max=0x7f0a0003;
         public static final int line_vercal=0x7f0a0004;
@@ -1770,6 +2073,251 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name com.mome.main:ptrSubHeaderTextAppearance
         */
         public static final int PullToRefresh_ptrSubHeaderTextAppearance = 12;
+        /** Attributes that can be used with a StickyListHeadersListView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_cacheColorHint android:cacheColorHint}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_choiceMode android:choiceMode}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_clipToPadding android:clipToPadding}</code></td><td> View attributes </td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_divider android:divider}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_dividerHeight android:dividerHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_drawSelectorOnTop android:drawSelectorOnTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_fadingEdgeLength android:fadingEdgeLength}</code></td><td> ListView attributes </td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_fastScrollAlwaysVisible android:fastScrollAlwaysVisible}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_fastScrollEnabled android:fastScrollEnabled}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_listSelector android:listSelector}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_overScrollMode android:overScrollMode}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_padding android:padding}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_paddingBottom android:paddingBottom}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_paddingLeft android:paddingLeft}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_paddingRight android:paddingRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_paddingTop android:paddingTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_requiresFadingEdge android:requiresFadingEdge}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_scrollbarStyle android:scrollbarStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_scrollbars android:scrollbars}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_scrollingCache android:scrollingCache}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_stackFromBottom android:stackFromBottom}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_android_transcriptMode android:transcriptMode}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_hasStickyHeaders com.mome.main:hasStickyHeaders}</code></td><td> StickyListHeaders attributes </td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_isDrawingListUnderStickyHeader com.mome.main:isDrawingListUnderStickyHeader}</code></td><td></td></tr>
+           <tr><td><code>{@link #StickyListHeadersListView_stickyListHeadersListViewStyle com.mome.main:stickyListHeadersListViewStyle}</code></td><td></td></tr>
+           </table>
+           @see #StickyListHeadersListView_android_cacheColorHint
+           @see #StickyListHeadersListView_android_choiceMode
+           @see #StickyListHeadersListView_android_clipToPadding
+           @see #StickyListHeadersListView_android_divider
+           @see #StickyListHeadersListView_android_dividerHeight
+           @see #StickyListHeadersListView_android_drawSelectorOnTop
+           @see #StickyListHeadersListView_android_fadingEdgeLength
+           @see #StickyListHeadersListView_android_fastScrollAlwaysVisible
+           @see #StickyListHeadersListView_android_fastScrollEnabled
+           @see #StickyListHeadersListView_android_listSelector
+           @see #StickyListHeadersListView_android_overScrollMode
+           @see #StickyListHeadersListView_android_padding
+           @see #StickyListHeadersListView_android_paddingBottom
+           @see #StickyListHeadersListView_android_paddingLeft
+           @see #StickyListHeadersListView_android_paddingRight
+           @see #StickyListHeadersListView_android_paddingTop
+           @see #StickyListHeadersListView_android_requiresFadingEdge
+           @see #StickyListHeadersListView_android_scrollbarStyle
+           @see #StickyListHeadersListView_android_scrollbars
+           @see #StickyListHeadersListView_android_scrollingCache
+           @see #StickyListHeadersListView_android_stackFromBottom
+           @see #StickyListHeadersListView_android_transcriptMode
+           @see #StickyListHeadersListView_hasStickyHeaders
+           @see #StickyListHeadersListView_isDrawingListUnderStickyHeader
+           @see #StickyListHeadersListView_stickyListHeadersListViewStyle
+         */
+        public static final int[] StickyListHeadersListView = {
+            0x0101007f, 0x010100d5, 0x010100d6, 0x010100d7,
+            0x010100d8, 0x010100d9, 0x010100de, 0x010100e0,
+            0x010100eb, 0x010100fb, 0x010100fc, 0x010100fd,
+            0x010100fe, 0x01010100, 0x01010101, 0x01010129,
+            0x0101012a, 0x0101012b, 0x01010226, 0x010102c1,
+            0x01010335, 0x010103a5, 0x7f010034, 0x7f010035,
+            0x7f010036
+        };
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#cacheColorHint}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:cacheColorHint
+        */
+        public static final int StickyListHeadersListView_android_cacheColorHint = 14;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#choiceMode}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:choiceMode
+        */
+        public static final int StickyListHeadersListView_android_choiceMode = 17;
+        /**
+          <p>
+          @attr description
+           View attributes 
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#clipToPadding}.
+          @attr name android:clipToPadding
+        */
+        public static final int StickyListHeadersListView_android_clipToPadding = 8;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#divider}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:divider
+        */
+        public static final int StickyListHeadersListView_android_divider = 15;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#dividerHeight}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:dividerHeight
+        */
+        public static final int StickyListHeadersListView_android_dividerHeight = 16;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#drawSelectorOnTop}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:drawSelectorOnTop
+        */
+        public static final int StickyListHeadersListView_android_drawSelectorOnTop = 10;
+        /**
+          <p>
+          @attr description
+           ListView attributes 
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#fadingEdgeLength}.
+          @attr name android:fadingEdgeLength
+        */
+        public static final int StickyListHeadersListView_android_fadingEdgeLength = 7;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#fastScrollAlwaysVisible}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:fastScrollAlwaysVisible
+        */
+        public static final int StickyListHeadersListView_android_fastScrollAlwaysVisible = 20;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#fastScrollEnabled}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:fastScrollEnabled
+        */
+        public static final int StickyListHeadersListView_android_fastScrollEnabled = 18;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#listSelector}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:listSelector
+        */
+        public static final int StickyListHeadersListView_android_listSelector = 9;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#overScrollMode}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:overScrollMode
+        */
+        public static final int StickyListHeadersListView_android_overScrollMode = 19;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#padding}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:padding
+        */
+        public static final int StickyListHeadersListView_android_padding = 1;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#paddingBottom}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:paddingBottom
+        */
+        public static final int StickyListHeadersListView_android_paddingBottom = 5;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#paddingLeft}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:paddingLeft
+        */
+        public static final int StickyListHeadersListView_android_paddingLeft = 2;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#paddingRight}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:paddingRight
+        */
+        public static final int StickyListHeadersListView_android_paddingRight = 4;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#paddingTop}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:paddingTop
+        */
+        public static final int StickyListHeadersListView_android_paddingTop = 3;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#requiresFadingEdge}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:requiresFadingEdge
+        */
+        public static final int StickyListHeadersListView_android_requiresFadingEdge = 21;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scrollbarStyle}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:scrollbarStyle
+        */
+        public static final int StickyListHeadersListView_android_scrollbarStyle = 0;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scrollbars}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:scrollbars
+        */
+        public static final int StickyListHeadersListView_android_scrollbars = 6;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scrollingCache}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:scrollingCache
+        */
+        public static final int StickyListHeadersListView_android_scrollingCache = 12;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#stackFromBottom}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:stackFromBottom
+        */
+        public static final int StickyListHeadersListView_android_stackFromBottom = 11;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#transcriptMode}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+          @attr name android:transcriptMode
+        */
+        public static final int StickyListHeadersListView_android_transcriptMode = 13;
+        /**
+          <p>
+          @attr description
+           StickyListHeaders attributes 
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name com.mome.main:hasStickyHeaders
+        */
+        public static final int StickyListHeadersListView_hasStickyHeaders = 23;
+        /**
+          <p>This symbol is the offset where the {@link com.mome.main.R.attr#isDrawingListUnderStickyHeader}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.mome.main:isDrawingListUnderStickyHeader
+        */
+        public static final int StickyListHeadersListView_isDrawingListUnderStickyHeader = 24;
+        /**
+          <p>This symbol is the offset where the {@link com.mome.main.R.attr#stickyListHeadersListViewStyle}
+          attribute's value can be found in the {@link #StickyListHeadersListView} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.mome.main:stickyListHeadersListViewStyle
+        */
+        public static final int StickyListHeadersListView_stickyListHeadersListViewStyle = 22;
         /**  头布局参数 
            <p>Includes the following attributes:</p>
            <table>

@@ -164,7 +164,7 @@ public final class ViewfinderView extends View {
 		} else {
 
 			//��ɨ�����ϵĽǣ��ܹ�8������
-			paint.setColor(Color.GREEN);
+			paint.setColor(getResources().getColor(R.color.Purple));
 			canvas.drawRect(frame.left, frame.top, frame.left + ScreenRate,
 					frame.top + CORNER_WIDTH, paint);
 			canvas.drawRect(frame.left, frame.top, frame.left + CORNER_WIDTH, frame.top

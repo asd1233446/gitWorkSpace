@@ -32,7 +32,7 @@ public class UserPhotoListCell  implements ListCellBase {
 
 	ViewHolder viewHolder=null;
 	@Override
-	public View getView(View convertView) {
+	public View getView(int postion,View convertView) {
 		// TODO Auto-generated method stub
 		
 		if(convertView==null){
@@ -61,7 +61,6 @@ public class UserPhotoListCell  implements ListCellBase {
 			Bundle bundle=new Bundle();
 			bundle.putSerializable("photoinfo", mPhotoInfo);
 			Tools.pushScreen(UserPhotoDetail.class, bundle);
-			
 		}
 		
 	

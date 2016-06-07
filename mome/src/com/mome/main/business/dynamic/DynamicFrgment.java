@@ -192,9 +192,6 @@ public class DynamicFrgment extends Fragment implements ResponseCallback{
 		if (getArticleByUserId != null && getArticleByUserId.getTotal() > 0) {
 			addComment(getArticleByUserId);
 
-		} else {
-			mPullRefreshListView
-					.setEmptyView(Tools.setEmptyView(getActivity()));
 		}
 	}
 

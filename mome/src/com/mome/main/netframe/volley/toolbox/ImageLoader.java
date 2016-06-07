@@ -27,8 +27,10 @@ import com.mome.main.netframe.volley.VolleyError;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.ThumbnailUtils;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.MediaStore.Images.Thumbnails;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -270,7 +272,7 @@ public class ImageLoader {
         return imageContainer;
     }
 
-    protected Request<Bitmap> makeImageRequest(String requestUrl, int maxWidth, int maxHeight,
+    protected Request<Bitmap> makeImageRequest(String requestUrl, final int maxWidth, final int maxHeight,
             ScaleType scaleType, final String cacheKey) {
         return new ImageRequest(requestUrl, new Listener<Bitmap>() {
             @Override

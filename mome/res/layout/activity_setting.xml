@@ -1,25 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/white" >
 
-    <com.mome.main.business.HeadRef
-        xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
+    <RelativeLayout
         android:id="@+id/head_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        head:leftBtnShow="show"
-        head:leftButton="img"
-        head:leftImg="@drawable/headview_btn_back"
-        head:titleShow="show"
-        head:titleText="设置" >
-    </com.mome.main.business.HeadRef>
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/common_head_height"
+        android:background="@color/white"
+       android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_marginOrpadding"
+        android:paddingRight="@dimen/common_marginOrpadding" >
+
+        <TextView
+            android:id="@+id/titlebar_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/headview_btn_back"
+             />
+
+        
+        
+        <TextView
+            android:id="@+id/titlebar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:text="设置"
+            android:textSize="18sp"
+             />
+        </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/head_layout"
-        android:background="#D9D9D9" >
+        android:layout_below="@+id/head_layout" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,21 +52,24 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/gary_line"
                 android:padding="15dp"
-                android:text="关联第三方平台" />
+                android:text="关联第三方平台"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_middle_textSize" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:padding="15dp" >
+                android:padding="@dimen/common_marginOrpadding" >
 
                 <ImageView
                     android:id="@+id/xinlang_icon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/login_weibo" />
+                    android:background="@drawable/sina_select" />
 
                 <TextView
                     android:id="@+id/xinlang_tv"
@@ -52,45 +78,36 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/xinlang_icon"
-                    android:text="新浪微博" />
-
-                <TextView
-                    android:id="@+id/sinaBind_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/xinlang_tv"
-                    android:text="已绑定"
-                    android:textSize="10sp" />
+                    android:text="新浪微博"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_textSize" />
 
                 <Button
                     android:id="@+id/sinaBind_bt"
-                    android:layout_width="50dp"
-                    android:layout_height="20dp"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentRight="true"
-                    android:background="#D9D9D9"
-                    android:text="解除绑定"
-                    android:textSize="12sp" />
+                    android:background="@drawable/button_corner"
+                    android:text="绑定"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/common_small_textSize" />
             </RelativeLayout>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@drawable/zk_line" />
+               style="@style/line_horizontal" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:padding="15dp" >
+                android:padding="@dimen/common_marginOrpadding" >
 
                 <ImageView
                     android:id="@+id/wechat_icon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/login_wechat" />
+                    android:background="@drawable/weichat_select" />
 
                 <TextView
                     android:id="@+id/wechat_tv"
@@ -99,47 +116,38 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/wechat_icon"
-                    android:text="微信" />
+                    android:text="微信"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_textSize" />
 
-                <TextView
-                    android:id="@+id/wechatBind_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/wechat_tv"
-                    android:text="已绑定"
-                    android:textSize="10sp"
-                    android:visibility="gone" />
+               
 
                 <Button
                     android:id="@+id/wechatBind_bt"
-                    android:layout_width="50dp"
-                    android:layout_height="20dp"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentRight="true"
-                    android:background="#912186"
+                    android:background="@drawable/button_corner"
                     android:text="绑定"
-                    android:textColor="#ffffff"
-                    android:textSize="12sp" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/common_small_textSize" />
             </RelativeLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@drawable/zk_line" />
+             <TextView
+               style="@style/line_horizontal" />
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:padding="15dp" >
+                android:padding="@dimen/common_marginOrpadding" >
 
                 <ImageView
                     android:id="@+id/douban_icon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/login_qq" />
+                    android:background="@drawable/douban_select" />
 
                 <TextView
                     android:id="@+id/douban_tv"
@@ -148,39 +156,32 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/douban_icon"
-                    android:text="豆瓣" />
+                    android:text="豆瓣"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_textSize" />
 
-                <TextView
-                    android:id="@+id/doubanBind_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/douban_tv"
-                    android:text="已绑定"
-                    android:textSize="10sp"
-                    android:visibility="gone" />
+                
 
                 <Button
                     android:id="@+id/doubanBind_bt"
-                    android:layout_width="50dp"
-                    android:layout_height="20dp"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentRight="true"
-                    android:background="#912186"
+                    android:background="@drawable/button_corner"
                     android:text="绑定"
-                    android:textColor="#ffffff"
-                    android:textSize="12sp" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/common_small_textSize" />
             </RelativeLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@drawable/zk_line" />
+           <TextView
+               style="@style/line_horizontal" />
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
+                android:visibility="gone"
                 android:padding="15dp" >
 
                 <ImageView
@@ -197,9 +198,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/phone_icon"
-                    android:text="手机绑定" />
-
-                <TextView
+                    android:text="手机绑定" /><TextView
                     android:id="@+id/bangding_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -209,8 +208,7 @@
                     android:text="已绑定"
                     android:textSize="10sp"
                     android:visibility="visible" />
-
-                <TextView
+<TextView
                     android:id="@+id/bindPhone_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -234,14 +232,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
+                android:background="@color/gary_line"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_middle_textSize"
                 android:text="隐私与安全" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:visibility="gone"
-                android:padding="15dp" >
+                android:padding="15dp"
+                android:visibility="gone" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -268,20 +269,21 @@
             </RelativeLayout>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@drawable/zk_line" />
+               style="@style/line_horizontal" />
+
 
             <RelativeLayout
                 android:id="@+id/opinion_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:padding="15dp" >
+                android:padding="@dimen/common_max_marginOrpadding" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_textSize"
                     android:text="意见反馈" />
 
                 <ImageView
@@ -290,23 +292,24 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/more_icon" />
+                    android:background="@drawable/discovery_icon_arrow" />
             </RelativeLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@drawable/zk_line" />
+             <TextView
+               style="@style/line_horizontal" />
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:padding="15dp" >
+                android:padding="@dimen/common_max_marginOrpadding" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_textSize"
                     android:text="清楚缓存" />
 
                 <TextView
@@ -314,8 +317,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_textSize"
+                    android:drawableRight="@drawable/discovery_icon_arrow"
                     android:text="256MB" />
             </RelativeLayout>
+            <View style="@style/line_horizontal"/>
         </LinearLayout>
     </ScrollView>
 

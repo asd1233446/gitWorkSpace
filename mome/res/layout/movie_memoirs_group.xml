@@ -3,20 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:padding="@dimen/common_max_marginOrpadding" >
+    android:padding="@dimen/common_samll_marginOrpadding" >
 
-    <TextView
+    <Spinner
         android:id="@+id/year"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:spinnerMode="dropdown"
+        android:background="@color/white"
+         />
+     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:text="2015年"
-        android:textColor="@color/black"
-        android:textSize="@dimen/common_max_textSize" />
-
+        android:layout_alignRight="@+id/year"
+        android:layout_centerVertical="true"
+        android:src="@drawable/openarrow"
+         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/looked_num"
         android:layout_toRightOf="@+id/year"
         android:gravity="right"
@@ -28,10 +35,11 @@
         android:id="@+id/looked_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/common_marginOrpadding"
-        android:layout_marginRight="@dimen/common_marginOrpadding"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/common_samll_marginOrpadding"
+        android:layout_marginRight="@dimen/common_samll_marginOrpadding"
         android:layout_toLeftOf="@+id/textView"
-        android:text="37"
+        android:text="0"
         android:textColor="@color/Purple"
         android:textSize="@dimen/common_max_textSize" />
 
@@ -39,18 +47,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="次"
-        android:layout_toLeftOf="@+id/arrow"
-        android:textColor="@color/black"
-        android:textSize="@dimen/common_max_textSize" />
-
-    <ImageView
-        android:id="@+id/arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/common_marginOrpadding"
-        />
+        android:text="次"
+        android:textColor="@color/black"
+        android:textSize="@dimen/common_max_textSize" />
 
 </RelativeLayout>

@@ -189,7 +189,9 @@ public class Record extends BaseFragment{
 	@OnClick(id = R.id.record_cinema_btn)
 	public void cinemaClick(View view) {
 		TabManager.topRecordLayout.setVisibility(View.GONE);
-		Tools.pushScreen(SelectCinema.class, null);
+		Bundle bundle=new Bundle();
+		bundle.putInt("lookedType", 1);
+		Tools.pushScreen(MovieList.class, bundle);
 	}
 	
 	/**
@@ -198,7 +200,9 @@ public class Record extends BaseFragment{
 	 */
 	@OnClick(id = R.id.record_net_btn)
 	public void netClick(View view) {
-		Tools.pushScreen(AddMovieMemoir.class, null);
+		Bundle bundle=new Bundle();
+		bundle.putInt("lookedType", 2);
+		Tools.pushScreen(MovieList.class, bundle);
 	}
 	
 	/**
@@ -207,7 +211,13 @@ public class Record extends BaseFragment{
 	 */
 	@OnClick(id = R.id.record_tv_btn)
 	public void tvClick(View view) {
-		//Tools.pushScreen(MovieComment.class, null);
+//	//	Bundle bundle=new Bundle();
+//	//	bundle.putInt("lookedType", 3);
+//		Tools.pushScreen(AddMovieMemoir.class, null);
+		
+		Bundle bundle=new Bundle();
+		bundle.putInt("lookedType", 3);
+		Tools.pushScreen(MovieList.class, bundle);
 		
 	}
 	

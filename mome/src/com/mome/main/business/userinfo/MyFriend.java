@@ -30,6 +30,7 @@ import com.jessieray.api.model.RelationListByUserId;
 import com.jessieray.api.request.base.ResponseCallback;
 import com.jessieray.api.request.base.ResponseError;
 import com.jessieray.api.request.base.ResponseResult;
+import com.jessieray.api.service.CancelttentionRequest;
 import com.jessieray.api.service.RelationListByUserIdRequest;
 import com.mome.main.R;
 import com.mome.main.business.model.UserProperty;
@@ -67,7 +68,7 @@ public class MyFriend extends BaseFragment implements OnTouchAssortListener,OnIt
 	@ViewInject(id = R.id.letter_view)
 	private AssortView assortView;
 
-	/** 好友关系 **/
+	/** 好友关系 1：关注的人 2：好友  3 粉丝**/
 	private int realationType = 1;
 	private String userId;
 	private Bundle bundle;
@@ -112,7 +113,9 @@ public class MyFriend extends BaseFragment implements OnTouchAssortListener,OnIt
 	                }
 	            }
 	        });
+		if(realationType==2){
 		myFriendsView.setOnItemLongClickListener(this);
+		}
 	}
 	
 	
@@ -131,6 +134,7 @@ public class MyFriend extends BaseFragment implements OnTouchAssortListener,OnIt
 	 * 刷新
 	 * */
 	private void setRefresh(){
+		swipeRefresh.setColorScheme(R.color.gary_line,R.color.white,R.color.gary_line,R.color.white);
 		  swipeRefresh.post(new Runnable() {
 			
 			@Override
@@ -194,21 +198,7 @@ public class MyFriend extends BaseFragment implements OnTouchAssortListener,OnIt
 	 */
 	private ArrayList<Friend> search(String str) {
 		ArrayList<Friend> filterList = new ArrayList<Friend>();// 过滤后的list
-		//if (str.matches("^([0-9]|[/+])*$")) {// 正则表达式 匹配号码
-		if (str.matches("^([0-9]|[/+]).*")) {// 正则表达式 匹配以数字或者加号开头的字符串(包括了带空格及-分割的号码)
-			String simpleStr = str.replaceAll("\\-|\\s", "");
 			for (Friend friend : childList) {
-				if (friend.getNickname() != null) {
-					if (friend.getNickname().contains(simpleStr) || friend.getNickname().contains(str)) {
-						if (!filterList.contains(friend)) {
-							filterList.add(friend);
-						}
-					}
-				}
-			}
-		}else {
-			for (Friend friend : childList) {
-				if (friend!=null) {
 					//姓名全匹配,姓名首字母简拼匹配,姓名全字母匹配
 					if (friend.getNickname().toLowerCase(Locale.CHINESE).contains(str.toLowerCase(Locale.CHINESE))
 							|| friendAdapter.getAssort().getFirstChar(friend.getNickname()).toLowerCase(Locale.CHINESE).replace(" ", "").contains(str.toLowerCase(Locale.CHINESE))) {
@@ -216,12 +206,14 @@ public class MyFriend extends BaseFragment implements OnTouchAssortListener,OnIt
 							filterList.add(friend);
 						}
 					}
-				}
+				
 			}
-		}
+		
 		return filterList;
 	}
 	
+	
+	//public void get
 	
 	
 	
@@ -236,10 +228,7 @@ public class MyFriend extends BaseFragment implements OnTouchAssortListener,OnIt
 						closeRefresh();
 						if (claszz.getCode() == AppConfig.REQUEST_CODE_SUCCESS
 								&& claszz.getModel() != null) {
-							Friend friend1=new Friend();
-							friend1.setRelationtype("2");
-							friend1.setUserid("2");
-							friend1.setNickname("sfsdf");
+						
 							RelationListByUserId relationListByUserId = claszz
 									.getModel();
 							childList.clear();
@@ -248,7 +237,6 @@ public class MyFriend extends BaseFragment implements OnTouchAssortListener,OnIt
 								
 								childList.add(friend);
 							}
-							childList.add(friend1);
 							friendAdapter.setChildList(childList);
 							myFriendsView.setAdapter(friendAdapter);
 						}
@@ -295,14 +283,40 @@ public class MyFriend extends BaseFragment implements OnTouchAssortListener,OnIt
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-				 childList.remove(friend);
-				   	friendAdapter.updateListView(childList);
-        
+				
+				 cancelAddttention(friend);
 			}
-		});
+		},null);
 	
 		return false;
 	}
+	
+	private void cancelAddttention(final Friend friend){
+	CancelttentionRequest.findCancelAddttention(UserProperty.getInstance()
+			.getUid(), friend
+			.getUserid(), new ResponseCallback() {
+
+		@Override
+		public <T> void sucess(Type type, ResponseResult<T> claszz) {
+			// TODO Auto-generated method stub
+			 childList.remove(friend);
+			 friendAdapter.updateListView(childList);
+		}
+
+		@Override
+		public boolean isRefreshNeeded() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public void error(ResponseError error) {
+			// TODO Auto-generated method stub
+			Tools.toastShow(error.getMessage());
+		}
+	});
+	}
+
 
 	
 }

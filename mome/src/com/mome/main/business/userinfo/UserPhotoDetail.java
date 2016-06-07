@@ -1,8 +1,11 @@
 package com.mome.main.business.userinfo;
 
 import java.io.IOException;
+
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 
 import com.jessieray.api.model.PhotoInfo;
 import com.jessieray.api.model.UserAlbum;
@@ -20,25 +23,43 @@ import com.mome.main.netframe.volley.toolbox.NetworkImageView;
 public class UserPhotoDetail extends BaseFragment {
 	@ViewInject(id = R.id.photo)
 	private NetworkImageView photo;
+	
 
 	private PhotoInfo photoInfo;
+	private boolean isNetwork=true;
+	private String bitmap;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		Bundle bundle = getArguments();
+		bitmap=bundle.getString("bitmap");
+		if(bitmap!=null){
+			photo.setDefaultImageResId(0);
+			photo.setNativeBitmap(Tools.string2Bitmap(bitmap));	
+		
+			return;
+		}
 		photoInfo = (PhotoInfo) (bundle != null ? bundle.get("photoinfo")
 				: new PhotoInfo());
+		isNetwork=bundle.getBoolean("isNetwork", true);
+		if(isNetwork)
 		photo.setImageUrl(photoInfo.getPhotourl(),
 				HttpRequest.getInstance().imageLoader);
+		else{
+			photo.setDefaultImageResId(0);
+			photo.setNativeBitmap(Tools.getScaleImage(photoInfo.getPhotourl(), 200, 240));	
+		}
 	}
 
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		headView.setTitle(photoInfo.getTitle());
+		if(!isNetwork)
+		headView.btnRight.setVisibility(View.GONE);
+		headView.setTitle(photoInfo==null?"预览图片":photoInfo.getTitle());
 	}
 
 	/***
@@ -62,4 +83,12 @@ public class UserPhotoDetail extends BaseFragment {
 
 			}
 	}
+	
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+	}
+	
+	
 }

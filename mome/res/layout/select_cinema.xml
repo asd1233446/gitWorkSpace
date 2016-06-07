@@ -2,18 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/combackgroud"
+    android:background="@color/gary_line"
     android:orientation="vertical" >
 
     <com.mome.main.business.HeadRef
         xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
         android:id="@+id/head_layout"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         head:leftBtnShow="show"
+        head:leftButton="img"
+        head:leftImg="@drawable/headview_btn_back"
         head:rightBtnShow="show"
         head:rightButton="text"
-        head:rightText="北京"
         head:titleShow="show"
         head:titleText="添加观影记录(影院)" >
     </com.mome.main.business.HeadRef>
@@ -21,15 +22,18 @@
     <EditText
         android:id="@+id/select_cinema_search_edittext"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp"
         android:layout_marginTop="10dp"
-        android:drawableLeft="@drawable/headview_btn_search"
+        android:background="@drawable/edit_bg"
+        android:drawableLeft="@drawable/search_xiao"
         android:drawablePadding="10dp"
         android:ems="10"
+        android:focusableInTouchMode="false"
         android:hint="搜索"
+        android:paddingLeft="10dp"
         android:textColor="@color/B3B3B3" >
 
         <requestFocus />
@@ -37,16 +41,16 @@
 
     <ExpandableListView
         android:id="@+id/select_cinema_list"
-         android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:cacheColorHint="#00000000"
-            android:childDivider="@null"
-            android:listSelector="#00000000"
-            android:childIndicator="@null"
-            android:divider="@null"
-            android:groupIndicator="@null"
-            android:background="@color/white" >
-
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="#00000000"
+        android:childDivider="@null"
+        android:childIndicator="@null"
+        android:divider="@null"
+        android:dividerHeight="@dimen/common_line_height"
+        android:groupIndicator="@null"
+        android:listSelector="#00000000"
+        android:scrollbars="none" >
     </ExpandableListView>
 
 </LinearLayout>

@@ -1,14 +1,20 @@
 package com.mome.main.business;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 import com.mome.main.R;
 import com.mome.main.core.BaseFragment;
@@ -59,7 +65,13 @@ public class HeadView extends BaseFragment{
 	@ViewInject(id = R.id.titlebar_bg_layout)
 	public  RelativeLayout titlebar_bg_layout;
 	
-	
+	/**
+	 * 清除
+	 * */
+	@OnClick(id=R.id.clear)
+	public  void clearClick(View view){
+		inputText.setText("");
+	}
 	
 	public HeadView(HeadRef headRef,HeadViewBtnOnClickListener listener) {
 		this.headRef = headRef;
@@ -70,6 +82,15 @@ public class HeadView extends BaseFragment{
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		initHead();
+		if(inputLayout.getVisibility()==View.VISIBLE){
+		inputText.setFocusable(true);  
+		inputText.setFocusableInTouchMode(true);  
+		inputText.requestFocus();  
+		InputMethodManager inputManager =  
+		               (InputMethodManager)inputText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);  
+		           inputManager.showSoftInput(inputText, 0);  
+		}
+		
 	}
 
 	
@@ -106,36 +127,59 @@ public class HeadView extends BaseFragment{
 			}
 			if(this.headRef.iInputShow == 0) {
 				inputLayout.setVisibility(View.VISIBLE);
-				inputText.addTextChangedListener(textWatcher);
+				//inputText.addTextChangedListener(textWatcher);
+				inputText.setOnEditorActionListener(editorActionListener);
 			} else if(this.headRef.iInputShow == 1) {
 				inputLayout.setVisibility(View.GONE);
 			}
 		}
 	}
 	
-	/**
-	 * 输入框监听
-	 */
-	public TextWatcher textWatcher = new TextWatcher() {
+	
+	public  String getText(){
+		return inputText.getText().toString();
+	}
+	
+	
+	//调用搜索键盘
+	public TextView.OnEditorActionListener editorActionListener=new OnEditorActionListener() {
 		
 		@Override
-		public void onTextChanged(CharSequence s, int start, int before, int count) {
+		public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+			// TODO Auto-generated method stub
+			if(actionId==EditorInfo.IME_ACTION_SEARCH){
+				if(headViewBtnOnClickListener != null&&!TextUtils.isEmpty(inputText.getText())) {
+					headViewBtnOnClickListener.editTextChange(inputText.getText().toString());
+				}
 			
-		}
-		
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count,
-				int after) {
-			
-		}
-		
-		@Override
-		public void afterTextChanged(Editable s) {
-			if(headViewBtnOnClickListener != null&&!TextUtils.isEmpty(inputText.getText())) {
-				headViewBtnOnClickListener.editTextChange(inputText.getText().toString());
+				return true;
 			}
+			return false;
 		}
 	};
+//	/**
+//	 * 输入框监听
+//	 */
+//	public TextWatcher textWatcher = new TextWatcher() {
+//		
+//		@Override
+//		public void onTextChanged(CharSequence s, int start, int before, int count) {
+//			
+//		}
+//		
+//		@Override
+//		public void beforeTextChanged(CharSequence s, int start, int count,
+//				int after) {
+//			
+//		}
+//		
+//		@Override
+//		public void afterTextChanged(Editable s) {
+//			if(headViewBtnOnClickListener != null&&!TextUtils.isEmpty(inputText.getText())) {
+//				headViewBtnOnClickListener.editTextChange(inputText.getText().toString());
+//			}
+//		}
+//	};
 	
 	/**
 	 * 左按钮点击监听

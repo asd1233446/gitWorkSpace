@@ -26,6 +26,7 @@ import com.mome.main.business.userinfo.UserInfo;
 import com.mome.main.core.BaseFragment;
 import com.mome.main.core.annotation.InjectProcessor;
 import com.mome.main.core.utils.AppConfig;
+import com.mome.main.core.utils.Tools;
 
 /**
  * tab管理类
@@ -65,7 +66,7 @@ public class TabManager extends BaseFragment {
 	private int[] iconPressed = { 			
 			R.drawable.tabmanager_tab_dynamic_pressed,
 			R.drawable.tabmanager_tab_movie_pressed,
-			R.drawable.tabmanager_tab_record_pressed,
+			R.drawable.tabmanager_tab_record_normal,
 			R.drawable.tabmanager_tab_discovery_pressed, 
 			R.drawable.tabmanager_tab_userinfo_pressed 
 			};
@@ -94,6 +95,8 @@ public class TabManager extends BaseFragment {
 	 */
 	private final int RECORD_INDEX = 2;
 	
+	
+	
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -118,14 +121,6 @@ public class TabManager extends BaseFragment {
 	 */
 	private void initView(View view) {
 		topRecordLayout = (LinearLayout) view.findViewById(R.id.tabmanager_record);
-//		topRecordLayout.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				iconList.get(RECORD_INDEX).setImageResource(iconNormal[RECORD_INDEX]);
-//				topRecordLayout.setVisibility(View.GONE);
-//			}
-//		});
 		mTabHost = (FragmentTabHost) view.findViewById(android.R.id.tabhost);
 		mTabHost.setup(this.getActivity(), getChildFragmentManager(), R.id.realtabcontent);
 		inflater = LayoutInflater.from(AppConfig.context);
@@ -136,9 +131,9 @@ public class TabManager extends BaseFragment {
 			// 将Tab按钮添加进Tab选项卡中
 			mTabHost.addTab(tabSpec, mFragmentArray[i], null);
 		}
-		mTabHost.setCurrentTab(0);
+		mTabHost.setCurrentTab(AppConfig.currentIndex);
 		updateTab();
-		mTabHost.setTag(new Integer(0));
+		mTabHost.setTag(new Integer(AppConfig.currentIndex));
 		mTabHost.setOnTabChangedListener(new OnTabChangeListener() {
 
 			@Override
@@ -146,10 +141,7 @@ public class TabManager extends BaseFragment {
 				if(!tabId.equals(mTextArray[2])) {
 					updateTab();
 					mTabHost.setTag(new Integer(mTabHost.getCurrentTab()));
-				} else {			
-					showRecord();
-					mTabHost.setCurrentTab((Integer)mTabHost.getTag());
-				}
+				} 
 			}
 		});
 	}
@@ -183,7 +175,7 @@ public class TabManager extends BaseFragment {
 	 * @param index
 	 * @return
 	 */
-	private View getTabItemView(int index) {
+	private View getTabItemView(final int index) {
 		View view = inflater.inflate(R.layout.tabmanager_tab_item_view,null);
 		ImageView imageView = (ImageView) view.findViewById(R.id.imageview);
 		imageView.setImageResource(iconNormal[index]);
@@ -193,6 +185,17 @@ public class TabManager extends BaseFragment {
 		textList.add(textView);
 		if(index == RECORD_INDEX) {
 			textView.setVisibility(View.GONE);
+		}
+		
+		if(index==2){
+		imageView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				showRecord();
+			}
+		});
 		}
 		return view;
 	}

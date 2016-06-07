@@ -1,8 +1,11 @@
 package com.mome.main.business.userinfo;
 
+import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.TextView;
 
+import com.jessieray.api.model.MessageInfo;
 import com.jessieray.api.model.TypeInfo;
 import com.mome.main.R;
 import com.mome.main.business.module.ListCellBase;
@@ -10,18 +13,22 @@ import com.mome.main.core.annotation.InjectProcessor;
 import com.mome.main.core.annotation.LayoutInject;
 import com.mome.main.core.annotation.ViewInject;
 import com.mome.main.core.net.HttpRequest;
+import com.mome.main.core.utils.AppConfig;
 import com.mome.main.netframe.volley.toolbox.ImageLoader;
 import com.mome.main.netframe.volley.toolbox.NetworkImageView;
 
 public class MyMessageListCell implements ListCellBase {
-	private TypeInfo info;
-
-	public void setTypeInfo( TypeInfo info) {
+	private MessageInfo info;	
+	public void setMessageInfo( MessageInfo info) {
 		this.info = info;
 	}
+	
+   public MessageInfo getMessage(){
+	   return info;
+   }
 
 	@Override
-	public View getView(View convertView) {
+	public View getView(int postion,View convertView) {
 		// TODO Auto-generated method stub
 		
 		ViewHolder viewHolder = null;
@@ -32,12 +39,16 @@ public class MyMessageListCell implements ListCellBase {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-
-	//	viewHolder.headIcon.setImageUrl(url, HttpRequest.getInstance().imageLoader);
-		viewHolder.name.setText(info.getMovietype());
-		viewHolder.news.setText(info.getAverage()+"");
-		viewHolder.news_date.setText(info.getAverage()+"");
-		viewHolder.news_num.setText(info.getAverage()+"");
+        if(info.getAvatar().equals("systemAvatar")){
+        	viewHolder.headIcon.setDefaultImageResId(R.drawable.systemicon);
+        	
+        }else{
+		viewHolder.headIcon.setImageUrl(info.getAvatar(), HttpRequest.getInstance().imageLoader);
+        }
+		viewHolder.name.setText(info.getNickname());
+		viewHolder.news.setText(info.getLastwords());
+		viewHolder.news_date.setText(info.getLastDate());
+		viewHolder.news_num.setText(info.getUnread());
 		return convertView;
 	}
 

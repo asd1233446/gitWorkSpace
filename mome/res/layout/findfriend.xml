@@ -2,30 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/combackgroud"
+    android:background="@color/gary_line"
     android:orientation="vertical" >
-    
+
     <com.mome.main.business.HeadRef
         xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
         android:id="@+id/head_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         head:leftBtnShow="show"
         head:leftButton="img"
         head:leftImg="@drawable/headview_btn_back"
-        android:background="@color/white"
         head:titleShow="show"
         head:titleText="找好友" >
     </com.mome.main.business.HeadRef>
- 
- 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_marginOrpadding"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:layout_marginTop="@dimen/common_marginOrpadding"
         android:orientation="vertical" >
 
         <RelativeLayout
@@ -33,8 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="@dimen/common_marginOrpadding"
-            >
+            android:padding="@dimen/common_marginOrpadding" >
 
             <ImageView
                 android:id="@+id/ImageView08"
@@ -50,7 +47,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/ImageView08"
                 android:text="微博好友"
-                android:textColor="@color/tabBackground" />
+                android:textColor="@color/tabBackground"
+                android:textSize="@dimen/common_middle_textSize" />
 
             <ImageView
                 android:id="@+id/ImageView06"
@@ -61,15 +59,14 @@
                 android:src="@drawable/discovery_icon_arrow" />
         </RelativeLayout>
 
-      <View style="@style/line_horizontal"/>
+        <View style="@style/line_horizontal" />
 
         <RelativeLayout
             android:id="@+id/findfriend_weixin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/common_marginOrpadding"
             android:layout_weight="1"
-             >
+            android:padding="@dimen/common_marginOrpadding" >
 
             <ImageView
                 android:id="@+id/ImageView05"
@@ -85,7 +82,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/ImageView05"
                 android:text="邀请微信好友"
-                android:textColor="@color/tabBackground" />
+                android:textColor="@color/tabBackground"
+                android:textSize="@dimen/common_middle_textSize" />
 
             <ImageView
                 android:id="@+id/ImageView02"
@@ -96,23 +94,21 @@
                 android:src="@drawable/discovery_icon_arrow" />
         </RelativeLayout>
 
-             <View style="@style/line_horizontal"/>
-
+        <View style="@style/line_horizontal" />
 
         <RelativeLayout
             android:id="@+id/findfriend_address_book"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="@dimen/common_marginOrpadding"
-            >
+            android:padding="@dimen/common_marginOrpadding" >
 
             <ImageView
                 android:id="@+id/discovery_icon_friend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@drawable/douban_select" />
+                android:src="@drawable/phone" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -121,7 +117,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/discovery_icon_friend"
                 android:text="通讯录好友"
-                android:textColor="@color/tabBackground" />
+                android:textColor="@color/tabBackground"
+                android:textSize="@dimen/common_middle_textSize" />
 
             <ImageView
                 android:id="@+id/ImageView03"
@@ -131,12 +128,6 @@
                 android:layout_centerVertical="true"
                 android:src="@drawable/discovery_icon_arrow" />
         </RelativeLayout>
-
-       
-
-        
     </LinearLayout>
-
-
 
 </LinearLayout>

@@ -185,19 +185,18 @@ public class HttpRequest implements Request {
 //		strbuf.append(signParams.get(AppConfig.SIGN));
 		for (String key : signParams.keySet()) {
 			strbuf.append("&"+key+"=");
-			strbuf.append( signParams.get(key));
+			//strbuf.append(URLEncoder.encode(signParams.get(key)));
+			strbuf.append(signParams.get(key));
 			   System.out.println("key= "+ key + " and value= " + signParams.get(key));
 			  }
 //		if (TextUtils.isEmpty(signParams.get("uid")) && !TextUtils.isEmpty(UserProperty.getInstance().getUid())) {
 //			strbuf.append("&uid=");
 //			strbuf.append(UserProperty.getInstance().getUid());
 //		}
-		String result="";
 		
-
-			result=URLEncoder.encode(strbuf.toString());
 	
-		params.append(result);
+		//params.append(result);
+			params.append(strbuf.toString());
 		Tools.Log("网络请求url:" + params.toString());
 		return params.toString();
 	}
@@ -238,7 +237,7 @@ public class HttpRequest implements Request {
 //			signParams = getSignParams(signParams, timestamp);
 			
 			if (method == AppConfig.HTTP_POST || method == AppConfig.HTTP_PUT) {
-				url = getPostUrl(url, signParams);
+//				url = getPostUrl(url, signParams);
 			} else if (method == AppConfig.HTTP_GET) {
 				url = getGetUrl(url, signParams);
 			}
@@ -293,7 +292,8 @@ public class HttpRequest implements Request {
 				if (error.networkResponse != null) {
 					responseError.setCode(error.networkResponse.statusCode);
 				}
-				responseError.setMessage(error.getMessage());
+				//responseError.setMessage(TextUtils.isEmpty(error.getMessage())?"通讯异常":error.getMessage());
+				responseError.setMessage("通讯异常");
 				callback.error(responseError);
 				Tools.Log("响应错误:" + callback +"　　"+ error.getMessage());
 			}

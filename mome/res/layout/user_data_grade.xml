@@ -25,13 +25,13 @@
                 android:id="@+id/markrating_rb"
                 style="androidratingBarStyleSmall"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxHeight="20dp"
-                android:maxWidth="20dp"
-                android:minHeight="20dp"
-                android:minWidth="20dp"
+                android:layout_height="35px"
                 android:numStars="5"
                 android:progressDrawable="@drawable/bg_rating"
+                android:isIndicator="true"
+                android:minHeight="40dp"
+                android:maxHeight="40dp"
+ 
                 android:rating="1.5" />
 
             <TextView

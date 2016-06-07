@@ -1,10 +1,13 @@
 package com.mome.main.business.movie;
 
 import java.lang.reflect.Type;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -145,11 +148,11 @@ public class MovieDetail extends BaseFragment implements
 
 	@OnClick(id = R.id.movie_detail_looked_rl)
 	public void goLookedClick(View view) {
-		Tools.toastShow("观看过的人数");
-		Bundle bundle = new Bundle();
-		bundle.putInt("realationType", 2);
-		bundle.putString("titleName", "我的好友");
-		Tools.pushScreen(MyFriend.class, bundle);
+		Bundle bundle=new Bundle();
+		bundle.putInt("friendType", 1);
+		bundle.putString("movieId", movieId);
+		bundle.putString("title", "观看好友列表");
+		Tools.pushScreen(SameFriendsList.class,bundle );
 	}
 
 	/**
@@ -163,11 +166,11 @@ public class MovieDetail extends BaseFragment implements
 
 	@OnClick(id = R.id.movie_detail_collect_rl)
 	public void goCollectedClick(View view) {
-		Tools.toastShow("观收藏该片的人数过的人数");
-		Bundle bundle = new Bundle();
-		bundle.putInt("realationType", 3);
-		bundle.putString("titleName", "我的好友");
-		Tools.pushScreen(MyFriend.class, bundle);
+		Bundle bundle=new Bundle();
+		bundle.putInt("friendType", 2);
+		bundle.putString("movieId", movieId+"");
+		bundle.putString("title", "收藏好友列表");
+		Tools.pushScreen(SameFriendsList.class,bundle );
 	}
 
 	/**
@@ -194,11 +197,10 @@ public class MovieDetail extends BaseFragment implements
 
 	@OnClick(id = R.id.movie_detail_commend_friends)
 	public void toCommentFriendClick(View view) {
-		Tools.toastShow("推荐给好友");
 		Bundle bundle = new Bundle();
-		bundle.putInt("realationType", 2);
-		bundle.putString("titleName", "我的好友");
-		Tools.pushScreen(MyFriend.class, bundle);
+		bundle.putInt("type", 1);
+		bundle.putString("movieid", movieId);
+		Tools.pushScreen(SelectedFriends.class, bundle);
 	}
 
 	/**
@@ -240,6 +242,11 @@ public class MovieDetail extends BaseFragment implements
 	@OnClick(id = R.id.movieIntroduce_tv)
 	public void goMovieIntroduceClick(View view) {
 		Tools.toastShow("进入豆瓣详情页面");
+		
+		Intent inetnt=new Intent(Intent.ACTION_VIEW,Uri.parse(movieInfo.getSite()));
+		startActivity(inetnt);
+		
+		
 	}
 
 	/**
@@ -265,7 +272,7 @@ public class MovieDetail extends BaseFragment implements
 	/**
 	 * 上个页面传过来的数据
 	 */
-	private MovieInfo movieinfo;
+	private String movieId;
 
 	private com.jessieray.api.model.MovieDetail movieInfo;
 
@@ -316,7 +323,7 @@ public class MovieDetail extends BaseFragment implements
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
-		headView.setTitle(movieinfo.getTitle());
+		
 		super.onResume();
 	}
 
@@ -376,9 +383,9 @@ public class MovieDetail extends BaseFragment implements
 
 	private void setUpMovieInfo() {
 		Bundle bundle = getArguments();
-		movieinfo = (MovieInfo) bundle.getSerializable("MovieInfo");
+		movieId=bundle.getString("movieId");
 		MovieDetailRequest.findMovieDetail(UserProperty.getInstance().getUid(),
-				movieinfo.getMovieid() + "", new ResponseCallback() {
+				movieId + "", new ResponseCallback() {
 
 					@Override
 					public <T> void sucess(Type type, ResponseResult<T> arg0) {
@@ -407,6 +414,7 @@ public class MovieDetail extends BaseFragment implements
 									: View.GONE);
 							line.setVisibility(movieInfo.getWasrecall() == true ? View.VISIBLE
 									: View.GONE);
+							headView.setTitle(movieInfo.getTitle());
 							selectorStyle(notCollectNum);
 						}
 					}
@@ -431,7 +439,7 @@ public class MovieDetail extends BaseFragment implements
 
 	private void getMovieComment() {
 		ArticleListByMovieIdRequest.findArticleListByMovieId(
-				movieinfo.getMovieid() + "", orderType, 1,
+				movieId + "", orderType, 1,
 				AppConfig.PAGE_SIZE, this);
 	}
 
@@ -461,10 +469,6 @@ public class MovieDetail extends BaseFragment implements
 					scrollview.setMode(Mode.PULL_FROM_START);
 				}
 				setDataListView(movieDetailList.getArticles());
-			}else{
-				listData.clear();
-				adapter.notifyDataSetChanged();
-				scrollview.setMode(Mode.PULL_FROM_START);
 			}
 		}
 	}
@@ -487,20 +491,29 @@ public class MovieDetail extends BaseFragment implements
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		// TODO Auto-generated method stub
+		
 		if (checkedId == R.id.movie_detail_new_btn)
 			orderType = 1;
 		else
 			orderType = 2;
-		    curPageIndex = 1;
-		getMovieComment();
+		reset();
 	}
 
+	
+	private void reset(){
+		listData.clear();
+		adapter.notifyDataSetChanged();
+		scrollview.setMode(Mode.PULL_FROM_START);
+		curPageIndex = 1;
+	    getMovieComment();
+	}
+	
 	/***
 	 * 收藏电影
 	 */
 	public void addMovieFavor() {
 		AddMovieFavorRequest.findAddMovieFavor(UserProperty.getInstance()
-				.getUid(), movieinfo.getMovieid() + "",
+				.getUid(), movieId + "",
 				new ResponseCallback() {
 
 					@Override
@@ -531,7 +544,7 @@ public class MovieDetail extends BaseFragment implements
 
 	public void undoMovieFavor() {
 		UndoMovieFavorRequest.findUndoMovieFavor(UserProperty.getInstance()
-				.getUid(), movieinfo.getMovieid() + "",
+				.getUid(), movieId + "",
 				new ResponseCallback() {
 
 					@Override

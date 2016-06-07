@@ -15,6 +15,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="40dp"
-        android:src="@drawable/newuser_guide_img_indicator_one" />
+         />
 
 </FrameLayout>

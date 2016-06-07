@@ -10,8 +10,8 @@
         android:layout_height="@dimen/common_head_height"
         android:background="@color/white"
        android:gravity="center_vertical"
-        android:paddingLeft="14dp"
-        android:paddingRight="14dp" >
+        android:paddingLeft="@dimen/common_marginOrpadding"
+        android:paddingRight="@dimen/common_marginOrpadding" >
 
         <TextView
             android:id="@+id/titlebar_left"
@@ -45,8 +45,7 @@
             android:singleLine="true"
             android:textColor="@color/black"
             android:text="添加影评"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:textSize="18sp"
              />
         </RelativeLayout>
  
@@ -82,12 +81,13 @@
             android:layout_marginTop="@dimen/common_max_marginOrpadding"
             android:layout_weight="1" >
 
-            <ImageView
+            <com.mome.main.netframe.volley.toolbox.NetworkImageView
                 android:id="@+id/movieIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/common_marginOrpadding"
-                android:src="@drawable/ic_launcher" />
+                android:layout_width="@dimen/common_moviehead_widht"
+                android:layout_height="@dimen/common_moviehead_small_height"
+                android:layout_marginRight="@dimen/common_samll_marginOrpadding"
+                android:scaleType="fitXY"
+                />
 
             <EditText
                 android:id="@+id/dynamic_comment_edit"
@@ -101,7 +101,7 @@
                 android:padding="@dimen/common_marginOrpadding"
                 android:textColor="@color/black"
                 android:textSize="@dimen/common_small_textSize"
-                android:visibility="gone" />
+                 />
         </RelativeLayout>
     </LinearLayout>
 
@@ -114,6 +114,7 @@
         android:gravity="center_vertical"
         android:padding="@dimen/common_max_marginOrpadding"
         android:text="关联观影同伴"
+        android:visibility="gone"
         android:textColor="@color/B3B3B3"
         android:textSize="@dimen/common_middle_textSize" />
     <LinearLayout

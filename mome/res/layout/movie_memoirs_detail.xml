@@ -2,26 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/combackgroud"
+    android:background="@color/white"
     android:orientation="vertical" >
 
     <com.mome.main.business.HeadRef
         xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
         android:id="@+id/head_layout"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:background="@color/white"
+        head:leftBtnShow="show"
+        head:leftButton="img"
+        head:leftImg="@drawable/headview_btn_back"
         head:rightBtnShow="show"
         head:rightButton="text"
         head:rightText="编辑"
         head:titleShow="show"
-        head:titleText="添加电影记录卡" >
+        head:titleText="电影记录卡" >
     </com.mome.main.business.HeadRef>
+
+    <View style="@style/line_horizontal_Max" />
 
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:scrollbars="none" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,18 +36,17 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="130dp"
-                android:background="@color/white"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
                 <com.mome.main.netframe.volley.toolbox.NetworkImageView
                     android:id="@+id/movie_icon"
-                    android:layout_width="80dp"
-                    android:layout_height="fill_parent"
+                    android:layout_width="@dimen/common_moviehead_widht"
+                    android:layout_height="@dimen/common_moviehead_small_height"
                     android:layout_marginBottom="@dimen/common_marginOrpadding"
                     android:layout_marginLeft="@dimen/common_marginOrpadding"
                     android:layout_marginTop="@dimen/common_marginOrpadding"
-                    android:scaleType="fitCenter"
+                    android:scaleType="fitXY"
                     android:src="@drawable/ic_launcher" />
 
                 <LinearLayout
@@ -148,44 +153,33 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/dynamicLineColor"
-                android:orientation="horizontal" >
-            </LinearLayout>
-
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:background="@color/gary_line"
+                android:paddingLeft="@dimen/common_samll_marginOrpadding"
+                android:paddingTop="@dimen/common_marginOrpadding"
                 android:text="影院观影信息"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/common_small_textSize" />
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/dynamicLineColor"
-                android:orientation="horizontal" >
-            </LinearLayout>
-
-            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="120dp"
                 android:background="@color/white"
                 android:orientation="horizontal" >
 
-                <ImageView
+                <com.mome.main.netframe.volley.toolbox.NetworkImageView
                     android:id="@+id/movie_ticket"
                     android:layout_width="80dp"
                     android:layout_height="100dp"
-                    android:layout_margin="@dimen/common_marginOrpadding"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_launcher" />
+                    android:layout_marginBottom="@dimen/common_marginOrpadding"
+                    android:layout_marginLeft="@dimen/common_marginOrpadding"
+                    android:layout_marginTop="@dimen/common_marginOrpadding"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_launcher"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -288,7 +282,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/bg_rating" />
+                    android:src="@drawable/allfriends" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -308,20 +302,20 @@
             </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:background="@color/gary_line"
+                android:paddingLeft="@dimen/common_samll_marginOrpadding"
+                android:paddingTop="@dimen/common_max_marginOrpadding"
                 android:text="照片留念"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/common_small_textSize" />
 
             <HorizontalScrollView
                 android:layout_width="fill_parent"
-                android:layout_height="100dp"
+                android:layout_height="120dp"
                 android:background="@color/white"
-                android:padding="@dimen/common_marginOrpadding"
+                android:padding="@dimen/common_samll_marginOrpadding"
                 android:scrollbars="none" >
 
                 <LinearLayout
@@ -331,21 +325,16 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
-                    <ImageView
-                        android:id="@+id/addSouvenir"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/iconfont_tianjia"
-                        android:scaleType="matrix" />
+                    
                 </LinearLayout>
             </HorizontalScrollView>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:background="@color/gary_line"
+                android:paddingLeft="@dimen/common_samll_marginOrpadding"
+                android:paddingTop="@dimen/common_marginOrpadding"
                 android:text="观影同伴"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/common_small_textSize" />
@@ -353,11 +342,8 @@
             <HorizontalScrollView
                 android:id="@+id/horizontalScrollView2"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@color/white"
-                android:padding="@dimen/common_marginOrpadding"
-                android:paddingBottom="@dimen/common_middle_marginOrpadding"
-                android:paddingTop="@dimen/common_middle_marginOrpadding" >
+                android:layout_height="120dp"
+                android:padding="@dimen/common_samll_marginOrpadding" >
 
                 <LinearLayout
                     android:id="@+id/MovieCompanion"
@@ -366,20 +352,16 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:scaleType="matrix"
-                        android:src="@drawable/ic_launcher" />
+                  
                 </LinearLayout>
             </HorizontalScrollView>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:background="@color/gary_line"
+                android:paddingLeft="@dimen/common_samll_marginOrpadding"
+                android:paddingTop="@dimen/common_marginOrpadding"
                 android:text="我的影评"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/common_small_textSize" />

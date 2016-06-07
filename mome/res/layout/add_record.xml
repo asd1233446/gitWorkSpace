@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/combackgroud"
+    android:background="@color/gary_line"
     android:orientation="vertical" >
 
     <com.mome.main.business.HeadRef
         xmlns:head="http://schemas.android.com/apk/res/com.mome.main"
         android:id="@+id/head_layout"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         head:leftBtnShow="show"
         head:leftButton="img"
         head:leftImg="@drawable/headview_btn_back"
@@ -19,215 +19,313 @@
         head:titleText="添加观影记录" >
     </com.mome.main.business.HeadRef>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical" >
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
 
-        <com.mome.main.netframe.volley.toolbox.NetworkImageView
-            android:id="@+id/movie_icon"
-            android:layout_width="80dp"
-            android:layout_height="fill_parent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_launcher" />
-
-        <TextView
-            android:id="@+id/movie_name"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/common_middle_marginOrpadding"
-            android:layout_marginTop="@dimen/common_middle_marginOrpadding"
-            android:layout_weight="1"
-            android:text="速度与激情"
-            android:textColor="@color/black"
-            android:textSize="@dimen/common_middle_textSize" />
-    </LinearLayout>
+            android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/common_max_marginOrpadding" >
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/common_max_marginOrpadding"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="@string/record_looked_date"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/common_small_textSize" />
+                <ImageView
+                    android:id="@+id/icon_bur"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginBottom="20dp"
+                    android:scaleType="fitXY" />
 
-        <TextView
-            android:id="@+id/movie_date"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:gravity="center_vertical"
-            android:hint="@string/record_looked_date_hint"
-            android:textColor="@color/gray"
-            android:textColorHint="@color/combackgroud"
-            android:textSize="@dimen/common_small_textSize" />
-    </LinearLayout>
+                <com.mome.main.netframe.volley.toolbox.NetworkImageView
+                    android:id="@+id/movie_icon"
+                    android:layout_width="120dp"
+                    android:layout_height="150dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="fitXY"
+                     />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="@dimen/common_line_height"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/common_max_marginOrpadding" >
+                <TextView
+                    android:id="@+id/movie_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/movie_icon"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/common_samll_marginOrpadding"
+                    android:text="速度与激情"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_middle_textSize" />
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/common_max_marginOrpadding"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="@string/record_looked_time"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/common_small_textSize" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/common_middle_marginOrpadding"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/common_max_marginOrpadding" >
 
-        <TextView
-            android:id="@+id/movie_time"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:gravity="center_vertical"
-            android:textColor="@color/gray"
-            android:hint="@string/record_looked_time_hint"
-            android:textColorHint="@color/combackgroud"
-            android:textSize="@dimen/common_small_textSize" />
-    </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_max_marginOrpadding"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/record_looked_date"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="@dimen/common_line_height_max"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/common_max_marginOrpadding" >
+                <TextView
+                    android:id="@+id/movie_date"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:hint="@string/record_looked_date_hint"
+                    android:textColor="@color/gray"
+                    android:textColorHint="@color/combackgroud"
+                    android:textSize="@dimen/common_small_textSize" />
+            </LinearLayout>
+            
+            <LinearLayout 
+                android:id="@+id/internet_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                
+               <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/common_line_height_max"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/common_max_marginOrpadding" >
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/common_max_marginOrpadding"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="@string/record_ciname_name"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/common_small_textSize" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_max_marginOrpadding"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/record_looked_type"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
 
-        <TextView
-            android:id="@+id/cinema_name"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:gravity="center_vertical"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/common_small_textSize" />
-    </LinearLayout>
+                <Spinner
+                    android:id="@+id/looked_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:background="@null"
+                    android:prompt="@string/record_looked_type_hint"
+                    android:spinnerMode="dialog" />
+            </LinearLayout>
+              <LinearLayout
+                android:id="@+id/addComment"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/common_line_height_max"
+                android:background="@color/white"
+                android:gravity="center"
+                android:visibility="gone"
+                android:paddingLeft="@dimen/common_max_marginOrpadding" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="@dimen/common_line_height"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/common_max_marginOrpadding" >
+                 
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/addcomment" />
+                <TextView
+                    android:id="@+id/myComment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Purple"
+                    android:text="添加影评"
+                    android:textSize="@dimen/common_small_textSize" />
+                
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/common_max_marginOrpadding"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="@string/record_ciname_no"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/common_small_textSize" />
+               
+            </LinearLayout>  
+                
+            </LinearLayout>
+            <LinearLayout 
+                android:id="@+id/cinema_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/common_line_height"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/common_max_marginOrpadding" >
 
-        <EditText
-            android:id="@+id/cinema_no"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="@string/record_ciname_no_hint"
-            android:textColor="@color/gray"
-            android:textColorHint="@color/combackgroud"
-            android:textSize="@dimen/common_small_textSize" />
-    </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_max_marginOrpadding"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/record_looked_time"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="@dimen/common_line_height"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/common_max_marginOrpadding" >
+                <TextView
+                    android:id="@+id/movie_time"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:hint="@string/record_looked_time_hint"
+                    android:textColor="@color/gray"
+                    android:textColorHint="@color/combackgroud"
+                    android:textSize="@dimen/common_small_textSize" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/common_max_marginOrpadding"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="@string/record_seat_no"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/common_small_textSize" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/common_line_height_max"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/common_max_marginOrpadding" >
 
-        <EditText
-            android:id="@+id/seat_no"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="@string/record_seat_no_hint"
-            android:textColor="@color/gray"
-            android:textColorHint="@color/combackgroud"
-            android:textSize="@dimen/common_small_textSize" />
-    </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_max_marginOrpadding"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/record_ciname_name"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="@dimen/common_line_height"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/common_max_marginOrpadding" >
+                <EditText
+                    android:id="@+id/cinema_name"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/record_ciname_name_hint"
+                    android:textColor="@color/gray"
+                    android:textColorHint="@color/combackgroud"
+                    android:focusable="false"
+                    android:textSize="@dimen/common_small_textSize" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/common_max_marginOrpadding"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="@string/record_ticket_monery"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/common_small_textSize" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/common_line_height"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/common_max_marginOrpadding" >
 
-        <EditText
-            android:id="@+id/ticket_price"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="@string/record_ticket_monery_hint"
-            android:textColor="@color/gray"
-            android:textColorHint="@color/combackgroud"
-            android:textSize="@dimen/common_small_textSize" />
-    </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_max_marginOrpadding"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/record_ciname_no"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
+
+                <EditText
+                    android:id="@+id/cinema_no"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/record_ciname_no_hint"
+                    android:textColor="@color/gray"
+                    android:textColorHint="@color/combackgroud"
+                    android:inputType="number"
+                    android:textSize="@dimen/common_small_textSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/common_line_height"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/common_max_marginOrpadding" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_max_marginOrpadding"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/record_seat_no"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
+
+                <EditText
+                    android:id="@+id/seat_no"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/record_seat_no_hint"
+                    android:textColor="@color/gray"
+                    android:textColorHint="@color/combackgroud"
+                    android:textSize="@dimen/common_small_textSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/common_line_height"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/common_max_marginOrpadding" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_max_marginOrpadding"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/record_ticket_monery"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/common_small_textSize" />
+
+                <EditText
+                    android:id="@+id/ticket_price"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/record_ticket_monery_hint"
+                    android:textColor="@color/gray"
+                    android:inputType="numberDecimal"
+                    android:textColorHint="@color/combackgroud"
+                    android:textSize="@dimen/common_small_textSize" />
+            </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

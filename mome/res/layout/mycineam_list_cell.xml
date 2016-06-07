@@ -11,10 +11,10 @@
         android:id="@+id/mycinema_list_cell_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/common_max_marginOrpadding"
+        android:padding="@dimen/common_middle_marginOrpadding"
         android:text="万达国际电影远"
-        android:textColor="@color/black"
-        android:textSize="@dimen/common_middle_textSize"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/common_small_textSize"
         android:textStyle="bold" />
  <View style="@style/line_horizontal" />
 </LinearLayout>

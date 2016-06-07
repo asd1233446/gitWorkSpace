@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ExpandableListView.OnGroupClickListener;
 
 import com.jessieray.api.model.MayInterestIn;
 import com.jessieray.api.model.UserInfo;
@@ -19,15 +20,17 @@ import com.mome.main.R;
 import com.mome.main.business.model.UserProperty;
 import com.mome.main.business.module.ExpandListAdapter;
 import com.mome.main.business.module.ExpandListCellBase;
+import com.mome.main.business.movie.SameFriendsList;
 import com.mome.main.core.BaseFragment;
 import com.mome.main.core.annotation.LayoutInject;
 import com.mome.main.core.annotation.OnClick;
 import com.mome.main.core.annotation.ViewInject;
 import com.mome.main.core.utils.AppConfig;
+import com.mome.main.core.utils.Tools;
 
 @LayoutInject(layout = R.layout.interest_friend)
 public class InterestFriend extends BaseFragment implements
-		OnChildClickListener {
+		OnChildClickListener,OnGroupClickListener {
 
 	/**
 	 * 用户列表
@@ -49,7 +52,11 @@ public class InterestFriend extends BaseFragment implements
 	 */
 	@OnClick(id = R.id.findfriend_new_add)
 	public void newFriendClick(View view) {
-
+		Bundle bundle=new Bundle();
+		bundle.putInt("friendType",4);
+		bundle.putString("title", "最新加入"); 
+		Tools.pushScreen(SameFriendsList.class,bundle );
+		
 	};
 
 	/**
@@ -57,7 +64,10 @@ public class InterestFriend extends BaseFragment implements
 	 */
 	@OnClick(id = R.id.findfriend_mome)
 	public void momeFriendClick(View view) {
-
+		Bundle bundle=new Bundle();
+		bundle.putInt("friendType",3);
+		bundle.putString("title", "mome推荐"); 
+		Tools.pushScreen(SameFriendsList.class,bundle );
 	}
 
 	@Override
@@ -73,8 +83,8 @@ public class InterestFriend extends BaseFragment implements
 		friendAdapter.setDataList(dataList);
 		friendAdapter.setGroupDataList(groupList);
 		expandableList.setAdapter(friendAdapter);
-		expandableList.expandGroup(0);
 		expandableList.setOnChildClickListener(this);
+		expandableList.setOnGroupClickListener(this);
 		getUserRecall();
 	}
 
@@ -103,8 +113,8 @@ public class InterestFriend extends BaseFragment implements
 			  InterestFriendAdapter  Interest=new InterestFriendAdapter();
               Interest.setFriendType("同类型爱好用户");
               groupList.add(Interest);
-              childList.clear();
-               for(UserInfo info:interes.getSame_movie()){
+              childList= new ArrayList<ExpandListCellBase>();
+               for(UserInfo info:interes.getSame_hobby()){
                      Interest=new InterestFriendAdapter();
                      Interest.setUserinfo(info);
                      childList.add(Interest);
@@ -113,16 +123,20 @@ public class InterestFriend extends BaseFragment implements
 		}
 		if (interes.getSame_cinema().size() > 0) {
 			  InterestFriendAdapter  Interest=new InterestFriendAdapter();
-              Interest.setFriendType("常去影院相同用户");
+              Interest.setFriendType("同影院观影用户");
               groupList.add(Interest);
-              childList.clear();
-               for(UserInfo info:interes.getSame_movie()){
+              childList= new ArrayList<ExpandListCellBase>();
+               for(UserInfo info:interes.getSame_cinema()){
                      Interest=new InterestFriendAdapter();
                      Interest.setUserinfo(info);
                      childList.add(Interest);
                }
                dataList.add(childList);
 		}
+		for (int i = 0; i < groupList.size(); i++) {
+			expandableList.expandGroup(i);
+		}
+		
 		friendAdapter.notifyDataSetChanged();
 	}
 
@@ -131,6 +145,13 @@ public class InterestFriend extends BaseFragment implements
 			int groupPosition, int childPosition, long id) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public boolean onGroupClick(ExpandableListView parent, View v,
+			int groupPosition, long id) {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

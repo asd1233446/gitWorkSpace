@@ -14,6 +14,7 @@ import com.jessieray.api.request.base.ResponseCallback;
 import com.jessieray.api.request.base.ResponseError;
 import com.jessieray.api.request.base.ResponseResult;
 import com.jessieray.api.service.ArticleListByUserIdRequest;
+import com.jessieray.api.service.DeleteArticleRequest;
 import com.jessieray.api.service.GetArticleByUserIdRequest;
 import com.jessieray.api.service.MyHomepageRequest;
 import com.mome.main.R;
@@ -36,6 +37,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -66,7 +68,7 @@ public class UserHome extends BaseFragment implements OnItemLongClickListener{
 	@ViewInject(id = R.id.user_icon)
 	private NetworkImageView headIcon;
 
-	/**
+	/**z
 	 * 用户名
 	 */
 	@ViewInject(id = R.id.user_name)
@@ -330,10 +332,11 @@ public class UserHome extends BaseFragment implements OnItemLongClickListener{
 
 							}
 							adapter.notifyDataSetChanged();
-						} else {
-							dynamicListLayout.setEmptyView(Tools
-									.setEmptyView(getActivity()));
 						}
+//						else {
+//							dynamicListLayout.setEmptyView(Tools
+//									.setEmptyView(getActivity()));
+//						}
 
 					}
 
@@ -363,11 +366,35 @@ public class UserHome extends BaseFragment implements OnItemLongClickListener{
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-				 dynamicListData.remove(dynaic);
-				adapter.notifyDataSetChanged();
+				deleteArticle(dynaic);
         
 			}
-		});
+		},null);
 		return false;
+	}
+	
+	
+	public void deleteArticle(final UserDynaicListCell dynaic){
+		DeleteArticleRequest.findDeleteArticle(dynaic.getMomentInfo().getArticleid()+"", new ResponseCallback() {
+			
+			@Override
+			public <T> void sucess(Type type, ResponseResult<T> claszz) {
+				// TODO Auto-generated method stub
+				 dynamicListData.remove(dynaic);
+				 adapter.notifyDataSetChanged();
+			}
+			
+			@Override
+			public boolean isRefreshNeeded() {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public void error(ResponseError error) {
+				// TODO Auto-generated method stub
+				Tools.toastShow("删除失败");
+			}
+		});
 	}
 }

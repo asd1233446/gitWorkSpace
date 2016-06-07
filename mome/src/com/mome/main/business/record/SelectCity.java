@@ -3,30 +3,39 @@ package com.mome.main.business.record;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import net.sourceforge.pinyin4j.PinyinHelper;
+
 import se.emilsjolander.stickylistheaders.ExpandableStickyListHeadersListView;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import com.mome.main.R;
 import com.mome.main.core.BaseFragment;
+import com.mome.main.core.MainActivity;
 import com.mome.main.core.annotation.LayoutInject;
+import com.mome.main.core.annotation.OnClick;
 import com.mome.main.core.annotation.ViewInject;
 import com.mome.main.core.utils.AppConfig;
 import com.mome.main.core.utils.Tools;
-import com.mome.main.core.utils.Tools.callBack;
 import com.mome.pinyin.AssortView;
 import com.mome.pinyin.AssortView.OnTouchAssortListener;
+import com.sina.weibo.sdk.register.mobile.PinyinUtils;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 
 @LayoutInject(layout = R.layout.select_city)
-public class SelectCity extends BaseFragment implements OnTouchAssortListener ,OnItemClickListener{
+public class SelectCity extends BaseFragment implements OnTouchAssortListener,
+		OnItemClickListener {
 	@ViewInject(id = R.id.seachCity)
 	private EditText seachCity;
 
@@ -45,31 +54,49 @@ public class SelectCity extends BaseFragment implements OnTouchAssortListener ,O
 	@ViewInject(id = R.id.letter_view)
 	private AssortView assortView;
 
+	// 定位城市
+	@ViewInject(id = R.id.gpsCity)
+	private TextView locationCity;
+
+	// 热门城市
+	@OnClick(id = R.id.bj_tv)
+	public void bjClick(View view){
+		getCityNmae("北京");
+	}
+	
+	// 热门城市
+	@OnClick(id = R.id.sh_tv)
+	public void shClick(View view){
+		getCityNmae("上海");
+	};
+	
+	// 热门城市
+	@OnClick(id = R.id.gz_tv)
+	public void gzClick(View view){
+		getCityNmae("广州");
+	};
+	
+	// 热门城市
+	@OnClick(id = R.id.tj_tv)
+	public void tjClick(View view){
+		getCityNmae("天津");
+	};
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-	//	AppConfig.fragmentManager.popBackStack(SelectCinema.class.getName(), 0);//0表示弹出的屏幕不包括当前屏幕
+		locationCity.setText(MainActivity.cityName + "GPS");
 		setUpListView();
 		fastSearch();
-		getCityList() ;
+		getCityList();
 	}
 
 	private void setUpListView() {
 		adapter = new CityExpandablelistAdapter();
 		assortView.setOnTouchAssortListener(this);
 		listView.setOnItemClickListener(this);
-		listView.setOnHeaderClickListener(new StickyListHeadersListView.OnHeaderClickListener() {
-			@Override
-			public void onHeaderClick(StickyListHeadersListView l, View header,
-					int itemPosition, long headerId, boolean currentlySticky) {
-				if (listView.isHeaderCollapsed(headerId)) {
-					listView.expand(headerId);
-				} else {
-					listView.collapse(headerId);
-				}
-			}
-		});
+		 
 	}
 
 	/**
@@ -117,7 +144,6 @@ public class SelectCity extends BaseFragment implements OnTouchAssortListener ,O
 	 */
 	private ArrayList<String> search(String str) {
 		ArrayList<String> filterList = new ArrayList<String>();// 过滤后的list
-
 		for (String string : childList) {
 			if (!string.isEmpty()) {
 				// 姓名全匹配,姓名首字母简拼匹配,姓名全字母匹配
@@ -125,7 +151,7 @@ public class SelectCity extends BaseFragment implements OnTouchAssortListener ,O
 						str.toLowerCase(Locale.CHINESE))
 						|| adapter.getAssort().getFirstChar(string)
 								.toLowerCase(Locale.CHINESE).replace(" ", "")
-								.contains(str.toLowerCase(Locale.CHINESE))) {
+								.contains(str.toLowerCase(Locale.CHINESE))||PinyinUtils.getInstance(getActivity()).getPinyin(string).contains(PinyinUtils.getInstance(getActivity()).getPinyin(str))) {
 					if (!filterList.contains(string)) {
 						filterList.add(string);
 					}
@@ -137,25 +163,10 @@ public class SelectCity extends BaseFragment implements OnTouchAssortListener ,O
 	}
 
 	private void getCityList() {
-		for (int i = 0; i < 3; i++) {
-			childList.add("北京" + i);
-			childList.add("北安" + i);
-		}
-		for (int i = 0; i < 3; i++) {
-			childList.add("北防" + i);
-
-		}
-		for (int i = 0; i < 3; i++) {
-			childList.add("赤峰" + i);
-
-		}
-		for (int i = 0; i < 3; i++) {
-			childList.add("天津" + i);
-			childList.add("成都" + i);
-		}
-
+		childList = Tools.getCityList();
 		adapter.setChildList(childList);
 		listView.setAdapter(adapter);
+
 	}
 
 	@Override
@@ -178,11 +189,14 @@ public class SelectCity extends BaseFragment implements OnTouchAssortListener ,O
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		// TODO Auto-generated method stub
-     String cityName=adapter.getAssort().getHashList().getKeyIndex(position);
-		
-		Tools.getCallListener().Back(cityName);
-		Tools.pullScreen();
+		String cityName = adapter.getAssort().getHashList()
+				.getKeyIndex(position);
+		getCityNmae(cityName);
 	}
 
+	public void getCityNmae(String cityName) {
+		Tools.getCallInnerListener().Back(cityName);
+		Tools.pullScreen();
+	}
 
 }

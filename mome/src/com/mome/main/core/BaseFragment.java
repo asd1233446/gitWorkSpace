@@ -156,7 +156,6 @@ public class BaseFragment extends Fragment implements HeadViewBtnOnClickListener
 	@Override
 	public void error(ResponseError arg0) {
 		// TODO Auto-generated method stub
-		Tools.toastShow(arg0.getMessage());
 	}
 
 	@Override

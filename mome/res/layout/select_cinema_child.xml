@@ -2,23 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:padding="15dp" >
+    android:paddingLeft="@dimen/common_middle_marginOrpadding"
+    android:paddingRight="@dimen/common_middle_marginOrpadding" >
 
     <TextView
         android:id="@+id/select_cinema_child_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_max_marginOrpadding"
+        android:layout_marginTop="@dimen/common_samll_marginOrpadding"
         android:text="五棵松成龙影院"
         android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="@dimen/common_middle_textSize" />
+        android:textSize="@dimen/common_textSize"
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" >
+        android:layout_marginTop="@dimen/common_samll_marginOrpadding" >
 
         <TextView
             android:id="@+id/select_cinema_child_address"
@@ -41,8 +43,5 @@
             android:textSize="@dimen/common_small_textSize" />
     </RelativeLayout>
 
-    <View
-        style="@style/line_horizontal"
-        android:layout_marginTop="@dimen/common_max_marginOrpadding" />
 
 </LinearLayout>

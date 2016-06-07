@@ -21,7 +21,7 @@
             android:gravity="center"
             android:text="添加观影记录"
             android:textColor="@color/tabBackground"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:visibility="invisible" />
 
         <ImageView
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/record_title"
-            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:scaleType="fitCenter"
@@ -51,6 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/record_net_btn"
             android:layout_below="@id/record_title"
+            android:layout_centerInParent="true"
             android:layout_toRightOf="@id/record_net_btn"
             android:scaleType="fitCenter"
             android:src="@drawable/record_btn_tv" />
@@ -61,14 +62,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/record_net_btn"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="55dp"
-            android:layout_marginRight="55dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="网络观看"
             android:textColor="@color/tabTitleDefault"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:visibility="invisible" />
 
         <TextView
@@ -76,14 +75,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/record_net_title"
+            android:layout_alignLeft="@+id/record_cinema_btn"
             android:layout_below="@id/record_net_btn"
-            android:layout_marginLeft="10dp"
             android:layout_toLeftOf="@id/record_net_title"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="left"
+            android:padding="5dp"
             android:text="影院观看"
             android:textColor="@color/tabTitleDefault"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:visibility="invisible" />
 
         <TextView
@@ -91,21 +91,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/record_net_title"
+            android:layout_alignRight="@+id/record_tv_btn"
             android:layout_below="@id/record_tv_btn"
-            android:layout_marginRight="10dp"
+            android:layout_centerHorizontal="true"
             android:layout_toRightOf="@id/record_net_title"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="right"
+            android:padding="5dp"
             android:text="电视观看"
             android:textColor="@color/tabTitleDefault"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:visibility="invisible" />
     </RelativeLayout>
 
     <ImageView
         android:id="@+id/clear"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_gravity="bottom|center_horizontal"
         android:src="@drawable/headview_icon_cross" />
 

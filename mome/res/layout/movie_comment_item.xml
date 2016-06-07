@@ -14,8 +14,8 @@
 
         <com.mome.main.netframe.volley.toolbox.NetworkImageView
             android:id="@+id/user_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/common_userhead_widht"
+            android:layout_height="@dimen/common_userhead_widht"
             android:layout_marginRight="@dimen/common_marginOrpadding"
             android:src="@drawable/defualt" />
 
@@ -30,11 +30,11 @@
 
         <RatingBar
             android:id="@+id/dynamic_rating"
-            style="?android:attr/ratingBarStyleSmall"
+            style="?android:attr/ratingBarStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/userName_tv"
-            android:layout_marginTop="@dimen/common_marginOrpadding"
+            android:layout_height="35px"
+            android:layout_alignBottom="@+id/user_icon"
+            android:layout_marginBottom="@dimen/common_marginOrpadding"
             android:layout_toRightOf="@+id/user_icon"
             android:isIndicator="true"
             android:numStars="5"
@@ -45,11 +45,11 @@
             android:id="@+id/movieScore_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/userName_tv"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="@dimen/common_marginOrpadding"
+            android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/dynamic_rating"
             android:text="6.5"
+            android:layout_alignBottom="@+id/user_icon"
+            android:layout_marginBottom="@dimen/common_marginOrpadding"
             android:textColor="@color/dynamicScoreClolor" />
 
         <TextView
@@ -57,9 +57,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/user_icon"
+            android:layout_marginTop="@dimen/common_marginOrpadding"
             android:text="一个特色传统，建党的古装奇幻个特色传统，建党的古装"
             android:textColor="@color/gray"
-            android:layout_marginTop="@dimen/common_marginOrpadding"
             android:textSize="@dimen/common_textSize" />
 
         <TextView
@@ -67,13 +67,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/movie_comment_info_tv"
-            android:layout_marginLeft="5dp"
             android:layout_marginTop="@dimen/common_marginOrpadding"
             android:drawableLeft="@drawable/dynamic_img_date"
             android:gravity="center_vertical"
             android:text="2015-04-11"
-            android:textSize="@dimen/common_textSize"
-            android:textColor="@color/dynamicDateColor" />
+            android:textColor="@color/dynamicDateColor"
+            android:textSize="@dimen/common_textSize" />
     </RelativeLayout>
+
+    <View style="@style/line_horizontal" />
 
 </LinearLayout>

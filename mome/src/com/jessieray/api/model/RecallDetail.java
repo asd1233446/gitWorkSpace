@@ -1,8 +1,14 @@
 package com.jessieray.api.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class RecallDetail {
+public class RecallDetail implements Serializable {
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 /**
  * 照片留念
  * */
@@ -11,7 +17,7 @@ public class RecallDetail {
 	/**
 	 * 观影同伴
 	 * */	
-	 private List<UserInfo> friends;
+	 private List<Friend> friends;
 	/**
 	 * 评论列表
 	 * */
@@ -20,6 +26,11 @@ public class RecallDetail {
 	 * 同场人数
 	 * */
 	private String samescene;
+	
+	/**
+	 * 同场id
+	 * */
+	private String  sceneid;
 	/**
 	 * 回忆录信息
 	 * */
@@ -28,17 +39,25 @@ public class RecallDetail {
 	 * 影片信息
 	 * */
 	
-	private MovieInfo movie;
+	private MemoirsInfo movie;
+	
+	
+	public String getSceneid() {
+		return sceneid;
+	}
+	public void setSceneid(String sceneid) {
+		this.sceneid = sceneid;
+	}
 	public List<PhotoInfo> getPhotos() {
 		return photos;
 	}
 	public void setPhotos(List<PhotoInfo> photos) {
 		this.photos = photos;
 	}
-	public List<UserInfo> getFriends() {
+	public List<Friend> getFriends() {
 		return friends;
 	}
-	public void setFriends(List<UserInfo> friends) {
+	public void setFriends(List<Friend> friends) {
 		this.friends = friends;
 	}
 	public List<DynamicInfo> getArticles() {
@@ -59,11 +78,12 @@ public class RecallDetail {
 	public void setBase(MemoirsInfo base) {
 		this.base = base;
 	}
-	public MovieInfo getMovie() {
+	public MemoirsInfo getMovie() {
 		return movie;
 	}
-	public void setMovie(MovieInfo movie) {
+	public void setMovie(MemoirsInfo movie) {
 		this.movie = movie;
 	}
+
 	
 }

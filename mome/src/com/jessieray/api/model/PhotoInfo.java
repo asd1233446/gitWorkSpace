@@ -24,9 +24,26 @@ public class PhotoInfo implements Serializable {
      * 图片地址
      */
     private String photourl;
+    
+    
+    /**
+     * 图片是否被选中
+     */
+    private boolean isCheck;
+    
+    
+    
 
 
-    private String id;
+    public boolean isCheck() {
+		return isCheck;
+	}
+
+	public void setCheck(boolean isCheck) {
+		this.isCheck = isCheck;
+	}
+
+	private String id;
     
     private String userid;
 

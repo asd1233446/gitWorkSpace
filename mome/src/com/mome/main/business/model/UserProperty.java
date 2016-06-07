@@ -49,7 +49,7 @@ public class UserProperty {
 
     public String getUid() {
     	if(userInfo != null) {
-    		return userInfo.getUserid();
+    		return TextUtils.isEmpty(userInfo.getUserid())==true?userInfo.getId():userInfo.getUserid();
     	}
     	return "1";
     }

@@ -48,13 +48,11 @@
             android:textSize="@dimen/common_max_textSize" />
     </RadioGroup>
 
-    <View style="@style/line_horizontal"/>
 
     
     <FrameLayout 
         android:id="@+id/framelayout"
         android:layout_width="fill_parent"
-        android:layout_marginTop="@dimen/common_middle_marginOrpadding"
         android:layout_height="0dp"
         android:layout_weight="1"
         ></FrameLayout>

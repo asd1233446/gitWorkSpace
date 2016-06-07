@@ -24,13 +24,13 @@
         android:layout_height="fill_parent"
         android:layout_above="@+id/Comment_rl"
         android:layout_below="@+id/head_layout"
-        ptr:ptrAnimationStyle="flip"
+        android:scrollbars="none"
         ptr:ptrMode="both" >
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical" > 
 
             <RelativeLayout
                 android:id="@+id/head_ll"
@@ -40,28 +40,35 @@
 
                 <com.mome.main.netframe.volley.toolbox.NetworkImageView
                     android:id="@+id/user_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/common_userhead_widht"
+                    android:layout_height="@dimen/common_userhead_height"
                     android:layout_marginRight="@dimen/common_middle_marginOrpadding"
-                    android:src="@drawable/ic_launcher" />
+                    android:scaleType="fitXY" />
 
                 <TextView
                     android:id="@+id/userName_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_samll_marginOrpadding"
                     android:layout_toRightOf="@+id/user_icon"
                     android:text="英雄饶命"
                     android:textColor="@color/black"
                     android:textSize="@dimen/common_max_textSize" />
+                
+                <LinearLayout
+                        android:id="@+id/score_ll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/userName_tv"
+                        android:layout_marginTop="@dimen/common_marginOrpadding"
+                        android:layout_toRightOf="@+id/user_icon"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
 
                 <RatingBar
                     android:id="@+id/dynamic_rating"
-                    style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/userName_tv"
-                    android:layout_marginTop="@dimen/common_marginOrpadding"
-                    android:layout_toRightOf="@+id/user_icon"
+                    android:layout_height="35px"
                     android:isIndicator="true"
                     android:numStars="5"
                     android:progressDrawable="@drawable/bg_rating"
@@ -71,12 +78,10 @@
                     android:id="@+id/movieScore_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/userName_tv"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="@dimen/common_marginOrpadding"
-                    android:layout_toRightOf="@+id/dynamic_rating"
                     android:text="6.5"
                     android:textColor="@color/dynamicScoreClolor" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/movieinfo_tv"
@@ -103,7 +108,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/dynamicComment_tv"
                     android:layout_below="@+id/movieinfo_tv"
-                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="@dimen/common_middle_marginOrpadding"
                     android:drawableLeft="@drawable/dynamic_img_date"
                     android:gravity="center"
@@ -132,6 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/movieinfo_tv"
+                    android:layout_marginLeft="@dimen/common_middle_marginOrpadding"
                     android:layout_marginTop="@dimen/common_middle_marginOrpadding"
                     android:drawableLeft="@drawable/dynamic_img_praise"
                     android:gravity="center"
@@ -151,9 +156,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/dynamicLineColor"
+                    android:paddingBottom="@dimen/common_marginOrpadding"
                     android:paddingLeft="@dimen/common_middle_marginOrpadding"
                     android:paddingTop="@dimen/common_max_marginOrpadding"
-                    android:paddingBottom="@dimen/common_marginOrpadding"
                     android:text="全部评论"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/common_small_textSize" />
@@ -168,7 +173,7 @@
                 android:divider="@null"
                 android:listSelector="#00000000" >
             </com.mome.view.ListViewInScrollView>
-        </LinearLayout>
+       </LinearLayout>
     </com.mome.main.business.widget.pulltorefresh.PullToRefreshScrollView>
 
     <RelativeLayout
@@ -189,10 +194,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="发送" />
+            android:background="@drawable/bg_round_corner_blue_rect"
+            android:padding="10dp"
+            android:text="发送"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
     </RelativeLayout>
 
-    <LinearLayout
+   <LinearLayout
         android:id="@+id/suspend_ll"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"

@@ -17,6 +17,7 @@
 package com.mome.main.netframe.volley;
 
 import android.os.Process;
+import android.util.Log;
 
 import java.util.concurrent.BlockingQueue;
 
@@ -118,7 +119,7 @@ public class CacheDispatcher extends Thread {
                 Response<?> response = request.parseNetworkResponse(
                         new NetworkResponse(entry.data, entry.responseHeaders));
                 request.addMarker("cache-hit-parsed");
-
+                Log.e("==============", request.isRefreshNeeded()+"=="+entry.refreshNeeded());
                 if (!request.isRefreshNeeded() && !entry.refreshNeeded()) {
                     // Completely unexpired cache hit. Just deliver the response.
                     mDelivery.postResponse(request, response);
@@ -134,16 +135,16 @@ public class CacheDispatcher extends Thread {
 
                     // Post the intermediate response back to the user and have
                     // the delivery then forward the request along to the network.
-                    mDelivery.postResponse(request, response, new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
+//                    mDelivery.postResponse(request, response, new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
                                 mNetworkQueue.put(request);
-                            } catch (InterruptedException e) {
-                                // Not much we can do about this.
-                            }
-                        }
-                    });
+//                            } catch (InterruptedException e) {
+//                                // Not much we can do about this.
+//                            }
+//                        }
+//                    });
                 }
 
             } catch (InterruptedException e) {

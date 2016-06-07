@@ -72,7 +72,7 @@ public class Movie extends BaseFragment {
 	/**
 	 * 当前页索引
 	 */
-	private int curPageIndex = 0;
+	private int curPageIndex = 1;
 	/**
 	 * 总页数
 	 */
@@ -180,7 +180,6 @@ public class Movie extends BaseFragment {
 		else
 			movieListData.clear();
 		    adapter.notifyDataSetChanged();
-			mPullRefreshListView.setEmptyView(Tools.setEmptyView(getActivity()));
 		
 		
 	}
@@ -199,5 +198,14 @@ public class Movie extends BaseFragment {
 			friendBtn.setTextColor(this.getActivity().getResources().getColor(R.color.dynamicTextPressed));
 			break;
 		}
+	}
+	
+	
+	@Override
+	public void rightOnClick() {
+		// TODO Auto-generated method stub
+		super.rightOnClick();
+		Tools.pushScreen(MovieSearch.class, null);
+
 	}
 }

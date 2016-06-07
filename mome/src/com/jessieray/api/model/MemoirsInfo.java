@@ -98,9 +98,47 @@ public class MemoirsInfo implements Serializable {
      * */
     private String  brief;
     
-    private String userid;
+    /**
+     * 同场次人数
+     * */
+    private String  samescene;
+    /**
+     * 场次id
+     * */
+    private String sceneid;
     
-    public int getId() {
+    private String site;
+    
+    
+    
+    
+    public String getSite() {
+		return site;
+	}
+
+	public void setSite(String site) {
+		this.site = site;
+	}
+
+	private String userid;
+    
+    public String getSamescene() {
+		return samescene;
+	}
+
+	public void setSamescene(String samescene) {
+		this.samescene = samescene;
+	}
+
+	public String getSceneid() {
+		return sceneid;
+	}
+
+	public void setSceneid(String sceneid) {
+		this.sceneid = sceneid;
+	}
+
+	public int getId() {
 		return id;
 	}
 
@@ -216,6 +254,7 @@ public class MemoirsInfo implements Serializable {
         return date;
     }
 
+    
 
     public void setRecallid(int recallid) {
         this.recallid = recallid;

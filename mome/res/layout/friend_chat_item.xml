@@ -15,8 +15,9 @@
 
     <com.mome.main.netframe.volley.toolbox.NetworkImageView
         android:id="@+id/userIcon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:scaleType="fitXY"
         android:layout_below="@+id/timeView" >
     </com.mome.main.netframe.volley.toolbox.NetworkImageView>
 
@@ -27,10 +28,11 @@
         android:layout_below="@+id/timeView"
         android:layout_toRightOf="@+id/userIcon"
         android:background="@drawable/msg_bg"
+        android:layout_alignTop="@+id/userIcon"
         android:gravity="center_vertical"
         android:maxWidth="200dp"
-        android:padding="@dimen/common_max_marginOrpadding"
-        android:text="我不是我的的饿死地方还送电风扇等候发生地附近搜到福建省东方手动方式都放松的"
+        android:padding="@dimen/common_marginOrpadding"
+        android:text="我"
         android:textColor="@color/black"
         android:textSize="@dimen/common_middle_textSize" />
 

@@ -27,7 +27,7 @@ public class MyCinemaListCell implements ListCellBase {
 		this.cinemaInfo = cinemaInfo;
 	}
 	@Override
-	public View getView(View convertView) {
+	public View getView(int postion,View convertView) {
 		// TODO Auto-generated method stub
 		
 		ViewHolder viewHolder = null;

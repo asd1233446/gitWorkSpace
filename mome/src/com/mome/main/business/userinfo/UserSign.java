@@ -39,7 +39,6 @@ protected void onCreate(Bundle savedInstanceState) {
 	titlebar_right.setOnClickListener(this);
 	titlebar_left.setOnClickListener(this);
 	intent=getIntent();
-	Log.e("昵称", intent+"=="+intent.getExtras().getString("nickName"));
 	userSign.setText(intent.getExtras().getString("sign"));
 }
 

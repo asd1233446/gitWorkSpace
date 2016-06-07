@@ -48,45 +48,43 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class FriendsExpandablelistAdapter extends BaseAdapter implements
-StickyListHeadersAdapter, SectionIndexer {
+		StickyListHeadersAdapter, SectionIndexer {
 
 	private ArrayList<Friend> childList;
 	private AssortPinyinList assort = new AssortPinyinList();
-	private Map<String , Friend> map=new HashMap<String , Friend>();
-	private Friend friend;
+	private Map<String, Friend> map = new HashMap<String, Friend>();
+	
+
 	public ArrayList<Friend> getChildList() {
 		return childList;
 	}
 
 	public void setChildList(ArrayList<Friend> childList) {
 		this.childList = childList;
-		sort() ;
+		sort();
 	}
-	
+
 	/*
 	 * 1代表关注 2，代表好友
-	 * */
-	private String relationType="0";	
-	public void setInfo(String relationType ) {
+	 */
+	private String relationType = "0";
+
+	public void setInfo(String relationType) {
 		this.relationType = relationType;
 	}
 
-	private LanguageComparator_CN cnSort = new LanguageComparator_CN();
-		
 	private void sort() {
 		assort.getHashList().getKeyArr().clear();
-		for (Friend friend :childList) {
+		for (Friend friend : childList) {
 			map.put(friend.getNickname(), friend);
 			assort.getHashList().add(friend.getNickname());
 		}
-	
-		assort.getHashList().sortKeyComparator(cnSort);
-		for(String i:assort.getHashList().getKeyArr()){
+
+		for (String i : assort.getHashList().getKeyArr()) {
 			assort.getHashList().setFristCharList(assort.getFirstChar(i));
 		}
 
 	}
-
 
 	public boolean hasStableIds() {
 		// TODO Auto-generated method stub
@@ -115,25 +113,26 @@ StickyListHeadersAdapter, SectionIndexer {
 		@ViewInject(id = R.id.name)
 		public TextView name;
 		@ViewInject(id = R.id.realtion_rb)
-		public CheckBox realtion_rb;    
+		public CheckBox realtion_rb;
 	}
-	 class lvButtonListener implements OnClickListener {
-	        private int position;
 
-	        lvButtonListener(int pos) {
-	            position = pos;
-	        }
-	        
-	        @Override
-	        public void onClick(View v) {
-	        	CheckBox a=(CheckBox) v;
-	        	Log.e(" realtion_rb.isChecked()", a.isChecked()+"");
-				if(!a.isChecked())
-					cancelAddttention(a,position);
-				else
-					addAddttention(a,position);
-			}
-	        }
+	class lvButtonListener implements OnClickListener {
+		private int position;
+
+		lvButtonListener(int pos) {
+			position = pos;
+		}
+
+		@Override
+		public void onClick(View v) {
+			CheckBox a = (CheckBox) v;
+			if (!a.isChecked())
+				cancelAddttention(a, position);
+			else
+				addAddttention(a, position);
+		}
+	}
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -164,14 +163,19 @@ StickyListHeadersAdapter, SectionIndexer {
 		} else {
 			viewHolder = (ChildViewHolder) view.getTag();
 		}
-		friend=map.get(assort.getHashList().getKeyIndex(position));
-		viewHolder.headIcon.setImageUrl(friend.getAvatar(), HttpRequest.getInstance().imageLoader);
+		 Friend friend = map.get(assort.getHashList().getKeyIndex(position));
+		viewHolder.headIcon.setImageUrl(friend.getAvatar(),
+				HttpRequest.getInstance().imageLoader);
 		viewHolder.name.setText(friend.getNickname());
-		viewHolder.realtion_rb.setVisibility(relationType.equals("2")?View.GONE:View.VISIBLE);
-		Log.e("好友的标准", friend.getRelationtype());
-		viewHolder.realtion_rb.setChecked(friend.getRelationtype().equals("1")?false:true);
-		selectorStyle(viewHolder.realtion_rb,viewHolder.realtion_rb.isChecked());
-		viewHolder.realtion_rb.setOnClickListener(new lvButtonListener(position) );
+		viewHolder.realtion_rb
+				.setVisibility(relationType.equals("2") ? View.GONE
+						: View.VISIBLE);
+		Log.e("好友的标准", friend.getRelationtype()+position);
+		
+		selectorStyle(viewHolder.realtion_rb,
+				friend.getRelationtype().equals("1") ? false : true);
+		viewHolder.realtion_rb
+				.setOnClickListener(new lvButtonListener(position));
 		return view;
 	}
 
@@ -206,18 +210,22 @@ StickyListHeadersAdapter, SectionIndexer {
 			viewHolder = (GroupViewHolder) view.getTag();
 		}
 
-	viewHolder.name.setText(assort.getFirstChar(assort.getHashList().getKeyIndex(position)));
+		viewHolder.name.setText(assort.getFirstChar(assort.getHashList()
+				.getKeyIndex(position)));
 		return view;
 	}
 
 	@Override
 	public long getHeaderId(int position) {
-		// TODO Auto-generated method stub	
-		String headId=assort.getFirstChar(assort.getHashList().getKeyIndex(position));
-				return headId.charAt(0);
+		// TODO Auto-generated method stub
+		String headId = assort.getFirstChar(assort.getHashList().getKeyIndex(
+				position));
+		return headId.charAt(0);
 	}
+
 	/**
 	 * 当ListView数据发生变化时,调用此方法来更新ListView
+	 * 
 	 * @param list
 	 */
 	public void updateListView(ArrayList<Friend> list) {
@@ -231,68 +239,77 @@ StickyListHeadersAdapter, SectionIndexer {
 
 	/**
 	 * 
-	 *添加关注
+	 * 添加关注
 	 */
-	private void addAddttention(final CheckBox button,int postion){
-		AddttentionRequest.findAddttention(UserProperty.getInstance().getUid(),map.get(assort.getHashList().getKeyIndex(postion)).getUserid(), new ResponseCallback() {
-			
-			@Override
-			public <T> void sucess(Type type, ResponseResult<T> claszz) {
-				// TODO Auto-generated method stub
-				 selectorStyle(button,true);
-			}
-			
-			@Override
-			public boolean isRefreshNeeded() {
-				// TODO Auto-generated method stub
-				return false;
-			}
-			
-			@Override
-			public void error(ResponseError error) {
-				// TODO Auto-generated method stub
-				Tools.toastShow(error.getMessage());
-			}
-		});
-		}
+	private void addAddttention(final CheckBox button, int postion) {
+		final Friend friend=map.get(assort.getHashList().getKeyIndex(postion));
+		AddttentionRequest.findAddttention(UserProperty.getInstance().getUid(),
+				friend.getUserid(),
+				new ResponseCallback() {
+
+					@Override
+					public <T> void sucess(Type type, ResponseResult<T> claszz) {
+						// TODO Auto-generated method stub
+						friend.setRelationtype("2");
+						selectorStyle(button, true);
+					}
+
+					@Override
+					public boolean isRefreshNeeded() {
+						// TODO Auto-generated method stub
+						return false;
+					}
+
+					@Override
+					public void error(ResponseError error) {
+						// TODO Auto-generated method stub
+						Tools.toastShow(error.getMessage());
+					}
+				});
+	}
+
 	/**
 	 * 
-	 *取消关注
+	 * 取消关注
 	 */
-		private void cancelAddttention(final CheckBox button,int position){
-		CancelttentionRequest.findCancelAddttention(UserProperty.getInstance().getUid(),map.get(assort.getHashList().getKeyIndex(position)).getUserid(), new ResponseCallback() {
-			
+	private void cancelAddttention(final CheckBox button, int position) {
+		final Friend friend=map.get(assort.getHashList().getKeyIndex(position));
+		CancelttentionRequest.findCancelAddttention(UserProperty.getInstance()
+				.getUid(), friend
+				.getUserid(), new ResponseCallback() {
+
 			@Override
 			public <T> void sucess(Type type, ResponseResult<T> claszz) {
 				// TODO Auto-generated method stub
-				 selectorStyle(button,false);
+				friend.setRelationtype("1");
+				selectorStyle(button, false);
 
 			}
-			
+
 			@Override
 			public boolean isRefreshNeeded() {
 				// TODO Auto-generated method stub
 				return false;
 			}
-			
+
 			@Override
 			public void error(ResponseError error) {
 				// TODO Auto-generated method stub
 				Tools.toastShow(error.getMessage());
 			}
 		});
-		}
+	}
 
-		private void selectorStyle(CheckBox attention, boolean isAttention){
-			if(isAttention){
-				//双向关注
-				attention.setChecked(isAttention);
-				attention.setBackgroundResource(R.drawable.checkbox_checked);
-			}else{
-				//单向关注
-				attention.setChecked(isAttention);
-				attention.setBackgroundResource(R.drawable.checkbox_unchecked);
-			}
+	private void selectorStyle(CheckBox attention, boolean isAttention) {
+		if (isAttention) {
+			// 双向关注
+			attention.setChecked(true);
+			attention.setBackgroundResource(R.drawable.attentioned);
+		} else {
+			// 单向关注
+			attention.setChecked(false);
+			attention.setBackgroundResource(R.drawable.attenton);
 		}
-	
+	}
+
 }

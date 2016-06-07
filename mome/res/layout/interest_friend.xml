@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/gary_line"
     android:orientation="vertical" >
 
     <com.mome.main.business.HeadRef
@@ -18,12 +18,12 @@
         head:titleText="可能感兴趣的人" >
     </com.mome.main.business.HeadRef>
 
-    <View style="@style/line_horizontal_Max" />
-
     <RelativeLayout
         android:id="@+id/findfriend_mome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_line_height_max"
+        android:background="@color/white"
         android:padding="@dimen/common_marginOrpadding" >
 
         <ImageView
@@ -40,7 +40,8 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/findfriend_mome_img"
             android:text="MOME推荐"
-            android:textColor="@color/tabBackground" />
+            android:textColor="@color/tabBackground"
+            android:textSize="@dimen/common_middle_textSize" />
 
         <ImageView
             android:id="@+id/ImageView07"
@@ -51,12 +52,13 @@
             android:src="@drawable/discovery_icon_arrow" />
     </RelativeLayout>
 
-    <View style="@style/line_horizontal" />
-
     <RelativeLayout
         android:id="@+id/findfriend_new_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
         android:padding="@dimen/common_marginOrpadding" >
 
         <ImageView
@@ -73,7 +75,8 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/findfriend_new_img"
             android:text="最新加入"
-            android:textColor="@color/tabBackground" />
+            android:textColor="@color/tabBackground"
+            android:textSize="@dimen/common_middle_textSize" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -83,6 +86,9 @@
             android:layout_centerVertical="true"
             android:src="@drawable/discovery_icon_arrow" />
     </RelativeLayout>
+
+    <View style="@style/line_horizontal" />
+
     <ExpandableListView
         android:id="@+id/expandableList"
         android:layout_width="match_parent"
@@ -91,10 +97,9 @@
         android:childDivider="@null"
         android:childIndicator="@null"
         android:divider="@null"
+        android:dividerHeight="1dp"
         android:groupIndicator="@null"
         android:listSelector="#00000000"
-        android:dividerHeight="1dp"
-        android:scrollbars="none"
-       />
+        android:scrollbars="none" />
 
 </LinearLayout>

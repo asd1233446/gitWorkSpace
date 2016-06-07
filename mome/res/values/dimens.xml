@@ -6,24 +6,34 @@
     <dimen name="indicator_corner_radius">12dp</dimen>
     <dimen name="indicator_internal_padding">4dp</dimen>
     <dimen name="header_footer_left_right_padding">24dp</dimen>
-    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">20dp</dimen>
     <!-- 字体定义 -->
-     <dimen name="common_small_textSize">16sp</dimen>
-     <dimen name="common_moreMax_textSize">30sp</dimen>
+     <dimen name="common_small_textSize">14sp</dimen>
+     <dimen name="common_moreMax_textSize">20sp</dimen>
     
-    <dimen name="common_textSize">16sp</dimen>
-    <dimen name="common_middle_textSize">18sp</dimen>
-    <dimen name="common_max_textSize">20sp</dimen>
+    <dimen name="common_textSize">14sp</dimen>
+    <dimen name="common_middle_textSize">16sp</dimen>
+    <dimen name="common_max_textSize">16sp</dimen>
     <!-- 距离定义 -->
-    <dimen name="common_marginOrpadding">15dp</dimen>
+    <dimen name="common_marginOrpadding">10dp</dimen>
     <dimen name="common_middle_marginOrpadding">10dp</dimen>
     <dimen name="common_max_marginOrpadding">15dp</dimen>
+        <dimen name="common_moremax_marginOrpadding">30dp</dimen>
+    
     <dimen name="common_samll_marginOrpadding">5dp</dimen>
     <!--线的高度  -->
     <dimen name="common_line_height">1dp</dimen>
     <dimen name="common_line_height_max">15dp</dimen>
     
     <!-- head的高度 -->
-    <dimen name="common_head_height">60dp</dimen>
+    <dimen name="common_head_height">50dp</dimen>
+    
+      <!-- 海报的高度 -->
+    <dimen name="common_moviehead_height">160dp</dimen>
+<dimen name="common_moviehead_widht">90dp</dimen>
+    <dimen name="common_moviehead_small_height">120dp</dimen>
 
+<!-- 头像的高度 -->
+ <dimen name="common_userhead_height">60dp</dimen>
+<dimen name="common_userhead_widht">60dp</dimen>
 </resources>

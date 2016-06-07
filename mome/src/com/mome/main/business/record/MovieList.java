@@ -1,13 +1,16 @@
 package com.mome.main.business.record;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import com.jessieray.api.model.CinemaInfo;
+import com.jessieray.api.model.GetCircleMovieList;
 import com.jessieray.api.model.MovieInfo;
 import com.jessieray.api.model.UserFavorite;
 import com.jessieray.api.request.base.ResponseError;
 import com.jessieray.api.request.base.ResponseResult;
+import com.jessieray.api.service.GetCircleMovieListRequest;
 import com.jessieray.api.service.UserFavoriteRequest;
 import com.mome.main.R;
 import com.mome.main.business.model.UserProperty;
@@ -19,6 +22,7 @@ import com.mome.main.business.widget.pulltorefresh.PullToRefreshBase.Mode;
 import com.mome.main.business.widget.pulltorefresh.PullToRefreshListView;
 import com.mome.main.core.BaseFragment;
 import com.mome.main.core.annotation.LayoutInject;
+import com.mome.main.core.annotation.OnClick;
 import com.mome.main.core.annotation.ViewInject;
 import com.mome.main.core.utils.AppConfig;
 import com.mome.main.core.utils.Tools;
@@ -33,8 +37,11 @@ import android.widget.ListView;
 
 @LayoutInject(layout = R.layout.recod_movie_list)
 public class MovieList extends BaseFragment implements OnItemClickListener{
-	@ViewInject(id=R.id.search_edit)
-	private EditText search_edit;
+	@OnClick(id = R.id.search_edit)
+	public void onSearchClick(View view) {
+		Bundle bundle=getArguments();
+		Tools.pushScreen(MovieSearch.class, bundle);
+	}
 
 	/**
 	 * listView实例
@@ -62,14 +69,10 @@ public class MovieList extends BaseFragment implements OnItemClickListener{
 	 */
 	private int totalPage = 0;
 	
-	private CinemaInfo mCinemaInfo;
-	private Bundle bundle;
 		
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-	    bundle=getArguments();
-		mCinemaInfo=(CinemaInfo) (bundle!=null?bundle.getSerializable("cinemaInfo"):new CinemaInfo());
 		initView();
 	}
 
@@ -91,10 +94,7 @@ public class MovieList extends BaseFragment implements OnItemClickListener{
 						refreshView.getLoadingLayoutProxy()
 								.setLastUpdatedLabel(label);
 						curPageIndex = 1;
-						UserFavoriteRequest.findUserFavorite(UserProperty
-								.getInstance().getUid(), curPageIndex,
-								AppConfig.PAGE_SIZE, MovieList.this);
-						mPullRefreshListView.setMode(Mode.BOTH);
+						getMovieList();
 					}
 
 					@Override
@@ -109,18 +109,11 @@ public class MovieList extends BaseFragment implements OnItemClickListener{
 						// Update the LastUpdatedLabel
 						refreshView.getLoadingLayoutProxy()
 								.setLastUpdatedLabel(label);
-						if (curPageIndex < totalPage) {
-							curPageIndex++;
-							UserFavoriteRequest.findUserFavorite(UserProperty
-									.getInstance().getUid(), curPageIndex,
-									AppConfig.PAGE_SIZE, MovieList.this);
-							mPullRefreshListView.setMode(Mode.BOTH);
-						} else {
-							mPullRefreshListView.setMode(Mode.PULL_FROM_START);
-						}
+						getMovieList();
+
 					}
 				});
-		mPullRefreshListView.setMode(Mode.BOTH);
+		mPullRefreshListView.setMode(Mode.PULL_FROM_START);
 		listView = mPullRefreshListView.getRefreshableView();
 		adapter = new ListAdapter();
 		adapter.setDataList(movieListData);
@@ -128,8 +121,16 @@ public class MovieList extends BaseFragment implements OnItemClickListener{
 		listView.setOnItemClickListener(this);
 
 	}
+	
+	
+	private void getMovieList(){
+		GetCircleMovieListRequest.findGetCircleMovieList(UserProperty.getInstance().getUid()+"", "2", AppConfig.PAGE_SIZE, curPageIndex, MovieList.this);
 
-	private void updateView(UserFavorite userFavorite) {
+	}
+	
+	
+
+	private void updateView(GetCircleMovieList userFavorite) {
 		totalPage=(int) Tools.calculateTotalPage(userFavorite.getTotal());
 		if (userFavorite.getMovies() == null
 				|| userFavorite.getMovies().isEmpty()) {
@@ -138,8 +139,15 @@ public class MovieList extends BaseFragment implements OnItemClickListener{
 		if (curPageIndex == 1) {
 			movieListData.clear();
 		}
+		if (totalPage > curPageIndex){
+			mPullRefreshListView.setMode(Mode.BOTH);
+		    curPageIndex++;
+		}
+		else {
+			mPullRefreshListView.setMode(Mode.PULL_FROM_START);
+		}		
 		for (MovieInfo movieInfo : userFavorite.getMovies()) {
-			MovieListCell movieListCell = new MovieListCell();
+			MyMovieListCell movieListCell = new MyMovieListCell();
 			movieListCell.setMovieInfo(movieInfo);
 			movieListData.add(movieListCell);
 		}
@@ -155,15 +163,11 @@ public class MovieList extends BaseFragment implements OnItemClickListener{
 	@Override
 	public <T> void sucess(Type type, ResponseResult<T> data) {
 		mPullRefreshListView.onRefreshComplete();
-		if (data.getCode() == AppConfig.REQUEST_CODE_SUCCESS
-				&& data.getModel() != null) {
-			if (UserFavoriteRequest.resultType.equals(type)) {
-				UserFavorite userFavorite = data.getModel();
-				if (userFavorite != null) {
-					updateView(userFavorite);
-				}
-			}
-		}
+		            if(data!=null&&data.getModel()!=null){
+		            	GetCircleMovieList movieList=data.getModel();
+		            	updateView(movieList);
+		            }
+
 	}
 
 
@@ -171,13 +175,12 @@ public class MovieList extends BaseFragment implements OnItemClickListener{
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		// TODO Auto-generated method stub
-		MovieListCell cell=(MovieListCell) adapter.getItem(position-1);
+		MyMovieListCell cell=(MyMovieListCell) adapter.getItem(position-1);
 		
 		MovieInfo info=cell.getMovieInfo();
-		Tools.toastShow(bundle.getSerializable("cinemaInfo")+"");
-		if(bundle!=null){
+         Bundle bundle=getArguments();
 		bundle.putSerializable("movieInfo", info);
 		Tools.pushScreen(AddRecord.class, bundle);
-	}
+	
 	}
 }

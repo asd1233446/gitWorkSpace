@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/gary_line"
-    android:padding="@dimen/common_max_marginOrpadding" >
+    android:padding="@dimen/common_middle_marginOrpadding" >
 
     <TextView
         android:id="@+id/friendType"
@@ -12,22 +12,18 @@
         android:layout_alignParentLeft="true"
         android:text="同类型爱好者"
         android:textColor="@color/black"
-        android:textSize="@dimen/common_max_textSize" />
+        android:textSize="@dimen/common_middle_textSize" />
 
-   
     <TextView
         android:id="@+id/AllAttention"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_marginLeft="@dimen/common_marginOrpadding"
-        android:layout_marginRight="@dimen/common_marginOrpadding"
-        android:layout_toLeftOf="@+id/arrow"
-        
         android:text="全部关注"
+        android:visibility="gone"
         android:textColor="@color/Purple"
-        android:textSize="@dimen/common_max_textSize" />
-
-    
+        android:textSize="@dimen/common_middle_textSize" />
 
     <ImageView
         android:id="@+id/arrow"
@@ -36,6 +32,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/common_marginOrpadding"
-        />
+        android:visibility="gone" />
 
 </RelativeLayout>

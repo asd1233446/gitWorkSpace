@@ -38,7 +38,7 @@ public class ListAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view = convertView;
 		if ((dataList != null) && (!dataList.isEmpty())) {
-			view = ((ListCellBase) dataList.get(position)).getView(convertView);
+			view = ((ListCellBase) dataList.get(position)).getView(position,convertView);
 		}
 		return view;
 	}

@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white" >
+    android:background="@color/white"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:id="@+id/head_layout"
@@ -12,11 +14,11 @@
 
         <com.mome.main.netframe.volley.toolbox.NetworkImageView
             android:id="@+id/head"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/common_userhead_widht"
+            android:layout_height="@dimen/common_userhead_height"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/ic_launcher"
+            android:scaleType="fitXY"
             android:paddingLeft="5dp" />
 
         <TextView
@@ -32,8 +34,8 @@
 
         <CheckBox
             android:id="@+id/realtion_rb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="30dp"

@@ -5,6 +5,7 @@ import com.jessieray.api.model.MemoirsInfo;
 import com.jessieray.api.model.Year;
 import com.mome.main.R;
 import com.mome.main.business.module.ExpandListCellBase;
+import com.mome.main.business.module.ListCellBase;
 import com.mome.main.core.annotation.InjectProcessor;
 import com.mome.main.core.annotation.LayoutInject;
 import com.mome.main.core.annotation.ViewInject;
@@ -18,22 +19,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MovieMemoirsAdapter extends ExpandListCellBase {
+public class MovieMemoirsAdapter implements ListCellBase {
 	
 	
 	private MemoirsInfo memoirsChild;
-	
-	private Year year;
-	
-	
-	public Year getYear() {
-		return year;
-	}
-
-	public void setYear(Year year) {
-		this.year = year;
-	}
-
 	public MemoirsInfo getMemoirsChild() {
 		return memoirsChild;
 	}
@@ -41,31 +30,10 @@ public class MovieMemoirsAdapter extends ExpandListCellBase {
 	public void setMemoirsChild(MemoirsInfo memoirsChild) {
 		this.memoirsChild = memoirsChild;
 	}
-	@Override
-	public View getGroupView(int groupIndex,View convertView,boolean isExpanded) {
-		// TODO Auto-generated method stub
-		View view = convertView;
-		GroupViewHolder viewHolder;
-		if (view == null) {
-			viewHolder = new GroupViewHolder();
-			view = InjectProcessor.injectListViewHolder(viewHolder);
-			view.setTag(viewHolder);
-		} else {
-			viewHolder = (GroupViewHolder) view.getTag();
-		}
-		
-		viewHolder.year.setText(year.getYear());
-		viewHolder.looked_num.setText(year.getYeartotal());
-		  if(isExpanded){
-              viewHolder.arrow.setImageResource(R.drawable.dynamic_img_rating_select);
-          }else{
-        	  viewHolder.arrow.setImageResource(R.drawable.dynamic_bg_rating);
-          }
-		return view;
-	}
+	
 
 	@Override
-	public View getChildView(int groupIndex,int childIndex,View convertView) {
+	public View getView(int postion,View convertView) {
 		// TODO Auto-generated method stub
 		View view = convertView;
 		ChildViewHolder viewHolder;
@@ -180,29 +148,7 @@ public class MovieMemoirsAdapter extends ExpandListCellBase {
 		private NetworkImageView card_poster;
 		
 	}
-	
-	@LayoutInject(layout=R.layout.movie_memoirs_group)
-	class GroupViewHolder{
-		/**
-		 * 年份
-		 * 
-		 * */
-		@ViewInject(id=R.id.year)
-		private TextView year;
-		
-		/**
-		 * 次数
-		 * 
-		 * */
-		@ViewInject(id=R.id.looked_num)
-		private TextView looked_num;
-		
-		/**
-		 * 箭头
-		 * 
-		 * */
-		@ViewInject(id=R.id.arrow)
-		private ImageView arrow;
-		
-	}
+
+
+
 }

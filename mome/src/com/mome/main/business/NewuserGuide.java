@@ -66,10 +66,10 @@ public class NewuserGuide extends BaseFragment implements OnClickListener {
 			public void onPageSelected(int arg0) {
 				if(arg0 == 0) {
 					indicator.setVisibility(View.VISIBLE);
-					indicator.setImageResource(R.drawable.newuser_guide_img_indicator_one);
+					indicator.setImageResource(R.drawable.dotselect);
 				} else if(arg0 == 1) {
 					indicator.setVisibility(View.VISIBLE);
-					indicator.setImageResource(R.drawable.newuser_guide_img_indicator_two);
+					indicator.setImageResource(R.drawable.dot);
 				} else {
 					indicator.setVisibility(View.GONE);
 				}

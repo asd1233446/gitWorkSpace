@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/combackgroud"
+    android:background="@color/gary_line"
     android:orientation="vertical" >
 
     <com.mome.main.business.HeadRef
@@ -17,7 +17,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0.5dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/common_marginOrpadding"
         android:background="@color/dynamicLineColor"
         android:orientation="horizontal" >
     </LinearLayout>
@@ -25,7 +25,8 @@
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,18 +39,19 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white" >
 
-                <ImageView
+                <com.mome.main.netframe.volley.toolbox.NetworkImageView
                     android:id="@+id/userinfo_head_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp" />
-
+                    android:layout_width="@dimen/common_userhead_widht"
+                    android:layout_height="@dimen/common_userhead_height"
+                    android:layout_marginBottom="@dimen/common_marginOrpadding"
+                    android:layout_marginLeft="@dimen/common_marginOrpadding"
+                    android:layout_marginRight="@dimen/common_samll_marginOrpadding"
+                    android:layout_marginTop="@dimen/common_max_marginOrpadding"
+                    android:scaleType="fitXY" />
+                
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
                     android:orientation="vertical" >
 
@@ -67,6 +69,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="MOME号："
+                        android:textSize="@dimen/common_textSize"
                         android:textColor="@color/tabBackground" />
                 </LinearLayout>
 
@@ -75,7 +78,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="right"
                     android:gravity="right|center_vertical"
-                    android:paddingRight="15dp" >
+                    android:paddingRight="@dimen/common_marginOrpadding" >
 
                     <TextView
                         android:id="@+id/userinfo_my_dynamic"
@@ -103,7 +106,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="@dimen/common_marginOrpadding"
                 android:background="@color/dynamicLineColor"
                 android:orientation="horizontal" >
             </LinearLayout>
@@ -120,13 +123,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp" >
+                    android:paddingLeft="@dimen/common_marginOrpadding"
+                    android:paddingRight="@dimen/common_marginOrpadding" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        android:layout_alignTop="@+id/ImageView02"
                         android:text="我的电影回忆录"
                         android:textColor="@color/tabBackground"
                         android:textSize="@dimen/common_textSize" />
@@ -143,7 +146,7 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="@dimen/common_marginOrpadding"
                     android:layout_weight="1"
                     android:background="@color/dynamicLineColor"
                     android:orientation="horizontal" >
@@ -154,8 +157,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp" >
+                    android:paddingLeft="@dimen/common_marginOrpadding"
+                    android:paddingRight="@dimen/common_marginOrpadding" >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -177,7 +180,7 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="@dimen/common_marginOrpadding"
                     android:layout_weight="1"
                     android:background="@color/dynamicLineColor"
                     android:orientation="horizontal" >
@@ -188,8 +191,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp" >
+                    android:paddingLeft="@dimen/common_marginOrpadding"
+                    android:paddingRight="@dimen/common_marginOrpadding" >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -210,7 +213,7 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="@dimen/common_marginOrpadding"
                     android:layout_weight="1"
                     android:background="@color/dynamicLineColor"
                     android:orientation="horizontal" >
@@ -221,8 +224,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp" >
+                    android:paddingLeft="@dimen/common_marginOrpadding"
+                    android:paddingRight="@dimen/common_marginOrpadding" >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -244,7 +247,7 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="@dimen/common_marginOrpadding"
                     android:layout_weight="1"
                     android:background="@color/dynamicLineColor"
                     android:orientation="horizontal" >
@@ -255,8 +258,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp" >
+                    android:paddingLeft="@dimen/common_marginOrpadding"
+                    android:paddingRight="@dimen/common_marginOrpadding" >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -278,7 +281,7 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="@dimen/common_marginOrpadding"
                     android:layout_weight="1"
                     android:background="@color/dynamicLineColor"
                     android:orientation="horizontal" >
@@ -289,8 +292,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp" >
+                    android:paddingLeft="@dimen/common_marginOrpadding"
+                    android:paddingRight="@dimen/common_marginOrpadding" >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -332,7 +335,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="@dimen/common_marginOrpadding"
                 android:background="@color/dynamicLineColor"
                 android:orientation="horizontal" >
             </LinearLayout>
@@ -356,8 +359,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp" >
+                    android:paddingLeft="@dimen/common_marginOrpadding"
+                    android:paddingRight="@dimen/common_marginOrpadding" >
 
                     <TextView
                         android:id="@+id/userinfo_message_title"
@@ -393,7 +396,7 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="@dimen/common_marginOrpadding"
                     android:layout_weight="1"
                     android:background="@color/dynamicLineColor"
                     android:orientation="horizontal" >
@@ -404,8 +407,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
+                    android:paddingLeft="@dimen/common_marginOrpadding"
+                    android:paddingRight="@dimen/common_marginOrpadding"
                     android:visibility="gone" >
 
                     <TextView
@@ -440,7 +443,7 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="@dimen/common_marginOrpadding"
                     android:layout_weight="1"
                     android:background="@color/dynamicLineColor"
                     android:orientation="horizontal" >
@@ -451,8 +454,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp" >
+                    android:paddingLeft="@dimen/common_marginOrpadding"
+                    android:paddingRight="@dimen/common_marginOrpadding" >
 
                     <TextView
                         android:id="@+id/userinfo_mail_title"
@@ -502,7 +505,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="@dimen/common_marginOrpadding"
                 android:background="@color/dynamicLineColor"
                 android:orientation="horizontal" >
             </LinearLayout>
@@ -519,8 +522,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp" >
+                    android:paddingLeft="@dimen/common_marginOrpadding"
+                    android:paddingRight="@dimen/common_marginOrpadding" >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -542,7 +545,7 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="@dimen/common_marginOrpadding"
                     android:layout_weight="1"
                     android:background="@color/dynamicLineColor"
                     android:orientation="horizontal" >
@@ -553,8 +556,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
+                    android:paddingLeft="@dimen/common_marginOrpadding"
+                    android:paddingRight="@dimen/common_marginOrpadding"
                     android:visibility="gone" >
 
                     <TextView
@@ -577,7 +580,7 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="@dimen/common_marginOrpadding"
                     android:layout_weight="1"
                     android:background="@color/dynamicLineColor"
                     android:orientation="horizontal"
@@ -589,8 +592,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
+                    android:paddingLeft="@dimen/common_marginOrpadding"
+                    android:paddingRight="@dimen/common_marginOrpadding"
                     android:visibility="gone" >
 
                     <TextView
@@ -612,7 +615,7 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="@dimen/common_marginOrpadding"
                     android:layout_weight="1"
                     android:background="@color/dynamicLineColor"
                     android:orientation="horizontal"
@@ -624,8 +627,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
+                    android:paddingLeft="@dimen/common_marginOrpadding"
+                    android:paddingRight="@dimen/common_marginOrpadding"
                     android:visibility="gone" >
 
                     <TextView
